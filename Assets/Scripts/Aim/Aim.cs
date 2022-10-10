@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Videon som jag har följt
+// https://www.youtube.com/watch?v=gaDFNCRQr38&t=23s
 public class Aim : MonoBehaviour
 {
     public Transform arm;
