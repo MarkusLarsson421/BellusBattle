@@ -36,7 +36,7 @@ public class Dash2 : MonoBehaviour
             return;
         }
 
-        rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+        rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);// Martins Deaceleration already do the same thing
     }
     private IEnumerator DashAction()
     {
