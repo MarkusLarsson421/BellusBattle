@@ -6,7 +6,7 @@ public class Shoot : MonoBehaviour
 {
 
 
-    public Transform Gun;
+    public GameObject Gun;
 
     public GameObject Bullet;
 
@@ -23,19 +23,15 @@ public class Shoot : MonoBehaviour
     public float ammo = 6;
 
     // Start is called before the first frame update
- 
 
+    public void Start()
+    {
+    }
     // Update is called once per frame
     void Update()
     {
 
-
-
-
         faceGun();
-
-
-
 
         if (ammo > 0)
         {
@@ -60,14 +56,23 @@ if (Input.GetMouseButtonDown(0))
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Gun.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
-    public void eqiup(Transform pickup)
+    public void eqiup(GameObject pickup)
     {
         Gun = pickup;
+        
+    }
+    public void die()
+    {
+        Destroy(gameObject);
     }
     void shoot()
     {
         ammo = ammo -1;
-        GameObject bulletIns = Instantiate(Bullet, ShootPoint.position, Gun.rotation);
-        bulletIns.GetComponent<Rigidbody>().AddForce(0,0, bulletIns.transform.rotation.z * bulletSpeed);
+        GameObject bulletIns = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
+        bulletIns.transform.Rotate(Vector3.left * 90);
+        Rigidbody bulletIns_rig;
+        bulletIns_rig = bulletIns.GetComponent<Rigidbody>();
+        bulletIns_rig.AddForce(ShootPoint.transform.up * bulletSpeed);
+        Destroy(bulletIns, 4f);
     }
 }

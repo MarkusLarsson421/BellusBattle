@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public Transform pickUp;
-    public GameObject Player;
+    public GameObject pickUp;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +19,12 @@ public class Pickup : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Weapon")
+        if (other.transform.tag == "Player")
         {
-            Player.GetComponent<Shoot>().eqiup(pickUp);
+            
+                other.GetComponent<Shoot>().eqiup(pickUp);
+            
+            
         }
     }
 }

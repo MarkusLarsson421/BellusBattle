@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            //kill
+            other.GetComponent<Shoot>().die();
         }
     }
 }
