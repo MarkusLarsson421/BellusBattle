@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Aim : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class Aim : MonoBehaviour
     private void InputToAngleCalculation()
     {
         mousePos = Input.mousePosition;
-        mousePos.z = 10; // fuck this shit (????)?????
+        mousePos.z = 10;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         direction = mousePos - transform.position;
         direction.Normalize();
