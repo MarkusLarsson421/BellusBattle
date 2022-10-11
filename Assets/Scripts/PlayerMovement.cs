@@ -7,9 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Forces")]
     [SerializeField] [Range(1f, 25f)] private float moveSpeed;
     [SerializeField] [Range(1f, 25f)] private float jumpForce;
-    [SerializeField] [Range(25f, 150f)] private float decelration;
+    [SerializeField] [Range(25f, 150f)] private float airDeceleration;
+    [SerializeField] [Range(25f, 150f)] private float groundDeceleration;
     [SerializeField] [Range(10f, 300f)] private float airResistance;
     [SerializeField] [Range(-100f, 0f)] private float downwardForce;
+
+    private float deceleration;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
@@ -66,14 +69,20 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            movementX = Mathf.MoveTowards(movementX, 0, decelration * Time.deltaTime);
+            movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
         
     
     }
     private bool CheckIsGrounded() 
     {
-        return Physics.Raycast(transform.position, Vector2.down, 0.5f, groundLayer);
+        if(Physics.Raycast(transform.position, Vector2.down, 0.5f, groundLayer))
+        {
+            deceleration = groundDeceleration;
+            return true;
+        }
+        deceleration = airDeceleration;
+        return false;
     
     }
     private void Jump() 
