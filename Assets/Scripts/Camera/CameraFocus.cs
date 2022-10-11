@@ -15,7 +15,6 @@ public class CameraFocus : MonoBehaviour
 	private Vector3 offset;
 	[SerializeField] [Tooltip("How smooth the camera repositions itself.")]
 	private float smoothTime = 0.5f;
-
 	[SerializeField] [Tooltip("The furthest out the camera can zoom out.")]
 	private float minZoom = 40.0f;
 	[SerializeField] [Tooltip("The closest in the camera can zoom in.")]
@@ -23,7 +22,7 @@ public class CameraFocus : MonoBehaviour
 	[SerializeField]
 	private float zoomLimiter = 50.0f;
 
-	private List<Transform> _targets;
+	private List<Transform> _targets = new();
 	private Vector3 _velocity;
 	private Camera _cam;
 
