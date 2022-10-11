@@ -24,7 +24,7 @@ public class Dash2 : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash) // INPUT
         {
             StartCoroutine(DashAction());
         }
