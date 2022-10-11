@@ -11,8 +11,6 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraFocus : MonoBehaviour
 {
-	[SerializeField] [Tooltip("The targets for the camera to follow.")]
-	private List<Transform> targets;
 	[SerializeField] [Tooltip("Offset relative to its' starting position.")]
 	private Vector3 offset;
 	[SerializeField] [Tooltip("How smooth the camera repositions itself.")]
@@ -25,6 +23,7 @@ public class CameraFocus : MonoBehaviour
 	[SerializeField]
 	private float zoomLimiter = 50.0f;
 
+	private List<Transform> _targets;
 	private Vector3 _velocity;
 	private Camera _cam;
 
@@ -36,7 +35,7 @@ public class CameraFocus : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		if (targets.Count == 0) {return;}
+		if (_targets.Count == 0) {return;}
 
 		Bounds bounds = GetTargetsBounds();
 		Reposition(bounds);
@@ -48,7 +47,7 @@ public class CameraFocus : MonoBehaviour
 	 */
 	public void AddTarget(Transform t)
 	{
-		targets.Add(t);
+		_targets.Add(t);
 	}
 	
 	/*
@@ -56,7 +55,7 @@ public class CameraFocus : MonoBehaviour
 	 */
 	public void RemoveTarget(Transform t)
 	{
-		targets.Remove(t);
+		_targets.Remove(t);
 	}
 
 	/*
@@ -74,7 +73,7 @@ public class CameraFocus : MonoBehaviour
 	 */
 	private void Focus(Bounds bounds)
 	{
-		float newZoom = Mathf.Lerp(maxZoom, minZoom, bounds.size.x / zoomLimiter);
+		float newZoom = Mathf.Lerp(maxZoom, minZoom, (bounds.size.x + bounds.size.y) / zoomLimiter);
 		_cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, newZoom, Time.deltaTime);
 	}
 
@@ -83,9 +82,9 @@ public class CameraFocus : MonoBehaviour
 	 */
 	private Vector3 GetMedian(Bounds bounds)
 	{
-		if (targets.Count == 1)
+		if (_targets.Count == 1)
 		{
-			return targets[0].position;
+			return _targets[0].position;
 		}
 		
 		return bounds.center;
@@ -96,10 +95,10 @@ public class CameraFocus : MonoBehaviour
 	 */
 	private Bounds GetTargetsBounds()
 	{
-		Bounds bounds = new Bounds(targets[0].position, Vector3.zero);
-		for (int i = 0; i < targets.Count; i++)
+		Bounds bounds = new Bounds(_targets[0].position, Vector3.zero);
+		for (int i = 0; i < _targets.Count; i++)
 		{
-			bounds.Encapsulate(targets[i].position);
+			bounds.Encapsulate(_targets[i].position);
 		}
 
 		return bounds;
