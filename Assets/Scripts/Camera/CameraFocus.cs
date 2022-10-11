@@ -5,8 +5,8 @@ using UnityEngine;
  * CameraFocus will keep its focus on the targets you give it and readjust once a target is removed.
  * 
  * It has to be attached to a GameObject with the Camera component.
- * This class requires the developer to remove the target from the list once it is no longer needed.
- * Meaning you have to access the targets list and remove the listed transform.
+ * This class requires the developer to remove the target from the list using the relevant methods once
+ * it is no longer needed.
  */
 [RequireComponent(typeof(Camera))]
 public class CameraFocus : MonoBehaviour
@@ -57,18 +57,6 @@ public class CameraFocus : MonoBehaviour
 	public void RemoveTarget(Transform t)
 	{
 		targets.Remove(t);
-
-		List<Transform> newList = new List<Transform>();
-		int j = 0;
-		for (int i = 0; i < targets.Capacity; i++)
-		{
-			if (targets[i] != null)
-			{
-				newList[j] = targets[i];
-			}
-			j++;
-		}
-		targets = newList;
 	}
 
 	/*
