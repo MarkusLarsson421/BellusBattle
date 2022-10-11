@@ -584,9 +584,9 @@ GameObject:
   - component: {fileID: 998439769}
   - component: {fileID: 998439768}
   - component: {fileID: 998439767}
-  - component: {fileID: 998439770}
   - component: {fileID: 998439772}
   - component: {fileID: 998439771}
+  - component: {fileID: 998439773}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -660,25 +660,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &998439770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998439764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 897329a04defc4849a2b0066e6510640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Gun: {fileID: 0}
-  Bullet: {fileID: 4310979030807534198, guid: cbeb602ccec1c6448b646b3bc1de89c1, type: 3}
-  bulletSpeed: 325
-  ShootPoint: {fileID: 1450445269}
-  fireRate: 1.5
-  mainCamera: {fileID: 587234644}
-  ammo: 6
 --- !u!65 &998439771
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -708,6 +689,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
+--- !u!114 &998439773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998439764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897329a04defc4849a2b0066e6510640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gun: {fileID: 0}
+  Bullet: {fileID: 4310979030807534198, guid: cbeb602ccec1c6448b646b3bc1de89c1, type: 3}
+  bulletSpeed: 325
+  ShootPoint: {fileID: 1450445269}
+  fireRate: 1.5
+  mainCamera: {fileID: 587234644}
+  ammo: 6
 --- !u!1 &1096020188
 GameObject:
   m_ObjectHideFlags: 0

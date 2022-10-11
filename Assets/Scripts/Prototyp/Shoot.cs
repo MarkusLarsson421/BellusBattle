@@ -54,7 +54,7 @@ if (Input.GetMouseButtonDown(0))
         Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camToPlayerDist));
         Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Gun.transform.rotation = Quaternion.Euler(0, 0, angle);
+        Gun.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
     }
     public void eqiup(GameObject pickup)
     {
@@ -73,6 +73,6 @@ if (Input.GetMouseButtonDown(0))
         Rigidbody bulletIns_rig;
         bulletIns_rig = bulletIns.GetComponent<Rigidbody>();
         bulletIns_rig.AddForce(ShootPoint.transform.up * bulletSpeed);
-        Destroy(bulletIns, 4f);
+        Destroy(bulletIns, 3f);
     }
 }
