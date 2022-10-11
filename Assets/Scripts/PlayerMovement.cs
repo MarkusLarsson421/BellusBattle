@@ -64,20 +64,29 @@ public class PlayerMovement : MonoBehaviour
         }
         velocity = new Vector2(movementX, movementY);
         
+        //WIP collisionDetection
         /*
         if(velocity.y != 0)
         {
             HandleVerticalCollisions(ref velocity);
         }
+        if(velocity.x != 0)
+        {
+            HandleHorizontalCollisions(ref velocity);
+        }
         */
-        
+
+
         
         if (!CheckCollision())
         {
             transform.Translate(velocity * Time.deltaTime);
         }
         
-        
+
+
+
+
 
 
 
@@ -98,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool CheckIsGrounded() 
     {
-        if(Physics.Raycast(transform.position, Vector2.down, 0.5f, groundLayer))
+        if(Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, groundLayer))
         {
             deceleration = groundDeceleration;
             return true;
@@ -148,15 +157,15 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("adada");
 
-            Vector2 rayOrigin = (directionY < 0) ? rayCastBottomLeft : rayCastTopLeft;
-            //rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
+            Vector2 rayOrigin = (directionY == -1) ? rayCastBottomLeft : rayCastTopLeft;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
             
             
 
-            Debug.DrawRay(rayOrigin, Vector2.right * directionY * rayLength, Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
                 Debug.Log("Hit!");
                 velocity.y = (hit.distance - skinWidth) * directionY;
@@ -168,11 +177,40 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+    private void HandleHorizontalCollisions(ref Vector2 velocity)
+    {
+        float directionX = Mathf.Sign(velocity.x);
+        float rayLength = Mathf.Abs(velocity.x) + skinWidth;
+
+        for (int i = 0; i < horizontalRayCount; i++)
+        {
+            Debug.Log("adada");
+
+            Vector2 rayOrigin = (directionX == -1) ? rayCastBottomLeft : rayCastBottomRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+
+
+
+            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
+
+            RaycastHit hit;
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
+            {
+                Debug.Log("Hit!");
+                velocity.x = (hit.distance - skinWidth) * directionX;
+                rayLength = hit.distance;
+                Debug.Log(hit.distance);
+
+                //movementY = 0;
+            }
+        }
+    }
+
+
     void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
-        bounds.Expand(skinWidth * -2);
+        //bounds.Expand(skinWidth * -2);
 
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
         verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
@@ -185,10 +223,10 @@ public class PlayerMovement : MonoBehaviour
     private void updateRayCastOrgins()
     {
         Bounds bounds = boxCollider.bounds;
-        bounds.Expand(skinWidth * -2);
+        //bounds.Expand(skinWidth * -2);
 
-        rayCastBottomLeft = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
-        rayCastTopLeft = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
+        rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
+        rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
         rayCastBottomRight = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
         rayCastTopRight = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
     }
