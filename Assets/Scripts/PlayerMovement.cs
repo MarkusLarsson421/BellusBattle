@@ -13,13 +13,18 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
 
     private Vector2 velocity;
     private float movementX, movementY;
 
     private float coyoteTime = 0.2f;
     private float coyoteTimer;
+    
     private bool hasCoyoteTime;
+    private bool hasDoubleJump;
+
+    private float skinWidth = 0.012f;
 
     void Start()
     {
@@ -41,11 +46,16 @@ public class PlayerMovement : MonoBehaviour
         if(CheckIsGrounded() && velocity.y < 0)
         {
             movementY = 0;
-            hasCoyoteTime = true;
             coyoteTimer = 0;
+            hasCoyoteTime = true;
+            hasDoubleJump = true;
         }
         velocity = new Vector2(movementX, movementY);
-        transform.Translate(velocity * Time.deltaTime);
+        if (!CheckCollision())
+        {
+            transform.Translate(velocity * Time.deltaTime);
+        }
+        
     }
 
     private void UpdateMovementForce() 
@@ -68,10 +78,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump() 
     {
-        if (CheckIsGrounded() || hasCoyoteTime)
+        if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                if(!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
                 movementY = jumpForce;
             }
         }
@@ -87,5 +98,11 @@ public class PlayerMovement : MonoBehaviour
             hasCoyoteTime = false;
         }
         coyoteTimer += Time.deltaTime;
+    }
+
+    private bool CheckCollision()
+    {
+        return Physics.Raycast(transform.position, velocity, 0.5f + skinWidth, wallLayer);
+       
     }
 }
