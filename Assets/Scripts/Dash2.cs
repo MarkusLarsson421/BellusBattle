@@ -27,7 +27,7 @@ public class Dash2 : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash) // INPUT
         {
-            StartCoroutine(DashAction());
+            //StartCoroutine(DashAction());
         }
     }
     private void FixedUpdate()
@@ -40,8 +40,10 @@ public class Dash2 : MonoBehaviour
         velocity = new Vector3(0, velocity.y, velocity.z);
     }
     float temp;
+    /*
     private IEnumerator DashAction()
     {
+        /*
         canDash = false;
         isDashing = true;
         temp = movement.GetDownwardForce();
@@ -54,5 +56,8 @@ public class Dash2 : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
-    }
+        */
+    //}
+
+
 }
