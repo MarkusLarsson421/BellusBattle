@@ -10,6 +10,7 @@ public class Dash2 : MonoBehaviour
     [SerializeField] private float dashingActivationCooldown = 0.01f;
 
     private Rigidbody rb;
+    private Vector3 velocity;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
     private void Start()
@@ -33,17 +34,17 @@ public class Dash2 : MonoBehaviour
     {
         if (isDashing)
         {
+            transform.position += velocity * Time.deltaTime;
             return;
         }
-
-        rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);// Martins Deaceleration already do the same thing
+        velocity = new Vector3(0, velocity.y, velocity.z);
     }
     private IEnumerator DashAction()
     {
         canDash = false;
         isDashing = true;
         if(stopGravityWhileDashing) rb.useGravity = false;
-        rb.velocity = new Vector3(transform.localScale.x * dashingDistace, 0f, 0f);
+        velocity = new Vector3(dashingDistace, 0f, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(dashingDuration);
         //tr.emitting = false; //See variable TrailRenderer tr
