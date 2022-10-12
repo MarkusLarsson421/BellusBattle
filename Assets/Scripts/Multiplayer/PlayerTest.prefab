@@ -128,10 +128,6 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 96b750e4-c8c5-48e8-9bb0-22419fc95526
-    m_ActionName: Player/X[/Keyboard/x]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -1659145427209495783}
         m_TargetAssemblyTypeName: MoveTest, Assembly-CSharp
@@ -147,8 +143,24 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7fa69d8d-691f-4616-aa6b-896214260deb
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1659145427209495783}
+        m_TargetAssemblyTypeName: MoveTest, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0c3d3477-aed4-47fe-8d62-750652a3dbc3
+    m_ActionName: Player/MoveController
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: CS1
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

@@ -9,6 +9,6 @@ public class PlayerDetails : MonoBehaviour
    
     void Start()
     {
-        transform.position = startPos;
+        transform.position = startPos; // Puts the player on the spawn position
     }
 }

@@ -7,26 +7,24 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "7fa69d8d-691f-4616-aa6b-896214260deb",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MoveController",
+                    "type": "Value",
+                    "id": "0c3d3477-aed4-47fe-8d62-750652a3dbc3",
+                    "expectedControlType": "Stick",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "4b49afab-9949-45aa-a0ef-7900c1f8b833",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CS1;Controller",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "WASD",
                     "id": "eba4573a-72e3-4a75-b1a1-11b3e1e47c8c",
@@ -84,12 +82,23 @@
                 },
                 {
                     "name": "",
+                    "id": "4b49afab-9949-45aa-a0ef-7900c1f8b833",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CS1;Controller",
+                    "action": "MoveController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "31f09933-e72a-4d3e-82bc-a34d88db2aa7",
                     "path": "<DualShockGamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "CS1;Controller",
-                    "action": "Move",
+                    "action": "MoveController",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
