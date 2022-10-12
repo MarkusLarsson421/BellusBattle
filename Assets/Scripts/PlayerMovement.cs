@@ -308,6 +308,14 @@ public class PlayerMovement : MonoBehaviour
         rayCastBottomRight = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
         rayCastTopRight = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
     }
+    public float GetDownwardForce()
+    {
+        return downwardForce;
+    }
+    public void SetDownwardForce(float value)
+    {
+        downwardForce = value;
 
 
+    }
 }
