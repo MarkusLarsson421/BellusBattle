@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Hit vert");
                 Debug.Log(hit.transform.position.y);
                 velocity.y = 0;
-                transform.position = new Vector3(transform.position.x, hit.transform.position.y);
+                //transform.position = new Vector3(transform.position.x, hit.transform.position.y);
                 //transform.position.y = hit.point.
                 /*
                 velocity.y = (hit.distance - skinWidth) * directionY;
