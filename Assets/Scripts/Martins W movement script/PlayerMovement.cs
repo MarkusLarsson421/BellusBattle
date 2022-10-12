@@ -114,4 +114,12 @@ public class PlayerMovement : MonoBehaviour
         return Physics.Raycast(transform.position, velocity, 0.5f + skinWidth, wallLayer);
        
     }
+    public void SetDownwardForce(float value)
+    {
+        downwardForce = value;
+    }
+    public float GetDownwardForce()
+    {
+        return downwardForce;
+    }
 }
