@@ -1,14 +1,14 @@
 {
-    "name": "Rotation",
+    "name": "PlayInputs",
     "maps": [
         {
             "name": "Gameplay",
-            "id": "6ea1c2a4-960f-40a5-9015-5d400c7bb6c6",
+            "id": "c6a4a188-3984-45b7-8c33-08c55f6ecc68",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "b8dcdc5e-5eb8-4f07-ae57-5c6c3541b9be",
+                    "id": "f7dc854e-c8b5-4171-a1d2-16b1e47a83bf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -17,8 +17,8 @@
                 {
                     "name": "Rotate",
                     "type": "Value",
-                    "id": "23f5b257-c7f3-41b7-8a47-bb1e59ea8052",
-                    "expectedControlType": "Stick",
+                    "id": "40f303e9-d360-47e4-bb1c-19374213bb4c",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -27,18 +27,18 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "78542408-45bf-4d8f-885f-15f1d90850df",
-                    "path": "",
+                    "id": "bdff6543-ca91-474c-83e4-e80e3b1af527",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "cc837ed3-d5b9-4019-a4d7-10c984241d25",
+                    "id": "6cc0740d-2e9a-43de-8acd-ac1e4d5c5430",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",

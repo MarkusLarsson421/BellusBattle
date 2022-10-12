@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Dash : MonoBehaviour
 {
     private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 16f;
+    [SerializeField]  private float jumpingPower = 16f;
     private bool isFacingRight = true;
 
     [SerializeField] private bool canDash = true;
@@ -66,6 +67,13 @@ public class Dash : MonoBehaviour
         }
     }
 
+    public void DoDash(InputAction.CallbackContext context)
+    {
+        if (canDash)
+        {
+            StartCoroutine(DashAction());
+        }
+    }
     private IEnumerator DashAction()
     {
         canDash = false;

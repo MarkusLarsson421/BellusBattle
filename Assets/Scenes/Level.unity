@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234047e15f252cb4a81eeecfd5333318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpingPower: 16
   canDash: 1
   dashingPower: 24
   dashingTime: 0.2
@@ -198,7 +199,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7850c118b7222294a89e2bf25285078c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -15,11 +15,11 @@ public class Aim : MonoBehaviour
 
     private void Update()
     {
-        InputToAngleCalculation();
+        //MouseInputToAngleCalculation();
         ChooseAngleRotation();
         transform.rotation = rotation;
     }
-    private void InputToAngleCalculation()
+    private void MouseInputToAngleCalculation()
     {
         mousePos = Input.mousePosition;
         mousePos.z = 10;
@@ -27,6 +27,14 @@ public class Aim : MonoBehaviour
         direction = mousePos - transform.position;
         direction.Normalize();
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    }
+    public void JoiStickInputToAngleCalculation(InputAction.CallbackContext context)
+    {
+        Vector2 t = context.ReadValue<Vector2>();
+        Debug.Log(t);
+        direction = t - (Vector2)transform.position;
+        direction.Normalize();
+        angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg;
     }
     private void ChooseAngleRotation()
     {
