@@ -30,7 +30,7 @@ public class Grenade : MonoBehaviour{
 	private void Die(){
 		ExplodeEvent ee = new ExplodeEvent{
 			Description = "Grenade " + name + " exploded!",
-			ExplosionGO = gameObject
+			ExplosionGo = gameObject
 		};
 		ee.FireEvent();
 		

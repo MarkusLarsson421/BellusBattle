@@ -28,7 +28,8 @@ public class BallisticFirearm : MonoBehaviour
 	}
 
 	public void Fire(){
-		if (ammo <= 0){Destroy(gameObject);}
+		if (ammo <= 0)
+		{Destroy(gameObject);}
 		if (Time.time >= _nextTimeToFire)
 		{
 			_nextTimeToFire = Time.time + 1.0f / fireRate;
@@ -36,9 +37,9 @@ public class BallisticFirearm : MonoBehaviour
 			_muzzleFlash.Play();
 			GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, Quaternion.identity);
 			//Calculation is inefficient, could possibly be improved to simulate inaccuracy better.
-			//Vector3 force = new Vector3(projectileForce, (float)_random.Next(0, (int)inaccuracy * 100) / 100, 0);
-			//firedProjectile.GetComponent<Rigidbody>().AddForce(force);
-			firedProjectile.GetComponent<Projectile>()
+			Vector3 force = new Vector3(projectileForce, (float)_random.Next(0, (int)inaccuracy * 100) / 100, 0);
+			_projectile = firedProjectile.GetComponent<Projectile>();
+			_projectile.Fire(force);
 		}
 	}
 }

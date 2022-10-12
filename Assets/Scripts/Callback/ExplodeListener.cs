@@ -12,7 +12,7 @@ public class ExplodeListener : MonoBehaviour
 
 	private void OnUnitDied(ExplodeEvent ee)
 	{
-		GameObject go = Instantiate(particleSys, ee.ExplosionGO.transform);
+		GameObject go = Instantiate(particleSys, ee.ExplosionGo.transform);
 		go.transform.parent = null;
 		ParticleSystem particle = go.GetComponent<ParticleSystem>();
 		particle.Play();

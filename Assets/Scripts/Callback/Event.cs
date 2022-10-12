@@ -36,12 +36,12 @@ public abstract class Event<T> where T : Event<T>
 
 public class DebugEvent : Event<DebugEvent>
 {
-	public int verbosityLevel;
+	public int VerbosityLevel;
 }
 
 public class ExplodeEvent : Event<ExplodeEvent>
 {
-	public GameObject ExplosionGO;
+	public GameObject ExplosionGo;
 	/*
 	 * Info about cause of death, our killer, etc...
 	 * Could be struct, readonly, etc...
