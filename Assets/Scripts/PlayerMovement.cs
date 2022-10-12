@@ -5,14 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Forces")]
-    [SerializeField] [Range(1f, 25f)] private float moveSpeed;
-    [SerializeField] [Range(1f, 25f)] private float jumpForce;
-    [SerializeField] [Range(25f, 150f)] private float airDeceleration;
-    [SerializeField] [Range(25f, 150f)] private float groundDeceleration;
-    [SerializeField] [Range(10f, 300f)] private float airResistance;
-    [SerializeField] [Range(-100f, 0f)] private float downwardForce;
-
-    private float deceleration;
+    [SerializeField] [Tooltip("Variabel som påverkar spelarens hastighet")] [Range(1f, 25f)] private float moveSpeed;
+    [SerializeField] [Tooltip("Hur högt spelaren kan hoppa")] [Range(1f, 25f)] private float jumpForce;
+    [SerializeField] [Tooltip("Hur snabbt spelaren decelererar i luften")] [Range(25f, 150f)] private float airDeceleration;
+    [SerializeField] [Tooltip("Hursnabbt spelaren decelererar på marken")] [Range(25f, 150f)] private float groundDeceleration;
+    [SerializeField] [Tooltip("Påverkar hur snabbt spelaren förlorar energi i ett hopp")] [Range(10f, 300f)] private float airResistance;
+    [SerializeField] [Tooltip("Hur mycket gravitation som påverkar spelaren i luften")] [Range(-100f, 0f)] private float downwardForce;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
@@ -20,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 velocity;
     private float movementX, movementY;
-
+    private float deceleration;
     private float coyoteTime = 0.2f;
     private float coyoteTimer;
 
@@ -33,15 +31,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private float verticalRaySpacing, horizontalRaySpacing;
-
     private int horizontalRayCount, verticalRayCount = 4;
-
-    [SerializeField] private CapsuleCollider collider;
-    Vector3 point1, point2;
-    float offset;
-    float radius = 0.5f;
-
-    public LayerMask collisionMask;
 
     void Start()
     {
@@ -70,35 +60,14 @@ public class PlayerMovement : MonoBehaviour
             hasDoubleJump = true;
         }
         velocity = new Vector2(movementX, movementY);
-
-        //WIP collisionDetection
-        /*
-        if(velocity.y != 0)
-        {
-            HandleVerticalCollisions(ref velocity);
-        }
-        if(velocity.x != 0)
-        {
-            HandleHorizontalCollisions(ref velocity);
-        }
-        */
         HandleVerticalCollisions(ref velocity);
         HandleHorizontalCollisions(ref velocity);
 
 
-        //PreventCollision3D();
-
-        //if (!CheckCollision())
-        // {
-        transform.Translate(velocity * Time.deltaTime);
-        //  }
-
-
-
-
-
-
-
+        if (!CheckCollision())
+        {
+            transform.Translate(velocity * Time.deltaTime);
+        }
 
     }
 
@@ -157,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    //Funkar inte än!
+    
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
@@ -180,8 +149,6 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Hit vert");
                 Debug.Log(hit.transform.position.y);
                 velocity.y = 0;
-                //transform.position = new Vector3(transform.position.x, hit.transform.position.y);
-                //transform.position.y = hit.point.
                 /*
                 velocity.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
@@ -222,77 +189,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    void PreventCollision3D()
-    {
-        offset = collider.height / 2 - radius;
-        point1 = transform.position + collider.center + Vector3.up * offset;
-        point2 = transform.position + collider.center + Vector3.down * offset;
-
-        Collider[] hits = Physics.OverlapCapsule(point1, point2, radius, collisionMask);
-
-        for (int i = 0; i < hits.Length; i++)
-        {
-            Physics.ComputePenetration(collider, transform.position, collider.transform.rotation, hits[i], hits[i].transform.position, hits[i].transform.rotation, out Vector3 direction, out float distance);
-            Vector3 separationVector = direction * distance;
-            velocity += NormalPower(velocity, separationVector.normalized);
-        }
-
-        if (velocity.magnitude < 0.01f)
-        {
-            return;
-        }
-
-
-        if (Physics.CapsuleCast(point1, point2, radius, velocity.normalized, out RaycastHit hit, collisionMask))
-        {
-            Debug.Log("jdada");
-            float distanceToColliderNeg = skinWidth / Vector3.Dot(velocity.normalized, hit.normal);
-            float allowedMovementDistance = hit.distance - distanceToColliderNeg; ;
-            if (allowedMovementDistance > velocity.magnitude * Time.deltaTime)
-            {
-                return;
-            }
-            if (allowedMovementDistance > 0.0f)
-            {
-                velocity += velocity.normalized * allowedMovementDistance;
-            }
-
-            Vector2 normal = NormalPower(velocity, hit.normal);
-            velocity += normal;
-            Friction(normal);
-            Debug.DrawLine(transform.position, hit.point, Color.red);
-            return;
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    static Vector2 NormalPower(Vector2 velocity, Vector2 normal)
-    {
-        if (Vector3.Dot(velocity, normal) >= 1)
-        {
-            return Vector3.zero;
-        }
-        Vector3 projection = Vector3.Dot(velocity, normal) * normal;
-        return -projection;
-    }
-
-    void Friction(Vector3 normalForce)
-    {
-        if (velocity.magnitude < normalForce.magnitude * 0.2f)
-        {
-            velocity = Vector3.zero;
-        }
-        else
-        {
-            velocity -= velocity.normalized * normalForce.magnitude * 0.1f;
-        }
-    }
-
-
     void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
@@ -314,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
         rayCastBottomLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastTopLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastBottomRight = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastTopRight = new Vector2(bounds.max.x, bounds.max.y);
+        rayCastTopRight = new Vector2(bounds.center.x, bounds.center.y);
 
 
 
