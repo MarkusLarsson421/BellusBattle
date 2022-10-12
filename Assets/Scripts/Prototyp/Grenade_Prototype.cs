@@ -22,7 +22,6 @@ public class Grenade_Prototype : MonoBehaviour
         if(countDown <= 0 && !exploded)
         {
             explode();
-            countDown = timer;
         }
     }
     void explode()
@@ -36,7 +35,7 @@ public class Grenade_Prototype : MonoBehaviour
             Rigidbody rb = near.GetComponent<Rigidbody>();
             if(rb!= null)
             {
-                rb.AddExplosionForce(500,transform.position,radius);
+                rb.AddExplosionForce(3000,transform.position,radius);
             }
         }
         

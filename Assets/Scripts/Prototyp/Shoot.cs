@@ -63,7 +63,7 @@ if (Input.GetMouseButtonDown(0))
     }
     public void die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.5f);
     }
     void shoot()
     {
@@ -73,6 +73,6 @@ if (Input.GetMouseButtonDown(0))
         Rigidbody bulletIns_rig;
         bulletIns_rig = bulletIns.GetComponent<Rigidbody>();
         bulletIns_rig.AddForce(ShootPoint.transform.up * bulletSpeed);
-        Destroy(bulletIns, 3f);
+        Destroy(bulletIns, 5f);
     }
 }
