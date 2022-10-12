@@ -22,6 +22,7 @@ public class Grenade_Prototype : MonoBehaviour
         if(countDown <= 0 && !exploded)
         {
             explode();
+            countDown = timer;
         }
     }
     void explode()
@@ -38,7 +39,7 @@ public class Grenade_Prototype : MonoBehaviour
                 rb.AddExplosionForce(500,transform.position,radius);
             }
         }
-
+        
         exploded = true;
         Destroy(gameObject);
     }
