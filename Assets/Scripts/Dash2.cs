@@ -44,11 +44,8 @@ public class Dash2 : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        if (stopGravityWhileDashing) 
-        { 
-            temp = movement.GetDownwardForce();
-            movement.SetDownwardForce(0);
-        }
+        temp = movement.GetDownwardForce();
+        if (stopGravityWhileDashing) movement.SetDownwardForce(0);
         velocity = new Vector3(dashingDistace, 0f, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(dashingDuration);
