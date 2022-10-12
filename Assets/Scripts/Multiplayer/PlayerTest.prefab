@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4317923148062240200}
   m_Layer: 0
   m_Name: PlayerTest
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,3 +177,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f658417c5d81e4b97b2e9bcc1a592f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
+  startPos: {x: 0, y: 0, z: 0}

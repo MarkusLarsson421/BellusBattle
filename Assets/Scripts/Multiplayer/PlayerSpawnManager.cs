@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerSpawnManager : MonoBehaviour
 {
     public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
-    public List<GameObject> listOfPlayers;
+    public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -15,6 +15,7 @@ public class PlayerSpawnManager : MonoBehaviour
 
         // Set the player ID, add one to the index to start at Player 1
         playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
+        listOfPlayers.Add(playerInput);
 
         // Set the start spawn position of the player using the location at the associated element into the array.
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.

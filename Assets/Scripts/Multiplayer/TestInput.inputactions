@@ -6,17 +6,8 @@
             "id": "2facfe52-dde3-4558-88f5-8340bb390b06",
             "actions": [
                 {
-                    "name": "X",
-                    "type": "Button",
-                    "id": "96b750e4-c8c5-48e8-9bb0-22419fc95526",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "7fa69d8d-691f-4616-aa6b-896214260deb",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -27,19 +18,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "6ea788c1-0d61-429d-a5c1-fbffd5e4afdf",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CS1",
-                    "action": "X",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4b49afab-9949-45aa-a0ef-7900c1f8b833",
-                    "path": "<Gamepad>/dpad",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "CS1;Controller",
