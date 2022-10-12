@@ -23,18 +23,25 @@ public class PlayerMovement : MonoBehaviour
 
     private float coyoteTime = 0.2f;
     private float coyoteTimer;
-    
+
     private bool hasCoyoteTime;
     private bool hasDoubleJump;
 
     private float skinWidth = 0.012f;
 
     private BoxCollider boxCollider;
-    [SerializeField]private Vector3 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
+    [SerializeField] private Vector3 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private float verticalRaySpacing, horizontalRaySpacing;
 
     private int horizontalRayCount, verticalRayCount = 4;
+
+    [SerializeField] private CapsuleCollider collider;
+    Vector3 point1, point2;
+    float offset;
+    float radius = 0.5f;
+
+    public LayerMask collisionMask;
 
     void Start()
     {
@@ -55,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
         }
 
-        if(CheckIsGrounded() && velocity.y < 0)
+        if (CheckIsGrounded() && velocity.y < 0)
         {
             movementY = 0;
             coyoteTimer = 0;
@@ -63,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             hasDoubleJump = true;
         }
         velocity = new Vector2(movementX, movementY);
-        
+
         //WIP collisionDetection
         /*
         if(velocity.y != 0)
@@ -76,13 +83,13 @@ public class PlayerMovement : MonoBehaviour
         }
         */
 
+        PreventCollision3D();
 
-        
-        if (!CheckCollision())
-        {
-            transform.Translate(velocity * Time.deltaTime);
-        }
-        
+        //if (!CheckCollision())
+        // {
+        transform.Translate(velocity * Time.deltaTime);
+        //  }
+
 
 
 
@@ -92,9 +99,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void UpdateMovementForce() 
+    private void UpdateMovementForce()
     {
-        if(Input.GetAxisRaw("Horizontal") != 0)
+        if (Input.GetAxisRaw("Horizontal") != 0)
         {
             movementX = moveSpeed * Input.GetAxisRaw("Horizontal");
         }
@@ -102,38 +109,38 @@ public class PlayerMovement : MonoBehaviour
         {
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
-        
-    
+
+
     }
-    private bool CheckIsGrounded() 
+    private bool CheckIsGrounded()
     {
-        if(Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, groundLayer))
+        if (Physics.Raycast(transform.position, Vector2.down, 0.55f + skinWidth, groundLayer))
         {
             deceleration = groundDeceleration;
             return true;
         }
         deceleration = airDeceleration;
         return false;
-    
+
     }
-    private void Jump() 
+    private void Jump()
     {
         if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if(!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
+                if (!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
                 movementY = jumpForce;
             }
         }
-    
+
     }
 
     private void UpdateCoyoteTime()
     {
         if (CheckIsGrounded() || !hasCoyoteTime) return;
         Debug.Log("awooo");
-        if(coyoteTimer > coyoteTime)
+        if (coyoteTimer > coyoteTime)
         {
             hasCoyoteTime = false;
         }
@@ -142,9 +149,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckCollision()
     {
-        Debug.DrawRay(transform.position, velocity, Color.green,0.5f + skinWidth);
+        Debug.DrawRay(transform.position, velocity, Color.green, 0.5f + skinWidth);
         return Physics.Raycast(transform.position, velocity, 0.5f + skinWidth, wallLayer);
-       
+
     }
 
     //Funkar inte än!
@@ -159,19 +166,21 @@ public class PlayerMovement : MonoBehaviour
 
             Vector2 rayOrigin = (directionY == -1) ? rayCastBottomLeft : rayCastTopLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
-            
-            
+
+
 
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(transform.position, velocity, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
                 Debug.Log("Hit!");
-                velocity.y = (hit.distance - skinWidth) * directionY;
-                rayLength = hit.distance;
+                float distanceToColllidrNeg = skinWidth / Vector2.Dot(velocity.normalized, hit.normal);
+                float allowedMovementDistance = hit.distance + distanceToColllidrNeg;
+                velocity.y = (distanceToColllidrNeg + hit.distance) * directionY;
+                //rayLength = hit.distance;
                 Debug.Log(hit.distance);
-                
+
                 //movementY = 0;
             }
         }
@@ -194,15 +203,84 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(transform.position, velocity, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
                 Debug.Log("Hit!");
-                velocity.x = (hit.distance - skinWidth) * directionX;
-                rayLength = hit.distance;
+                float distanceToColllidrNeg = skinWidth / Vector2.Dot(velocity.normalized, hit.normal);
+                float allowedMovementDistance = hit.distance + distanceToColllidrNeg;
+                velocity.x = (distanceToColllidrNeg + hit.distance) * directionX;
+                //rayLength = hit.distance;
                 Debug.Log(hit.distance);
 
                 //movementY = 0;
             }
+        }
+    }
+
+    void PreventCollision3D()
+    {
+        offset = collider.height / 2 - radius;
+        point1 = transform.position + collider.center + Vector3.up * offset;
+        point2 = transform.position + collider.center + Vector3.down * offset;
+
+        Collider[] hits = Physics.OverlapCapsule(point1, point2, radius, collisionMask);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Physics.ComputePenetration(collider, transform.position, collider.transform.rotation, hits[i], hits[i].transform.position, hits[i].transform.rotation, out Vector3 direction, out float distance);
+            Vector3 separationVector = direction * distance;
+            velocity += NormalPower(velocity, separationVector.normalized);
+        }
+
+        if (velocity.magnitude < 0.01f)
+        {
+            return;
+        }
+
+        if (Physics.CapsuleCast(point1, point2, radius, velocity.normalized, out RaycastHit hit, collisionMask))
+        {
+            float distanceToColliderNeg = skinWidth / Vector3.Dot(velocity.normalized, hit.normal);
+            float allowedMovementDistance = hit.distance + distanceToColliderNeg;
+            if (allowedMovementDistance > velocity.magnitude * Time.deltaTime)
+            {
+                return;
+            }
+            if (allowedMovementDistance > 0.0f)
+            {
+                velocity += velocity.normalized * allowedMovementDistance;
+            }
+
+            Vector2 normal = NormalPower(velocity, hit.normal);
+            velocity += normal;
+            Friction(normal);
+            Debug.DrawLine(transform.position, hit.point, Color.red);
+            return;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    static Vector2 NormalPower(Vector2 velocity, Vector2 normal)
+    {
+        if (Vector3.Dot(velocity, normal) >= 1)
+        {
+            return Vector3.zero;
+        }
+        Vector3 projection = Vector3.Dot(velocity, normal) * normal;
+        return -projection;
+    }
+
+    void Friction(Vector3 normalForce)
+    {
+        if (velocity.magnitude < normalForce.magnitude * 0.2f)
+        {
+            velocity = Vector3.zero;
+        }
+        else
+        {
+            velocity -= velocity.normalized * normalForce.magnitude * 0.1f;
         }
     }
 
@@ -230,13 +308,6 @@ public class PlayerMovement : MonoBehaviour
         rayCastBottomRight = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
         rayCastTopRight = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
     }
-    public float GetDownwardForce()
-    {
-        return downwardForce;
-    }
-    public void SetDownwardForce(float value)
-    {
-        downwardForce = value;
-    }
+
 
 }
