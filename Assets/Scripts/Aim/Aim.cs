@@ -31,7 +31,7 @@ public class Aim : MonoBehaviour
     public void JoiStickInputToAngleCalculation(InputAction.CallbackContext context)
     {
         Vector2 t = context.ReadValue<Vector2>();
-        Debug.Log(t);
+        if (t.x == 0 && t.y == 0) return;
         direction = t - (Vector2)transform.position;
         direction.Normalize();
         angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg;
