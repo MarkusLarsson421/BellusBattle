@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour
+public class Throw_Grenade_prototype : MonoBehaviour
+
+
 {
 
 
@@ -22,6 +24,16 @@ public class Shoot : MonoBehaviour
 
     public float ammo = 6;
 
+    bool pinOut;
+
+    bool tro;
+
+    Rigidbody bulletIns_rig;
+
+    GameObject bulletIns;
+
+
+
     // Start is called before the first frame update
 
     public void Start()
@@ -33,22 +45,42 @@ public class Shoot : MonoBehaviour
 
         faceGun();
 
+        
+
         if (ammo > 0)
         {
-if (Input.GetMouseButtonDown(0))
-        {
-            
-            if(Time.time > fireAgain)
+            if (Input.GetMouseButton(0))
             {
-                fireAgain = Time.time + 1/fireRate;
-                shoot();
+                
+
+                if (Time.time > fireAgain)
+                {
+                    if (!pinOut)
+                    {
+                        fireAgain = Time.time + 1 / fireRate;
+                        Pin();
+                        
+                    }
+                    
+                    
+                }
+                
+
+            }if (Input.GetMouseButtonUp(0))
+            {
+                        thro();
             }
-            
         }
+        if (pinOut && !tro)
+        {
+            bulletIns.transform.position = ShootPoint.position;
         }
         
+            
+        
+
     }
-     void faceGun()
+    void faceGun()
     {
         float camToPlayerDist = Vector3.Distance(transform.position, Camera.main.transform.position);
         Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camToPlayerDist));
@@ -59,20 +91,28 @@ if (Input.GetMouseButtonDown(0))
     public void eqiup(GameObject pickup)
     {
         Gun = pickup;
-        
+
     }
     public void die()
     {
         Destroy(gameObject, 0.5f);
     }
-    void shoot()
+    void Pin()
     {
-        ammo = ammo -1;
-        GameObject bulletIns = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
+        ammo = ammo - 1;
+        bulletIns = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
         bulletIns.transform.Rotate(Vector3.left * 90);
-        Rigidbody bulletIns_rig;
+        
         bulletIns_rig = bulletIns.GetComponent<Rigidbody>();
+        pinOut = true;
+        tro = false;
+
+    }
+    void thro(){
+        tro = true;
+        pinOut = false;
         bulletIns_rig.AddForce(ShootPoint.transform.up * bulletSpeed);
-        Destroy(bulletIns, 3f);
+        Destroy(bulletIns, 5f);
+        
     }
 }
