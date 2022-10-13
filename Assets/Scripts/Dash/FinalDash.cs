@@ -44,18 +44,18 @@ public class FinalDash : MonoBehaviour
 
     private IEnumerator DashAction()
     {
-
+        CheckForCollision(); 
         canDash = false;
         isDashing = true;
         temp = movement.GetDownwardForce();
         if (stopGravityWhileDashing) movement.SetDownwardForce(0);
         if(movement.velocity.x > 0.1)
         {
-            velocity = new Vector3(dashingDistace, 0f, 0f);
+            velocity = new Vector3(dashingDistace - movement.velocity.x, 0f, 0f);
         }
         else if (movement.velocity.x < 0.1)
         {
-            velocity = new Vector3(-dashingDistace, 0f, 0f);
+            velocity = new Vector3(-dashingDistace - movement.velocity.x, 0f, 0f);
         }
         else
         {
@@ -71,6 +71,16 @@ public class FinalDash : MonoBehaviour
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
 
+    }
+
+    private void CheckForCollision()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, movement.velocity, out hit, 5f, movement.WallLayer))
+        {
+            dashingDistace = hit.distance - 0.5f; /// 0.5f är spelarens storlek
+
+        }
     }
 
     public void DoDash(InputAction.CallbackContext context)

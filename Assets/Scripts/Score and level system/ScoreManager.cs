@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
             hasGivenScore = true;
         }
 
-        Debug.Log(ScoreDic[cameraFocus._targets[0].transform.gameObject]);
+        //Debug.Log(ScoreDic[cameraFocus._targets[0].transform.gameObject]);
     }
 
     public void AddScore(GameObject winner)

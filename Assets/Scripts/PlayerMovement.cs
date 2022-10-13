@@ -18,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask oneWayLayer;
 
+    public LayerMask WallLayer
+    {
+        get { return wallLayer; }
+    }
+
     public Vector2 velocity;
     private float movementX, movementY;
     Vector2 movementX2;
