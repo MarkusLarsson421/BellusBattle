@@ -170,12 +170,14 @@ MonoBehaviour:
   downwardForce: -22
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
   wallLayer:
     serializedVersion: 2
     m_Bits: 72
+  oneWayLayer:
+    serializedVersion: 2
+    m_Bits: 128
   velocity: {x: 0, y: 0}
-  isAlive: 0
   rayCastBottomLeft: {x: 0, y: 0, z: 0}
   rayCastBottomRight: {x: 0, y: 0, z: 0}
   rayCastTopRight: {x: 0, y: 0, z: 0}
@@ -303,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   startPos: {x: 0, y: 0, z: 0}
+  isAlive: 0
 --- !u!114 &6592616742247666660
 MonoBehaviour:
   m_ObjectHideFlags: 0

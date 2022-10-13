@@ -31,6 +31,14 @@ public class CameraFocus : MonoBehaviour
 	{
 		offset = transform.position;
 		_cam = GetComponent<Camera>();
+
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach(GameObject tr in players)
+        {
+			_targets.Add(tr.transform);
+		}
+		
+ 		
 	}
 
 	private void LateUpdate()

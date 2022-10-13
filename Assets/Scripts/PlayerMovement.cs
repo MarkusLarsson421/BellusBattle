@@ -16,12 +16,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask oneWayLayer;
 
     public Vector2 velocity;
     private float movementX, movementY;
     Vector2 movementX2;
     bool moving;
-    public bool isAlive;
 
     private float deceleration;
     private float coyoteTime = 0.2f;
@@ -42,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
-        isAlive = true;
     }
 
     // Update is called once per frame
@@ -83,13 +82,10 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(velocity * Time.deltaTime);
         }
 
-        if (!isAlive)
-        {
-            //Debug.Log("dead");
-        }
-
         //FLipPlayer();
 
+        // So that when we change scene we don't have to re-join the lobby
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void FLipPlayer()
@@ -222,27 +218,28 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
-            //Debug.Log("adada");
-
             Vector2 rayOrigin = (directionY == -1) ? rayCastBottomLeft : rayCastTopLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-
-
 
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))
             {
-               // Debug.Log("Hit vert");
-                //Debug.Log(hit.transform.position.y);
                 velocity.y = 0;
-                /*
-                velocity.y = (hit.distance - skinWidth) * directionY;
-                rayLength = hit.distance;
-                */
+            }
 
-                //movementY = 0;
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, oneWayLayer))
+            {
+                if (velocity.y > 0)
+                {
+                    return;
+                }
+                else
+                {
+                    velocity.y = 0;
+                }
+                    
             }
         }
     }

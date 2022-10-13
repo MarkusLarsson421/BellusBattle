@@ -23,6 +23,8 @@ public class PlayerSpawnManager : MonoBehaviour
 
         playerInput.gameObject.GetComponent<CameraTest>().focus = camera.gameObject.GetComponent<CameraFocus>();
         AddPlayerInFocus(playerInput.transform);
+
+        
     }
 
     private void AddPlayerInFocus(Transform player)
