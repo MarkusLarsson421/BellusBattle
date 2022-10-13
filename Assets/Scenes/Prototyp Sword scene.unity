@@ -697,6 +697,7 @@ GameObject:
   - component: {fileID: 998439771}
   - component: {fileID: 998439773}
   - component: {fileID: 998439774}
+  - component: {fileID: 998439775}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -825,7 +826,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998439764}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f2cef8634171fe4fbdc3a19a8f4bf6c, type: 3}
   m_Name: 
@@ -837,6 +838,21 @@ MonoBehaviour:
   fireRate: 1.5
   mainCamera: {fileID: 0}
   ammo: 6
+--- !u!114 &998439775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998439764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45dd60a14f3ccf43b0be20fd8d130c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sword: {fileID: 1096020188}
+  canAttack: 0
+  cooldown: 1
 --- !u!1 &1096020188
 GameObject:
   m_ObjectHideFlags: 0
