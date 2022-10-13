@@ -11,12 +11,11 @@ public class PlayerSpawnManager : MonoBehaviour
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
-
-        Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
-
         // Set the player ID, add one to the index to start at Player 1
         playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
         listOfPlayers.Add(playerInput);
+
+        Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
         // Set the start spawn position of the player using the location at the associated element into the array.
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.
@@ -24,8 +23,6 @@ public class PlayerSpawnManager : MonoBehaviour
 
         playerInput.gameObject.GetComponent<CameraTest>().focus = camera.gameObject.GetComponent<CameraFocus>();
         AddPlayerInFocus(playerInput.transform);
-
-
     }
 
     private void AddPlayerInFocus(Transform player)

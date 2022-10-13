@@ -35,7 +35,7 @@ public class Aim : MonoBehaviour
         direction = t - (Vector2)transform.position;
         direction.Normalize();
         angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg;
-        Debug.Log(direction);
+        //Debug.Log(direction);
     }
     private void ChooseAngleRotation()
     {

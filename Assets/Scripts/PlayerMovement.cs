@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementX, movementY;
     Vector2 movementX2;
     bool moving;
+    public bool isAlive;
 
     private float deceleration;
     private float coyoteTime = 0.2f;
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -79,6 +81,11 @@ public class PlayerMovement : MonoBehaviour
         if (!CheckCollision())
         {
             transform.Translate(velocity * Time.deltaTime);
+        }
+
+        if (!isAlive)
+        {
+            //Debug.Log("dead");
         }
 
         //FLipPlayer();
@@ -228,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
                // Debug.Log("Hit vert");
-                Debug.Log(hit.transform.position.y);
+                //Debug.Log(hit.transform.position.y);
                 velocity.y = 0;
                 /*
                 velocity.y = (hit.distance - skinWidth) * directionY;
