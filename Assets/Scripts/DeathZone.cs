@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 
 public class DeathZone : MonoBehaviour
 {
-    PlayerMovement pm;
-
-    private void OnCollisionEnter(Collision collision)
+    [SerializeField] CameraFocus CF;
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             // Sätter isAlive bool till false
             Debug.Log("FUCK");
-            //pm.gameObject.GetComponent<PlayerMovement>().isAlive = false;
-            //collision.gameObject.SetActive(false);
+            other.gameObject.GetComponent<PlayerMovement>().isAlive = false;
+            CF.RemoveTarget(other.transform);
+            other.gameObject.SetActive(false);
         }
     }
 }
