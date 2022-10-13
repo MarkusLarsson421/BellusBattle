@@ -23,7 +23,7 @@ public class CameraFocus : MonoBehaviour
 	[SerializeField]
 	private float zoomLimiter = 50.0f;
 
-	private List<Transform> _targets;
+	[SerializeField] public List<Transform> _targets;
 	private Vector3 _velocity;
 	private Camera _cam;
 
@@ -35,6 +35,7 @@ public class CameraFocus : MonoBehaviour
 
 	private void LateUpdate()
 	{
+
 		if (_targets.Count == 0) {return;}
 
 		Bounds bounds = GetTargetsBounds();

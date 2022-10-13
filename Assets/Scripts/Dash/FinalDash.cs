@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class FinalDash : MonoBehaviour
 {
     [SerializeField] private bool canDash = true;
@@ -17,7 +18,7 @@ public class FinalDash : MonoBehaviour
     {
         movement = GetComponent<PlayerMovement>();
     }
-
+    /*
     void Update()
     {
         if (isDashing)
@@ -29,6 +30,7 @@ public class FinalDash : MonoBehaviour
             StartCoroutine(DashAction());
         }
     }
+    */
     private void FixedUpdate()
     {
         if (isDashing)
@@ -47,7 +49,20 @@ public class FinalDash : MonoBehaviour
         isDashing = true;
         temp = movement.GetDownwardForce();
         if (stopGravityWhileDashing) movement.SetDownwardForce(0);
-        velocity = new Vector3(dashingDistace, 0f, 0f);
+        if(movement.velocity.x > 0.1)
+        {
+            velocity = new Vector3(dashingDistace, 0f, 0f);
+        }
+        else if (movement.velocity.x < 0.1)
+        {
+            velocity = new Vector3(-dashingDistace, 0f, 0f);
+        }
+        else
+        {
+            velocity = new Vector3(0f, 0f, 0f);
+            Debug.Log("Fuck you");
+        }
+        
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(dashingDuration);
         //tr.emitting = false; //See variable TrailRenderer tr
@@ -56,6 +71,14 @@ public class FinalDash : MonoBehaviour
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
 
+    }
+
+    public void DoDash(InputAction.CallbackContext context)
+    {
+        if (canDash)
+        {
+            StartCoroutine(DashAction());
+        }
     }
 
 

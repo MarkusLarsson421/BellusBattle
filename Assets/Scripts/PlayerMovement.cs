@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
-    private Vector2 velocity;
+    public Vector2 velocity;
     private float movementX, movementY;
     Vector2 movementX2;
     bool moving;
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if (!moving)
         {
             velocity.x = Mathf.MoveTowards(movementX2.x, 0, deceleration * Time.deltaTime);
-            Debug.Log(moving);
+           // Debug.Log(moving);
         }
         velocity = new Vector2(movementX2.x, movementY);
 
@@ -81,6 +81,20 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(velocity * Time.deltaTime);
         }
 
+        //FLipPlayer();
+
+    }
+
+    private void FLipPlayer()
+    {
+        if (velocity.x < -.01)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
+        }
+        else if (velocity.x > .01)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0); // Normal
+        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -101,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moving = false;
         }
-        Debug.Log(movementX2);
+        //Debug.Log(movementX2);
         if (movementX2.x != 0)
         {
             movementX2.x *= moveSpeed;
@@ -178,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateCoyoteTime()
     {
         if (CheckIsGrounded() || !hasCoyoteTime) return;
-        Debug.Log("awooo");
+        //Debug.Log("awooo");
         if (coyoteTimer > coyoteTime)
         {
             hasCoyoteTime = false;
@@ -201,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
-            Debug.Log("adada");
+            //Debug.Log("adada");
 
             Vector2 rayOrigin = (directionY == -1) ? rayCastBottomLeft : rayCastTopLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
@@ -213,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
-                Debug.Log("Hit vert");
+               // Debug.Log("Hit vert");
                 Debug.Log(hit.transform.position.y);
                 velocity.y = 0;
                 /*
@@ -233,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
-            Debug.Log("adada");
+            //Debug.Log("adada");
 
             Vector2 rayOrigin = (directionX == -1) ? rayCastBottomLeft : rayCastBottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
@@ -245,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
-                Debug.Log("Hit horiz");
+                //Debug.Log("Hit horiz");
                 velocity.x = 0;
                 /*
                 Debug.Log("Hit!");

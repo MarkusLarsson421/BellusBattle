@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 256984643}
   - component: {fileID: 256984642}
   - component: {fileID: 256984641}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Passable Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 270793531}
   - component: {fileID: 270793530}
   - component: {fileID: 270793533}
+  - component: {fileID: 270793534}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -453,6 +454,24 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &270793534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270793529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bea2dc907e6f744ebdd02ad3211acd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
+  smoothTime: 0.1
+  minZoom: 60
+  maxZoom: 20
+  zoomLimiter: 60
+  _targets: []
 --- !u!1 &372306968
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 761133694}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Battlefield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,6 +744,7 @@ MonoBehaviour:
   - {fileID: 1598311235}
   - {fileID: 528996188}
   listOfPlayers: []
+  camera: {fileID: 270793531}
 --- !u!114 &934071443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,7 +834,7 @@ GameObject:
   - component: {fileID: 1293796343}
   - component: {fileID: 1293796342}
   - component: {fileID: 1293796341}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Passable Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +931,7 @@ GameObject:
   - component: {fileID: 1312616038}
   - component: {fileID: 1312616037}
   - component: {fileID: 1312616036}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Box 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1028,7 @@ GameObject:
   - component: {fileID: 1385725819}
   - component: {fileID: 1385725818}
   - component: {fileID: 1385725817}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Passable Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1125,7 @@ GameObject:
   - component: {fileID: 1414524624}
   - component: {fileID: 1414524623}
   - component: {fileID: 1414524622}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Passable Platform (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1202,7 +1222,7 @@ GameObject:
   - component: {fileID: 1512801523}
   - component: {fileID: 1512801522}
   - component: {fileID: 1512801521}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Box 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1416,7 @@ GameObject:
   - component: {fileID: 1607352623}
   - component: {fileID: 1607352622}
   - component: {fileID: 1607352621}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Box 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1493,7 +1513,7 @@ GameObject:
   - component: {fileID: 1636441141}
   - component: {fileID: 1636441140}
   - component: {fileID: 1636441139}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Top Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1590,7 +1610,7 @@ GameObject:
   - component: {fileID: 1728110615}
   - component: {fileID: 1728110614}
   - component: {fileID: 1728110613}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1687,7 +1707,7 @@ GameObject:
   - component: {fileID: 2030748266}
   - component: {fileID: 2030748265}
   - component: {fileID: 2030748264}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Passable Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1881,7 +1901,7 @@ GameObject:
   - component: {fileID: 2071256082}
   - component: {fileID: 2071256081}
   - component: {fileID: 2071256080}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Passable Platform (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
