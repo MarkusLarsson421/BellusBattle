@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 velocity;
     private float movementX, movementY;
+    Vector2 movementX2;
+    bool moving;
+
     private float deceleration;
     private float coyoteTime = 0.2f;
     private float coyoteTimer;
@@ -43,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         updateRayCastOrgins();
-        UpdateMovementForce();
+        //UpdateMovementForce();
         CheckIsGrounded();
-        Jump();
+        //Jump();
         UpdateCoyoteTime();
         if (!CheckIsGrounded())
         {
@@ -59,7 +63,15 @@ public class PlayerMovement : MonoBehaviour
             hasCoyoteTime = true;
             hasDoubleJump = true;
         }
-        velocity = new Vector2(movementX, movementY);
+        if (!moving)
+        {
+            velocity.x = Mathf.MoveTowards(movementX2.x, 0, deceleration * Time.deltaTime);
+            Debug.Log(moving);
+        }
+        velocity = new Vector2(movementX2.x, movementY);
+
+
+        //velocity = new Vector2(movementX, movementY);
         HandleVerticalCollisions(ref velocity);
         HandleHorizontalCollisions(ref velocity);
 
@@ -70,6 +82,61 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+    public void OnMove(InputAction.CallbackContext ctx)
+    {
+        movementX2 = ctx.ReadValue<Vector2>();// * moveSpeed;
+        //Debug.Log(movementX2);
+        if (movementX2.x > 0f)
+        {
+            movementX2.x = 1f;
+            moving = true;
+        }
+        if (movementX2.x < 0f)
+        {
+            movementX2.x = -1f;
+            moving = true;
+        }
+        if (movementX2.x == 0)
+        {
+            moving = false;
+        }
+        Debug.Log(movementX2);
+        if (movementX2.x != 0)
+        {
+            movementX2.x *= moveSpeed;
+
+
+        }
+
+
+        //moving = true;
+        // Debug.Log(moving);
+
+        //Debug.Log(movementX2.x);
+        //moving = ctx.started;
+
+
+        if (ctx.started)
+        {
+
+            //moving = false;
+            //Debug.Log("fun");
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext ctx)
+    {
+        if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
+        {
+            if (ctx.started)
+            {
+                if (!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
+                movementY = jumpForce;
+            }
+        }
+    }
+
 
     private void UpdateMovementForce()
     {
