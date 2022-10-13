@@ -19,8 +19,9 @@ public class DropWeapon_Porotype : MonoBehaviour
     {
         if(other.transform.tag == "Player")
         {
-            other.transform.Find("Capsule");
-            
+            GameObject child = other.transform.GetChild(1).gameObject;
+            child.SetActive(false);
+
         }
     }
 }
