@@ -9,7 +9,7 @@ public class FinalDash : MonoBehaviour
     private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
     [SerializeField] private float dashingDuration = 0.2f;
-    [SerializeField] private float dashingActivationCooldown = 0.01f;
+    [SerializeField] private float dashingActivationCooldown = 1000f;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
     private Vector3 velocity;

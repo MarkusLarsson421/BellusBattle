@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   jumpForce: 20
-  airDeceleration: 25
+  airDeceleration: 44.3
   groundDeceleration: 80
   airResistance: 50
   downwardForce: -22

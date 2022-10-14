@@ -10,6 +10,7 @@ public class PlayerSpawnManager : MonoBehaviour
     [SerializeField] private Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
     [SerializeField] private Camera camera;
+    public Material[] colors;
     
 
     private void Start()
@@ -37,6 +38,9 @@ public class PlayerSpawnManager : MonoBehaviour
 
         playerInput.gameObject.GetComponent<CameraTest>().focus = camera.gameObject.GetComponent<CameraFocus>();
         AddPlayerInFocus(playerInput.transform);
+
+        // Change color depending on index
+        playerInput.gameObject.GetComponent<MeshRenderer>().material = colors[playerInput.playerIndex];
     }
 
     private void AddPlayerInFocus(Transform player)
