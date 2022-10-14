@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask oneWayLayer;
+    [SerializeField] private LayerMask downWayLayer;
 
     public LayerMask WallLayer
     {
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 velocity;
     private float movementX, movementY;
     private float movementX2;
-    bool moving;
+    bool wantToJumpDown;
     private bool movingLeft, movingRight;
 
     private float deceleration;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private float skinWidth = 0.012f;
 
     private BoxCollider boxCollider;
-    [SerializeField] private Vector3 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
+    [SerializeField] private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private float verticalRaySpacing, horizontalRaySpacing;
     private int horizontalRayCount, verticalRayCount = 4;
@@ -111,9 +112,13 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
 
-        if(ctx.ReadValue<Vector2>().x != 0)
+        if(ctx.ReadValue<Vector2>().y < -0.9f )
         {
-
+            wantToJumpDown = true;
+        }
+        else
+        {
+            wantToJumpDown = false;
         }
         movementX2 = ctx.ReadValue<Vector2>().x;// * moveSpeed;
         //Debug.Log(movementX2);
@@ -155,6 +160,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
         {
+            /// TODO: 
+            /// Detta är början på downWayPlatforms, men den fungerar inte ännnu då IgnorLayerCollision inte gör dtet den ska
+            if(wantToJumpDown && ctx.started)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, Vector2.down, out hit, 0.5f + skinWidth, oneWayLayer))
+                {
+                    Physics.IgnoreLayerCollision(0, 8, true);
+
+                    Debug.Log("LOOOOOOOOOOOOOOOOOOOOOO");
+                }
+                Debug.Log("awooo");
+            }
             if (ctx.started)
             {
                 if (!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
@@ -223,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
+
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
@@ -231,17 +249,32 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
-            Vector2 rayOrigin = (directionY == -1) ? rayCastBottomLeft : rayCastTopLeft;
+            //Debug.Log("adada");
+
+            Vector2 rayOrigin;
+
+            if (directionY == -1)
+            {
+                rayOrigin = rayCastBottomLeft + new Vector2(0f, 0.5f);
+            }
+            else
+            {
+                rayOrigin = rayCastTopLeft - new Vector2(0f, 0.5f);
+            }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+
+
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * (0.5f + skinWidth), Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
-                velocity.y = 0;
-            }
 
+                velocity.y = 0;
+
+                
+            }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, oneWayLayer))
             {
                 if (velocity.y > 0)
@@ -252,8 +285,9 @@ public class PlayerMovement : MonoBehaviour
                 {
                     velocity.y = 0;
                 }
-                    
+
             }
+            
         }
     }
 
@@ -265,8 +299,20 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < horizontalRayCount; i++)
         {
             //Debug.Log("adada");
-
+            Vector2 rayOrigin;
+            /*
             Vector2 rayOrigin = (directionX == -1) ? rayCastBottomLeft : rayCastBottomRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            */
+
+            if (directionX == -1)
+            {
+                rayOrigin = rayCastBottomLeft + new Vector2(0.5f, 0f);
+            }
+            else
+            {
+                rayOrigin = rayCastBottomRight - new Vector2(0.5f, 0f); ;
+            }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
 
@@ -278,15 +324,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Debug.Log("Hit horiz");
                 velocity.x = 0;
+
+                //Debug.Log("Hit!");
                 /*
-                Debug.Log("Hit!");
                 velocity.x = (hit.distance - skinWidth);
                 rayLength = hit.distance;
                 */
+
                 //movementY = 0;
             }
         }
     }
+
+    /*
+      
+    */
+
+
     void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
@@ -304,7 +358,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
-
+        
         rayCastBottomLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastTopLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastBottomRight = new Vector2(bounds.center.x, bounds.center.y);
@@ -312,12 +366,13 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        /*
+
+        
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
         rayCastBottomRight = new Vector2(bounds.max.x, bounds.min.y);
         rayCastTopRight = new Vector2(bounds.max.x, bounds.max.y);
-        */
+        
 
     }
 
