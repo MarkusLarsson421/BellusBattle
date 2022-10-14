@@ -94,6 +94,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a8f9b134-66ad-4f42-9b34-0fa6e17a309c",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4c824bf9-e120-4e85-9c2b-9466aad002d3",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -116,8 +127,30 @@
                 },
                 {
                     "name": "",
+                    "id": "7ade83f8-293d-4a12-badb-9fb5723e1c6e",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f4f1ff27-9bbd-419c-a11c-33c7cdd71870",
                     "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Join Game",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "deac496b-bc5b-41b6-941d-a3623e0d4ce7",
+                    "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -140,6 +173,17 @@
                     "name": "",
                     "id": "a28e88c5-ec80-48a8-9a3e-5d74c01a7d86",
                     "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUp/Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d99f1a2-7dac-48db-81b8-415df8016c99",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
