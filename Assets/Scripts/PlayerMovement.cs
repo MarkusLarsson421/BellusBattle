@@ -25,8 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 velocity;
     private float movementX, movementY;
-    Vector2 movementX2;
+    private float movementX2;
     bool moving;
+    private bool movingLeft, movingRight;
 
     private float deceleration;
     private float coyoteTime = 0.2f;
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         updateRayCastOrgins();
-        //UpdateMovementForce();
+        UpdateMovementForce();
         CheckIsGrounded();
         //Jump();
         UpdateCoyoteTime();
@@ -69,12 +70,14 @@ public class PlayerMovement : MonoBehaviour
             hasCoyoteTime = true;
             hasDoubleJump = true;
         }
+        /*
         if (!moving)
         {
-            velocity.x = Mathf.MoveTowards(movementX2.x, 0, deceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
            // Debug.Log(moving);
         }
-        velocity = new Vector2(movementX2.x, movementY);
+        */
+        velocity = new Vector2(movementX, movementY);
 
 
         //velocity = new Vector2(movementX, movementY);
@@ -107,44 +110,45 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        movementX2 = ctx.ReadValue<Vector2>();// * moveSpeed;
+
+        if(ctx.ReadValue<Vector2>().x != 0)
+        {
+
+        }
+        movementX2 = ctx.ReadValue<Vector2>().x;// * moveSpeed;
         //Debug.Log(movementX2);
-        if (movementX2.x > 0f)
+        if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
-            movementX2.x = 1f;
-            moving = true;
+            //movementX2 = 1f;
+            movingRight = true;
+            movingLeft = false;
         }
-        if (movementX2.x < 0f)
+        else if (ctx.ReadValue<Vector2>().x < -0.1f)
         {
-            movementX2.x = -1f;
-            moving = true;
+            //movementX2 = -1f;
+            movingRight = false;
+            movingLeft = true;
         }
-        if (movementX2.x == 0)
+        else if (ctx.ReadValue<Vector2>().x < 0.2f || ctx.ReadValue<Vector2>().x > -0.2f)
         {
-            moving = false;
+            movingRight = false;
+            movingLeft = false;
         }
+        /*
         //Debug.Log(movementX2);
-        if (movementX2.x != 0)
+        if (moving)
         {
-            movementX2.x *= moveSpeed;
+           Debug.Log(movementX2 + "Ta in!!!");
+           movementX2 *= moveSpeed;
+            
 
+
+            Debug.Log(moving + " hahahahah");
 
         }
+        Debug.Log(moving + " hahahahah");
+        */
 
-
-        //moving = true;
-        // Debug.Log(moving);
-
-        //Debug.Log(movementX2.x);
-        //moving = ctx.started;
-
-
-        if (ctx.started)
-        {
-
-            //moving = false;
-            //Debug.Log("fun");
-        }
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
@@ -162,9 +166,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateMovementForce()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (movingRight && !movingLeft)
         {
-            movementX = moveSpeed * Input.GetAxisRaw("Horizontal");
+            movementX = moveSpeed;
+        }
+        if(!movingRight && movingLeft)
+        {
+            movementX = -moveSpeed;
         }
         else
         {
