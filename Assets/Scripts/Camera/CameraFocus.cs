@@ -32,7 +32,7 @@ public class CameraFocus : MonoBehaviour
 		offset = transform.position;
 		_cam = GetComponent<Camera>();
 
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
 		foreach(GameObject tr in players)
         {
 			_targets.Add(tr.transform);
