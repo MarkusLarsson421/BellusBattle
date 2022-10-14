@@ -51,7 +51,7 @@ public class Teleporter : MonoBehaviour
         for (int i = 0; i < sceneCount - 1; i++)
         {
             scenes[i] = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
-            Debug.Log(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i)));
+            //Debug.Log(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i)));
         }
 
     }

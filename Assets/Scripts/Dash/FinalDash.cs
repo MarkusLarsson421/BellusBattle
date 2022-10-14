@@ -64,11 +64,11 @@ public class FinalDash : MonoBehaviour
         isDashing = true;
         temp = movement.GetDownwardForce();
         if (stopGravityWhileDashing) movement.SetDownwardForce(0);
-        if (movement.velocity.x > 0.1)
+        if (isFacingRight)
         {
             velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
         }
-        else if (movement.velocity.x < 0.1)
+        else if (!isFacingRight)
         {
             velocity = new Vector3(-currentDashingDistace - movement.velocity.x, 0f, 0f);
         }
@@ -87,21 +87,23 @@ public class FinalDash : MonoBehaviour
     {
         if (isFacingRight && movement.velocity.x < 0f || !isFacingRight && movement.velocity.x > 0f)
         {
-            Vector3 localScale = transform.localScale;
             isFacingRight = !isFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
         }
     }
 
     private void CheckForCollision()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, movement.velocity, out hit, 5f, movement.WallLayer))
+        Debug.DrawLine(transform.position, movement.velocity * currentDashingDistace, Color.blue, 0.5f);
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, currentDashingDistace/4, movement.WallLayer) && isFacingRight)
         {
-            currentDashingDistace = hit.distance - 0.5f; /// 0.5f är spelarens storlek
-
+            currentDashingDistace = hit.distance * 4; /// 1f är spelarens storlek
+        }else if (Physics.Raycast(transform.position, Vector3.left, out hit, currentDashingDistace / 4, movement.WallLayer) && !isFacingRight)
+        {
+            currentDashingDistace = hit.distance * 4; /// 1f är spelarens storlek
         }
+        Debug.Log(hit.distance);
+
     }
 
 
