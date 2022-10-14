@@ -28,13 +28,12 @@ public class BallisticFirearm : MonoBehaviour
 	}
 
 	public void Fire(){
-		if (ammo <= 0)
-		{Destroy(gameObject);}
+		if (ammo <= 0) {Destroy(gameObject);}
 		if (Time.time >= _nextTimeToFire)
 		{
 			_nextTimeToFire = Time.time + 1.0f / fireRate;
 			ammo--;
-			_muzzleFlash.Play();
+			if (_muzzleFlash != null){_muzzleFlash.Play();}
 			GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, Quaternion.identity);
 			//Calculation is inefficient, could possibly be improved to simulate inaccuracy better.
 			Vector3 force = new Vector3(projectileForce, (float)_random.Next(0, (int)inaccuracy * 100) / 100, 0);

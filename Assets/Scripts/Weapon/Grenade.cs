@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class Grenade : MonoBehaviour{
-	[SerializeField] [Tooltip("")] 
+	[SerializeField] [Tooltip("Time until the grenade explodes.")] 
 	private float fuse = 5.0f;
 	
 	private ParticleSystem _explosion;
@@ -14,7 +14,7 @@ public class Grenade : MonoBehaviour{
 		_collider.enabled = false;
 	}
 
-	private void Update(){
+	private void Update(){	
 		fuse -= Time.deltaTime;
 		if (fuse <= 0){StartCoroutine(Explode(_explosion.time));}
 	}

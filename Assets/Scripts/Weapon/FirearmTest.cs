@@ -1,18 +1,68 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FirearmTest : MonoBehaviour{
-	[SerializeField] [Tooltip("")]
-	private GameObject firearms;
+	[SerializeField] [Tooltip("All firearms to test fire.")]
+	private List<GameObject> firearms;
 
-	private BallisticFirearm _bfs;
+	private List<BallisticFirearm> _bfs;
+	private KeyCode[] _keyCodes;
 
-	private void Start(){
-		_bfs = firearms.GetComponent<BallisticFirearm>();
+	private void Start()
+	{
+		_bfs = new List<BallisticFirearm>(firearms.Count);
+		_keyCodes = new KeyCode[9];
+		
+		for (int i = 0; i < firearms.Count; i++)
+		{
+			_bfs.Add(firearms[i].GetComponent<BallisticFirearm>());
+			_keyCodes[i] = GetKeyCodes(i);
+		}
 	}
 
-	private void Update(){
-		if (Input.GetKey(KeyCode.Mouse0)){
-			_bfs.Fire();
+	private void Update()
+	{
+		for (int i = 0; i < firearms.Count; i++)
+		{
+			if (firearms[i] == null)
+			{
+				firearms.RemoveAt(i);
+				_bfs.RemoveAt(i);
+			}
+			if (Input.GetKey(_keyCodes[i]))
+			{
+				_bfs[i].Fire();
+			}
 		}
+	}
+
+	private KeyCode GetKeyCodes(int index)
+	{
+		switch(index)
+		{
+			case 0:
+				return KeyCode.Alpha1;
+			case 1:
+				return KeyCode.Alpha2;
+			case 2:
+				return KeyCode.Alpha3;
+			case 3:
+				return KeyCode.Alpha4;
+			case 4:
+				return KeyCode.Alpha5;
+			case 5:
+				return KeyCode.Alpha6;
+			case 6:
+				return KeyCode.Alpha7;
+			case 7:
+				return KeyCode.Alpha8;
+			case 8:
+				return KeyCode.Alpha9;
+			case 9:
+				return KeyCode.Alpha0;
+		}
+
+		//Has to return a keycode, can't return null.
+		return KeyCode.Q;
 	}
 }
