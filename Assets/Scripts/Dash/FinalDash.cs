@@ -95,12 +95,13 @@ public class FinalDash : MonoBehaviour
     {
         RaycastHit hit;
         Debug.DrawLine(transform.position, movement.velocity * currentDashingDistace, Color.blue, 0.5f);
-        if (Physics.Raycast(transform.position, Vector3.right, out hit, currentDashingDistace/4, movement.WallLayer) && isFacingRight)
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, currentDashingDistace/4, movement.WallLayer) && isFacingRight) //4 is a the number that make dash distance works correct 
         {
-            currentDashingDistace = hit.distance * 4; /// 1f är spelarens storlek
-        }else if (Physics.Raycast(transform.position, Vector3.left, out hit, currentDashingDistace / 4, movement.WallLayer) && !isFacingRight)
+            currentDashingDistace = hit.distance * 4; /// 4 is a the number that make dash distance works correct 
+        }
+        else if (Physics.Raycast(transform.position, Vector3.left, out hit, currentDashingDistace / 4, movement.WallLayer) && !isFacingRight) // 4 is a the number that make dash distance works correct 
         {
-            currentDashingDistace = hit.distance * 4; /// 1f är spelarens storlek
+            currentDashingDistace = hit.distance * 4; /// 4 is a the number that make dash distance works correct 
         }
         Debug.Log(hit.distance);
 
