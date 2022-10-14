@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float skinWidth = 0.012f;
 
     private BoxCollider boxCollider;
-    [SerializeField] private Vector3 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
+    [SerializeField] private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private float verticalRaySpacing, horizontalRaySpacing;
     private int horizontalRayCount, verticalRayCount = 4;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateRayCastOrgins();
+
         UpdateMovementForce();
         CheckIsGrounded();
         Jump();
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (CheckIsGrounded() && velocity.y < 0)
         {
-            movementY = 0;
+            //movementY = 0;
             coyoteTimer = 0;
             hasCoyoteTime = true;
             hasDoubleJump = true;
@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateMovementForce()
     {
+        updateRayCastOrgins();
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             movementX = moveSpeed * Input.GetAxisRaw("Horizontal");
@@ -126,7 +127,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
+
+
+
+
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
@@ -134,25 +138,38 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
-            Debug.Log("adada");
+            //Debug.Log("adada");
 
-            Vector2 rayOrigin = (directionY == -1) ? rayCastBottomLeft : rayCastTopLeft;
+            Vector2 rayOrigin;
+
+            if (directionY == -1)
+            {
+                rayOrigin = rayCastBottomLeft + new Vector2(0f, 0.5f);
+            }
+            else
+            {
+                rayOrigin = rayCastTopLeft - new Vector2(0f, 0.5f);
+            }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
 
 
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * (0.5f + skinWidth), Color.red);
 
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
-                Debug.Log("Hit vert");
-                Debug.Log(hit.transform.position.y);
+
+                //Debug.Log("Hit vert");
+                //Debug.Log(hit.distance);
                 velocity.y = 0;
+
                 /*
                 velocity.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
                 */
+
+
 
                 //movementY = 0;
             }
@@ -166,9 +183,21 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
-            Debug.Log("adada");
-
+            //Debug.Log("adada");
+            Vector2 rayOrigin;
+            /*
             Vector2 rayOrigin = (directionX == -1) ? rayCastBottomLeft : rayCastBottomRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            */
+
+            if (directionX == -1)
+            {
+                rayOrigin = rayCastBottomLeft + new Vector2(0.5f, 0f);
+            }
+            else
+            {
+                rayOrigin = rayCastBottomRight - new Vector2(0.5f, 0f); ;
+            }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
 
@@ -178,13 +207,15 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
-                Debug.Log("Hit horiz");
+                //Debug.Log("Hit horiz");
                 velocity.x = 0;
+
+                //Debug.Log("Hit!");
                 /*
-                Debug.Log("Hit!");
                 velocity.x = (hit.distance - skinWidth);
                 rayLength = hit.distance;
                 */
+
                 //movementY = 0;
             }
         }
@@ -207,19 +238,21 @@ public class PlayerMovement : MonoBehaviour
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
 
+        /*
         rayCastBottomLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastTopLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastBottomRight = new Vector2(bounds.center.x, bounds.center.y);
         rayCastTopRight = new Vector2(bounds.center.x, bounds.center.y);
+        */
 
 
 
-        /*
+
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
         rayCastBottomRight = new Vector2(bounds.max.x, bounds.min.y);
         rayCastTopRight = new Vector2(bounds.max.x, bounds.max.y);
-        */
+
 
     }
 
