@@ -51,6 +51,10 @@ public class FinalDash : MonoBehaviour
     }
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
+        if (isDashing)
+        {
+            return;
+        }
         if (canDash)
         {
             StartCoroutine(DashAction());
