@@ -103,8 +103,6 @@ public class FinalDash : MonoBehaviour
         {
             currentDashingDistace = hit.distance * 4; /// 4 is a the number that make dash distance works correct 
         }
-        Debug.Log(hit.distance);
-
     }
 
 
