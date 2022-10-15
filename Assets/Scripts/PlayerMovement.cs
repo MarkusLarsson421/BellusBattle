@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] private LayerMask oneWayLayer;
 
     private Vector2 velocity;
     private float movementX, movementY;
@@ -25,7 +26,14 @@ public class PlayerMovement : MonoBehaviour
     private bool hasCoyoteTime;
     private bool hasDoubleJump;
 
+    private bool isStandingOnOneWayLayer;
+
     private float skinWidth = 0.012f;
+
+    private bool isGrounded
+    {
+        get { return CheckIsGrounded(); }
+    }
 
     private BoxCollider boxCollider;
     [SerializeField] private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
@@ -44,15 +52,15 @@ public class PlayerMovement : MonoBehaviour
     {
 
         UpdateMovementForce();
-        CheckIsGrounded();
+        //CheckIsGrounded();
         Jump();
         UpdateCoyoteTime();
-        if (!CheckIsGrounded())
+        if (!isGrounded)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
         }
 
-        if (CheckIsGrounded() && velocity.y < 0)
+        if (isGrounded && velocity.y <= 0)
         {
             //movementY = 0;
             coyoteTimer = 0;
@@ -87,18 +95,30 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool CheckIsGrounded()
     {
+        if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, oneWayLayer))
+        {
+            isStandingOnOneWayLayer = true;
+            deceleration = groundDeceleration;
+            return true;
+        }
         if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, groundLayer))
         {
             deceleration = groundDeceleration;
             return true;
         }
+        
         deceleration = airDeceleration;
         return false;
 
     }
     private void Jump()
     {
-        if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
+        if(isStandingOnOneWayLayer && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            transform.position += Vector3.down;
+            isStandingOnOneWayLayer = false;
+        }
+        else if (isGrounded || hasCoyoteTime || hasDoubleJump)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -111,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCoyoteTime()
     {
-        if (CheckIsGrounded() || !hasCoyoteTime) return;
+        if (isGrounded || !hasCoyoteTime) return;
         Debug.Log("awooo");
         if (coyoteTimer > coyoteTime)
         {
@@ -123,12 +143,9 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckCollision()
     {
         Debug.DrawRay(transform.position, velocity, Color.green, 0.5f + skinWidth);
-        return Physics.Raycast(transform.position, velocity, 0.5f + skinWidth, wallLayer);
+        return Physics.Raycast(transform.position, velocity, 0.5f + skinWidth, collisionLayer);
 
     }
-
-
-
 
 
     private void HandleVerticalCollisions(ref Vector2 velocity)
@@ -138,8 +155,6 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
-            //Debug.Log("adada");
-
             Vector2 rayOrigin;
 
             if (directionY == -1)
@@ -157,12 +172,13 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * (0.5f + skinWidth), Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))
             {
 
                 //Debug.Log("Hit vert");
                 //Debug.Log(hit.distance);
                 velocity.y = 0;
+                movementY = 0;
 
                 /*
                 velocity.y = (hit.distance - skinWidth) * directionY;
@@ -183,13 +199,7 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
-            //Debug.Log("adada");
             Vector2 rayOrigin;
-            /*
-            Vector2 rayOrigin = (directionX == -1) ? rayCastBottomLeft : rayCastBottomRight;
-            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            */
-
             if (directionX == -1)
             {
                 rayOrigin = rayCastBottomLeft + new Vector2(0.5f, 0f);
@@ -205,10 +215,12 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, collisionLayer))
             {
                 //Debug.Log("Hit horiz");
                 velocity.x = 0;
+                movementX = 0;
+
 
                 //Debug.Log("Hit!");
                 /*
@@ -237,16 +249,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
-
-        /*
-        rayCastBottomLeft = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastTopLeft = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastBottomRight = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastTopRight = new Vector2(bounds.center.x, bounds.center.y);
-        */
-
-
-
 
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
