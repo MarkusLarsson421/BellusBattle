@@ -6,9 +6,10 @@ public class Sword_Prototype : MonoBehaviour
 {
 
     public GameObject Sword;
-
+    Vector3 pos;
     public bool canAttack = true;
     public float cooldown;
+    public Transform ShootPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class Sword_Prototype : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        faceGun();
+        
         if (Input.GetMouseButton(0))
         {
             if (canAttack)
@@ -27,6 +28,7 @@ public class Sword_Prototype : MonoBehaviour
                 Attack();
             }
         }
+        faceGun();
     }
     void faceGun()
     {
@@ -38,15 +40,17 @@ public class Sword_Prototype : MonoBehaviour
     }
     void Attack()
     {
+        pos = Sword.transform.position;
+        Sword.transform.position += ShootPoint.transform.up * 1.1f;
         canAttack = false;
-        Animator ani = Sword.GetComponent<Animator>();
-        ani.SetTrigger("Attack");
         StartCoroutine(ResetAttack());
     }
 
     IEnumerator ResetAttack()
     {
+        
         yield return new WaitForSeconds(cooldown);
+        Sword.transform.position = pos;
         canAttack = true;
     }
 

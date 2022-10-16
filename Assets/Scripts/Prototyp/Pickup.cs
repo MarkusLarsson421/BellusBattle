@@ -21,8 +21,8 @@ public class Pickup : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            
-                other.GetComponent<Shoot>().eqiup(pickUp);
+            other.GetComponent<Shoot>().enabled = true;
+            other.GetComponent<Shoot>().eqiup(pickUp);
             
             
         }

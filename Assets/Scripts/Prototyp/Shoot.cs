@@ -31,6 +31,11 @@ public class Shoot : MonoBehaviour
     void Update()
     {
 
+        if(ammo <= 0){
+            gameObject.GetComponent<Sword_Prototype>().enabled = true;
+            gameObject.GetComponent<Shoot>().enabled = false;
+        }
+            
         faceGun();
 
         if (ammo > 0)
@@ -64,6 +69,7 @@ if (Input.GetMouseButtonDown(0))
     public void die()
     {
         Destroy(gameObject, 0.5f);
+        
     }
     void shoot()
     {
