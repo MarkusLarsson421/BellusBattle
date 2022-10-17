@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
         get { return wallLayer; }
     }
 
+    private bool isGrounded
+    {
+        get { return CheckIsGrounded(); }
+    }
+
     public Vector2 velocity;
     private float movementX, movementY;
     private float movementX2;
@@ -36,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool hasCoyoteTime;
     private bool hasDoubleJump;
+
+    private float downwardInput;
+
+    
+    [SerializeField ]private bool isStandingOnOneWayPlatform;
 
     private float skinWidth = 0.012f;
 
@@ -64,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
         }
 
-        if (CheckIsGrounded() && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
         {
             movementY = 0;
             coyoteTimer = 0;
@@ -91,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(velocity * Time.deltaTime);
         }
 
-        //FLipPlayer();
+        
 
         // So that when we change scene we don't have to re-join the lobby
         DontDestroyOnLoad(this.gameObject);
@@ -111,26 +121,19 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-
-        if(ctx.ReadValue<Vector2>().y < -0.9f )
-        {
-            wantToJumpDown = true;
-        }
-        else
-        {
-            wantToJumpDown = false;
-        }
-        movementX2 = ctx.ReadValue<Vector2>().x;// * moveSpeed;
-        //Debug.Log(movementX2);
+        downwardInput = ctx.ReadValue<Vector2>().y;
+        Debug.Log(ctx.ReadValue<Vector2>().y);
+        movementX2 = ctx.ReadValue<Vector2>().x;
+      
         if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
-            //movementX2 = 1f;
+            
             movingRight = true;
             movingLeft = false;
         }
         else if (ctx.ReadValue<Vector2>().x < -0.1f)
         {
-            //movementX2 = -1f;
+            
             movingRight = false;
             movingLeft = true;
         }
@@ -139,40 +142,32 @@ public class PlayerMovement : MonoBehaviour
             movingRight = false;
             movingLeft = false;
         }
-        /*
-        //Debug.Log(movementX2);
-        if (moving)
-        {
-           Debug.Log(movementX2 + "Ta in!!!");
-           movementX2 *= moveSpeed;
-            
-
-
-            Debug.Log(moving + " hahahahah");
-
-        }
-        Debug.Log(moving + " hahahahah");
-        */
+     
 
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
+
+
+        if (downwardInput <= -0.98f && isStandingOnOneWayPlatform)
+        {
+            if (ctx.started)
+            {
+                Debug.Log("jump down!");
+                transform.position += Vector3.down;
+                isStandingOnOneWayPlatform = false;
+                return;
+            }
+           
+        }
+        
+        
+        else if (isGrounded || hasCoyoteTime || hasDoubleJump)
         {
             /// TODO: 
             /// Detta är början på downWayPlatforms, men den fungerar inte ännnu då IgnorLayerCollision inte gör dtet den ska
-            if(wantToJumpDown && ctx.started)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector2.down, out hit, 0.5f + skinWidth, oneWayLayer))
-                {
-                    Physics.IgnoreLayerCollision(0, 8, true);
-
-                    Debug.Log("LOOOOOOOOOOOOOOOOOOOOOO");
-                }
-                Debug.Log("awooo");
-            }
+         
             if (ctx.started)
             {
                 if (!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
@@ -201,13 +196,25 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool CheckIsGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, groundLayer))
+        if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, oneWayLayer))
         {
+            isStandingOnOneWayPlatform = true;
             deceleration = groundDeceleration;
             return true;
         }
-        deceleration = airDeceleration;
-        return false;
+        if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, groundLayer))
+        {
+            deceleration = groundDeceleration;
+            isStandingOnOneWayPlatform = false;
+            return true;
+        }
+        else
+        {
+            deceleration = airDeceleration;
+            isStandingOnOneWayPlatform = false;
+            return false;
+        }
+        
 
     }
     private void Jump()
@@ -225,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCoyoteTime()
     {
-        if (CheckIsGrounded() || !hasCoyoteTime) return;
+        if (isGrounded || !hasCoyoteTime) return;
         //Debug.Log("awooo");
         if (coyoteTimer > coyoteTime)
         {
@@ -359,10 +366,12 @@ public class PlayerMovement : MonoBehaviour
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
         
+        /*
         rayCastBottomLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastTopLeft = new Vector2(bounds.center.x, bounds.center.y);
         rayCastBottomRight = new Vector2(bounds.center.x, bounds.center.y);
         rayCastTopRight = new Vector2(bounds.center.x, bounds.center.y);
+        */
 
 
 
