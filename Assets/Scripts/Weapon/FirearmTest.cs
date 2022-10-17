@@ -5,17 +5,17 @@ public class FirearmTest : MonoBehaviour{
 	[SerializeField] [Tooltip("All firearms to test fire.")]
 	private List<GameObject> firearms;
 
-	private List<BallisticFirearm> _bfs;
+	private List<Weapon> _bfs;
 	private KeyCode[] _keyCodes;
 
 	private void Start()
 	{
-		_bfs = new List<BallisticFirearm>(firearms.Count);
+		_bfs = new List<Weapon>(firearms.Count);
 		_keyCodes = new KeyCode[9];
 		
 		for (int i = 0; i < firearms.Count; i++)
 		{
-			_bfs.Add(firearms[i].GetComponent<BallisticFirearm>());
+			_bfs.Add(firearms[i].GetComponent<Weapon>());
 			_keyCodes[i] = GetKeyCodes(i);
 		}
 	}
