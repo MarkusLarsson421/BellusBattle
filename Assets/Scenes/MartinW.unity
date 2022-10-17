@@ -282,9 +282,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  wallLayer:
+  collisionLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 200
+  oneWayLayer:
+    serializedVersion: 2
+    m_Bits: 128
   rayCastBottomLeft: {x: 0, y: 0}
   rayCastBottomRight: {x: 0, y: 0}
   rayCastTopRight: {x: 0, y: 0}
@@ -379,7 +382,7 @@ GameObject:
   - component: {fileID: 1120285710}
   - component: {fileID: 1120285709}
   - component: {fileID: 1120285708}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: werew (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
