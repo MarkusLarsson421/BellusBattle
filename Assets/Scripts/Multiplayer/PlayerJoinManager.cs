@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerJoinManager : MonoBehaviour
+public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] private Camera camera;
-    [SerializeField] protected Transform[] spawnLocations; // Keeps track of all the possible spawn locations
+    //[SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
+    PlayerSpawnManager psm;
 
     public Material[] colors;
 

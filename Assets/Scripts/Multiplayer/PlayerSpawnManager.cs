@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class PlayerSpawnManager : PlayerJoinManager
+public class PlayerSpawnManager : MonoBehaviour
 {
     public int sceneIndex;
+    PlayerJoinManager playerJoinManager;
+    [SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
 
     private void Start()
     {
@@ -15,6 +17,7 @@ public class PlayerSpawnManager : PlayerJoinManager
         for(int i = 0; i < players.Length; i++)
         {
             players[i].transform.position = spawnLocations[i].position;
+            Debug.Log(players[i].transform.position);
         }
     }
 

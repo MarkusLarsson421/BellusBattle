@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3243,7 +3243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594956249}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
@@ -3325,19 +3325,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f567d90a01346842a911c7f8e79de01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1472629316}
+  sceneIndex: 2
   spawnLocations:
   - {fileID: 913304224}
   - {fileID: 1045487974}
   - {fileID: 920342105}
   - {fileID: 2014802965}
-  listOfPlayers: []
-  colors:
-  - {fileID: 2100000, guid: 6aaced500a74efc48b94a7eea97e5ecb, type: 2}
-  - {fileID: 2100000, guid: b33560ad662fdea44b44e438febb2704, type: 2}
-  - {fileID: 2100000, guid: 7850c118b7222294a89e2bf25285078c, type: 2}
-  - {fileID: 2100000, guid: d6b4a61cda23acf49aa9e7d120fc27b3, type: 2}
-  sceneIndex: 0
 --- !u!1 &1645603685
 GameObject:
   m_ObjectHideFlags: 0

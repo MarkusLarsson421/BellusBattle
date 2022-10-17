@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Teleporter : MonoBehaviour
 {
     public int playerAmountOnTeleporter = 0; // Amount of players on the Teleporter
-    [SerializeField] PlayerSpawnManager playerSpawnManager; // Keeps track of players in game
+    [SerializeField] PlayerJoinManager playerJoinManager; // Keeps track of players in game
     [SerializeField] string startSceneName; // The name of the scene that is the beginner scene
 
     private string[] scenes;
@@ -27,7 +27,7 @@ public class Teleporter : MonoBehaviour
 
         // There needs to be at least two players in the scene
         // All players in game needs to be in the Teleporter for the game to start
-        if (playerSpawnManager.listOfPlayers.Count >= 1)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
+        if (playerJoinManager.listOfPlayers.Count >= 1)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
         {
             LoadRandomScene();
             //SceneManager.LoadScene(startSceneName);
