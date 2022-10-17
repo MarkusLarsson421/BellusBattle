@@ -177,11 +177,14 @@ MonoBehaviour:
   oneWayLayer:
     serializedVersion: 2
     m_Bits: 128
+  downWayLayer:
+    serializedVersion: 2
+    m_Bits: 0
   velocity: {x: 0, y: 0}
-  rayCastBottomLeft: {x: 0, y: 0, z: 0}
-  rayCastBottomRight: {x: 0, y: 0, z: 0}
-  rayCastTopRight: {x: 0, y: 0, z: 0}
-  rayCastTopLeft: {x: 0, y: 0, z: 0}
+  rayCastBottomLeft: {x: 0, y: 0}
+  rayCastBottomRight: {x: 0, y: 0}
+  rayCastTopRight: {x: 0, y: 0}
+  rayCastTopLeft: {x: 0, y: 0}
 --- !u!136 &6431588530169345910
 CapsuleCollider:
   m_ObjectHideFlags: 0
