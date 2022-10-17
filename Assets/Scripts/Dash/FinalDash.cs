@@ -15,10 +15,12 @@ public class FinalDash : MonoBehaviour
     private Vector3 velocity;
     private PlayerMovement movement;
     private float currentDashingDistace;
+    private float currentDashingDuration;
 
     private void Start()
     {
         currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
         movement = GetComponent<PlayerMovement>();
     }
     
@@ -78,9 +80,10 @@ public class FinalDash : MonoBehaviour
         }
 
         //tr.emitting = true; //See variable TrailRenderer tr
-        yield return new WaitForSeconds(dashingDuration);
+        yield return new WaitForSeconds(currentDashingDuration);
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
         movement.SetDownwardForce(temp);
         isDashing = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
@@ -94,19 +97,29 @@ public class FinalDash : MonoBehaviour
             isFacingRight = !isFacingRight;
         }
     }
-
+    float x;
     private void CheckForCollision()
     {
         RaycastHit hit;
-        Debug.DrawLine(transform.position, movement.velocity * currentDashingDistace, Color.blue, 0.5f);
         if (Physics.Raycast(transform.position, Vector3.right, out hit, currentDashingDistace/4, movement.WallLayer) && isFacingRight) //4 is a the number that make dash distance works correct 
         {
-            currentDashingDistace = hit.distance * 4; /// 4 is a the number that make dash distance works correct 
+            if (hit.distance * 4 < 3)
+            {
+                currentDashingDistace = 0;
+                return;
+            }
+            currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
         }
         else if (Physics.Raycast(transform.position, Vector3.left, out hit, currentDashingDistace / 4, movement.WallLayer) && !isFacingRight) // 4 is a the number that make dash distance works correct 
         {
-            currentDashingDistace = hit.distance * 4; /// 4 is a the number that make dash distance works correct 
+            if (hit.distance * 4 < 3)
+            {
+                currentDashingDistace = 0;
+                return;
+            }
+            currentDashingDistace = hit.distance * 4 - 0.5f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
         }
+
     }
 
 
