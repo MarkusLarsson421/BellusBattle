@@ -1,24 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class PlayerSpawnManager : PlayerJoinManager
+public class PlayerJoinManager : MonoBehaviour
 {
-    public int sceneIndex;
+    [SerializeField] private Camera camera;
+    [SerializeField] protected Transform[] spawnLocations; // Keeps track of all the possible spawn locations
+    [SerializeField] public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
 
-    private void Start()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
-        
-        for(int i = 0; i < players.Length; i++)
-        {
-            players[i].transform.position = spawnLocations[i].position;
-        }
-    }
+    public Material[] colors;
 
-    /*
     void OnPlayerJoined(PlayerInput playerInput)
     {
         // Set the player ID, add one to the index to start at Player 1
@@ -38,10 +30,8 @@ public class PlayerSpawnManager : PlayerJoinManager
         // Change color depending on index
         playerInput.gameObject.GetComponent<MeshRenderer>().material = colors[playerInput.playerIndex];
     }
-
     private void AddPlayerInFocus(Transform player)
     {
         camera.gameObject.GetComponent<CameraFocus>()._targets.Add(player);
     }
-    */
 }
