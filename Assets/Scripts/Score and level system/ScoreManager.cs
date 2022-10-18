@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    Dictionary<GameObject, int> ScoreDic = new Dictionary<GameObject, int>();
+    private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] CameraFocus cameraFocus;
     bool hasGivenScore;
+    [SerializeField] private float giveScoreTimer;
+    [SerializeField] private float giveScoreTime;
+
 
     private void Start()
     {
@@ -17,23 +20,44 @@ public class ScoreManager : MonoBehaviour
     {
         if (cameraFocus._targets.Count == 1 && !hasGivenScore)
         {
-            AddScore(cameraFocus._targets[0].transform.gameObject);
-            hasGivenScore = true;
+            GiveScoreAfterTimer();
         }
+        DontDestroyOnLoad(gameObject);
 
-        //Debug.Log(ScoreDic[cameraFocus._targets[0].transform.gameObject]);
     }
 
-    public void AddScore(GameObject winner)
+    private void AddScore(GameObject winner)
     {
-        if (!ScoreDic.ContainsKey(winner))
+        if (!scoreDic.ContainsKey(winner))
         {
-            ScoreDic[winner] = 1;
+            scoreDic[winner] = 1;
         }
         else
         {
-            ScoreDic[winner]++;
+            scoreDic[winner]++;
         }
         
     }
+
+    public int getScore(GameObject player)
+    {
+        if (!scoreDic.ContainsKey(player)) return 0;
+
+        return scoreDic[player];
+    }
+
+    private void GiveScoreAfterTimer()
+    {
+        if(giveScoreTimer >= giveScoreTime && cameraFocus._targets.Count !=0)
+        {
+            AddScore(cameraFocus._targets[0].transform.gameObject);
+            hasGivenScore = true;
+        }
+        else
+        {
+            giveScoreTimer += Time.deltaTime;
+        }
+    }
+
+    
 }
