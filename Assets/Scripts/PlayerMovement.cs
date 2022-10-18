@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask oneWayLayer;
     [SerializeField] private LayerMask downWayLayer;
+
+    [SerializeField] private Animator playerAnimator;
+
+    public UnityEvent jumpEvent;
 
     public LayerMask WallLayer
     {
@@ -69,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         CheckIsGrounded();
         //Jump();
         UpdateCoyoteTime();
+        
         if (!CheckIsGrounded())
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
@@ -105,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         // So that when we change scene we don't have to re-join the lobby
         DontDestroyOnLoad(this.gameObject);
+
     }
 
     private void FLipPlayer()
@@ -142,7 +149,8 @@ public class PlayerMovement : MonoBehaviour
             movingRight = false;
             movingLeft = false;
         }
-     
+        playerAnimator.SetFloat("Speed", movementX2);
+
 
     }
 
@@ -166,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
                 hasDoubleJump = false; 
             }
             movementY = jumpForce;
-
+            jumpEvent.Invoke();
         }
     }
 
