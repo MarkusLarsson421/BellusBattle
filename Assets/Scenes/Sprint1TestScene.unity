@@ -1139,6 +1139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraFocus: {fileID: 270793534}
+  giveScoreTimer: 0
+  giveScoreTime: 0
 --- !u!4 &1248052310
 Transform:
   m_ObjectHideFlags: 0
@@ -1263,7 +1265,7 @@ GameObject:
   - component: {fileID: 1312616038}
   - component: {fileID: 1312616037}
   - component: {fileID: 1312616036}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Box 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1554,7 +1556,7 @@ GameObject:
   - component: {fileID: 1512801523}
   - component: {fileID: 1512801522}
   - component: {fileID: 1512801521}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Box 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1748,7 +1750,7 @@ GameObject:
   - component: {fileID: 1607352623}
   - component: {fileID: 1607352622}
   - component: {fileID: 1607352621}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Box 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
