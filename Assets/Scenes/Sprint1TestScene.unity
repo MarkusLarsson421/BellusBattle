@@ -468,7 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   smoothTime: 0.5
-  minZoom: 100
+  minZoom: 5
   maxZoom: 60
   zoomLimiter: 100
   _targets: []
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158c30789f3c1ed48916708654474fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraFocus: {fileID: 270793534}
+  cameraFocus: {fileID: 0}
 --- !u!4 &1248052310
 Transform:
   m_ObjectHideFlags: 0
