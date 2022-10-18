@@ -115,6 +115,7 @@ MonoBehaviour:
   lifeSpan: 5
   gravity: 0
   ph: {fileID: 3128890739003345982, guid: b1192d4dc8bc4b442b24e1abf65dd17e, type: 3}
+  CF: {fileID: 0}
 --- !u!54 &-7609460445648897667
 Rigidbody:
   m_ObjectHideFlags: 0
