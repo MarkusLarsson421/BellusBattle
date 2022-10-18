@@ -75,7 +75,8 @@ if (Input.GetMouseButtonDown(0))
     {
         ammo = ammo -1;
         GameObject bulletIns = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
-        bulletIns.transform.Rotate(Vector3.left * 90);
+
+        //bulletIns.transform.Rotate(Vector3.left * 90);
         Rigidbody bulletIns_rig;
         bulletIns_rig = bulletIns.GetComponent<Rigidbody>();
         bulletIns_rig.AddForce(ShootPoint.transform.up * bulletSpeed);
