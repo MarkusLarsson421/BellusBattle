@@ -148,42 +148,36 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-
+        if (!ctx.started) return;
 
         if (downwardInput <= -0.98f && isStandingOnOneWayPlatform)
         {
-            if (ctx.started)
-            {
-                Debug.Log("jump down!");
-                transform.position += Vector3.down;
-                isStandingOnOneWayPlatform = false;
-                return;
-            }
-           
+            Debug.Log("jump down!");
+            transform.position += Vector3.down;
+            isStandingOnOneWayPlatform = false;
+            return;
         }
         
         
         else if (isGrounded || hasCoyoteTime || hasDoubleJump)
         {
-            /// TODO: 
-            /// Detta är början på downWayPlatforms, men den fungerar inte ännnu då IgnorLayerCollision inte gör dtet den ska
-         
-            if (ctx.started)
-            {
-                if (!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
-                movementY = jumpForce;
+            if (!hasCoyoteTime && hasDoubleJump)
+            { 
+                hasDoubleJump = false; 
             }
+            movementY = jumpForce;
+
         }
     }
 
 
     private void UpdateMovementForce()
     {
-        if (movingRight && !movingLeft)
+        if (movingRight)
         {
             movementX = moveSpeed;
         }
-        if(!movingRight && movingLeft)
+        if (movingLeft)
         {
             movementX = -moveSpeed;
         }
@@ -233,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateCoyoteTime()
     {
         if (isGrounded || !hasCoyoteTime) return;
-        //Debug.Log("awooo");
+ 
         if (coyoteTimer > coyoteTime)
         {
             hasCoyoteTime = false;
@@ -279,6 +273,7 @@ public class PlayerMovement : MonoBehaviour
             {
 
                 velocity.y = 0;
+                movementY = 0f;
 
                 
             }
@@ -305,13 +300,8 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
-            //Debug.Log("adada");
-            Vector2 rayOrigin;
-            /*
-            Vector2 rayOrigin = (directionX == -1) ? rayCastBottomLeft : rayCastBottomRight;
-            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            */
 
+            Vector2 rayOrigin;
             if (directionX == -1)
             {
                 rayOrigin = rayCastBottomLeft + new Vector2(0.5f, 0f);
@@ -331,6 +321,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Debug.Log("Hit horiz");
                 velocity.x = 0;
+                movementX = 0;
 
                 //Debug.Log("Hit!");
                 /*
@@ -342,11 +333,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    /*
-      
-    */
-
 
     void CalculateRaySpacing()
     {
@@ -365,24 +351,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
-        
-        /*
-        rayCastBottomLeft = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastTopLeft = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastBottomRight = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastTopRight = new Vector2(bounds.center.x, bounds.center.y);
-        */
-
-
-
-
-        
+      
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
         rayCastBottomRight = new Vector2(bounds.max.x, bounds.min.y);
         rayCastTopRight = new Vector2(bounds.max.x, bounds.max.y);
-        
-
     }
 
     public float GetDownwardForce()
