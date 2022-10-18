@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("Hursnabbt spelaren decelererar på marken")] [Range(25f, 150f)] private float groundDeceleration;
     [SerializeField] [Tooltip("Påverkar hur snabbt spelaren förlorar energi i ett hopp")] [Range(10f, 300f)] private float airResistance;
     [SerializeField] [Tooltip("Hur mycket gravitation som påverkar spelaren i luften")] [Range(-100f, 0f)] private float downwardForce;
+    [SerializeField] [Tooltip("ACCELERATION!!")] [Range(1f, 50000f)] private float acceleration;
+    [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
@@ -52,10 +54,14 @@ public class PlayerMovement : MonoBehaviour
     private bool movingLeft, movingRight;
     private bool isStandingOnOneWayPlatform;
 
+    private float initialSpeed;
+    
+
     private BoxCollider boxCollider;
 
     void Start()
     {
+        initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
     }
@@ -114,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         downwardInput = ctx.ReadValue<Vector2>().y;
-        Debug.Log(ctx.ReadValue<Vector2>().y);
+        //Debug.Log(ctx.ReadValue<Vector2>().y);
        // movementX2 = ctx.ReadValue<Vector2>().x;
       
         if (ctx.ReadValue<Vector2>().x > 0.1f)
@@ -134,19 +140,20 @@ public class PlayerMovement : MonoBehaviour
             movingRight = false;
             movingLeft = false;
         }
-        playerAnimator.SetFloat("Speed", movementX2);
+        playerAnimator.SetFloat("Speed", movementX);
 
 
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        float jumpDecreaser = 1f;
         if (!ctx.started) return;
 
-        if (downwardInput <= -0.98f && isStandingOnOneWayPlatform)
+        if (downwardInput <= -0.75f && isStandingOnOneWayPlatform)
         {
             Debug.Log("jump down!");
-            transform.position += Vector3.down;
+            transform.position += Vector3.down * 1.8f;
             isStandingOnOneWayPlatform = false;
             return;
         }
@@ -156,9 +163,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hasCoyoteTime && hasDoubleJump)
             { 
-                hasDoubleJump = false; 
+                hasDoubleJump = false;
+                jumpDecreaser = doubleJumpDecreaser;
             }
-            movementY = jumpForce;
+            movementY = jumpForce * jumpDecreaser;
             jumpEvent.Invoke();
         }
     }
@@ -168,11 +176,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movingRight)
         {
-            movementX = moveSpeed;
+            Debug.Log(movementX);
+            movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
         }
         if (movingLeft)
         {
-            movementX = -moveSpeed;
+            Debug.Log(movementX);
+            movementX = -Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
         }
         else
         {
