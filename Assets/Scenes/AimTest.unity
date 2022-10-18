@@ -377,12 +377,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335974458}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440f69ea1c96fba4684c107bfef131b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotations: 3
+  rotations: 0
 --- !u!114 &1335974462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335974458}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 413a8ec0be036294c9dafedfd8545fea, type: 3}
   m_Name: 
@@ -409,9 +409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: bd0787253cf7d614da99d16452946b43,
+  m_Actions: {fileID: -944628639613478452, guid: 00e7af494b977dc41bd98ee678d7ef32,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -422,10 +422,34 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2e64ba4-84ae-47b4-a7d1-4a6bac551a71
+    m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9fb80104-f90e-4cdf-b926-add27ba98fd2
+    m_ActionName: Player/Jump[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1335974461}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: JoiStickInputToAngleCalculation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 73477702-9213-443f-ac46-3de09c0fe29a
+    m_ActionName: Player/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1635171817}
 --- !u!1 &1397799349
