@@ -1,28 +1,19 @@
 using UnityEngine;
 
 public class Projectile : MonoBehaviour{
-	[SerializeField] [Tooltip("Whether the projectile will kill on impact or not.")]
-	private bool lethal = true;
-	[SerializeField] [Tooltip("")]
-	private float lifeSpan = 5.0f;
-	[SerializeField] [Tooltip("")]
+	/*[SerializeField] [Tooltip("The gravity of the projectile.")]
 	private float gravity = 9.82f;
+	[SerializeField] [Range(0, 1)] [Tooltip("The slow down drag the projectile gets.")]
+	private float airFriction = 0.5f;
 	
-	private Vector3 _velocity;
-
-	private void Start(){
-		GetComponent<SphereCollider>().enabled = lethal;
-	}
+	protected Vector3 velocity;
 
 	private void Update(){
-		lifeSpan -= Time.deltaTime;
-		if (lifeSpan <= 0){Destroy(gameObject);}
-		
-		_velocity += Vector3.down * (gravity * Time.deltaTime);
-		transform.position += _velocity * Time.deltaTime;
+		velocity += Vector3.down * (gravity * Time.deltaTime * airFriction);
+		transform.position += velocity * Time.deltaTime;
 	}
 
 	public void Fire(Vector3 vec){
-		_velocity += vec;
-	}
+		velocity += vec;
+	}*/
 }

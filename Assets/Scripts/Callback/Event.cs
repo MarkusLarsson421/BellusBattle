@@ -25,11 +25,8 @@ public abstract class Event<T> where T : Event<T>
 		if (_hasFired){throw new Exception("Event already been fired.");}
 
 		_hasFired = true;
-		if (Listeners != null)
-		{
-			Listeners(this as T);
-		}
-	
+		Listeners?.Invoke(this as T);
+
 		Debug.Log(Description);
 	}
 }

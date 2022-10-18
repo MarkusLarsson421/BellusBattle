@@ -22,6 +22,10 @@ public class FirearmTest : MonoBehaviour{
 
 	private void Update()
 	{
+		UserInput();
+	}
+
+	private void UserInput(){
 		for (int i = 0; i < firearms.Count; i++)
 		{
 			if (firearms[i] == null)
