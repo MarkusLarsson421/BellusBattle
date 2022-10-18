@@ -5209,6 +5209,8 @@ MonoBehaviour:
   groundDeceleration: 80
   airResistance: 50
   downwardForce: -22
+  acceleration: 50000
+  doubleJumpDecreaser: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -5238,11 +5240,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   velocity: {x: 0, y: 0}
-  isStandingOnOneWayPlatform: 0
-  rayCastBottomLeft: {x: 0, y: 0}
-  rayCastBottomRight: {x: 0, y: 0}
-  rayCastTopRight: {x: 0, y: 0}
-  rayCastTopLeft: {x: 0, y: 0}
 --- !u!136 &6431588530169345910
 CapsuleCollider:
   m_ObjectHideFlags: 0
