@@ -10,7 +10,7 @@ public class CameraTest : MonoBehaviour
 	public CameraFocus focus;
 	
 	private List<GameObject> _players = new();
-	private Random _random = new();
+	private readonly Random _random = new();
 
 	private void Update()
 	{

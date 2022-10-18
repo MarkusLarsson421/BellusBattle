@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,31 +18,41 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask oneWayLayer;
+    [SerializeField] private LayerMask downWayLayer;
+
+    [SerializeField] private Animator playerAnimator;
+
+    public UnityEvent jumpEvent;
 
     public LayerMask WallLayer
     {
         get { return wallLayer; }
     }
 
-    public Vector2 velocity;
-    private float movementX, movementY;
-    Vector2 movementX2;
-    bool moving;
+    private bool isGrounded
+    {
+        get { return CheckIsGrounded(); }
+    }
 
+    public Vector2 velocity;
+    private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
+
+    private int horizontalRayCount, verticalRayCount = 4;
+
+    private float movementX, movementY;
     private float deceleration;
     private float coyoteTime = 0.2f;
     private float coyoteTimer;
+    private float skinWidth = 0.012f;
+    private float downwardInput;
+    private float verticalRaySpacing, horizontalRaySpacing;
 
     private bool hasCoyoteTime;
     private bool hasDoubleJump;
-
-    private float skinWidth = 0.012f;
+    private bool movingLeft, movingRight;
+    private bool isStandingOnOneWayPlatform;
 
     private BoxCollider boxCollider;
-    [SerializeField] private Vector3 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
-
-    private float verticalRaySpacing, horizontalRaySpacing;
-    private int horizontalRayCount, verticalRayCount = 4;
 
     void Start()
     {
@@ -53,31 +64,25 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         updateRayCastOrgins();
-        //UpdateMovementForce();
+        UpdateMovementForce();
         CheckIsGrounded();
-        //Jump();
         UpdateCoyoteTime();
+        
         if (!CheckIsGrounded())
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
         }
 
-        if (CheckIsGrounded() && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
         {
             movementY = 0;
             coyoteTimer = 0;
             hasCoyoteTime = true;
             hasDoubleJump = true;
         }
-        if (!moving)
-        {
-            velocity.x = Mathf.MoveTowards(movementX2.x, 0, deceleration * Time.deltaTime);
-           // Debug.Log(moving);
-        }
-        velocity = new Vector2(movementX2.x, movementY);
+      
+        velocity = new Vector2(movementX, movementY);
 
-
-        //velocity = new Vector2(movementX, movementY);
         HandleVerticalCollisions(ref velocity);
         HandleHorizontalCollisions(ref velocity);
 
@@ -87,10 +92,11 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(velocity * Time.deltaTime);
         }
 
-        //FLipPlayer();
+        
 
         // So that when we change scene we don't have to re-join the lobby
         DontDestroyOnLoad(this.gameObject);
+
     }
 
     private void FLipPlayer()
@@ -107,64 +113,66 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        movementX2 = ctx.ReadValue<Vector2>();// * moveSpeed;
-        //Debug.Log(movementX2);
-        if (movementX2.x > 0f)
+        downwardInput = ctx.ReadValue<Vector2>().y;
+        Debug.Log(ctx.ReadValue<Vector2>().y);
+       // movementX2 = ctx.ReadValue<Vector2>().x;
+      
+        if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
-            movementX2.x = 1f;
-            moving = true;
+            
+            movingRight = true;
+            movingLeft = false;
         }
-        if (movementX2.x < 0f)
+        else if (ctx.ReadValue<Vector2>().x < -0.1f)
         {
-            movementX2.x = -1f;
-            moving = true;
+            
+            movingRight = false;
+            movingLeft = true;
         }
-        if (movementX2.x == 0)
+        else if (ctx.ReadValue<Vector2>().x < 0.2f || ctx.ReadValue<Vector2>().x > -0.2f)
         {
-            moving = false;
+            movingRight = false;
+            movingLeft = false;
         }
-        //Debug.Log(movementX2);
-        if (movementX2.x != 0)
-        {
-            movementX2.x *= moveSpeed;
+        playerAnimator.SetFloat("Speed", movementX2);
 
 
-        }
-
-
-        //moving = true;
-        // Debug.Log(moving);
-
-        //Debug.Log(movementX2.x);
-        //moving = ctx.started;
-
-
-        if (ctx.started)
-        {
-
-            //moving = false;
-            //Debug.Log("fun");
-        }
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
+        if (!ctx.started) return;
+
+        if (downwardInput <= -0.98f && isStandingOnOneWayPlatform)
         {
-            if (ctx.started)
-            {
-                if (!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
-                movementY = jumpForce;
+            Debug.Log("jump down!");
+            transform.position += Vector3.down;
+            isStandingOnOneWayPlatform = false;
+            return;
+        }
+        
+        
+        else if (isGrounded || hasCoyoteTime || hasDoubleJump)
+        {
+            if (!hasCoyoteTime && hasDoubleJump)
+            { 
+                hasDoubleJump = false; 
             }
+            movementY = jumpForce;
+            jumpEvent.Invoke();
         }
     }
 
 
     private void UpdateMovementForce()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (movingRight)
         {
-            movementX = moveSpeed * Input.GetAxisRaw("Horizontal");
+            movementX = moveSpeed;
+        }
+        if (movingLeft)
+        {
+            movementX = -moveSpeed;
         }
         else
         {
@@ -175,13 +183,25 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool CheckIsGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, groundLayer))
+        if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, oneWayLayer))
         {
+            isStandingOnOneWayPlatform = true;
             deceleration = groundDeceleration;
             return true;
         }
-        deceleration = airDeceleration;
-        return false;
+        if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, groundLayer))
+        {
+            deceleration = groundDeceleration;
+            isStandingOnOneWayPlatform = false;
+            return true;
+        }
+        else
+        {
+            deceleration = airDeceleration;
+            isStandingOnOneWayPlatform = false;
+            return false;
+        }
+        
 
     }
     private void Jump()
@@ -199,8 +219,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCoyoteTime()
     {
-        if (CheckIsGrounded() || !hasCoyoteTime) return;
-        //Debug.Log("awooo");
+        if (isGrounded || !hasCoyoteTime) return;
+ 
         if (coyoteTimer > coyoteTime)
         {
             hasCoyoteTime = false;
@@ -215,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
+
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
@@ -223,17 +243,31 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
-            Vector2 rayOrigin = (directionY == -1) ? rayCastBottomLeft : rayCastTopLeft;
+            Vector2 rayOrigin;
+
+            if (directionY == -1)
+            {
+                rayOrigin = rayCastBottomLeft + new Vector2(0f, 0.5f);
+            }
+            else
+            {
+                rayOrigin = rayCastTopLeft - new Vector2(0f, 0.5f);
+            }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+
+
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * (0.5f + skinWidth), Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
-                velocity.y = 0;
-            }
 
+                velocity.y = 0;
+                movementY = 0f;
+
+                
+            }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, oneWayLayer))
             {
                 if (velocity.y > 0)
@@ -244,8 +278,9 @@ public class PlayerMovement : MonoBehaviour
                 {
                     velocity.y = 0;
                 }
-                    
+
             }
+            
         }
     }
 
@@ -256,9 +291,16 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
-            //Debug.Log("adada");
 
-            Vector2 rayOrigin = (directionX == -1) ? rayCastBottomLeft : rayCastBottomRight;
+            Vector2 rayOrigin;
+            if (directionX == -1)
+            {
+                rayOrigin = rayCastBottomLeft + new Vector2(0.5f, 0f);
+            }
+            else
+            {
+                rayOrigin = rayCastBottomRight - new Vector2(0.5f, 0f); ;
+            }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
 
@@ -268,17 +310,12 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
-                //Debug.Log("Hit horiz");
                 velocity.x = 0;
-                /*
-                Debug.Log("Hit!");
-                velocity.x = (hit.distance - skinWidth);
-                rayLength = hit.distance;
-                */
-                //movementY = 0;
+                movementX = 0;;
             }
         }
     }
+
     void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
@@ -296,21 +333,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
-
-        rayCastBottomLeft = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastTopLeft = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastBottomRight = new Vector2(bounds.center.x, bounds.center.y);
-        rayCastTopRight = new Vector2(bounds.center.x, bounds.center.y);
-
-
-
-        /*
+      
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
         rayCastBottomRight = new Vector2(bounds.max.x, bounds.min.y);
         rayCastTopRight = new Vector2(bounds.max.x, bounds.max.y);
-        */
-
     }
 
     public float GetDownwardForce()

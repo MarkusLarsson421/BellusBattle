@@ -7,10 +7,8 @@ using UnityEngine.InputSystem;
 public class PlayerSpawnManager : MonoBehaviour
 {
     public int sceneIndex;
-    [SerializeField] private Transform[] spawnLocations; // Keeps track of all the possible spawn locations
-    [SerializeField] public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
-    [SerializeField] private Camera camera;
-    
+    PlayerJoinManager playerJoinManager;
+    [SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
 
     private void Start()
     {
@@ -19,9 +17,11 @@ public class PlayerSpawnManager : MonoBehaviour
         for(int i = 0; i < players.Length; i++)
         {
             players[i].transform.position = spawnLocations[i].position;
+            Debug.Log(players[i].transform.position);
         }
     }
 
+    /*
     void OnPlayerJoined(PlayerInput playerInput)
     {
         // Set the player ID, add one to the index to start at Player 1
@@ -37,10 +37,14 @@ public class PlayerSpawnManager : MonoBehaviour
 
         playerInput.gameObject.GetComponent<CameraTest>().focus = camera.gameObject.GetComponent<CameraFocus>();
         AddPlayerInFocus(playerInput.transform);
+
+        // Change color depending on index
+        playerInput.gameObject.GetComponent<MeshRenderer>().material = colors[playerInput.playerIndex];
     }
 
     private void AddPlayerInFocus(Transform player)
     {
         camera.gameObject.GetComponent<CameraFocus>()._targets.Add(player);
     }
+    */
 }

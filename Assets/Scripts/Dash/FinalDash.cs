@@ -6,31 +6,30 @@ public class FinalDash : MonoBehaviour
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool stopGravityWhileDashing = true;
     private bool isDashing;
+    private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
     [SerializeField] private float dashingDuration = 0.2f;
-    [SerializeField] private float dashingActivationCooldown = 0.01f;
+    [SerializeField] private float dashingActivationCooldown = 1000f;
+    //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
     private Vector3 velocity;
     private PlayerMovement movement;
-    //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
+    private float currentDashingDistace;
+    private float currentDashingDuration;
 
     private void Start()
     {
+        currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
         movement = GetComponent<PlayerMovement>();
     }
-    /*
+    
     void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash) // INPUT
-        {
-            StartCoroutine(DashAction());
-        }
+        Flip();
+        //DashWithKeyboard();
     }
-    */
+    
     private void FixedUpdate()
     {
         if (isDashing)
@@ -41,54 +40,86 @@ public class FinalDash : MonoBehaviour
         velocity = new Vector3(0, velocity.y, velocity.z);
     }
     float temp;
+    private void DashWithKeyboard()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash) // INPUT
+        {
+            StartCoroutine(DashAction());
+        }
+    }
+    public void DashWithJoystick(InputAction.CallbackContext context)
+    {
+        if (isDashing)
+        {
+            return;
+        }
+        if (canDash)
+        {
+            StartCoroutine(DashAction());
+        }
+    }
 
     private IEnumerator DashAction()
     {
-        CheckForCollision(); 
+        CheckForCollision();
         canDash = false;
         isDashing = true;
         temp = movement.GetDownwardForce();
         if (stopGravityWhileDashing) movement.SetDownwardForce(0);
-        if(movement.velocity.x > 0.1)
+        if (isFacingRight)
         {
-            velocity = new Vector3(dashingDistace - movement.velocity.x, 0f, 0f);
+            velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
         }
-        else if (movement.velocity.x < 0.1)
+        else if (!isFacingRight)
         {
-            velocity = new Vector3(-dashingDistace - movement.velocity.x, 0f, 0f);
+            velocity = new Vector3(-currentDashingDistace - movement.velocity.x, 0f, 0f);
         }
-        else
-        {
-            velocity = new Vector3(0f, 0f, 0f);
-            Debug.Log("Fuck you");
-        }
-        
+
         //tr.emitting = true; //See variable TrailRenderer tr
-        yield return new WaitForSeconds(dashingDuration);
+        yield return new WaitForSeconds(currentDashingDuration);
         //tr.emitting = false; //See variable TrailRenderer tr
+        currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
         movement.SetDownwardForce(temp);
         isDashing = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
 
     }
-
+    private void Flip()
+    {
+        if (isFacingRight && movement.velocity.x < 0f || !isFacingRight && movement.velocity.x > 0f)
+        {
+            isFacingRight = !isFacingRight;
+        }
+    }
+    float x;
     private void CheckForCollision()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, movement.velocity, out hit, 5f, movement.WallLayer))
+        if (Physics.Raycast(transform.position, Vector3.right, out hit, currentDashingDistace/4, movement.WallLayer) && isFacingRight) //4 is a the number that make dash distance works correct 
         {
-            dashingDistace = hit.distance - 0.5f; /// 0.5f är spelarens storlek
-
+            if (hit.distance * 4 < 3)
+            {
+                currentDashingDistace = 0;
+                return;
+            }
+            currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
         }
-    }
-
-    public void DoDash(InputAction.CallbackContext context)
-    {
-        if (canDash)
+        else if (Physics.Raycast(transform.position, Vector3.left, out hit, currentDashingDistace / 4, movement.WallLayer) && !isFacingRight) // 4 is a the number that make dash distance works correct 
         {
-            StartCoroutine(DashAction());
+            if (hit.distance * 4 < 3)
+            {
+                currentDashingDistace = 0;
+                return;
+            }
+            currentDashingDistace = hit.distance * 4 - 0.5f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
         }
+
     }
 
 
