@@ -30,30 +30,24 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public Vector2 velocity;
-    private float movementX, movementY;
-    private float movementX2;
-    bool wantToJumpDown;
-    private bool movingLeft, movingRight;
+    private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
+    private int horizontalRayCount, verticalRayCount = 4;
+
+    private float movementX, movementY;
     private float deceleration;
     private float coyoteTime = 0.2f;
     private float coyoteTimer;
+    private float skinWidth = 0.012f;
+    private float downwardInput;
+    private float verticalRaySpacing, horizontalRaySpacing;
 
     private bool hasCoyoteTime;
     private bool hasDoubleJump;
-
-    private float downwardInput;
-
-    
-    [SerializeField ]private bool isStandingOnOneWayPlatform;
-
-    private float skinWidth = 0.012f;
+    private bool movingLeft, movingRight;
+    private bool isStandingOnOneWayPlatform;
 
     private BoxCollider boxCollider;
-    [SerializeField] private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
-
-    private float verticalRaySpacing, horizontalRaySpacing;
-    private int horizontalRayCount, verticalRayCount = 4;
 
     void Start()
     {
@@ -67,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
         updateRayCastOrgins();
         UpdateMovementForce();
         CheckIsGrounded();
-        //Jump();
         UpdateCoyoteTime();
         if (!CheckIsGrounded())
         {
@@ -81,17 +74,9 @@ public class PlayerMovement : MonoBehaviour
             hasCoyoteTime = true;
             hasDoubleJump = true;
         }
-        /*
-        if (!moving)
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
-           // Debug.Log(moving);
-        }
-        */
+      
         velocity = new Vector2(movementX, movementY);
 
-
-        //velocity = new Vector2(movementX, movementY);
         HandleVerticalCollisions(ref velocity);
         HandleHorizontalCollisions(ref velocity);
 
@@ -123,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     {
         downwardInput = ctx.ReadValue<Vector2>().y;
         Debug.Log(ctx.ReadValue<Vector2>().y);
-        movementX2 = ctx.ReadValue<Vector2>().x;
+       // movementX2 = ctx.ReadValue<Vector2>().x;
       
         if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
@@ -250,8 +235,6 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < verticalRayCount; i++)
         {
-            //Debug.Log("adada");
-
             Vector2 rayOrigin;
 
             if (directionY == -1)
@@ -319,17 +302,8 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
-                //Debug.Log("Hit horiz");
                 velocity.x = 0;
-                movementX = 0;
-
-                //Debug.Log("Hit!");
-                /*
-                velocity.x = (hit.distance - skinWidth);
-                rayLength = hit.distance;
-                */
-
-                //movementY = 0;
+                movementX = 0;;
             }
         }
     }
