@@ -585,6 +585,7 @@ MonoBehaviour:
   minZoom: 40
   maxZoom: 10
   zoomLimiter: 50
+  _targets: []
 --- !u!1 &660062230
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gun: {fileID: 1096020188}
-  Bullet: {fileID: 7401326324578758395, guid: c35e65ebdd7397548a09729657da3e65, type: 3}
+  Bullet: {fileID: 7929666838174018582, guid: d0c789bad4bffe54395f62c5044dd73e, type: 3}
   bulletSpeed: 325
   ShootPoint: {fileID: 1450445269}
   fireRate: 1.5
