@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float health = 1;
+    public delegate void OnGameOver();
+    public static event OnGameOver onGameOver;
+    public void TakeDamage(float damage)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        health -= damage;
+        if (health <= 0)
+        {
+            onGameOver.Invoke();
+        }
     }
 }

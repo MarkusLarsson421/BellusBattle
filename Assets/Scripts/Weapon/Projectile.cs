@@ -10,19 +10,36 @@ public class Projectile : MonoBehaviour{
 	
 	private Vector3 _velocity;
 
+	[SerializeField] PlayerHealth ph;
+
 	private void Start(){
 		GetComponent<SphereCollider>().enabled = lethal;
-	}
+    }
 
-	private void Update(){
-		lifeSpan -= Time.deltaTime;
-		if (lifeSpan <= 0){Destroy(gameObject);}
+    private void Update()
+    {
+        lifeSpan -= Time.deltaTime;
+        if (lifeSpan <= 0) { Destroy(gameObject); }
+
+        _velocity += Vector3.down * (gravity * Time.deltaTime);
+        transform.position += _velocity * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+		if (other.gameObject.tag == "Player")
+		{
+
+			Debug.Log("hit");
+			ph = other.gameObject.GetComponent<PlayerHealth>();
+			ph.TakeDamage(1);
+			Debug.Log(ph.health);
+			Destroy(gameObject);
+		}
 		
-		_velocity += Vector3.down * (gravity * Time.deltaTime);
-		transform.position += _velocity * Time.deltaTime;
 	}
 
-	public void Fire(Vector3 vec){
+    public void Fire(Vector3 vec){
 		_velocity += vec;
 	}
 }

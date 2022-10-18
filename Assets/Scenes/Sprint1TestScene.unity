@@ -468,7 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   smoothTime: 0.5
-  minZoom: 100
+  minZoom: 5
   maxZoom: 60
   zoomLimiter: 100
   _targets: []
