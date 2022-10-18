@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("Påverkar hur snabbt spelaren förlorar energi i ett hopp")] [Range(10f, 300f)] private float airResistance;
     [SerializeField] [Tooltip("Hur mycket gravitation som påverkar spelaren i luften")] [Range(-100f, 0f)] private float downwardForce;
 
+    [SerializeField, Range(0f, 1f)] private float doubleJumpHeightDecreaser;
+
+
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
@@ -133,9 +136,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        float jumpHeightDecreaser = 1f;
         if (!ctx.started) return;
 
-        if (downwardInput <= -0.98f && isStandingOnOneWayPlatform)
+        if (downwardInput <= -0.75f && isStandingOnOneWayPlatform)
         {
             Debug.Log("jump down!");
             transform.position += Vector3.down;
@@ -148,9 +152,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!hasCoyoteTime && hasDoubleJump)
             { 
-                hasDoubleJump = false; 
+                hasDoubleJump = false;
+                jumpHeightDecreaser = doubleJumpHeightDecreaser;
             }
-            movementY = jumpForce;
+            movementY = jumpForce * jumpHeightDecreaser;
 
         }
     }

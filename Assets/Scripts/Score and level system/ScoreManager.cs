@@ -6,7 +6,8 @@ public class ScoreManager : MonoBehaviour
 {
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] CameraFocus cameraFocus;
-    bool hasGivenScore;
+    [SerializeField] LevelManager levelManager;
+    private bool hasGivenScore;
     [SerializeField] private float giveScoreTimer;
     [SerializeField] private float giveScoreTime;
 
@@ -26,7 +27,7 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    private void AddScore(GameObject winner)
+    private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
     {
         if (!scoreDic.ContainsKey(winner))
         {
