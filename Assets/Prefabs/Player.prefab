@@ -5210,7 +5210,7 @@ MonoBehaviour:
   airResistance: 50
   downwardForce: -22
   acceleration: 50000
-  doubleJumpDecreaser: 1
+  doubleJumpDecreaser: 0.783
   downwardInputBound: -0.75
   groundLayer:
     serializedVersion: 2
@@ -5413,7 +5413,7 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 1
   dashingDistace: 24
-  dashingDuration: 0.2
+  dashingDuration: 0.15
   dashingActivationCooldown: 0.01
 --- !u!114 &1991130997618187709
 MonoBehaviour:
