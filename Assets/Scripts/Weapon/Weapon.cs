@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     private Projectile _projectile;
     private readonly Random _random = new();
 
-    [SerializeField] Aim aim; // test to make bullet shoot in correct direction
+    [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
 
     private void Start(){
         _muzzleFlash = projectileOrigin.GetComponent<ParticleSystem>();
@@ -44,6 +44,7 @@ public class Weapon : MonoBehaviour
             //Vector3 force = new Vector3(projectileForce, (float)_random.Next(0, (int)inaccuracy * 100) / 100, 0);
 
             Vector3 force = new Vector3(projectileForce * aim.transform.right.x, projectileForce * aim.transform.right.y, projectileForce * aim.transform.right.z);
+            //Vector3 force = new Vector3(projectileForce * aim.transform.rotation.x, projectileForce * aim.transform.rotation.y, projectileForce * aim.transform.rotation.z);
             _projectile = firedProjectile.GetComponent<Projectile>();
             _projectile.Fire(force); 
         }

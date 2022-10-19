@@ -31,6 +31,7 @@ public class Projectile : MonoBehaviour{
 
     private void OnTriggerEnter(Collider other)
     {
+		Debug.Log("hitititititi");
 		if (other.gameObject.tag == "Player")
 		{
 			Debug.Log("hit");
@@ -40,9 +41,9 @@ public class Projectile : MonoBehaviour{
 
 			//other.gameObject.GetComponent<PlayerDetails>().isAlive = false;
 			CF.RemoveTarget(other.transform);
-			other.gameObject.transform.position = new Vector3(999999f, 99999f, 999f);
+			//other.gameObject.transform.position = new Vector3(999999f, 99999f, 999f);
 			//other.gameObject.GetComponent<PlayerInput>().gameObject.SetActive(false);
-			//other.gameObject.SetActive(false);
+			other.gameObject.SetActive(false);
 			Debug.Log(ph.health);
 			
 			Destroy(gameObject);
