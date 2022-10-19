@@ -19,8 +19,6 @@ public class DropWeapon_Porotype : MonoBehaviour
     {
         if(other.transform.tag == "Player")
         {
-            //&& !this.gameObject.transform.parent == other.transform.gameObject
-            //other.GetComponent<Shoot>().enabled = false;
             other.gameObject.transform.Find("revolver_low").gameObject.SetActive(false);
             other.gameObject.transform.Find("Sword").gameObject.SetActive(true);
 

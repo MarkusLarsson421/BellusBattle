@@ -10,40 +10,41 @@ public class Sword_Prototype : MonoBehaviour
     Vector3 pos;
     Vector3 rotation;
     public bool canAttack = true;
-    public float cooldown;
+    public float cooldown = 3;
     public Transform ShootPoint;
 
     // Start is called before the first frame update
-    
+    private void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButton(0))
-        {
-            if (canAttack)
-            {
-                //Attack();
-            }
-        }
+
     }
    
-    void Attack(InputAction.CallbackContext ctx)
+    public void Attack(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed) { return; }
-
         pos = Sword.transform.position;
-        Sword.transform.position += ShootPoint.transform.up * 1.1f;
-        canAttack = false;
-        StartCoroutine(ResetAttack());
+        if (!ctx.performed) { return; }
+        if (canAttack)
+        {
+            Sword.transform.position += ShootPoint.transform.up * 1.02f;
+            canAttack = false;
+            StartCoroutine(ResetAttack());
+            Debug.Log(pos);
+        }
+
+        
     }
 
     IEnumerator ResetAttack()
     {
-        
-        yield return new WaitForSeconds(cooldown);
+        Debug.Log(pos);
         Sword.transform.position = pos;
+        yield return new WaitForSeconds(cooldown);
         canAttack = true;
     }
 
