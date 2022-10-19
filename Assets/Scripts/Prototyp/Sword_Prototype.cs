@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Sword_Prototype : MonoBehaviour
 {
 
     public GameObject Sword;
     Vector3 pos;
+    Vector3 rotation;
     public bool canAttack = true;
     public float cooldown;
     public Transform ShootPoint;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -25,21 +24,15 @@ public class Sword_Prototype : MonoBehaviour
         {
             if (canAttack)
             {
-                Attack();
+                //Attack();
             }
         }
-        faceGun();
     }
-    void faceGun()
+   
+    void Attack(InputAction.CallbackContext ctx)
     {
-        float camToPlayerDist = Vector3.Distance(transform.position, Camera.main.transform.position);
-        Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camToPlayerDist));
-        Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Sword.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
-    }
-    void Attack()
-    {
+        if (!ctx.performed) { return; }
+
         pos = Sword.transform.position;
         Sword.transform.position += ShootPoint.transform.up * 1.1f;
         canAttack = false;
