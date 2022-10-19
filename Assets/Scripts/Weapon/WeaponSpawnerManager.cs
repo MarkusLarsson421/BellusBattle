@@ -9,30 +9,58 @@ public class WeaponSpawnerManager : MonoBehaviour
     [SerializeField] private float spawnWeaponsTimer;
     [SerializeField] private float numberOfWeaponsToSpawn;
     [SerializeField] private WeaponSpawner[] spawners;
-    [SerializeField] private List<WeaponSpawner> spawnersToChooseFrom = new List<WeaponSpawner>();
+    private List<WeaponSpawner> spawnersToChooseFrom = new List<WeaponSpawner>();
     private List<WeaponSpawner> choosenSpawners = new List<WeaponSpawner>();
     private bool isReadyToSpawn = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         ControlNumberOfWeaponToSpawners();
+        ÍnitialSpawnersToChooseFrom();
+        StartCoroutine(InitialSpawnWeapons());
+    }
+    private void ControlNumberOfWeaponToSpawners()
+    {
+
+        if (numberOfWeaponsToSpawn > spawners.Length)
+        {
+            numberOfWeaponsToSpawn = spawners.Length;
+            Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
+        }
+    }
+    private void ÍnitialSpawnersToChooseFrom()
+    {
         foreach (var spawner in spawners)
         {
             spawnersToChooseFrom.Add(spawner);
         }
-        StartCoroutine(InitialSpawnWeapons());
+    }
+    IEnumerator InitialSpawnWeapons()
+    {
+        yield return new WaitForSeconds(initialSpawnWeaponsTimer);
+        ChooseSpawnReapeatProtocol();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isReadyToSpawn) StartCoroutine(SpawnWeapons());
     }
+    IEnumerator SpawnWeapons()
+    {
+        yield return new WaitForSeconds(spawnWeaponsTimer);
+        ChooseSpawnReapeatProtocol();
+    }
+    private void ChooseSpawnReapeatProtocol()
+    {
+        ChooseRandomSpawners();
+        SpawnWeaponsInSpawners();
+        choosenSpawners.Clear();
+        StartCoroutine(SpawnWeapons());
+    }
     private void ChooseRandomSpawners()
     {
         int temporaryNumber;
-        for (int i = 0; i < numberOfWeaponsToSpawn && i < spawnersToChooseFrom.Count; i++)
+        for (int i = 0; i < numberOfWeaponsToSpawn && i < spawners.Length && spawnersToChooseFrom.Count > 0; i++)
         {
             temporaryNumber = Random.Range(0, spawnersToChooseFrom.Count);
             choosenSpawners.Add(spawnersToChooseFrom.ElementAt(temporaryNumber));
@@ -46,30 +74,9 @@ public class WeaponSpawnerManager : MonoBehaviour
             spawner.SpawnRandomWeapon();
         }
     }
-    IEnumerator SpawnWeapons()
+    public void AddEmptySpawnerToChooseFrom(WeaponSpawner spawner)
     {
-        yield return new WaitForSeconds(spawnWeaponsTimer);
-        ChooseRandomSpawners();
-        SpawnWeaponsInSpawners();
-        choosenSpawners.Clear();
-        StartCoroutine(SpawnWeapons());
-    }
-    IEnumerator InitialSpawnWeapons()
-    {
-        yield return new WaitForSeconds(initialSpawnWeaponsTimer);
-        ChooseRandomSpawners();
-        SpawnWeaponsInSpawners();
-        choosenSpawners.Clear();
-        StartCoroutine(SpawnWeapons());
+        spawnersToChooseFrom.Add(spawner);
     }
 
-    private void ControlNumberOfWeaponToSpawners()
-    {
-
-        if (numberOfWeaponsToSpawn > spawners.Length)
-        {
-            numberOfWeaponsToSpawn = spawners.Length;
-            Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
-        }
-    }
 }
