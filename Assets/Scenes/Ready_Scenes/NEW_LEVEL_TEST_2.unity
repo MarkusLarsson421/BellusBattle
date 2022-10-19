@@ -5011,6 +5011,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponSpawner (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
       propertyPath: m_RootOrder
@@ -5680,6 +5685,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WeaponSpawner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
@@ -6844,6 +6854,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponSpawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
       propertyPath: m_RootOrder
@@ -7311,6 +7326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WeaponSpawner (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
@@ -9117,6 +9137,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WeaponSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
