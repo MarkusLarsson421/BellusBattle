@@ -5203,14 +5203,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837ef830bb7cb304d9f92158dee6a699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  jumpForce: 20
+  moveSpeed: 16.8
+  jumpForce: 18.5
   airDeceleration: 44.3
   groundDeceleration: 80
-  airResistance: 50
+  airResistance: 65
   downwardForce: -22
-  acceleration: 50000
-  doubleJumpDecreaser: 1
+  acceleration: 35066
+  doubleJumpDecreaser: 0.783
   downwardInputBound: -0.75
   groundLayer:
     serializedVersion: 2
