@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponSpawnerManager : MonoBehaviour
@@ -8,7 +9,7 @@ public class WeaponSpawnerManager : MonoBehaviour
     [SerializeField] private float spawnWeaponsTimer;
     [SerializeField] private float numberOfWeaponsToSpawn;
     [SerializeField] private WeaponSpawner[] spawners;
-    private List<WeaponSpawner> spawnersToChooseFrom = new List<WeaponSpawner>();
+    [SerializeField] private List<WeaponSpawner> spawnersToChooseFrom = new List<WeaponSpawner>();
     private List<WeaponSpawner> choosenSpawners = new List<WeaponSpawner>();
     private bool isReadyToSpawn = false;
 
@@ -34,7 +35,7 @@ public class WeaponSpawnerManager : MonoBehaviour
         for (int i = 0; i < numberOfWeaponsToSpawn && i < spawnersToChooseFrom.Count; i++)
         {
             temporaryNumber = Random.Range(0, spawnersToChooseFrom.Count);
-            choosenSpawners.Add(spawners[temporaryNumber]); // spawners[temporaryNumber] --> spawnersToChooseFrom.get(temporaryNumber)
+            choosenSpawners.Add(spawnersToChooseFrom.ElementAt(temporaryNumber));
             spawnersToChooseFrom.RemoveAt(temporaryNumber);
         }
     }
