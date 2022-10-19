@@ -5211,6 +5211,7 @@ MonoBehaviour:
   downwardForce: -22
   acceleration: 50000
   doubleJumpDecreaser: 1
+  downwardInputBound: -0.75
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
