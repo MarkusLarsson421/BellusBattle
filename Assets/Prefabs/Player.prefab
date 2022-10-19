@@ -5414,7 +5414,7 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 1
   dashingDistace: 24
-  dashingDuration: 0.124
+  dashingDuration: 0.2
   dashingImmortality: 0.076
   dashingActivationCooldown: 1
   dashEvent:

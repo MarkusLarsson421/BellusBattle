@@ -11,7 +11,7 @@ public class FinalDash : MonoBehaviour
     private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
     [SerializeField] private float dashingDuration;
-    [SerializeField, Tooltip("måste vara lägre än dashingDuration")] [Range(0f, 1f)] private float dashingImmortality;
+    [SerializeField, Tooltip("måste vara lägre än dashingDuration")][Range(0f, 1f)] private float dashingImmortality;
     [SerializeField] private float dashingActivationCooldown = 1000f;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
