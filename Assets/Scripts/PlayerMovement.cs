@@ -14,13 +14,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("Påverkar hur snabbt spelaren förlorar energi i ett hopp")] [Range(10f, 300f)] private float airResistance;
     [SerializeField] [Tooltip("Hur mycket gravitation som påverkar spelaren i luften")] [Range(-100f, 0f)] private float downwardForce;
     [SerializeField] [Tooltip("ACCELERATION!!")] [Range(1f, 50000f)] private float acceleration;
+   
+    
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
+    [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask oneWayLayer;
-    [SerializeField] private LayerMask downWayLayer;
+    
 
     [SerializeField] private Animator playerAnimator;
 
@@ -38,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 velocity;
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
+
+    private Vector2 verticalRayOffset = new Vector2(0f, 0.5f);
+    private Vector2 horizontalRayOffset = new Vector2(0.5f, 0f);
 
     private int horizontalRayCount, verticalRayCount = 4;
 
@@ -103,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         // So that when we change scene we don't have to re-join the lobby
         DontDestroyOnLoad(this.gameObject);
 
+        playerAnimator.SetFloat("Speed", movementX);
     }
 
     private void FLipPlayer()
@@ -140,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
             movingRight = false;
             movingLeft = false;
         }
-        playerAnimator.SetFloat("Speed", movementX);
+
 
 
     }
@@ -150,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
         float jumpDecreaser = 1f;
         if (!ctx.started) return;
 
-        if (downwardInput <= -0.75f && isStandingOnOneWayPlatform)
+        if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
             Debug.Log("jump down!");
             transform.position += Vector3.down * 1.8f;
@@ -224,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
                 movementY = jumpForce;
             }
         }
-
     }
 
     private void UpdateCoyoteTime()
@@ -245,7 +251,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
@@ -257,26 +262,20 @@ public class PlayerMovement : MonoBehaviour
 
             if (directionY == -1)
             {
-                rayOrigin = rayCastBottomLeft + new Vector2(0f, 0.5f);
+                rayOrigin = rayCastBottomLeft + verticalRayOffset;
             }
             else
             {
-                rayOrigin = rayCastTopLeft - new Vector2(0f, 0.5f);
+                rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-
-
-
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * (0.5f + skinWidth), Color.red);
 
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
-
                 velocity.y = 0;
-                movementY = 0f;
-
-                
+                movementY = 0f;   
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, oneWayLayer))
             {
@@ -288,9 +287,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     velocity.y = 0;
                 }
-
-            }
-            
+            } 
         }
     }
 
@@ -301,27 +298,23 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
-
             Vector2 rayOrigin;
             if (directionX == -1)
             {
-                rayOrigin = rayCastBottomLeft + new Vector2(0.5f, 0f);
+                rayOrigin = rayCastBottomLeft + horizontalRayOffset;
             }
             else
             {
-                rayOrigin = rayCastBottomRight - new Vector2(0.5f, 0f); ;
+                rayOrigin = rayCastBottomRight - horizontalRayOffset;
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-
-
-
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
                 velocity.x = 0;
-                movementX = 0;;
+                movementX = 0;
             }
         }
     }
@@ -337,7 +330,6 @@ public class PlayerMovement : MonoBehaviour
         horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
-
 
     private void updateRayCastOrgins()
     {
@@ -357,9 +349,5 @@ public class PlayerMovement : MonoBehaviour
     public void SetDownwardForce(float value)
     {
         downwardForce = value;
-
-
     }
-
-
 }

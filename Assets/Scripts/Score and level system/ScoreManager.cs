@@ -6,9 +6,18 @@ public class ScoreManager : MonoBehaviour
 {
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] CameraFocus cameraFocus;
-    bool hasGivenScore;
-    [SerializeField] private float giveScoreTimer;
-    [SerializeField] private float giveScoreTime;
+    [SerializeField] LevelManager levelManager;
+    private bool hasGivenScore;
+    private float giveScoreTimer;
+    [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
+
+    [SerializeField] private bool gameHasStarted; //för att den inte ska börja räkna poäng i lobbyn, är tänkt att sättas till true när man går igenom teleportern
+
+    public bool GameHasStarted
+    {
+        get { return gameHasStarted; }
+        set { gameHasStarted = value; }
+    }
 
 
     private void Start()
@@ -18,7 +27,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        if (cameraFocus._targets.Count == 1 && !hasGivenScore)
+        if (cameraFocus._targets.Count == 1 && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
         }
@@ -26,7 +35,7 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    private void AddScore(GameObject winner)
+    private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
     {
         if (!scoreDic.ContainsKey(winner))
         {
@@ -52,6 +61,8 @@ public class ScoreManager : MonoBehaviour
         {
             AddScore(cameraFocus._targets[0].transform.gameObject);
             hasGivenScore = true;
+            Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+            Debug.Log(getScore(cameraFocus._targets[0].transform.gameObject));
         }
         else
         {
