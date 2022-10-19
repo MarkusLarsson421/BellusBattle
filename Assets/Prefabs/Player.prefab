@@ -5203,13 +5203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837ef830bb7cb304d9f92158dee6a699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  jumpForce: 20
+  moveSpeed: 16.8
+  jumpForce: 18.5
   airDeceleration: 44.3
   groundDeceleration: 80
-  airResistance: 50
+  airResistance: 65
   downwardForce: -22
-  acceleration: 50000
+  acceleration: 35066
   doubleJumpDecreaser: 0.783
   downwardInputBound: -0.75
   groundLayer:
@@ -5413,7 +5413,7 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 1
   dashingDistace: 24
-  dashingDuration: 0.15
+  dashingDuration: 0.124
   dashingActivationCooldown: 0.01
 --- !u!114 &1991130997618187709
 MonoBehaviour:
