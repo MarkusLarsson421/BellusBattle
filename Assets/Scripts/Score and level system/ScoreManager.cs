@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] CameraFocus cameraFocus;
     [SerializeField] LevelManager levelManager;
+    [SerializeField] int pointsToWin;
     private bool hasGivenScore;
     private float giveScoreTimer;
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
@@ -66,6 +67,11 @@ public class ScoreManager : MonoBehaviour
             AddScore(cameraFocus._targets[0].transform.gameObject);
             hasGivenScore = true;
             Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+
+            if(getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
+            {
+                Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+            } 
             Debug.Log(getScore(cameraFocus._targets[0].transform.gameObject));
             giveScoreTimer = 0;
         }
