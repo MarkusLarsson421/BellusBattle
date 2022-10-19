@@ -8,7 +8,7 @@ public class FinalDash : MonoBehaviour
     private bool isDashing;
     private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
-    [SerializeField] private float dashingDuration = 0.2f;
+    [SerializeField] private float dashingDuration = 0.05f;
     [SerializeField] private float dashingActivationCooldown = 1000f;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
@@ -69,7 +69,7 @@ public class FinalDash : MonoBehaviour
         canDash = false;
         isDashing = true;
         temp = movement.GetDownwardForce();
-        if (stopGravityWhileDashing) movement.SetDownwardForce(0);
+        if (stopGravityWhileDashing) movement.SetDownwardForce(-15);
         if (isFacingRight)
         {
             velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
