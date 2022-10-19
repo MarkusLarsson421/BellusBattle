@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 public class FinalDash : MonoBehaviour
 {
     [SerializeField] private bool canDash = true;
@@ -16,6 +17,8 @@ public class FinalDash : MonoBehaviour
     private PlayerMovement movement;
     private float currentDashingDistace;
     private float currentDashingDuration;
+
+    public UnityEvent dashEvent;
 
     private void Start()
     {
@@ -70,6 +73,7 @@ public class FinalDash : MonoBehaviour
         isDashing = true;
         temp = movement.GetDownwardForce();
         if (stopGravityWhileDashing) movement.SetDownwardForce(0);
+        dashEvent.Invoke();
         if (isFacingRight)
         {
             velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
