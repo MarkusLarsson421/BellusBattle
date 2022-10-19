@@ -34,7 +34,7 @@ public class WeaponSpawnerManager : MonoBehaviour
         for (int i = 0; i < numberOfWeaponsToSpawn && i < spawnersToChooseFrom.Count; i++)
         {
             temporaryNumber = Random.Range(0, spawnersToChooseFrom.Count);
-            choosenSpawners.Add(spawners[temporaryNumber]);
+            choosenSpawners.Add(spawners[temporaryNumber]); // spawners[temporaryNumber] --> spawnersToChooseFrom.get(temporaryNumber)
             spawnersToChooseFrom.RemoveAt(temporaryNumber);
         }
     }
@@ -70,11 +70,5 @@ public class WeaponSpawnerManager : MonoBehaviour
             numberOfWeaponsToSpawn = spawners.Length;
             Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
         }
-    }
-    private void ResetVariables()
-    {
-        choosenSpawners.Clear();
-        spawnersToChooseFrom.Clear();
-
     }
 }
