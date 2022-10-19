@@ -7,9 +7,11 @@ public class FinalDash : MonoBehaviour
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool stopGravityWhileDashing = true;
     private bool isDashing;
+    private bool isDashingImmortality;
     private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
-    [SerializeField] private float dashingDuration = 0.2f;
+    [SerializeField] private float dashingDuration;
+    [SerializeField, Tooltip("måste vara lägre än dashingDuration")] [Range(0f, 1f)] private float dashingImmortality;
     [SerializeField] private float dashingActivationCooldown = 1000f;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
@@ -71,6 +73,7 @@ public class FinalDash : MonoBehaviour
         CheckForCollision();
         canDash = false;
         isDashing = true;
+        isDashingImmortality = true;
         temp = movement.GetDownwardForce();
         if (stopGravityWhileDashing) movement.SetDownwardForce(-15);
         dashEvent.Invoke();
@@ -83,9 +86,10 @@ public class FinalDash : MonoBehaviour
         {
             velocity = new Vector3(-currentDashingDistace - movement.velocity.x, 0f, 0f);
         }
-
+        yield return new WaitForSeconds(dashingImmortality);
+        isDashingImmortality = false;
         //tr.emitting = true; //See variable TrailRenderer tr
-        yield return new WaitForSeconds(currentDashingDuration);
+        yield return new WaitForSeconds(currentDashingDuration - dashingImmortality);
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
@@ -126,6 +130,9 @@ public class FinalDash : MonoBehaviour
         }
 
     }
-
+    public bool GetDashImmortality()
+    {
+        return isDashingImmortality;
+    }
 
 }

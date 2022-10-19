@@ -15,10 +15,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("Hur mycket gravitation som påverkar spelaren i luften")] [Range(-100f, 0f)] private float downwardForce;
     [SerializeField] [Tooltip("ACCELERATION!!")] [Range(1f, 50000f)] private float acceleration;
    
-    
+
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
-
+    [SerializeField] [Range(0f, 1f)] private float coyoteTime;
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float movementX, movementY;
     private float deceleration;
-    private float coyoteTime = 0.2f;
+    
     private float coyoteTimer;
     private float skinWidth = 0.012f;
     private float downwardInput;

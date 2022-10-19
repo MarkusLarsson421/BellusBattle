@@ -5189,8 +5189,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7971084, z: 1}
-  m_Center: {x: 0, y: 0.913195, z: 0}
+  m_Size: {x: 0.40271947, y: 1.7971084, z: 1}
+  m_Center: {x: 0.0020873994, y: 0.913195, z: 0}
 --- !u!114 &6431588530169345917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5204,7 +5204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 16.8
-  jumpForce: 18.5
+  jumpForce: 17.37
   airDeceleration: 44.3
   groundDeceleration: 80
   airResistance: 65
@@ -5212,6 +5212,7 @@ MonoBehaviour:
   acceleration: 35066
   doubleJumpDecreaser: 0.783
   downwardInputBound: -0.75
+  coyoteTime: 0.147
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -5414,6 +5415,7 @@ MonoBehaviour:
   stopGravityWhileDashing: 1
   dashingDistace: 24
   dashingDuration: 0.124
+  dashingImmortality: 0.076
   dashingActivationCooldown: 1
   dashEvent:
     m_PersistentCalls:
