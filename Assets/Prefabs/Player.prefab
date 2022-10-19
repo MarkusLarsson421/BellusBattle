@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inaccuracy: 1
-  fireRate: 5
+  fireRate: 1.5
   ammo: 6
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
-  projectileForce: 100
+  projectileForce: 40
 --- !u!1 &2953532988127057366
 GameObject:
   m_ObjectHideFlags: 0
@@ -5221,9 +5221,6 @@ MonoBehaviour:
   oneWayLayer:
     serializedVersion: 2
     m_Bits: 128
-  downWayLayer:
-    serializedVersion: 2
-    m_Bits: 0
   playerAnimator: {fileID: 8727384561011662934}
   jumpEvent:
     m_PersistentCalls:
