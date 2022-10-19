@@ -183,7 +183,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movingRight)
         {
-            Debug.Log(movementX);
             movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
         }
         if (movingLeft)
