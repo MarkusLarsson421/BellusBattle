@@ -5204,7 +5204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  jumpForce: 20
+  jumpForce: 17.37
   airDeceleration: 44.3
   groundDeceleration: 80
   airResistance: 50
