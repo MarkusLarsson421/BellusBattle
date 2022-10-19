@@ -29,7 +29,8 @@ public class PlayerJoinManager : PlayerSpawnManager
         AddPlayerInFocus(playerInput.transform);
 
         // Change color depending on index
-        playerInput.gameObject.GetComponent<MeshRenderer>().material = colors[playerInput.playerIndex];
+        // Kanske ej behövs i framtiden då alla karaktärer är unika /Martin Nyman
+        //playerInput.gameObject.GetComponent<MeshRenderer>().material = colors[playerInput.playerIndex];
     }
     private void AddPlayerInFocus(Transform player)
     {
