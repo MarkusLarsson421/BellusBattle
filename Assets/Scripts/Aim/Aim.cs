@@ -10,7 +10,7 @@ public class Aim : MonoBehaviour
 
     Vector3 mousePos;
     Vector3 direction;
-    public Quaternion rotation;
+    Quaternion rotation;
     float angle;
 
     private void Update()
@@ -34,7 +34,7 @@ public class Aim : MonoBehaviour
         if (t.x == 0 && t.y == 0) return;
         direction = t - (Vector2)transform.position;
         direction.Normalize();
-        angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg - 180f; // -90 degrees
         //Debug.Log(direction);
     }
     private void ChooseAngleRotation()

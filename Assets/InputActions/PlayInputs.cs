@@ -60,6 +60,17 @@ public partial class @PlayInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9e6f96d0-33a8-4559-97d1-a22e782c7774"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6cc0740d-2e9a-43de-8acd-ac1e4d5c5430"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
