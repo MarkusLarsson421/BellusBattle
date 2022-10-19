@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 public class FinalDash : MonoBehaviour
 {
     [SerializeField] private bool canDash = true;
@@ -8,7 +9,7 @@ public class FinalDash : MonoBehaviour
     private bool isDashing;
     private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
-    [SerializeField] private float dashingDuration = 0.05f;
+    [SerializeField] private float dashingDuration = 0.2f;
     [SerializeField] private float dashingActivationCooldown = 1000f;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
@@ -16,6 +17,8 @@ public class FinalDash : MonoBehaviour
     private PlayerMovement movement;
     private float currentDashingDistace;
     private float currentDashingDuration;
+
+    public UnityEvent dashEvent;
 
     private void Start()
     {
@@ -69,7 +72,8 @@ public class FinalDash : MonoBehaviour
         canDash = false;
         isDashing = true;
         temp = movement.GetDownwardForce();
-        if (stopGravityWhileDashing) movement.SetDownwardForce(-15);
+        if (stopGravityWhileDashing) movement.SetDownwardForce(0);
+        dashEvent.Invoke();
         if (isFacingRight)
         {
             velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
