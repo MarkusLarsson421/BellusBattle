@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
+    [SerializeField] private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] CameraFocus cameraFocus;
     [SerializeField] LevelManager levelManager;
     private bool hasGivenScore;
@@ -22,6 +22,10 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        if(cameraFocus == null)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
+        }
         hasGivenScore = false;
     }
 
@@ -63,6 +67,7 @@ public class ScoreManager : MonoBehaviour
             hasGivenScore = true;
             Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
             Debug.Log(getScore(cameraFocus._targets[0].transform.gameObject));
+            giveScoreTimer = 0;
         }
         else
         {
