@@ -12,6 +12,7 @@ public class WeaponSpawnerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ControlNumberOfWeaponToSpawners();
         StartCoroutine(SpawnWeapons());
     }
 
@@ -29,9 +30,11 @@ public class WeaponSpawnerManager : MonoBehaviour
             if (spawners[temporaryNumber].GetIsHoldingWeapon() == true)
             {
                 i--;
-                return;
             }
-            choosenSpawners.Add(spawners[temporaryNumber]);
+            else
+            {
+                choosenSpawners.Add(spawners[temporaryNumber]);
+            }
         }
     }
     private void SpawnWeaponsInSpawners()
@@ -48,5 +51,13 @@ public class WeaponSpawnerManager : MonoBehaviour
         SpawnWeaponsInSpawners();
         choosenSpawners.Clear();
         StartCoroutine(SpawnWeapons());
+    }
+    private void ControlNumberOfWeaponToSpawners()
+    {
+        if(numberOfWeaponsToSpawn > spawners.Length)
+        {
+            numberOfWeaponsToSpawn = spawners.Length;
+            Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
+        }
     }
 }
