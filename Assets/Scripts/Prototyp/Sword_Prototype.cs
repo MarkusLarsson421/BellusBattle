@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Sword_Prototype : MonoBehaviour
 {
 
     public GameObject Sword;
     Vector3 pos;
+    Vector3 rotation;
     public bool canAttack = true;
-    public float cooldown;
+    public float cooldown = 3;
     public Transform ShootPoint;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         
     }
@@ -20,37 +22,29 @@ public class Sword_Prototype : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButton(0))
-        {
-            if (canAttack)
-            {
-                Attack();
-            }
-        }
-        faceGun();
+
     }
-    void faceGun()
-    {
-        float camToPlayerDist = Vector3.Distance(transform.position, Camera.main.transform.position);
-        Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camToPlayerDist));
-        Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Sword.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
-    }
-    void Attack()
+   
+    public void Attack(InputAction.CallbackContext ctx)
     {
         pos = Sword.transform.position;
-        Sword.transform.position += ShootPoint.transform.up * 1.1f;
-        canAttack = false;
-        StartCoroutine(ResetAttack());
+        if (!ctx.performed) { return; }
+        if (canAttack)
+        {
+            Sword.transform.position += ShootPoint.transform.up * 1.02f;
+            canAttack = false;
+            StartCoroutine(ResetAttack());
+            Debug.Log(pos);
+        }
+
+        
     }
 
     IEnumerator ResetAttack()
     {
-        
-        yield return new WaitForSeconds(cooldown);
+        Debug.Log(pos);
         Sword.transform.position = pos;
+        yield return new WaitForSeconds(cooldown);
         canAttack = true;
     }
 
