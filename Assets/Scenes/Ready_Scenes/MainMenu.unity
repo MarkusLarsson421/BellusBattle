@@ -257,6 +257,11 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 165493304}
+    - target: {fileID: 4401542679982079948, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 165493304}
     - target: {fileID: 4867209304053015717, guid: 6bbf5b6599b5f714ea352cfb4677488f,
         type: 3}
       propertyPath: m_IsActive
@@ -346,6 +351,11 @@ PrefabInstance:
     - target: {fileID: 6816382114350787464, guid: 2419d59ae6139464d82a73547f006732,
         type: 3}
       propertyPath: m_Name
+      value: ScoreManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816382114350787464, guid: 2419d59ae6139464d82a73547f006732,
+        type: 3}
+      propertyPath: m_TagString
       value: ScoreManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
