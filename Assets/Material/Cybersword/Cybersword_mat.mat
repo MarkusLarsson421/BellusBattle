@@ -104,7 +104,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emissive_Tex:
-        m_Texture: {fileID: 2800000, guid: 41077a5a25d38244fadd3b9d947234f4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4334845946200c445b1bb9d5f3f31f36, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -124,7 +124,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3c5819e1bf392b14fba661484944eee3, type: 3}
+        m_Texture: {fileID: 2800000, guid: b6e64ac36a8d28d4faa820d6ef2092ef, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -140,7 +140,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: e992cc1094d4aaa4186b3c72bae976d6, type: 3}
+        m_Texture: {fileID: 2800000, guid: ecd370bef284f0e44a4313b2d2b9a790, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapForMatCap:
@@ -503,8 +503,8 @@ Material:
     - _utsVersionY: 8
     - _utsVersionZ: 2
     m_Colors:
-    - _1st_ShadeColor: {r: 0.6415094, g: 0, b: 0.58193505, a: 1}
-    - _2nd_ShadeColor: {r: 0.3679245, g: 0, b: 0.31434336, a: 1}
+    - _1st_ShadeColor: {r: 0.8301887, g: 0.18405126, b: 0.757491, a: 1}
+    - _2nd_ShadeColor: {r: 0.4191128, g: 0, b: 0.5283019, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -518,7 +518,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _Emissive_Color: {r: 32, g: 0, b: 23.244293, a: 1}
+    - _Emissive_Color: {r: 5.992157, g: 0, b: 5.1137257, a: 1}
     - _FirstShadeMaskColor: {r: 0, g: 1, b: 1, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighlightMaskColor: {r: 1, g: 1, b: 0, a: 1}
