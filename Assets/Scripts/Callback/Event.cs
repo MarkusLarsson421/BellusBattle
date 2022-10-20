@@ -25,11 +25,8 @@ public abstract class Event<T> where T : Event<T>
 		if (_hasFired){throw new Exception("Event already been fired.");}
 
 		_hasFired = true;
-		if (Listeners != null)
-		{
-			Listeners(this as T);
-		}
-	
+		Listeners?.Invoke(this as T);
+
 		Debug.Log(Description);
 	}
 }
@@ -46,4 +43,17 @@ public class ExplodeEvent : Event<ExplodeEvent>
 	 * Info about cause of death, our killer, etc...
 	 * Could be struct, readonly, etc...
 	 */
+}
+
+public class PickUpEvent : Event<PickUpEvent>
+{
+	public GameObject PickedUpGo;
+}
+
+public class PlayerDeathEvent : Event<PlayerDeathEvent>
+{
+	public GameObject PlayerGo;
+	public string Kille; //Player who was killed.
+	public string KilledBy;
+	public string KilledWith;
 }
