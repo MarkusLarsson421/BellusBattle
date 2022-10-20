@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5605244744219591389}
   - component: {fileID: 7929666838174018585}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: shit gun bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,5 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lethal: 1
-  lifeSpan: 5
-  gravity: 0
+  lifeSpan: 0.5
+  gravity: 2
