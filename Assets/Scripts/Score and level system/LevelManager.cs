@@ -33,6 +33,10 @@ public class LevelManager : MonoBehaviour
     {
         if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
         else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
+        if (scenesToChooseFrom.Count <= 0)
+        {
+            LoadScenesList();
+        }
     }
     private void CreateListOfScenesFromBuild()
     {
@@ -57,31 +61,35 @@ public class LevelManager : MonoBehaviour
     }
     private void LoadNextSceneInNumericalOrder()
     {
-        SceneManager.LoadScene(scenesToChooseFrom.ElementAt(SceneManager.GetActiveScene().buildIndex));
-        scenesToChooseFrom.RemoveAt(SceneManager.GetActiveScene().buildIndex);
-        if (scenesToChooseFrom.Count <= 0)
-        {
-            LoadScenesList();
-        }
-        //try
-        //{
-        //    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(SceneManager.GetActiveScene().buildIndex + 1));
-
-        //}
-        //catch
-        //{
-        //    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
-        //}
+        SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
+        scenesToChooseFrom.RemoveAt(0);
     }
     private void LoadNextSceneInRandomOrder()
     {
         int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
         scenesToChooseFrom.RemoveAt(randomNumber);
-        if (scenesToChooseFrom.Count <= 0)
-        {
-            LoadScenesList();
-        }
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//try
+//{
+//    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(SceneManager.GetActiveScene().buildIndex + 1));
+
+//}
+//catch
+//{
+//    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
+//}
