@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inaccuracy: 1
   fireRate: 1.5
-  ammo: 6
+  ammo: 6000
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
@@ -5875,7 +5875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inaccuracy: 1
   fireRate: 1.5
-  ammo: 6
+  ammo: 6000
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
@@ -6101,17 +6101,17 @@ PrefabInstance:
     - target: {fileID: 6491676215669448556, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.302
+      value: 1.16
       objectReference: {fileID: 0}
     - target: {fileID: 6491676215669448556, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.396
+      value: 0.293
       objectReference: {fileID: 0}
     - target: {fileID: 6491676215669448556, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.218
+      value: -0.226
       objectReference: {fileID: 0}
     - target: {fileID: 6491676216654945447, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}

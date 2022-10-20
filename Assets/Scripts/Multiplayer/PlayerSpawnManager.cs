@@ -10,11 +10,16 @@ public class PlayerSpawnManager : MonoBehaviour
     PlayerJoinManager playerJoinManager;
     [SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] GameObject[] players;
-    //[SerializeField] ScoreManager scoreManager;
+    [SerializeField] protected ScoreManager scoreManager;
 
     private void Start()
     {
-         players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
+        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        foreach (GameObject player in scoreManager.players)
+        {
+            player.SetActive(true);
+        }
+        players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
         
         for(int i = 0; i < players.Length; i++)
         {

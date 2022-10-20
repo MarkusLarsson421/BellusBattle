@@ -7,7 +7,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] private Camera camera;
     //[SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
-    [SerializeField] public ScoreManager scoreManager;
+    //[SerializeField] public ScoreManager scoreManager;
 
     private List<int> inputDevices = new List<int>();
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
