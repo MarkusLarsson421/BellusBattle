@@ -10,12 +10,12 @@ public class LevelManager : MonoBehaviour
 {
     private enum WhichScenesListToPlay{ ScenesFromBuild, ScencesFromList };
     [SerializeField] WhichScenesListToPlay scenceToPlay;
-    private int sceneCount;
-    [SerializeField] private float timer = 5;
-    [SerializeField] private string[] scenes;
-    [SerializeField] private string[] scenesToRemove;
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
+    private int sceneCount;
+    [SerializeField] private string[] scenes;
+    [SerializeField] private string[] scenesToRemove;
+
     private List<string> scenesToChooseFrom = new List<string>();
     private float temp;
     private void Awake()
