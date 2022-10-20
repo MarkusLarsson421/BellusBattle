@@ -39,7 +39,6 @@ public class Weapon : MonoBehaviour
             //Calculation is inefficient, could possibly be improved to simulate inaccuracy better.
             Vector3 force = new Vector3(projectileForce, (float)_random.Next(0, (int)inaccuracy * 100) / 100, 0);
             _projectile = firedProjectile.GetComponent<Projectile>();
-            //_projectile.Fire(force);
             _projectile.GetComponent<Rigidbody>().AddForce(force);
         }
     }

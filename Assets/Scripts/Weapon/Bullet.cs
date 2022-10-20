@@ -6,7 +6,8 @@ public class Bullet : Projectile
     [SerializeField] [Tooltip("For how long the bullet will exist in seconds.")]
     private float lifeSpan = 5.0f;
 
-    private void Start(){
+    private void Start()
+    {
         StartCoroutine(Shoot(lifeSpan));
     }
 

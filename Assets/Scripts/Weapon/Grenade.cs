@@ -6,8 +6,8 @@ public class Grenade : Projectile{
 	private float fuse = 5.0f;
 	[SerializeField] [Tooltip("Size of the explosion.")]
 	private float explosionSize = 5.0f;
-	
-	
+
+
 	private void Start(){
 		StartCoroutine(StartFuse());
 	}
