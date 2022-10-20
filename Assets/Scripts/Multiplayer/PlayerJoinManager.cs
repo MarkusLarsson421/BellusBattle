@@ -8,6 +8,7 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private Camera camera;
     //[SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
+    //private List<InputDevice> inputDevices = new List<InputDevice>()
     PlayerSpawnManager psm;
 
     public Material[] colors;
