@@ -7,7 +7,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] private Camera camera;
     //[SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
-    [SerializeField] public ScoreManager scoreManager;
+    //[SerializeField] public ScoreManager scoreManager;
 
     private List<int> inputDevices = new List<int>();
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
@@ -26,6 +26,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         */
         // Set the player ID, add one to the index to start at Player 1
         playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
+        //
         scoreManager.AddPlayers(playerInput.gameObject);
         //inputDevices.Add(playerInput.GetComponent<InputDevice>().deviceId);
         listOfPlayers.Add(playerInput);

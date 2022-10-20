@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Firematerial
+  m_Name: Firematerial_mat
   m_Shader: {fileID: -6465566751694194690, guid: 53e18cbf5c2f8264d801de5396ee559c,
     type: 3}
   m_ValidKeywords: []

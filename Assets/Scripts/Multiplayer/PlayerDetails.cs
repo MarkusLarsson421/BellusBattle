@@ -14,8 +14,5 @@ public class PlayerDetails : MonoBehaviour
         isAlive = true;
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        gameObject.SetActive(true);
-    }
+   
 }
