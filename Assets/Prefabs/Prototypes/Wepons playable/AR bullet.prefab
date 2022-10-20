@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5605244744219591389}
   - component: {fileID: 7929666838174018585}
   m_Layer: 0
-  m_Name: shit gun bullet
+  m_Name: AR bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
