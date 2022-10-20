@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FirearmTest : MonoBehaviour{
 	[SerializeField] [Tooltip("All firearms to test fire.")]
@@ -7,6 +8,8 @@ public class FirearmTest : MonoBehaviour{
 
 	private List<Weapon> _bfs;
 	private KeyCode[] _keyCodes;
+
+	bool hasFired; // Används för att kunna använda med det nya Input Systemet
 
 	private void Start()
 	{
@@ -22,10 +25,7 @@ public class FirearmTest : MonoBehaviour{
 
 	private void Update()
 	{
-		UserInput();
-	}
-
-	private void UserInput(){
+        
 		for (int i = 0; i < firearms.Count; i++)
 		{
 			if (firearms[i] == null)
@@ -33,10 +33,19 @@ public class FirearmTest : MonoBehaviour{
 				firearms.RemoveAt(i);
 				_bfs.RemoveAt(i);
 			}
-			if (Input.GetKey(_keyCodes[i]))
+			if (hasFired)
 			{
 				_bfs[i].Fire();
 			}
+
+		}
+	}
+
+	void OnFire(InputAction.CallbackContext ctx)
+    {
+		if (ctx.started)
+		{
+			hasFired = true;
 		}
 	}
 

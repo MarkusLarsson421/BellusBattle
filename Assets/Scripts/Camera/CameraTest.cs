@@ -7,7 +7,7 @@ public class CameraTest : MonoBehaviour
 	[SerializeField] [Tooltip("The maximum distance from the center of this game object it can spawn.")]
 	private int max = 10;
 	[SerializeField] [Tooltip("The camera which should follows its targets.")] 
-	private CameraFocus focus;
+	public CameraFocus focus;
 	
 	private List<GameObject> _players = new();
 	private readonly Random _random = new();
