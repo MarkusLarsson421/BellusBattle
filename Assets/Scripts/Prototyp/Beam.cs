@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Beam : MonoBehaviour
 {
-    public GameObject Gun;
 
-    public GameObject Bullet;
+
     public GameObject Beamy;
 
     public float bulletSpeed;
