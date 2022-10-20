@@ -813,7 +813,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gun: {fileID: 1096020188}
-  Bullet: {fileID: 7929666838174018582, guid: d0c789bad4bffe54395f62c5044dd73e, type: 3}
+  Bullet: {fileID: 8810459717289832452, guid: 08d075fc124d23946b562b84e25b5315, type: 3}
+  Beam: {fileID: 8810459717289832452, guid: cfa01090d75967c419db3d01481b03aa, type: 3}
   bulletSpeed: 325
   ShootPoint: {fileID: 1450445269}
   fireRate: 1.5
@@ -826,7 +827,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998439764}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f2cef8634171fe4fbdc3a19a8f4bf6c, type: 3}
   m_Name: 

@@ -5203,14 +5203,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837ef830bb7cb304d9f92158dee6a699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16.8
-  jumpForce: 17.37
-  airDeceleration: 44.3
+  moveSpeed: 15
+  jumpForce: 19
+  airDeceleration: 44
   groundDeceleration: 80
-  airResistance: 65
-  downwardForce: -22
+  airResistance: 72
+  downwardForce: -22.5
   acceleration: 35066
-  doubleJumpDecreaser: 0.783
+  doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
   groundLayer:
     serializedVersion: 2
@@ -5815,7 +5815,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 457cfa393a91a6c429d84ade259841f4,
         type: 3}
       propertyPath: m_Name
-      value: revolver_low
+      value: revolver
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 457cfa393a91a6c429d84ade259841f4,
         type: 3}

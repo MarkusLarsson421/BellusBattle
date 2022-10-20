@@ -9,6 +9,7 @@ public class Shoot : MonoBehaviour
     public GameObject Gun;
 
     public GameObject Bullet;
+    public GameObject Beam;
 
     public float bulletSpeed;
 
@@ -20,7 +21,14 @@ public class Shoot : MonoBehaviour
 
     float fireAgain;
 
+    bool beamReady = false;
+
+    public float timeUntilBeam = 1.7f;
+
     public float ammo = 6;
+
+    GameObject bulletIns;
+    GameObject beamIns;
 
     // Start is called before the first frame update
 
@@ -40,18 +48,32 @@ public class Shoot : MonoBehaviour
 
         if (ammo > 0)
         {
-if (Input.GetMouseButtonDown(0))
-        {
-            
-            if(Time.time > fireAgain)
+            if (Input.GetMouseButtonDown(0))
             {
-                fireAgain = Time.time + 1/fireRate;
-                shoot();
+            
+                if(Time.time > fireAgain)
+                {
+                    fireAgain = Time.time + 1/fireRate;
+                    shoot();
+                }
+            
+            }
+        }
+        
+
+        if (beamReady == true)
+        {
+            timeUntilBeam -= Time.deltaTime;
+            if(timeUntilBeam <= 0)
+            {
+                beamIns = Instantiate(Beam, ShootPoint.position, ShootPoint.rotation);
+                beamIns.transform.Rotate(Vector3.left * 180);
+                Destroy(beamIns, 0.5f);
+                timeUntilBeam = 1.7f;
+                beamReady = false;
             }
             
         }
-        }
-        
     }
      void faceGun()
     {
@@ -60,6 +82,17 @@ if (Input.GetMouseButtonDown(0))
         Vector2 direction = mouseWorldPosition - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Gun.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        if(bulletIns != null) {
+            bulletIns.transform.position = ShootPoint.position;
+            bulletIns.transform.rotation = Quaternion.Euler(0, 0, angle + 90); 
+        }
+        if (beamIns != null)
+        {
+            beamIns.transform.position = ShootPoint.position;
+            beamIns.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        }
+
+
     }
     public void eqiup(GameObject pickup)
     {
@@ -74,12 +107,16 @@ if (Input.GetMouseButtonDown(0))
     void shoot()
     {
         ammo = ammo -1;
-        GameObject bulletIns = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
+        bulletIns = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
 
-        //bulletIns.transform.Rotate(Vector3.left * 90);
-        Rigidbody bulletIns_rig;
-        bulletIns_rig = bulletIns.GetComponent<Rigidbody>();
-        bulletIns_rig.AddForce(ShootPoint.transform.up * bulletSpeed);
-        Destroy(bulletIns, 3f);
+        bulletIns.transform.Rotate(Vector3.left * 180);
+       // Rigidbody bulletIns_rig;
+       // bulletIns_rig = bulletIns.GetComponent<Rigidbody>();
+       // bulletIns_rig.AddForce(ShootPoint.transform.up * bulletSpeed);
+        beamReady = true;
+        Destroy(bulletIns, 1.9f);
+
     }
+
+    
 }

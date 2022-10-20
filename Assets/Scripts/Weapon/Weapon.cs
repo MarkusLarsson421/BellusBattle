@@ -28,7 +28,8 @@ public class Weapon : MonoBehaviour
     }
 
     public void Fire(){
-        if (ammo <= 0) { this.gameObject.transform.parent.Find("revolver_low").gameObject.SetActive(false); this.gameObject.SetActive(false);  //Destroy(gameObject);
+        if (ammo <= 0) {  //gameObject.transform.parent.Find("Sword").gameObject.SetActive(true);
+            Destroy(gameObject);
         }
         if (Time.time >= _nextTimeToFire)
         {
