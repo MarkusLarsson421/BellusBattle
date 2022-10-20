@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7514057479248470519
+--- !u!1 &6816382114350787464
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7514057479248470517}
-  - component: {fileID: 7514057479248470518}
+  - component: {fileID: 6654202594948050944}
+  - component: {fileID: 3811216812318420032}
   m_Layer: 0
-  m_Name: WeaponSpawnerManager
+  m_Name: ScoreManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7514057479248470517
+--- !u!4 &6654202594948050944
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7514057479248470519}
+  m_GameObject: {fileID: 6816382114350787464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.518473, y: 12.549546, z: -1.4517784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7514057479248470518
+--- !u!114 &3811216812318420032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7514057479248470519}
+  m_GameObject: {fileID: 6816382114350787464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0897b965cc7354485f7fd7075fd34a, type: 3}
+  m_Script: {fileID: 11500000, guid: 158c30789f3c1ed48916708654474fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnWeaponsTimer: 30
-  numberOfWeaponsToSpawn: 5
-  spawners:
-  - {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6, type: 3}
+  cameraFocus: {fileID: 0}
+  levelManager: {fileID: 0}
+  pointsToWin: 3
+  giveScoreTime: 3
+  gameHasStarted: 0
