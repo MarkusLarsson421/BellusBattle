@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
         {
             
            cameraFocus =  GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
-           Debug.Log("camammammam");
+           //Debug.Log("camammammam");
         }
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         
@@ -94,7 +94,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (giveScoreTimer >= giveScoreTime)
         {
-            Debug.Log("im runnig´ng");
+            //Debug.Log("im runnig´ng");
             if(cameraFocus._targets.Count != 0)
             {
                 AddScore(cameraFocus._targets[0].transform.gameObject);

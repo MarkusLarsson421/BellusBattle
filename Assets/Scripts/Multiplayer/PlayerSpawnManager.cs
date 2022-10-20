@@ -26,7 +26,7 @@ public class PlayerSpawnManager : MonoBehaviour
             players[i].gameObject.SetActive(true);
             //players[i].gameObject.GetComponent<PlayerInput>().gameObject.SetActive(true);
             players[i].transform.position = spawnLocations[i].position;
-            Debug.Log(players[i].transform.position);
+            //Debug.Log(players[i].transform.position);
         }
     }
 

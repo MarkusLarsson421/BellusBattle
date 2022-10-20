@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
         */
         int index = Random.Range(1, sceneCount);
         SceneManager.LoadScene(index);
-        Debug.Log("Scene Loaded: " + index);
+        
     }
     private void CreateListOfScenes()
     {

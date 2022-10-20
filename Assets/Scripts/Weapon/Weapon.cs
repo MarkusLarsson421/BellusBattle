@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     private bool _isFiring;
     private ParticleSystem _muzzleFlash;
     private Projectile _projectile;
-    private readonly Random _random = new();
+   // private readonly Random _random = new();
 
     [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
 
@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
             ammo--;
             if (_muzzleFlash != null){_muzzleFlash.Play();}
             //Debug.Log(aim.rotation.z);
-            GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z));
+            GameObject firedProjectile = Instantiate(projectile, new Vector3(projectileOrigin.transform.position.x, projectileOrigin.transform.position.y,0), Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0));
 
             // Original
             //GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, Quaternion.identity);
