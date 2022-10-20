@@ -36,7 +36,8 @@ public class Weapon : MonoBehaviour
             _nextTimeToFire = Time.time + 1.0f / fireRate;
             ammo--;
             if (_muzzleFlash != null){_muzzleFlash.Play();}
-            GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, aim.rotation);
+            Debug.Log(aim.rotation.z);
+            GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z));
 
             // Original
             //GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, Quaternion.identity);

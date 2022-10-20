@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour{
         _velocity += Vector3.down * (gravity * Time.deltaTime);
         transform.position += _velocity * Time.deltaTime;
     }
-
+	/*
     private void OnTriggerEnter(Collider other)
     {
 		Debug.Log("hitititititi");
@@ -50,6 +50,7 @@ public class Projectile : MonoBehaviour{
 		}
 		
 	}
+	*/
 
     public void Fire(Vector3 vec){
 		_velocity += vec;
