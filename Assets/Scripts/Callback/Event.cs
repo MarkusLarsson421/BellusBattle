@@ -44,3 +44,8 @@ public class ExplodeEvent : Event<ExplodeEvent>
 	 * Could be struct, readonly, etc...
 	 */
 }
+
+public class PickUpEvent : Event<PickUpEvent>
+{
+	public GameObject PickedUpGo;
+}
