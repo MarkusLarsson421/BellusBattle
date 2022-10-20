@@ -733,7 +733,7 @@ PrefabInstance:
     - target: {fileID: 2840680792378777891, guid: 26748b17d5f5e994cab620063817464f,
         type: 3}
       propertyPath: playingScenesOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7370360072466686956, guid: 26748b17d5f5e994cab620063817464f,
         type: 3}
