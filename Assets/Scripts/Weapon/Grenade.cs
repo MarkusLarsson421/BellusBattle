@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class Grenade : Projectile{
+public class Grenade : Projectile
+{
 	[SerializeField] [Tooltip("Time until the grenade explodes.")] 
 	private float fuse = 5.0f;
 	[SerializeField] [Tooltip("Size of the explosion.")]
 	private float explosionSize = 5.0f;
-
 
 	private void Start(){
 		StartCoroutine(StartFuse());
@@ -20,8 +20,10 @@ public class Grenade : Projectile{
 	private void Explode(){
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
 		for (int i = 0; i < hits.Length; i++){
-			if (hits[i].CompareTag("Player")){
-				//TODO deal damage.
+			if (hits[i].CompareTag("Player"))
+			{
+				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
+				ph.TakeDamage(1);
 			}
 		}
 		Die();

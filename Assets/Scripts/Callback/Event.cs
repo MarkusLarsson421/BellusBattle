@@ -49,3 +49,11 @@ public class PickUpEvent : Event<PickUpEvent>
 {
 	public GameObject PickedUpGo;
 }
+
+public class PlayerDeathEvent : Event<PlayerDeathEvent>
+{
+	public GameObject PlayerGo;
+	public string Kille; //Player who was killed.
+	public string KilledBy;
+	public string KilledWith;
+}
