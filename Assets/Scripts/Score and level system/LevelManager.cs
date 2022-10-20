@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartNewLevel()
     {
+        /*
         int randomNumber;
         string curentScene = scenes[0]; // Main menu scene
        
@@ -32,6 +33,10 @@ public class LevelManager : MonoBehaviour
         } while (scenes[randomNumber] == curentScene);
         SceneManager.LoadScene(scenes[randomNumber]);
         temp = 0;
+        */
+        int index = Random.Range(1, sceneCount);
+        SceneManager.LoadScene(index);
+        Debug.Log("Scene Loaded: " + index);
     }
     private void CreateListOfScenes()
     {

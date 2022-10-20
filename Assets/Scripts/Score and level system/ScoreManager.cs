@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] CameraFocus cameraFocus;
     [SerializeField] LevelManager levelManager;
     [SerializeField] int pointsToWin;
+    [SerializeField] private List<GameObject> players = new List<GameObject>();
     private bool hasGivenScore;
     private float giveScoreTimer;
     private bool hasOnePlayerLeft;
@@ -40,7 +41,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -57,8 +58,15 @@ public class ScoreManager : MonoBehaviour
         {
             GiveScoreAfterTimer();
         }
-        DontDestroyOnLoad(gameObject);
+        Debug.Log("hahaha");
+        
+        Debug.Log("hihihihi");
 
+    }
+
+    public void AddPlayers(GameObject player)
+    {
+        players.Add(player);
     }
 
     private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
@@ -102,6 +110,10 @@ public class ScoreManager : MonoBehaviour
                 Debug.Log("Its a draaaaw!");
             }
 
+            foreach(GameObject player in players)
+            {
+                player.SetActive(true);
+            }
 
             levelManager.StartNewLevel();
             giveScoreTimer = 0;

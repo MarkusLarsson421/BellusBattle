@@ -10,6 +10,7 @@ public class PlayerSpawnManager : MonoBehaviour
     PlayerJoinManager playerJoinManager;
     [SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] GameObject[] players;
+    //[SerializeField] ScoreManager scoreManager;
 
     private void Start()
     {
@@ -18,10 +19,16 @@ public class PlayerSpawnManager : MonoBehaviour
         for(int i = 0; i < players.Length; i++)
         {
             players[i].gameObject.SetActive(true);
-            players[i].gameObject.GetComponent<PlayerInput>().gameObject.SetActive(true);
+            //players[i].gameObject.GetComponent<PlayerInput>().gameObject.SetActive(true);
             players[i].transform.position = spawnLocations[i].position;
             Debug.Log(players[i].transform.position);
         }
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        for (int i = 0; i < players.Length; i++)
+            players[i].gameObject.SetActive(true);
     }
 
     /*
