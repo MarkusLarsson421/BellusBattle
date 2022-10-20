@@ -11,31 +11,32 @@ public class LevelManager : MonoBehaviour
     private float temp;
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        
         CreateListOfScenes();
     }
 
     [System.Obsolete]
     void Update()
     {
-        StartNewLevel();
+        
     }
 
-    private void StartNewLevel()
+    public void StartNewLevel()
     {
+        /*
         int randomNumber;
         string curentScene = scenes[0]; // Main menu scene
-        if (temp < timer)
-        {
-            temp += Time.deltaTime;
-            return;
-        }
+       
         do
         {
             randomNumber = (int)Random.Range(0, scenes.Length - 1);
         } while (scenes[randomNumber] == curentScene);
         SceneManager.LoadScene(scenes[randomNumber]);
         temp = 0;
+        */
+        int index = Random.Range(1, sceneCount);
+        SceneManager.LoadScene(index);
+        Debug.Log("Scene Loaded: " + index);
     }
     private void CreateListOfScenes()
     {

@@ -794,7 +794,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraFocus: {fileID: 270793534}
   levelManager: {fileID: 0}
-  giveScoreTime: 0
+  pointsToWin: 2
+  giveScoreTime: 3
   gameHasStarted: 0
 --- !u!4 &1248052310
 Transform:
