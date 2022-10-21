@@ -28,7 +28,11 @@ public class FinalDash : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
     }
-    
+
+    private void OnLevelWasLoaded(int level)
+    {
+        isDashing = false;
+    }
     void Update()
     {
         Flip();

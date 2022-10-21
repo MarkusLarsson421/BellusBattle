@@ -32,9 +32,7 @@ public class ScoreManager : MonoBehaviour
         }
         if (cameraFocus == null)
         {
-            
-           cameraFocus =  GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
-           //Debug.Log("camammammam");
+            cameraFocus = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
         }
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         
@@ -70,8 +68,9 @@ public class ScoreManager : MonoBehaviour
         players.Add(player);
     }
 
-    private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
+    private void AddScore(GameObject winner) 
     {
+
         if (!scoreDic.ContainsKey(winner))
         {
             scoreDic[winner] = 1;
@@ -80,46 +79,39 @@ public class ScoreManager : MonoBehaviour
         {
             scoreDic[winner]++;
         }
-
     }
 
     public int getScore(GameObject player)
     {
-        if (!scoreDic.ContainsKey(player)) return 0;
-
-        return scoreDic[player];
+        return !scoreDic.ContainsKey(player) ? 0 : scoreDic[player];
     }
 
     private void GiveScoreAfterTimer()
     {
-        if (giveScoreTimer >= giveScoreTime)
+        giveScoreTimer += Time.deltaTime;
+        if (giveScoreTimer <= giveScoreTime) return;
+
+        if (cameraFocus._targets.Count != 0)
         {
-            //Debug.Log("im runnig´ng");
-            if(cameraFocus._targets.Count != 0)
-            {
-                AddScore(cameraFocus._targets[0].transform.gameObject);
-                hasGivenScore = true;
-                Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
-                Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
-                if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
-                {
-                    Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
-                }
-            }
-            else
-            {
-                Debug.Log("Its a draaaaw!");
-            }
+            AddScore(cameraFocus._targets[0].transform.gameObject);
+            hasGivenScore = true;
 
-
-            hasGivenScore = false;
-            levelManager.LoadNextScene();
-            
+            if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
+            {
+                Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+            }
         }
         else
         {
-            giveScoreTimer += Time.deltaTime;
+            Debug.Log("Its a draaaaw!");
         }
+        hasGivenScore = false;
+        levelManager.LoadNextScene();
+
+
+
+
+
     }
 
 

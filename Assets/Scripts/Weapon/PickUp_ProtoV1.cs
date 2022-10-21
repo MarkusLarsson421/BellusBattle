@@ -28,6 +28,8 @@ public class PickUp_ProtoV1 : MonoBehaviour
         {
             if (col.CompareTag("Weapon"))
             {
+                if (currentWeapon != null) currentWeapon = null;
+
                 Debug.Log(col.gameObject.name);
                 currentWeapon = col.gameObject.GetComponent<Weapon>();
                 currentWeapon.transform.parent = weaponPosition.transform;
