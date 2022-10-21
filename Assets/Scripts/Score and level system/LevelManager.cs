@@ -17,7 +17,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private string[] scenesToRemove;
 
     private List<string> scenesToChooseFrom = new List<string>();
-    private float temp;
+    public List<string> GetScencesList()
+    {
+        return scenesToChooseFrom;
+    }
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
