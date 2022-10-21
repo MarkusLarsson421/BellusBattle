@@ -5048,7 +5048,7 @@ GameObject:
   - component: {fileID: 2228781965160076772}
   m_Layer: 0
   m_Name: Shit gun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5090,3 +5090,4 @@ MonoBehaviour:
     type: 3}
   projectileOrigin: {fileID: 8510856196853466762}
   projectileForce: 10
+  aim: {fileID: 0}

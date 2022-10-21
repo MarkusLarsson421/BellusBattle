@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &596360121883777707
 Transform:
   m_ObjectHideFlags: 0
@@ -5155,6 +5155,7 @@ GameObject:
   - component: {fileID: 1991130997618187709}
   - component: {fileID: 4997217773707887276}
   - component: {fileID: 8544227076739203574}
+  - component: {fileID: 4479072025469690523}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5389,7 +5390,19 @@ MonoBehaviour:
     m_ActionId: 797709a1-c0ec-43f5-bf66-7178908db49e
     m_ActionName: Player/Shoot/Attack[/XInputControllerWindows/rightTrigger]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4479072025469690523}
+        m_TargetAssemblyTypeName: PickUp_ProtoV1, Assembly-CSharp
+        m_MethodName: OnPickUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8b4c91bd-af96-4030-be35-ca6edf77ff28
     m_ActionName: Player/PickUp/Drop[/XInputControllerWindows/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
@@ -5485,6 +5498,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CF: {fileID: 0}
   health: 1
+--- !u!114 &4479072025469690523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431588530169345916}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47963c56e76e8434bb418619df0d44a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPosition: {fileID: 2915926472710746650}
 --- !u!1 &7210684032876526358
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour{
     private void OnTriggerEnter(Collider other)
     {
 		Debug.Log("hitititititi");
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.tag == "Obstacle")
         {
 			Destroy(gameObject);
 			return;
