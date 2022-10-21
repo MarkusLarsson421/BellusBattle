@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Random = System.Random;
 
@@ -31,7 +32,7 @@ public class Weapon : MonoBehaviour
     }
 
     public void Fire(){
-        if (ammo <= 0) {Destroy(gameObject);}
+        if (ammo <= 0) {Die();}
         if (Time.time >= _nextTimeToFire)
         {
             _nextTimeToFire = Time.time + 1.0f / fireRate;
@@ -45,5 +46,33 @@ public class Weapon : MonoBehaviour
             _projectile = firedProjectile.GetComponent<Projectile>();
             _projectile.GetComponent<Rigidbody>().AddForce(force);
         }
+    }
+
+    public void Drop(Vector3 dropDirection)
+    {
+	    GetComponent<Rigidbody>().AddForce(dropDirection);
+	    StartCoroutine(PickUpCooldown());
+    }
+
+    private IEnumerator PickUpCooldown()
+    {
+	    yield return new WaitForSeconds(5.0f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+	    GameObject playerGo = collision.gameObject;
+	    if (playerGo.CompareTag("Player"))
+	    {
+		    playerGo.GetComponent<FirearmTest>().PickUpWeapon(gameObject);
+		    GetComponent<SphereCollider>().enabled = false;
+	    }
+    }
+
+    private void Die()
+    {
+	    GetComponentInParent<FirearmTest>().DropWeapon();
+	    transform.parent = null;
+	    Destroy(gameObject);
     }
 }
