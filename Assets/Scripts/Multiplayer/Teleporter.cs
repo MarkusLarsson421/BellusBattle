@@ -9,13 +9,14 @@ public class Teleporter : MonoBehaviour
     [SerializeField] PlayerJoinManager playerJoinManager; // Keeps track of players in game
     [SerializeField] LevelManager manager; // Keeps track of players in game
     [SerializeField] string startSceneName; // The name of the scene that is the beginner scene
+    [SerializeField] private GameObject playPanel;
 
     private string[] scenes;
     private int sceneCount;
 
     private void Start()
     {
-
+        playPanel.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,7 +31,8 @@ public class Teleporter : MonoBehaviour
         // All players in game needs to be in the Teleporter for the game to start
         if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
         {
-            manager.LoadNextScene();// author Khaled;
+            playPanel.SetActive(true);
+            //manager.LoadNextScene();// author Khaled;
 
             //SceneManager.LoadScene(startSceneName);
         }
