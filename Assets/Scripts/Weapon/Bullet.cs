@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Bullet : Projectile
 {
-	[SerializeField] 
-	public PlayerHealth ph;
-    
 	[SerializeField] [Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 5.0f;
 
@@ -15,19 +12,19 @@ public class Bullet : Projectile
 
 	private void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("hitititititi");
-		if (other.gameObject.CompareTag("Player"))
+		GameObject playerGo = other.gameObject;
+		if (playerGo.CompareTag("Player"))
 		{
-			Debug.Log("hit");
-			ph = other.gameObject.GetComponent<PlayerHealth>();
-			ph.TakeDamage(1);
-			Debug.Log(ph.health);
-
-			//other.gameObject.GetComponent<PlayerDetails>().isAlive = false;
-			//other.gameObject.transform.position = new Vector3(999999f, 99999f, 999f);
-			//other.gameObject.GetComponent<PlayerInput>().gameObject.SetActive(false);
-			Debug.Log(ph.health);
+			playerGo.GetComponent<PlayerHealth>().TakeDamage(1);
 			
+			PlayerDeathEvent pde = new PlayerDeathEvent{
+				PlayerGo = other.gameObject,
+				Kille = other.name,
+				KilledBy = "No Idea-chan",
+				KilledWith = "Bullets",
+			};
+			pde.FireEvent();
+
 			Die();
 		}
 	}

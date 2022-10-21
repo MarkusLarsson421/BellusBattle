@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aim: {fileID: 0}
   inaccuracy: 1
   fireRate: 1.5
   ammo: 6
@@ -500,10 +501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aim: {fileID: 0}
   inaccuracy: 1
   fireRate: 5
   ammo: 1
-  projectile: {fileID: 9128361909951087984, guid: e6495995ebe266c4aa513e23ff180d7d,
+  projectile: {fileID: 7929666838174018582, guid: e6495995ebe266c4aa513e23ff180d7d,
     type: 3}
   projectileOrigin: {fileID: 1148469435}
   projectileForce: 10
@@ -817,7 +819,7 @@ GameObject:
   m_Layer: 0
   m_Name: FirearmTest
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -861,11 +863,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1993572189}
   - component: {fileID: 1993572190}
-  - component: {fileID: 1993572191}
   m_Layer: 0
   m_Name: Listeners
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -898,18 +899,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSys: {fileID: 942763787346198989, guid: 9c55e5d81b2b17845be3945ce7994b0c,
     type: 3}
---- !u!114 &1993572191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993572188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e0b59dcc54ce34ba30a0f5719934cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2066778972
 GameObject:
   m_ObjectHideFlags: 0

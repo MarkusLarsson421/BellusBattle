@@ -24,6 +24,14 @@ public class Grenade : Projectile
 			{
 				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
 				ph.TakeDamage(1);
+				
+				PlayerDeathEvent pde = new PlayerDeathEvent{
+					PlayerGo = hits[i].gameObject,
+					Kille = hits[i].name,
+					KilledBy = "No Idea-chan",
+					KilledWith = "Bullets",
+				};
+				pde.FireEvent();
 			}
 		}
 		Die();
