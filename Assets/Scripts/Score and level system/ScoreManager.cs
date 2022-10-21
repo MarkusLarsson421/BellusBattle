@@ -113,7 +113,7 @@ public class ScoreManager : MonoBehaviour
 
 
             hasGivenScore = false;
-            levelManager.StartNewLevel();
+            levelManager.LoadNextScene();
             
         }
         else

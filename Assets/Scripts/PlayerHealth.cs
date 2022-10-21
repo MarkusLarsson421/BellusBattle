@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
             //onGameOver.Invoke();
         }
     }
-    public void SetIsInvinsable( bool value)
+    public void SetInvincible( bool value)
     {
         isInvinsable = value;
     }
