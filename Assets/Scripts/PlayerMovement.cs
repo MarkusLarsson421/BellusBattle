@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         // So that when we change scene we don't have to re-join the lobby
         DontDestroyOnLoad(this.gameObject);
 
+        playerAnimator.SetFloat("Speed", movementX);
     }
 
     private void FLipPlayer()
@@ -146,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
             movingRight = false;
             movingLeft = false;
         }
-        playerAnimator.SetFloat("Speed", movementX);
+
 
 
     }
@@ -182,12 +183,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movingRight)
         {
-            Debug.Log(movementX);
             movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
         }
         if (movingLeft)
         {
-            Debug.Log(movementX);
             movementX = -Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
         }
         else
