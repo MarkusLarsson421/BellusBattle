@@ -27,7 +27,7 @@ public class Teleporter : MonoBehaviour
 
         // There needs to be at least two players in the scene
         // All players in game needs to be in the Teleporter for the game to start
-        if (playerJoinManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
+        if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
         {
             LoadRandomScene();
             //SceneManager.LoadScene(startSceneName);
