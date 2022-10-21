@@ -1451,6 +1451,11 @@ PrefabInstance:
       objectReference: {fileID: 872281406}
     - target: {fileID: 3638203682725970360, guid: 97e3df44b9dfc34409c13187d330d66d,
         type: 3}
+      propertyPath: playPanel
+      value: 
+      objectReference: {fileID: 1877500881}
+    - target: {fileID: 3638203682725970360, guid: 97e3df44b9dfc34409c13187d330d66d,
+        type: 3}
       propertyPath: playerJoinManager
       value: 
       objectReference: {fileID: 17144446}
