@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
-    private enum WhichScenesListToPlay{ ScenesFromBuild, ScencesFromList };
+    private enum WhichScenesListToPlay{ ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     [SerializeField] WhichScenesListToPlay scenceToPlay;
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
@@ -29,17 +29,9 @@ public class LevelManager : MonoBehaviour
     public void LoadScenesList()
     {
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
-        else if (scenceToPlay == WhichScenesListToPlay.ScencesFromList) CreateListOfScenesFromList();
+        else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
+        else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
         CreateListTofScenesToChooseFrom();
-    }
-    public void LoadNextScene()
-    {
-        if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
-        else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
-        if (scenesToChooseFrom.Count <= 0)
-        {
-            LoadScenesList();
-        }
     }
     private void CreateListOfScenesFromBuild()
     {
@@ -61,6 +53,15 @@ public class LevelManager : MonoBehaviour
     private void CreateListTofScenesToChooseFrom()
     {
         scenesToChooseFrom.Remove("MainMenu");
+    }
+    public void LoadNextScene()
+    {
+        if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
+        else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
+        if (scenesToChooseFrom.Count <= 0)
+        {
+            LoadScenesList();
+        }
     }
     private void LoadNextSceneInNumericalOrder()
     {
