@@ -13,4 +13,6 @@ public class PlayerDetails : MonoBehaviour
         transform.position = startPos; // Puts the player on the spawn position
         isAlive = true;
     }
+
+   
 }

@@ -9,9 +9,10 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] CameraFocus cameraFocus;
     [SerializeField] LevelManager levelManager;
     [SerializeField] int pointsToWin;
-    private bool hasGivenScore;
-    private float giveScoreTimer;
-    private bool hasOnePlayerLeft;
+    [SerializeField] public List<GameObject> players = new List<GameObject>();
+    [SerializeField] private bool hasGivenScore;
+    [SerializeField] private float giveScoreTimer;
+    [SerializeField] private bool hasOnePlayerLeft;
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
 
     [SerializeField] private bool gameHasStarted; //för att den inte ska börja räkna poäng i lobbyn, är tänkt att sättas till true när man går igenom teleportern
@@ -24,7 +25,8 @@ public class ScoreManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        if(level != 0)
+        giveScoreTimer = 0;
+        if (level != 0)
         {
             gameHasStarted = true;
         }
@@ -32,19 +34,21 @@ public class ScoreManager : MonoBehaviour
         {
             
            cameraFocus =  GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
-           Debug.Log("camammammam");
+           //Debug.Log("camammammam");
         }
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        hasGivenScore = false;
+        
     }
 
     private void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
     {
+        if (!gameHasStarted) return;
+        
         if(cameraFocus._targets.Count == 1)
         {
             hasOnePlayerLeft = true;
@@ -57,8 +61,13 @@ public class ScoreManager : MonoBehaviour
         {
             GiveScoreAfterTimer();
         }
-        DontDestroyOnLoad(gameObject);
+       
 
+    }
+
+    public void AddPlayers(GameObject player)
+    {
+        players.Add(player);
     }
 
     private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
@@ -85,7 +94,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (giveScoreTimer >= giveScoreTime)
         {
-            Debug.Log("im runnig´ng");
+            //Debug.Log("im runnig´ng");
             if(cameraFocus._targets.Count != 0)
             {
                 AddScore(cameraFocus._targets[0].transform.gameObject);
@@ -103,8 +112,9 @@ public class ScoreManager : MonoBehaviour
             }
 
 
-            levelManager.StartNewLevel();
-            giveScoreTimer = 0;
+            hasGivenScore = false;
+            levelManager.LoadNextScene();
+            
         }
         else
         {

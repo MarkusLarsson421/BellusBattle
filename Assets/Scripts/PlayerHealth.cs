@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public float health = 1;
     public delegate void OnGameOver();
     public static event OnGameOver onGameOver;
+    private bool isInvinsable=false;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        if(isInvinsable) return;
         health -= damage;
         if (health <= 0)
         {
@@ -22,5 +24,9 @@ public class PlayerHealth : MonoBehaviour
             
             //onGameOver.Invoke();
         }
+    }
+    public void SetInvincible( bool value)
+    {
+        isInvinsable = value;
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 public class ExplodeListener : MonoBehaviour
 {
 	[SerializeField] private GameObject particleSys;
-	
+
 	private void Start()
 	{
-		ExplodeEvent.RegisterListener(OnUnitDied);
+		ExplodeEvent.RegisterListener(OnExplosion);
 	}
 
-	private void OnUnitDied(ExplodeEvent ee)
+	private void OnExplosion(ExplodeEvent ee)
 	{
 		GameObject go = Instantiate(particleSys, ee.ExplosionGo.transform);
 		go.transform.parent = null;
@@ -28,6 +28,6 @@ public class ExplodeListener : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		ExplodeEvent.UnregisterListener(OnUnitDied);
+		ExplodeEvent.UnregisterListener(OnExplosion);
 	}
 }
