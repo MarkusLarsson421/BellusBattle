@@ -56,18 +56,22 @@ public class LevelManager : MonoBehaviour
 
     public void StartNewLevel()
     {
-        LoadNextScene();
+        //LoadNextScene();
+        
+        //int randomNumber;
+        //string curentScene = scenes[0]; // Main menu scene
         /*
-        int randomNumber;
-        string curentScene = scenes[0]; // Main menu scene
-       
-        do
-        {
-            randomNumber = (int)Random.Range(0, scenes.Length - 1);
-        } while (scenes[randomNumber] == curentScene);
-        SceneManager.LoadScene(scenes[randomNumber]);
-        temp = 0;
+         do
+         {
+             randomNumber = (int)Random.Range(0, scenes.Length - 1);
+         } while (scenes[randomNumber] == curentScene);
+         SceneManager.LoadScene(scenes[randomNumber]);
+         temp = 0;
         */
+        int index = Random.Range(1, sceneCount);
+        SceneManager.LoadScene(index);
+        Debug.Log("Scene Loaded: " + index);
+
 
     }
     private void LoadNextSceneInNumericalOrder()
