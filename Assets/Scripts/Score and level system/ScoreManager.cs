@@ -22,6 +22,10 @@ public class ScoreManager : MonoBehaviour
         get { return gameHasStarted; }
         set { gameHasStarted = value; }
     }
+    public void SetPointsToWin(int value)
+    {
+        pointsToWin = value;
+    }
 
     private void OnLevelWasLoaded(int level)
     {
