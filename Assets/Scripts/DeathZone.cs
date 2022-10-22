@@ -13,7 +13,7 @@ public class DeathZone : MonoBehaviour
             // Sätter isAlive bool till false
             other.gameObject.GetComponent<PlayerDetails>().isAlive = false;
             CF.RemoveTarget(other.transform);
-            other.gameObject.GetComponent<PlayerInputManager>().gameObject.SetActive(false);
+            //other.gameObject.GetComponent<PlayerInputManager>().gameObject.SetActive(false);
             other.gameObject.SetActive(false);
         }
     }

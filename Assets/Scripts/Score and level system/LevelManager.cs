@@ -1,52 +1,99 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+    private enum WhichScenesListToPlay{ ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
+    [SerializeField] WhichScenesListToPlay scenceToPlay;
+    private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
+    [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
     private int sceneCount;
-    private string[] scenes;
-    [SerializeField] private float timer = 5;
-    private float temp;
-    void Start()
+    [SerializeField] private string[] scenes;
+    [SerializeField] private string[] scenesToRemove;
+
+    private List<string> scenesToChooseFrom = new List<string>();
+    public List<string> GetScencesList()
+    {
+        return scenesToChooseFrom;
+    }
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        CreateListOfScenes();
+        LoadScenesList();
     }
-
-    [System.Obsolete]
-    void Update()
+    public void LoadScenesList()
     {
-        StartNewLevel();
+        if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
+        else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
+        else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
+        CreateListTofScenesToChooseFrom();
     }
-
-    private void StartNewLevel()
-    {
-        int randomNumber;
-        string curentScene = scenes[0]; // Main menu scene
-        if (temp < timer)
-        {
-            temp += Time.deltaTime;
-            return;
-        }
-        do
-        {
-            randomNumber = (int)Random.Range(0, scenes.Length - 1);
-        } while (scenes[randomNumber] == curentScene);
-        SceneManager.LoadScene(scenes[randomNumber]);
-        temp = 0;
-    }
-    private void CreateListOfScenes()
+    private void CreateListOfScenesFromBuild()
     {
         sceneCount = SceneManager.sceneCountInBuildSettings;
-        scenes = new string[sceneCount];
-        for (int i = 0; i < sceneCount-1; i++)
+        for (int i = 0; i < sceneCount; i++)
         {
-            scenes[i] = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
-            Debug.Log(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i)));
+            scenesToChooseFrom.Add(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i)));
         }
-        
+        if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in build or choose ScencesFromList from " + gameObject);
+    }
+    private void CreateListOfScenesFromList()
+    {
+        foreach (string scene in scenes)
+        {
+            scenesToChooseFrom.Add(scene);
+        }
+        if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in scences list or choose ScenesFromBuild from " + gameObject);
+    }
+    private void CreateListTofScenesToChooseFrom()
+    {
+        scenesToChooseFrom.Remove("MainMenu");
+    }
+    public void LoadNextScene()
+    {
+        if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
+        else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
+        if (scenesToChooseFrom.Count <= 0)
+        {
+            LoadScenesList();
+        }
+    }
+    private void LoadNextSceneInNumericalOrder()
+    {
+        SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
+        scenesToChooseFrom.RemoveAt(0);
+    }
+    private void LoadNextSceneInRandomOrder()
+    {
+        int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
+        SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
+        scenesToChooseFrom.RemoveAt(randomNumber);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//try
+//{
+//    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(SceneManager.GetActiveScene().buildIndex + 1));
+
+//}
+//catch
+//{
+//    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
+//}

@@ -7,19 +7,19 @@ public class FinalDash : MonoBehaviour
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool stopGravityWhileDashing = true;
     private bool isDashing;
-    private bool isDashingImmortality;
     private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
-    [SerializeField] private float dashingDuration;
-    [SerializeField, Tooltip("måste vara lägre än dashingDuration")][Range(0f, 1f)] private float dashingImmortality;
-    [SerializeField] private float dashingActivationCooldown = 1000f;
+    [SerializeField] private float dashingDuration = 0.2f;
+    [SerializeField] private float dashingActivationCooldown = 1f;
+    [SerializeField] private float dashingInvincibilityDuration = 1f;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
     private Vector3 velocity;
     private PlayerMovement movement;
+    private PlayerHealth health;
     private float currentDashingDistace;
     private float currentDashingDuration;
-
+    private float gravity;
     public UnityEvent dashEvent;
 
     private void Start()
@@ -27,6 +27,8 @@ public class FinalDash : MonoBehaviour
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
         movement = GetComponent<PlayerMovement>();
+        health = GetComponent<PlayerHealth>();
+        gravity = movement.GetDownwardForce();
     }
     
     void Update()
@@ -44,7 +46,6 @@ public class FinalDash : MonoBehaviour
         }
         velocity = new Vector3(0, velocity.y, velocity.z);
     }
-    float temp;
     private void DashWithKeyboard()
     {
         if (isDashing)
@@ -73,31 +74,32 @@ public class FinalDash : MonoBehaviour
         CheckForCollision();
         canDash = false;
         isDashing = true;
-        isDashingImmortality = true;
-        temp = movement.GetDownwardForce();
-        if (stopGravityWhileDashing) movement.SetDownwardForce(-15);
+        StartCoroutine(Invincibility());
         dashEvent.Invoke();
+        if (stopGravityWhileDashing) movement.SetDownwardForce(-15); // should be 0???
 
-        if (isFacingRight)
+        velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
+        if (!isFacingRight)
         {
-            velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
+            velocity *= -1;
         }
-        else if (!isFacingRight)
-        {
-            velocity = new Vector3(-currentDashingDistace - movement.velocity.x, 0f, 0f);
-        }
-        yield return new WaitForSeconds(dashingImmortality);
-        isDashingImmortality = false;
+
         //tr.emitting = true; //See variable TrailRenderer tr
-        yield return new WaitForSeconds(currentDashingDuration - dashingImmortality);
+        yield return new WaitForSeconds(currentDashingDuration);
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
-        movement.SetDownwardForce(temp);
+        movement.SetDownwardForce(gravity);
         isDashing = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
 
+    }
+    private IEnumerator Invincibility()
+    {
+        health.SetInvincible(true);
+        yield return new WaitForSeconds(dashingInvincibilityDuration);
+        health.SetInvincible(false);
     }
     private void Flip()
     {
@@ -130,9 +132,6 @@ public class FinalDash : MonoBehaviour
         }
 
     }
-    public bool GetDashImmortality()
-    {
-        return isDashingImmortality;
-    }
+
 
 }

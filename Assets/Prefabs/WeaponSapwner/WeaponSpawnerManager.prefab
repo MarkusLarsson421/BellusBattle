@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0897b965cc7354485f7fd7075fd34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnWeaponsTimer: 1
-  numberOfWeaponsToSpawn: 1
+  initialSpawnWeaponsTimer: 0
+  spawnWeaponsTimer: 30
+  numberOfWeaponsToSpawn: 5
   spawners:
   - {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6, type: 3}

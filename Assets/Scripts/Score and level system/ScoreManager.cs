@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
-    private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
+    [SerializeField] private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] CameraFocus cameraFocus;
     [SerializeField] LevelManager levelManager;
-    private bool hasGivenScore;
-    private float giveScoreTimer;
+    [SerializeField] int pointsToWin;
+    [SerializeField] public List<GameObject> players = new List<GameObject>();
+    [SerializeField] private bool hasGivenScore;
+    [SerializeField] private float giveScoreTimer;
+    [SerializeField] private bool hasOnePlayerLeft;
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
 
     [SerializeField] private bool gameHasStarted; //för att den inte ska börja räkna poäng i lobbyn, är tänkt att sättas till true när man går igenom teleportern
@@ -18,21 +22,56 @@ public class ScoreManager : MonoBehaviour
         get { return gameHasStarted; }
         set { gameHasStarted = value; }
     }
+    public void SetPointsToWin(int value)
+    {
+        pointsToWin = value;
+    }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        giveScoreTimer = 0;
+        if (level != 0)
+        {
+            gameHasStarted = true;
+        }
+        if (cameraFocus == null)
+        {
+            
+           cameraFocus =  GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
+           //Debug.Log("camammammam");
+        }
+        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        
+    }
 
     private void Start()
     {
-        hasGivenScore = false;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
     {
-        if (cameraFocus._targets.Count == 1 && !hasGivenScore && gameHasStarted)
+        if (!gameHasStarted) return;
+        
+        if(cameraFocus._targets.Count == 1)
+        {
+            hasOnePlayerLeft = true;
+        }
+        else if(cameraFocus._targets.Count > 1)
+        {
+            hasOnePlayerLeft = false;
+        }
+        if(hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
         }
-        DontDestroyOnLoad(gameObject);
+       
 
+    }
+
+    public void AddPlayers(GameObject player)
+    {
+        players.Add(player);
     }
 
     private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
@@ -45,7 +84,7 @@ public class ScoreManager : MonoBehaviour
         {
             scoreDic[winner]++;
         }
-        
+
     }
 
     public int getScore(GameObject player)
@@ -57,12 +96,29 @@ public class ScoreManager : MonoBehaviour
 
     private void GiveScoreAfterTimer()
     {
-        if(giveScoreTimer >= giveScoreTime && cameraFocus._targets.Count !=0)
+        if (giveScoreTimer >= giveScoreTime)
         {
-            AddScore(cameraFocus._targets[0].transform.gameObject);
-            hasGivenScore = true;
-            Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
-            Debug.Log(getScore(cameraFocus._targets[0].transform.gameObject));
+            //Debug.Log("im runnig´ng");
+            if(cameraFocus._targets.Count != 0)
+            {
+                AddScore(cameraFocus._targets[0].transform.gameObject);
+                hasGivenScore = true;
+                Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+                Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
+                if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
+                {
+                    Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+                }
+            }
+            else
+            {
+                Debug.Log("Its a draaaaw!");
+            }
+
+
+            hasGivenScore = false;
+            levelManager.LoadNextScene();
+            
         }
         else
         {
@@ -70,5 +126,5 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    
+
 }

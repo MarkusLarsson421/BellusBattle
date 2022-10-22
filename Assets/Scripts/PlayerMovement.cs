@@ -187,7 +187,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (movingLeft)
         {
-            Debug.Log(movementX);
             movementX = -Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
         }
         else

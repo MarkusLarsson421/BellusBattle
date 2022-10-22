@@ -1,13 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * CameraFocus will keep its focus on the targets you give it and readjust once a target is removed.
- * 
- * It has to be attached to a GameObject with the Camera component.
- * This class requires the developer to remove the target from the list using the relevant methods once
- * it is no longer needed.
- */
+
 [RequireComponent(typeof(Camera))]
 public class CameraFocus : MonoBehaviour
 {
@@ -15,7 +9,6 @@ public class CameraFocus : MonoBehaviour
 	private Vector3 offset;
 	[SerializeField] [Tooltip("How smooth the camera repositions itself.")]
 	private float smoothTime = 0.5f;
-
 	[SerializeField] [Tooltip("The furthest out the camera can zoom out.")]
 	private float minZoom = 40.0f;
 	[SerializeField] [Tooltip("The closest in the camera can zoom in.")]
@@ -27,23 +20,33 @@ public class CameraFocus : MonoBehaviour
 	private Vector3 _velocity;
 	private Camera _cam;
 
+	private float timer;
+	private bool hasReachedTime;
+
 	private void Start()
 	{
 		offset = transform.position;
 		_cam = GetComponent<Camera>();
-
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
-		foreach(GameObject tr in players)
-        {
-			_targets.Add(tr.transform);
-		}
-		
- 		
 	}
 
-	private void LateUpdate()
-	{
+    private void Update()
+    {
+		if (hasReachedTime) return;
 
+        if(timer >= 0.2f)
+        {
+			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");  // Used for when changing level
+			foreach (GameObject tr in players)
+			{
+				_targets.Add(tr.transform);
+			}
+			hasReachedTime = true;
+		}
+		timer += Time.deltaTime;
+    }
+
+    private void LateUpdate()
+	{
 		if (_targets.Count == 0) {return;}
 
 		Bounds bounds = GetTargetsBounds();

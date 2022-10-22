@@ -9,16 +9,31 @@ public class PlayerSpawnManager : MonoBehaviour
     public int sceneIndex;
     PlayerJoinManager playerJoinManager;
     [SerializeField] public Transform[] spawnLocations; // Keeps track of all the possible spawn locations
+    [SerializeField] GameObject[] players;
+    [SerializeField] protected ScoreManager scoreManager;
 
     private void Start()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
+        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        foreach (GameObject player in scoreManager.players)
+        {
+            player.SetActive(true);
+        }
+        players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
         
         for(int i = 0; i < players.Length; i++)
         {
+            players[i].gameObject.SetActive(true);
+            //players[i].gameObject.GetComponent<PlayerInput>().gameObject.SetActive(true);
             players[i].transform.position = spawnLocations[i].position;
-            Debug.Log(players[i].transform.position);
+            //Debug.Log(players[i].transform.position);
         }
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        for (int i = 0; i < players.Length; i++)
+            players[i].gameObject.SetActive(true);
     }
 
     /*
