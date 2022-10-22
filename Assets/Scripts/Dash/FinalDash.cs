@@ -28,7 +28,7 @@ public class FinalDash : MonoBehaviour
         currentDashingDuration = dashingDuration;
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
-        gravity = movement.GetDownwardForce();
+        gravity = movement.DownwardForce;
     }
     
     void Update()
@@ -76,9 +76,9 @@ public class FinalDash : MonoBehaviour
         isDashing = true;
         StartCoroutine(Invincibility());
         dashEvent.Invoke();
-        if (stopGravityWhileDashing) movement.SetDownwardForce(-15); // should be 0???
+        if (stopGravityWhileDashing) movement.DownwardForce = -15f; // should be 0???
 
-        velocity = new Vector3(currentDashingDistace - movement.velocity.x, 0f, 0f);
+        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
         if (!isFacingRight)
         {
             velocity *= -1;
@@ -89,7 +89,7 @@ public class FinalDash : MonoBehaviour
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
-        movement.SetDownwardForce(gravity);
+        movement.DownwardForce = gravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
@@ -103,7 +103,7 @@ public class FinalDash : MonoBehaviour
     }
     private void Flip()
     {
-        if (isFacingRight && movement.velocity.x < 0f || !isFacingRight && movement.velocity.x > 0f)
+        if (isFacingRight && movement.Velocity.x < 0f || !isFacingRight && movement.Velocity.x > 0f)
         {
             isFacingRight = !isFacingRight;
         }
