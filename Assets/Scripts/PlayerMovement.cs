@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
         HandleVerticalCollisions(ref velocity);
         HandleHorizontalCollisions(ref velocity);
-        EdgeControl();
+        EdgeControl(); //Experimentelt!
         JumpBuffer();
 
 
