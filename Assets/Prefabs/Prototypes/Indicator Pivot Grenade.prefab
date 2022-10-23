@@ -144,9 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f2ef673a3f4db4596ecd9c3bd55a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gun: {fileID: 0}
-  Bullet: {fileID: 0}
-  Beamy: {fileID: 0}
+  Beamy: {fileID: 8810459717289832452, guid: cfa01090d75967c419db3d01481b03aa, type: 3}
   bulletSpeed: 0
   ShootPoint: {fileID: 0}
   fireRate: 0

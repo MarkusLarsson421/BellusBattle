@@ -10,7 +10,7 @@ public class Beam : MonoBehaviour
 
     public float bulletSpeed;
 
-    public Transform ShootPoint;
+    Transform grenadePoint;
 
     public float fireRate;
 
@@ -25,15 +25,27 @@ public class Beam : MonoBehaviour
 
     GameObject beamIns;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        grenadePoint = this.transform;
+    }
+    
     void Update()
     {
+        timeUntilBeam -= Time.deltaTime;
         if (timeUntilBeam <= 0)
         {
-            beamIns = Instantiate(Beamy, ShootPoint.position, ShootPoint.rotation);
-            beamIns.transform.Rotate(Vector3.left * 180);
+            beamIns = Instantiate(Beamy, this.transform.position, this.transform.rotation);
+            //beamIns.transform.Rotate(Vector3.left * 180);
+
             Destroy(beamIns, 0.5f);
             timeUntilBeam = 1.7f;
         }
+        if (beamIns != null)
+        {
+            beamIns.transform.position = this.transform.position;
+            beamIns.transform.rotation = grenadePoint.rotation;
+        }
+
     }
 }

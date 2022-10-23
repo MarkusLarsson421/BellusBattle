@@ -8,16 +8,20 @@ public class Grenade_Prototype : MonoBehaviour
     float countDown;
     bool exploded;
     float radius = 3;
+    
 
     public GameObject explosionParticles;
 
     // Update is called once per frame
     private void Start()
     {
+   
         countDown = timer;
     }
     void FixedUpdate()
     {
+
+
         countDown -= Time.deltaTime;
         if(countDown <= 0 && !exploded)
         {
@@ -27,6 +31,7 @@ public class Grenade_Prototype : MonoBehaviour
     void explode()
     {
         GameObject GrenadeIns = Instantiate(explosionParticles, transform.position, transform.rotation);
+        GrenadeIns.transform.Rotate(Vector3.right * 90);
         Destroy(GrenadeIns, 2);
 
         Collider[] collider = Physics.OverlapSphere(transform.position, radius);
