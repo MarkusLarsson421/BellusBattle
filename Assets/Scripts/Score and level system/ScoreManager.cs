@@ -22,6 +22,10 @@ public class ScoreManager : MonoBehaviour
         get { return gameHasStarted; }
         set { gameHasStarted = value; }
     }
+    public void SetPointsToWin(int value)
+    {
+        pointsToWin = value;
+    }
 
     private void OnLevelWasLoaded(int level)
     {
@@ -85,41 +89,37 @@ public class ScoreManager : MonoBehaviour
 
     public int getScore(GameObject player)
     {
-        if (!scoreDic.ContainsKey(player)) return 0;
-
-        return scoreDic[player];
+        return !scoreDic.ContainsKey(player) ? 0 : scoreDic[player];
     }
 
     private void GiveScoreAfterTimer()
     {
-        if (giveScoreTimer >= giveScoreTime)
+        giveScoreTimer += Time.deltaTime;
+        if (giveScoreTimer <= giveScoreTime) return;
+
+        
+        if (cameraFocus._targets.Count != 0)
         {
-            //Debug.Log("im runnig´ng");
-            if(cameraFocus._targets.Count != 0)
+            AddScore(cameraFocus._targets[0].transform.gameObject);
+            hasGivenScore = true;
+            Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+            Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
+            if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
             {
-                AddScore(cameraFocus._targets[0].transform.gameObject);
-                hasGivenScore = true;
-                Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
-                Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
-                if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
-                {
-                    Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
-                }
+                Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
             }
-            else
-            {
-                Debug.Log("Its a draaaaw!");
-            }
-
-
-            hasGivenScore = false;
-            levelManager.StartNewLevel();
-            
         }
         else
         {
-            giveScoreTimer += Time.deltaTime;
+            Debug.Log("Its a draaaaw!");
         }
+        hasGivenScore = false;
+        levelManager.LoadNextScene();
+
+
+
+
+
     }
 
 

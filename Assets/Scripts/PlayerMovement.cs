@@ -18,10 +18,11 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
+    [SerializeField] private float jumpBufferTime = 0.2f;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private LayerMask oneWayLayer;
     
 
@@ -31,7 +32,18 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask WallLayer
     {
-        get { return wallLayer; }
+        get { return collisionLayer; }
+    }
+
+    public Vector2 Velocity
+    {
+        get { return velocity; }
+    }
+
+    public float DownwardForce
+    {
+        get { return downwardForce; }
+        set { downwardForce = value; }
     }
 
     private bool isGrounded
@@ -39,11 +51,13 @@ public class PlayerMovement : MonoBehaviour
         get { return CheckIsGrounded(); }
     }
 
-    public Vector2 velocity;
+    private Vector2 velocity;
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private Vector2 verticalRayOffset = new Vector2(0f, 0.5f);
     private Vector2 horizontalRayOffset = new Vector2(0.5f, 0f);
+
+    private BoxCollider boxCollider;
 
     private int horizontalRayCount, verticalRayCount = 4;
 
@@ -54,22 +68,25 @@ public class PlayerMovement : MonoBehaviour
     private float skinWidth = 0.012f;
     private float downwardInput;
     private float verticalRaySpacing, horizontalRaySpacing;
+    private float movementAmount;
+    
+    private float bufferTimer;
+    private float initialSpeed;
 
+    private bool hasJumpedOnGround;
     private bool hasCoyoteTime;
     private bool hasDoubleJump;
     private bool movingLeft, movingRight;
     private bool isStandingOnOneWayPlatform;
-
-    private float initialSpeed;
-    
-
-    private BoxCollider boxCollider;
-
+    private bool runBufferTimer;
+    private bool hasJumpBuffer;
+  
     void Start()
     {
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -91,54 +108,44 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimer = 0;
             hasCoyoteTime = true;
             hasDoubleJump = true;
+            hasJumpedOnGround = false;
+            
+            if (hasJumpBuffer)
+            {
+                Jump();
+                hasJumpBuffer = false;
+                runBufferTimer = false;
+            }
+            
         }
       
         velocity = new Vector2(movementX, movementY);
 
         HandleVerticalCollisions(ref velocity);
         HandleHorizontalCollisions(ref velocity);
+        EdgeControl(); //Experimentelt!
+        JumpBuffer();
 
 
         if (!CheckCollision())
         {
             transform.Translate(velocity * Time.deltaTime);
         }
-
-        
-
-        // So that when we change scene we don't have to re-join the lobby
-        DontDestroyOnLoad(this.gameObject);
-
         playerAnimator.SetFloat("Speed", movementX);
-    }
-
-    private void FLipPlayer()
-    {
-        if (velocity.x < -.01)
-        {
-            transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
-        }
-        else if (velocity.x > .01)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0); // Normal
-        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
         downwardInput = ctx.ReadValue<Vector2>().y;
-        //Debug.Log(ctx.ReadValue<Vector2>().y);
-       // movementX2 = ctx.ReadValue<Vector2>().x;
+        movementAmount = ctx.ReadValue<Vector2>().x;
       
         if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
-            
             movingRight = true;
             movingLeft = false;
         }
         else if (ctx.ReadValue<Vector2>().x < -0.1f)
         {
-            
             movingRight = false;
             movingLeft = true;
         }
@@ -148,15 +155,20 @@ public class PlayerMovement : MonoBehaviour
             movingLeft = false;
         }
 
-
-
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        float jumpDecreaser = 1f;
-        if (!ctx.started) return;
+        if (ctx.started)
+        {
+            Jump();
+        }
+    }
 
+
+    private void Jump()
+    {
+        float jumpDecreaser = 1f;
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
             Debug.Log("jump down!");
@@ -164,40 +176,97 @@ public class PlayerMovement : MonoBehaviour
             isStandingOnOneWayPlatform = false;
             return;
         }
-        
-        
         else if (isGrounded || hasCoyoteTime || hasDoubleJump)
         {
+            if (isGrounded)
+            {
+                hasJumpedOnGround = true;
+            }
             if (!hasCoyoteTime && hasDoubleJump)
-            { 
+            {
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }
             movementY = jumpForce * jumpDecreaser;
             jumpEvent.Invoke();
         }
+        else
+        {
+            Debug.Log("JUMPY");
+            runBufferTimer = true;
+            bufferTimer = 0;
+        }
     }
 
+    private void JumpBuffer()
+    {
+        if (!runBufferTimer) return;
+        bufferTimer += Time.deltaTime;
+        if(bufferTimer <= jumpBufferTime)
+        {
+            hasJumpBuffer = true;
+        }
+        else
+        {
+            hasJumpBuffer = false;
+            runBufferTimer = false;
+        }
+    }
 
+    private void EdgeControl()
+    {
+
+        Bounds bound = boxCollider.bounds;
+        Vector2 rayCastOrgin = new Vector3(bound.center.x, bound.min.y, transform.position.z);
+        RaycastHit hit;
+
+        Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.5f + skinWidth), Color.blue);
+        if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.25f + skinWidth, collisionLayer))
+        {
+            float hitpointY = hit.point.y;
+            Collider platformCollider = hit.collider;
+            Bounds col = platformCollider.bounds;
+
+            float colliderDif = col.max.y - hitpointY;
+            Debug.Log(colliderDif);
+
+            if(colliderDif > 0 && colliderDif < 0.50f)
+            {
+                if(velocity.x < 0f)
+                {
+                    transform.position = new Vector3(col.max.x, col.max.y + 1.8f, transform.position.z);
+                }
+                else
+                {
+                    transform.position = new Vector3(col.min.x, col.max.y + 1.8f, transform.position.z);
+                }
+            }
+        }
+
+    }
     private void UpdateMovementForce()
     {
-        if (movingRight)
+        if(movementAmount > 0.1f || movementAmount < -0.1f)
         {
-            movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
-        }
-        if (movingLeft)
-        {
-            movementX = -Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
+            if (movingRight)
+            {
+                movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
+            }
+            if (movingLeft)
+            {
+                movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
+            }
+            movementX *= movementAmount;
         }
         else
         {
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
 
-
     }
     private bool CheckIsGrounded()
     {
+        
         if (Physics.Raycast(transform.position, Vector2.down, 0.5f + skinWidth, oneWayLayer))
         {
             isStandingOnOneWayPlatform = true;
@@ -216,26 +285,14 @@ public class PlayerMovement : MonoBehaviour
             isStandingOnOneWayPlatform = false;
             return false;
         }
-        
+    }
 
-    }
-    private void Jump()
-    {
-        if (CheckIsGrounded() || hasCoyoteTime || hasDoubleJump)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (!hasCoyoteTime && hasDoubleJump) { hasDoubleJump = false; }
-                movementY = jumpForce;
-            }
-        }
-    }
 
     private void UpdateCoyoteTime()
     {
         if (isGrounded || !hasCoyoteTime) return;
  
-        if (coyoteTimer > coyoteTime)
+        if (coyoteTimer > coyoteTime || hasJumpedOnGround)
         {
             hasCoyoteTime = false;
         }
@@ -245,14 +302,17 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckCollision()
     {
         Debug.DrawRay(transform.position, velocity, Color.green, 0.5f + skinWidth);
-        return Physics.Raycast(transform.position, velocity, 0.5f + skinWidth, wallLayer);
-
+        return Physics.Raycast(transform.position, velocity, 0.5f + skinWidth, collisionLayer);
     }
 
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
-        float rayLength = Mathf.Abs(velocity.y) + skinWidth;
+        //float rayLength = 0.5f + skinWidth;
+        Bounds bounds = boxCollider.bounds;
+
+        float rayLength = ((bounds.max.y - bounds.min.y) / 2f) + skinWidth;
+        //Debug.Log(rayLength + "vert");
 
         for (int i = 0; i < verticalRayCount; i++)
         {
@@ -267,11 +327,12 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * (0.5f + skinWidth), Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, wallLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
+                Debug.Log(directionY);
                 velocity.y = 0;
                 movementY = 0f;   
             }
@@ -292,7 +353,10 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        float rayLength = Mathf.Abs(velocity.x) + skinWidth;
+        //float rayLength = 0.6f + skinWidth;
+        Bounds bounds = boxCollider.bounds;
+        float rayLength = ((bounds.max.x - bounds.min.x) / 2) + 0.4f;
+        //Debug.Log(rayLength);
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
@@ -309,7 +373,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, 0.6f + skinWidth, wallLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
                 velocity.x = 0;
                 movementX = 0;
@@ -339,13 +403,5 @@ public class PlayerMovement : MonoBehaviour
         rayCastBottomRight = new Vector2(bounds.max.x, bounds.min.y);
         rayCastTopRight = new Vector2(bounds.max.x, bounds.max.y);
     }
-
-    public float GetDownwardForce()
-    {
-        return downwardForce;
-    }
-    public void SetDownwardForce(float value)
-    {
-        downwardForce = value;
-    }
+  
 }
