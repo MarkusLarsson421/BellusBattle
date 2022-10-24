@@ -1,13 +1,9 @@
-using System.Collections;
 using UnityEngine;
 using Random = System.Random;
 
 public class Weapon : MonoBehaviour
 {
-	[SerializeField] 
-	public Aim aim; // test to make bullet shoot in correct direction
-	
-	[SerializeField] [Tooltip("How accurate the firearm is.")] [Range(0, 1)]
+    [SerializeField] [Tooltip("How accurate the firearm is.")] [Range(0, 1)]
     private float inaccuracy = 1.0f;
     [SerializeField] [Tooltip("Rounds per second.")]
     private float fireRate = 5.0f;
@@ -18,13 +14,15 @@ public class Weapon : MonoBehaviour
     [SerializeField] [Tooltip("Where the projectile is fired from.")] 
     private GameObject projectileOrigin;
     [SerializeField] [Tooltip("The amount of force placed on the projectile.")]
-    private float projectileForce = 100.0f; 
-    
+    private float projectileForce = 100.0f;
+
     private float _nextTimeToFire;
     private bool _isFiring;
     private ParticleSystem _muzzleFlash;
     private Projectile _projectile;
-    private readonly Random _random = new();
+   // private readonly Random _random = new();
+
+    [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
 
     private void Start(){
         _muzzleFlash = projectileOrigin.GetComponent<ParticleSystem>();
@@ -32,47 +30,26 @@ public class Weapon : MonoBehaviour
     }
 
     public void Fire(){
-        if (ammo <= 0) {Die();}
+        if (ammo <= 0) {  //gameObject.transform.parent.Find("Sword").gameObject.SetActive(true);
+            Destroy(gameObject);
+        }
         if (Time.time >= _nextTimeToFire)
         {
             _nextTimeToFire = Time.time + 1.0f / fireRate;
             ammo--;
             if (_muzzleFlash != null){_muzzleFlash.Play();}
-            GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, transform.rotation);
-            
-            //Force calculation uses 'aim.transform' could possibly use 'transform.localPosition' or 'transform.localRotation' instead.
+            //Debug.Log(aim.rotation.z);
+            GameObject firedProjectile = Instantiate(projectile, new Vector3(projectileOrigin.transform.position.x, projectileOrigin.transform.position.y,0), Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0));
+
+            // Original
+            //GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, Quaternion.identity);
             //Calculation is inefficient, could possibly be improved to simulate inaccuracy better.
-            Vector3 force = new Vector3(projectileForce * aim.transform.right.x * _random.Next(0, (int)inaccuracy * 100) / 100, projectileForce * aim.transform.right.y * _random.Next(0, (int)inaccuracy * 100) / 100, 0);
+            //Vector3 force = new Vector3(projectileForce, (float)_random.Next(0, (int)inaccuracy * 100) / 100, 0);
+
+            Vector3 force = new Vector3(projectileForce * aim.transform.right.x, projectileForce * aim.transform.right.y, projectileForce * aim.transform.right.z);
+            //Vector3 force = new Vector3(projectileForce * aim.transform.rotation.x, projectileForce * aim.transform.rotation.y, projectileForce * aim.transform.rotation.z);
             _projectile = firedProjectile.GetComponent<Projectile>();
-            _projectile.GetComponent<Rigidbody>().AddForce(force);
+            _projectile.Fire(force); 
         }
-    }
-
-    public void Drop(Vector3 dropDirection)
-    {
-	    GetComponent<Rigidbody>().AddForce(dropDirection);
-	    StartCoroutine(PickUpCooldown());
-    }
-
-    private IEnumerator PickUpCooldown()
-    {
-	    yield return new WaitForSeconds(5.0f);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-	    GameObject playerGo = collision.gameObject;
-	    if (playerGo.CompareTag("Player"))
-	    {
-		    playerGo.GetComponent<FirearmTest>().PickUpWeapon(gameObject);
-		    GetComponent<SphereCollider>().enabled = false;
-	    }
-    }
-
-    private void Die()
-    {
-	    GetComponentInParent<FirearmTest>().DropWeapon();
-	    transform.parent = null;
-	    Destroy(gameObject);
     }
 }
