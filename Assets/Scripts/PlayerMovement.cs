@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
+    [SerializeField] private float jumpBufferTime = 0.2f;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private float downwardInput;
     private float verticalRaySpacing, horizontalRaySpacing;
     private float movementAmount;
-    private float bufferTime = 0.2f;
+    
     private float bufferTimer;
     private float initialSpeed;
 
@@ -136,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         downwardInput = ctx.ReadValue<Vector2>().y;
-        //Debug.Log(ctx.ReadValue<Vector2>().y);
         movementAmount = ctx.ReadValue<Vector2>().x;
       
         if (ctx.ReadValue<Vector2>().x > 0.1f)
@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!runBufferTimer) return;
         bufferTimer += Time.deltaTime;
-        if(bufferTimer <= bufferTime)
+        if(bufferTimer <= jumpBufferTime)
         {
             hasJumpBuffer = true;
         }
@@ -221,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
 
         Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.5f + skinWidth), Color.blue);
-        if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.6f + skinWidth, collisionLayer))
+        if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.25f + skinWidth, collisionLayer))
         {
             float hitpointY = hit.point.y;
             Collider platformCollider = hit.collider;
@@ -230,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
             float colliderDif = col.max.y - hitpointY;
             Debug.Log(colliderDif);
 
-            if(colliderDif > 0 && colliderDif < 0.25f)
+            if(colliderDif > 0 && colliderDif < 0.50f)
             {
                 if(velocity.x < 0f)
                 {
@@ -308,7 +308,11 @@ public class PlayerMovement : MonoBehaviour
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
-        float rayLength = 0.5f + skinWidth;
+        //float rayLength = 0.5f + skinWidth;
+        Bounds bounds = boxCollider.bounds;
+
+        float rayLength = ((bounds.max.y - bounds.min.y) / 2) + skinWidth;
+        Debug.Log(rayLength + "vert");
 
         for (int i = 0; i < verticalRayCount; i++)
         {
@@ -348,7 +352,10 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        float rayLength = 0.6f + skinWidth;
+        //float rayLength = 0.6f + skinWidth;
+        Bounds bounds = boxCollider.bounds;
+        float rayLength = ((bounds.max.x - bounds.min.x) / 2) + 0.4f;
+        Debug.Log(rayLength);
 
         for (int i = 0; i < horizontalRayCount; i++)
         {

@@ -53,7 +53,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (!gameHasStarted) return;
         
-        if(cameraFocus._targets.Count == 0)
+        if(cameraFocus._targets.Count == 1)
         {
             hasOnePlayerLeft = true;
         }
@@ -63,7 +63,7 @@ public class ScoreManager : MonoBehaviour
         }
         if(hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
-            //GiveScoreAfterTimer();
+            GiveScoreAfterTimer();
         }
        
 
@@ -113,8 +113,6 @@ public class ScoreManager : MonoBehaviour
         {
             Debug.Log("Its a draaaaw!");
         }
-
-
         hasGivenScore = false;
         levelManager.LoadNextScene();
 
