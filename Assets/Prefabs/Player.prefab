@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aim: {fileID: 4782767669193128058}
   inaccuracy: 1
   fireRate: 1.5
   ammo: 6000
@@ -54,7 +55,6 @@ MonoBehaviour:
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
   projectileForce: 40
-  aim: {fileID: 4782767669193128058}
 --- !u!1 &2953532988127057366
 GameObject:
   m_ObjectHideFlags: 0
@@ -5148,7 +5148,6 @@ GameObject:
   - component: {fileID: 6431588530169345905}
   - component: {fileID: 6431588530169345906}
   - component: {fileID: 6431588530169345917}
-  - component: {fileID: 6431588530169345910}
   - component: {fileID: 2786539736660453916}
   - component: {fileID: -163156915827499938}
   - component: {fileID: 6592616742247666660}
@@ -5191,8 +5190,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.40271947, y: 1.7971084, z: 1}
-  m_Center: {x: 0.0020873994, y: 0.913195, z: 0}
+  m_Size: {x: 0.39972296, y: 1.8, z: 1}
+  m_Center: {x: -0.0036599487, y: 0.9, z: 0}
 --- !u!114 &6431588530169345917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5207,18 +5206,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   jumpForce: 19
-  airDeceleration: 44
+  airDeceleration: 25
   groundDeceleration: 80
   airResistance: 72
   downwardForce: -22.5
   acceleration: 35066
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
-  coyoteTime: 0.147
+  jumpBufferTime: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
-  wallLayer:
+  collisionLayer:
     serializedVersion: 2
     m_Bits: 72
   oneWayLayer:
@@ -5240,21 +5239,6 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
-  velocity: {x: 0, y: 0}
---- !u!136 &6431588530169345910
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6431588530169345916}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2786539736660453916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5428,9 +5412,9 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 1
   dashingDistace: 24
-  dashingDuration: 0.2
-  dashingImmortality: 0.076
+  dashingDuration: 0.124
   dashingActivationCooldown: 1
+  dashingInvincibilityDuration: 1
   dashEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5875,6 +5859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aim: {fileID: 0}
   inaccuracy: 1
   fireRate: 1.5
   ammo: 6000
@@ -5882,7 +5867,6 @@ MonoBehaviour:
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
   projectileForce: 40
-  aim: {fileID: 0}
 --- !u!1001 &8241695838658003634
 PrefabInstance:
   m_ObjectHideFlags: 0
