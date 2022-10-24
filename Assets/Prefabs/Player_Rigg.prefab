@@ -1,63 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &893873290572829414
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4792864227441337652}
-  - component: {fileID: 352057737452978250}
-  m_Layer: 0
-  m_Name: Headslot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4792864227441337652
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893873290572829414}
-  m_LocalRotation: {x: 0.000000002385214, y: 0.6875185, z: -0.0000000022576403, w: 0.72616684}
-  m_LocalPosition: {x: -0.034207355, y: 1.1999094, z: -0.0018749258}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6374296991120226692}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1773428102 &352057737452978250
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893873290572829414}
-  m_Enabled: 1
-  m_Weight: 1
-  m_TranslationAtRest: {x: -0.034207355, y: 1.1999094, z: -0.0018749258}
-  m_RotationAtRest: {x: 0, y: 86.868, z: 0}
-  m_TranslationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_RotationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 860533418602687005}
-    weight: 1
 --- !u!1 &1098271241168301054
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,39 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotations: 0
---- !u!1 &1404615784500993771
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6374296991120226692}
-  m_Layer: 0
-  m_Name: AccessoryInventory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6374296991120226692
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404615784500993771}
-  m_LocalRotation: {x: -0, y: -0.0000031888478, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4792864227441337652}
-  - {fileID: 1952737545159249948}
-  m_Father: {fileID: 6491676215360573080}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1495816928213918120
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,64 +909,6 @@ Transform:
   m_Father: {fileID: 6745732958653479070}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6157057367300022597
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1952737545159249948}
-  - component: {fileID: 965543519385416195}
-  m_Layer: 0
-  m_Name: Spineslot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1952737545159249948
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6157057367300022597}
-  m_LocalRotation: {x: -0.027610324, y: 0.68702155, z: 0.02614085, w: 0.7256416}
-  m_LocalPosition: {x: -0.01529742, y: 0.6082703, z: -0.0008401884}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6374296991120226692}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1773428102 &965543519385416195
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6157057367300022597}
-  m_Enabled: 1
-  m_Weight: 1
-  m_TranslationAtRest: {x: -0.01529742, y: 0.6082703, z: -0.0008401884}
-  m_RotationAtRest: {x: -4.358046, y: 86.868, z: 0}
-  m_TranslationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_RotationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 1559656664388037529}
-    weight: 1
 --- !u!1 &6257321559319323172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,7 +1249,6 @@ Transform:
   - {fileID: 6491676215400410279}
   - {fileID: 6491676215254085800}
   - {fileID: 6491676216062056944}
-  - {fileID: 6374296991120226692}
   m_Father: {fileID: 6745732958653479070}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2474,6 +2325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotations: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &9047723134818983288
 GameObject:
   m_ObjectHideFlags: 0
