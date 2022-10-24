@@ -311,8 +311,8 @@ public class PlayerMovement : MonoBehaviour
         //float rayLength = 0.5f + skinWidth;
         Bounds bounds = boxCollider.bounds;
 
-        float rayLength = ((bounds.max.y - bounds.min.y) / 2) + skinWidth;
-        Debug.Log(rayLength + "vert");
+        float rayLength = ((bounds.max.y - bounds.min.y) / 2f) + skinWidth;
+        //Debug.Log(rayLength + "vert");
 
         for (int i = 0; i < verticalRayCount; i++)
         {
@@ -327,11 +327,12 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * (0.5f + skinWidth), Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
+                Debug.Log(directionY);
                 velocity.y = 0;
                 movementY = 0f;   
             }
@@ -355,7 +356,7 @@ public class PlayerMovement : MonoBehaviour
         //float rayLength = 0.6f + skinWidth;
         Bounds bounds = boxCollider.bounds;
         float rayLength = ((bounds.max.x - bounds.min.x) / 2) + 0.4f;
-        Debug.Log(rayLength);
+        //Debug.Log(rayLength);
 
         for (int i = 0; i < horizontalRayCount; i++)
         {

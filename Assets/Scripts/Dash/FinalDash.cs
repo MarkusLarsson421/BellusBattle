@@ -22,6 +22,12 @@ public class FinalDash : MonoBehaviour
     private float gravity;
     public UnityEvent dashEvent;
 
+    public void ResetValues()
+    {
+        isDashing = false;
+        canDash = true;
+    }
+
     private void Start()
     {
         currentDashingDistace = dashingDistace;

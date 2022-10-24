@@ -5190,8 +5190,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.39972296, y: 1.7971084, z: 1}
-  m_Center: {x: -0.0036599487, y: 0.913195, z: 0}
+  m_Size: {x: 0.39972296, y: 1.8, z: 1}
+  m_Center: {x: -0.0036599487, y: 0.9, z: 0}
 --- !u!114 &6431588530169345917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5213,6 +5213,7 @@ MonoBehaviour:
   acceleration: 35066
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
+  jumpBufferTime: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -5238,7 +5239,6 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
-  isGivingInput: 0
 --- !u!114 &2786539736660453916
 MonoBehaviour:
   m_ObjectHideFlags: 0
