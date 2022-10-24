@@ -349,7 +349,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     return;
                 }
-                else
+                else if(hit.collider.bounds.min.y < bounds.min.y)
                 {
                     velocity.y = 0;
                 }
