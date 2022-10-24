@@ -5210,10 +5210,10 @@ MonoBehaviour:
   groundDeceleration: 80
   airResistance: 72
   downwardForce: -22.5
-  acceleration: 35066
+  acceleration: 35245
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
-  jumpBufferTime: 0.2
+  jumpBufferTime: 0.04
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -5927,7 +5927,7 @@ PrefabInstance:
     - target: {fileID: 3476690299495660232, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: rotations
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3901932808931750151, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
