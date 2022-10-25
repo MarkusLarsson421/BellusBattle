@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Grenade : Projectile
 {
@@ -9,12 +10,20 @@ public class Grenade : Projectile
 	private float explosionSize = 5.0f;
 
 	private void Start(){
-		StartCoroutine(StartFuse());
+		//StartCoroutine(StartFuse());
 	}
 
 	private IEnumerator StartFuse(){
 		yield return new WaitForSeconds(fuse);
 		Explode();
+	}
+
+	public void OnPickUp(InputAction.CallbackContext ctx)
+	{
+		if (ctx.started)
+		{
+			StartFuse();
+		}
 	}
 
 	private void Explode(){

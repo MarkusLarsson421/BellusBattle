@@ -10,18 +10,7 @@ public class PickUp_ProtoV1 : MonoBehaviour
     [SerializeField] private Transform weaponPosition;
     private Weapon currentWeapon;
     [SerializeField] GameObject revolver;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [SerializeField] GameObject Grenade;
 
     private void PickUpWeapon(Vector3 center, float radius)
     {
@@ -39,10 +28,18 @@ public class PickUp_ProtoV1 : MonoBehaviour
                 //currentWeapon.transform.parent = weaponPosition.transform;
                 return;
             }
+            if (col.CompareTag("Grenade"))
+            {
+                Debug.Log(col.gameObject.name);
+                col.gameObject.SetActive(false);
+
+                Grenade.GetComponent<MeshRenderer>().enabled = true;
+                Grenade.GetComponent<Grenade>().enabled = true;
+                //currentWeapon = col.gameObject.GetComponent<Weapon>();
+                //currentWeapon.transform.parent = weaponPosition.transform;
+                return;
+            }
         }
-
-
-
     }
 
     public void OnPickUp(InputAction.CallbackContext ctx)
