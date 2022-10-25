@@ -44,4 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ba4c0d3da86e4ea10dd9f11795576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenceToPlay: 0
   timer: 5
+  scenes: []
+  scenesToRemove: []
+  playingScenesOrder: 0

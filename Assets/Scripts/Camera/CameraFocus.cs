@@ -27,21 +27,37 @@ public class CameraFocus : MonoBehaviour
 	private Vector3 _velocity;
 	private Camera _cam;
 
+	private float timer;
+	private bool hasReachedTime;
+
 	private void Start()
 	{
 		offset = transform.position;
 		_cam = GetComponent<Camera>();
 
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
-		foreach(GameObject tr in players)
-        {
-			_targets.Add(tr.transform);
-		}
+		 
+		
 		
  		
 	}
 
-	private void LateUpdate()
+    private void Update()
+    {
+		if (hasReachedTime) return;
+
+        if(timer >= 0.2f)
+        {
+			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");  // Used for when changing level
+			foreach (GameObject tr in players)
+			{
+				_targets.Add(tr.transform);
+			}
+			hasReachedTime = true;
+		}
+		timer += Time.deltaTime;
+    }
+
+    private void LateUpdate()
 	{
 
 		if (_targets.Count == 0) {return;}

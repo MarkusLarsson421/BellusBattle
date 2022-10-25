@@ -15,6 +15,7 @@ public class FinalDash : MonoBehaviour
 
     private Vector3 velocity;
     private PlayerMovement movement;
+    private PlayerHealth health;
     private float currentDashingDistace;
     private float currentDashingDuration;
 
@@ -25,8 +26,13 @@ public class FinalDash : MonoBehaviour
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
         movement = GetComponent<PlayerMovement>();
+        health = GetComponent<PlayerHealth>();
     }
-    
+
+    private void OnLevelWasLoaded(int level)
+    {
+        isDashing = false;
+    }
     void Update()
     {
         Flip();
@@ -71,6 +77,7 @@ public class FinalDash : MonoBehaviour
         CheckForCollision();
         canDash = false;
         isDashing = true;
+        health.SetIsInvinsable(true);
         temp = movement.GetDownwardForce();
         if (stopGravityWhileDashing) movement.SetDownwardForce(-15);
         dashEvent.Invoke();
@@ -89,6 +96,7 @@ public class FinalDash : MonoBehaviour
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
+        health.SetIsInvinsable(false);
         movement.SetDownwardForce(temp);
         isDashing = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
