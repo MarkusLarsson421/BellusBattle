@@ -5176,6 +5176,7 @@ Transform:
   - {fileID: 5442244501946298359}
   - {fileID: 1995696444269868830}
   - {fileID: 550519761581017672}
+  - {fileID: 53634629798713152}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5210,10 +5211,10 @@ MonoBehaviour:
   groundDeceleration: 80
   airResistance: 72
   downwardForce: -22.5
-  acceleration: 35066
+  acceleration: 35245
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
-  jumpBufferTime: 0.2
+  jumpBufferTime: 0.04
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -5224,6 +5225,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerAnimator: {fileID: 8727384561011662934}
+  doubleJumpVFX: {fileID: 7622657328120678579}
   jumpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5602,6 +5604,87 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!1001 &131396304900860126
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6431588530169345905}
+    m_Modifications:
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055174566135126261, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Graph_StylizedDoubleJumpSmoke
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a35352e4f6730646bda6a3b5dbdd2cd, type: 3}
+--- !u!4 &53634629798713152 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 131396304900860126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &7622657328120678579 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 7501816422365093997, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 131396304900860126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2088393504146825161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5928,7 +6011,7 @@ PrefabInstance:
     - target: {fileID: 3476690299495660232, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: rotations
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3901932808931750151, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
