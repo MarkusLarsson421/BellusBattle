@@ -127,7 +127,6 @@ public class PlayerMovement : MonoBehaviour
         EdgeControl(); //Experimentelt!
         JumpBuffer();
 
-
         if (!CheckCollision())
         {
             transform.Translate(velocity * Time.deltaTime);
@@ -166,7 +165,6 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
     }
-
 
     private void Jump()
     {
@@ -247,7 +245,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-
     }
     private void UpdateMovementForce()
     {
@@ -267,7 +264,6 @@ public class PlayerMovement : MonoBehaviour
         {
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
-
     }
     private bool CheckIsGrounded()
     {
@@ -291,8 +287,6 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
     }
-
-
     private void UpdateCoyoteTime()
     {
         if (isGrounded || !hasCoyoteTime) return;
@@ -314,11 +308,9 @@ public class PlayerMovement : MonoBehaviour
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
-        //float rayLength = 0.5f + skinWidth;
         Bounds bounds = boxCollider.bounds;
 
         float rayLength = ((bounds.max.y - bounds.min.y) / 2f) + skinWidth;
-        //Debug.Log(rayLength + "vert");
 
         for (int i = 0; i < verticalRayCount; i++)
         {
@@ -333,7 +325,6 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            //Debug.Log(rayOrigin);
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             RaycastHit hit;
@@ -360,10 +351,8 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        //float rayLength = 0.6f + skinWidth;
         Bounds bounds = boxCollider.bounds;
         float rayLength = ((bounds.max.x - bounds.min.x) / 2) + skinWidth;
-        //Debug.Log(rayLength);
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
@@ -427,5 +416,4 @@ public class PlayerMovement : MonoBehaviour
         movementX = 0;
         movementY = 0;
     }
-  
 }
