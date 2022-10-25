@@ -14,9 +14,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
     private int sceneCount;
     [SerializeField] private string[] scenes;
-    [SerializeField] private string[] scenesToRemove;
+    [SerializeField] private List<LevelDetails> levels = new List<LevelDetails>();
+    [SerializeField] private GameObject content;
+    [SerializeField] private GameObject levelXPrefab;
 
-    private List<string> scenesToChooseFrom = new List<string>();
+
+    public List<string> scenesToChooseFrom = new List<string>();
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
@@ -25,22 +28,44 @@ public class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         LoadScenesList();
+        CreateLevelsUI();
     }
     public void LoadScenesList()
     {
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
-        CreateListTofScenesToChooseFrom();
+        scenesToChooseFrom.Remove("MainMenu");
     }
     private void CreateListOfScenesFromBuild()
     {
+        string tempStr = "";
+        GameObject g;
         sceneCount = SceneManager.sceneCountInBuildSettings;
         for (int i = 0; i < sceneCount; i++)
         {
-            scenesToChooseFrom.Add(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i)));
+            tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            scenesToChooseFrom.Add(tempStr);
         }
         if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in build or choose ScencesFromList from " + gameObject);
+    }
+    private void CreateLevelsUI ()
+    {
+        string tempStr = "";
+        GameObject g;
+        sceneCount = SceneManager.sceneCountInBuildSettings;
+        for (int i = 0; i < sceneCount; i++)
+        {
+            tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            if (i != 0)
+            {
+                g = Instantiate(levelXPrefab);
+                g.transform.parent = content.transform;
+                levels.Add(g.GetComponent<LevelDetails>());
+                levels.ElementAt(i - 1).SetName(tempStr);
+            }
+
+        }
     }
     private void CreateListOfScenesFromList()
     {
@@ -50,10 +75,17 @@ public class LevelManager : MonoBehaviour
         }
         if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in scences list or choose ScenesFromBuild from " + gameObject);
     }
-    private void CreateListTofScenesToChooseFrom()
+
+    public void ChangeScenesToChooseFrom(LevelDetails scene)
     {
-        scenesToChooseFrom.Remove("MainMenu");
+        if (scene.GetToggle())
+        {
+            scenesToChooseFrom.Remove(scene.GetName());
+            Debug.Log("I work " + scene.GetName());
+        }
+        else scenesToChooseFrom.Add(scene.GetName());
     }
+
     public void LoadNextScene()
     {
         if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
