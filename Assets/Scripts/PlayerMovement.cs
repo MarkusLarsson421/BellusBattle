@@ -67,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
     private float deceleration;
     private float coyoteTime = 0.2f;
     private float coyoteTimer;
-    private float skinWidth = 0.8f;
+    private float horizontalSkinWidth = 0.2f;
+    private float verticalSkinWidth = 0.1f;
     private float downwardInput;
     private float verticalRaySpacing, horizontalRaySpacing;
     private float movementAmount;
@@ -85,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
-        vfxManager = GameObject.FindGameObjectWithTag("VFX_Manager").GetComponent<VFX_Manager>();
+        //vfxManager = GameObject.FindGameObjectWithTag("VFX_Manager").GetComponent<VFX_Manager>();
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
@@ -188,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
             if (!hasCoyoteTime && hasDoubleJump)
             {
 
-                vfxManager.PlayDoubleJumpVFX(gameObject);
+                //vfxManager.PlayDoubleJumpVFX(gameObject);
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }
@@ -226,15 +227,15 @@ public class PlayerMovement : MonoBehaviour
         Vector2 rayCastOrgin = new Vector3(bound.center.x, bound.min.y, transform.position.z);
         RaycastHit hit;
 
-        Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.5f + skinWidth), Color.blue);
-        if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.35f, collisionLayer))
+        Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.4f + horizontalSkinWidth), Color.blue);
+        if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.35f + horizontalSkinWidth, collisionLayer))
         {
             float hitpointY = hit.point.y;
             Collider platformCollider = hit.collider;
             Bounds col = platformCollider.bounds;
 
             float colliderDif = col.max.y - hitpointY;
-            Debug.Log(colliderDif);
+            //Debug.Log(colliderDif);
 
             if(colliderDif > 0 && colliderDif < 0.25f)
             {
@@ -273,13 +274,13 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckIsGrounded()
     {
         
-        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, 0.9f, oneWayLayer))
+        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, 0.9f + verticalSkinWidth, oneWayLayer))
         {
             isStandingOnOneWayPlatform = true;
             deceleration = groundDeceleration;
             return true;
         }
-        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, 0.9f, groundLayer))
+        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, 0.9f + verticalSkinWidth, groundLayer))
         {
             deceleration = groundDeceleration;
             isStandingOnOneWayPlatform = false;
@@ -315,7 +316,7 @@ public class PlayerMovement : MonoBehaviour
         float directionY = Mathf.Sign(velocity.y);
         Bounds bounds = boxCollider.bounds;
 
-        float rayLength = ((bounds.max.y - bounds.min.y) / 2f) + skinWidth;
+        float rayLength = ((bounds.max.y - bounds.min.y) / 2f) + verticalSkinWidth;
 
         for (int i = 0; i < verticalRayCount; i++)
         {
@@ -335,11 +336,12 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
-                Debug.Log("stop");
                 velocity.y = 0;
-                movementY = 0f;   
+                movementY = 0f;
+                
+                 
             }
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, 0.5f + skinWidth, oneWayLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, oneWayLayer))
             {
                 if (velocity.y > 0)
                 {
@@ -357,7 +359,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float directionX = Mathf.Sign(velocity.x);
         Bounds bounds = boxCollider.bounds;
-        float rayLength = ((bounds.max.x - bounds.min.x) / 2) + skinWidth;
+        float rayLength = ((bounds.max.x - bounds.min.x) / 2) + horizontalSkinWidth;
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
@@ -387,7 +389,7 @@ public class PlayerMovement : MonoBehaviour
     private void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
-        bounds.Expand(skinWidth * -2);
+        //bounds.Expand(skinWidth * -2);
 
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
         verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
@@ -399,7 +401,7 @@ public class PlayerMovement : MonoBehaviour
     private void updateRayCastOrgins()
     {
         Bounds bounds = boxCollider.bounds;
-        bounds.Expand(skinWidth * -2);
+        //bounds.Expand(skinWidth * -2);
       
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
