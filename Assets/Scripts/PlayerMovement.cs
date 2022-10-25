@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     
 
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private VFX_Manager vfxManager;
 
     public UnityEvent jumpEvent;
 
@@ -83,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
+        vfxManager = GameObject.FindGameObjectWithTag("VFX_Manager").GetComponent<VFX_Manager>();
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
@@ -184,6 +187,8 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!hasCoyoteTime && hasDoubleJump)
             {
+
+                vfxManager.PlayDoubleJumpVFX(gameObject);
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }
