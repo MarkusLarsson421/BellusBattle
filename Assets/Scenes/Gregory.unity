@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1802856, g: 0.22571692, b: 0.30692402, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028525, g: 0.22571582, b: 0.30692267, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -634,6 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aim: {fileID: 0}
   inaccuracy: 1
   fireRate: 5
   ammo: 6
@@ -641,7 +642,6 @@ MonoBehaviour:
     type: 3}
   projectileOrigin: {fileID: 0}
   projectileForce: 100
-  aim: {fileID: 0}
 --- !u!1 &950360615
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,14 +900,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080092452}
-  m_LocalRotation: {x: 0.3139241, y: -0.60677737, z: 0.282945, w: 0.6732125}
+  m_LocalRotation: {x: 0.22812277, y: -0.7629337, z: 0.35576174, w: 0.48920935}
   m_LocalPosition: {x: -6.95, y: 3, z: -4.98}
   m_LocalScale: {x: 1.0000001, y: 1, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 50, y: -84.058, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: -114.662, z: 0}
 --- !u!114 &1080092455
 MonoBehaviour:
   m_ObjectHideFlags: 0
