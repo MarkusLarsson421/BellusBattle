@@ -390,7 +390,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void CalculateRaySpacing()
+    private void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
@@ -418,6 +418,14 @@ public class PlayerMovement : MonoBehaviour
         Bounds bounds = boxCollider.bounds;
         horizontalRayOffset = new Vector2((bounds.max.x - bounds.min.x) / 2, 0f);
         verticalRayOffset = new Vector2(0f, (bounds.max.y - bounds.min.y) / 2);
+    }
+
+    public void StopPlayer()
+    {
+        velocity.x = 0;
+        velocity.y = 0;
+        movementX = 0;
+        movementY = 0;
     }
   
 }
