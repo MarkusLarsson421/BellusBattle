@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour
 
     public void ChangeScenesToChooseFrom(LevelDetails scene)
     {
-        if (scene.GetToggle())
+        if (scene.GetToggle() && scenesToChooseFrom.Count > 0)
         {
             scenesToChooseFrom.Remove(scene.GetName());
             Debug.Log("I work " + scene.GetName());
