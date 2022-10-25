@@ -25,13 +25,27 @@ public class Weapon : MonoBehaviour
     private Projectile _projectile;
     private readonly Random _random = new();
 
+    private PlayerMovement player;
+
     private void Start(){
         _muzzleFlash = projectileOrigin.GetComponent<ParticleSystem>();
         _projectile = projectile.GetComponent<Projectile>();
     }
 
+    public void OnPickUpWeapon()
+    {
+        player = gameObject.GetComponent<PlayerMovement>();
+        aim = player.GetComponentInChildren<Aim>();
+    }
+
     public void Fire(){
-        if (ammo <= 0) {Destroy(gameObject);}
+        MeshRenderer g = gameObject.GetComponent<MeshRenderer>();
+        if (!g.enabled) return;
+        if (ammo <= 0) 
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Weapon>().enabled = false;
+        }//Destroy(gameObject);}
         if (Time.time >= _nextTimeToFire)
         {
             _nextTimeToFire = Time.time + 1.0f / fireRate;

@@ -19,11 +19,9 @@ public class DropWeapon_Porotype : MonoBehaviour
     {
         if(other.transform.tag == "Player")
         {
-            other.gameObject.transform.Find("revolver_low").gameObject.SetActive(false);
+            other.gameObject.transform.Find("revolver").gameObject.SetActive(false);
             other.gameObject.transform.Find("Sword").gameObject.SetActive(true);
-
-
-
+            Debug.Log("Dropeed");
         }
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - LevelManager
   - ScoreManager
+  - Sword
+  - Obstacle
+  - Revolver
   layers:
   - Default
   - TransparentFX
