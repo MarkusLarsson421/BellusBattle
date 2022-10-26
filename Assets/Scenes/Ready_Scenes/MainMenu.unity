@@ -381,6 +381,60 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 165493304}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: colors.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: colors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 01b1fa9942b514446b155eab3c6e3d89, type: 2}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: colors.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0755f92c78e1f9441b718e920cdada9a, type: 2}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: colors.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51bc165d55a731448bdcc12efe6e60dc, type: 2}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: colors.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb35d03ef6c871243ac3087919e20527, type: 2}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: accessorites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: accessorites.Array.data[0]
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: a3dfaab7abb69c3478353de6bf53b30f,
+        type: 3}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: accessorites.Array.data[1]
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: d3e103f6fe26915469f60795d3f99d2b,
+        type: 3}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: accessorites.Array.data[2]
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: aefb4f3628e590547ba21f92f81b81d4,
+        type: 3}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: accessorites.Array.data[3]
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: d7666a9aa9b29ca4d81c6d8c5beab7c5,
+        type: 3}
     - target: {fileID: 4401542679982079948, guid: 6bbf5b6599b5f714ea352cfb4677488f,
         type: 3}
       propertyPath: scoreManager
@@ -1238,7 +1292,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1091961803}
   m_HandleRect: {fileID: 1091961802}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
