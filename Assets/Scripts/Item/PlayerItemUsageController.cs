@@ -7,6 +7,7 @@ using System.Collections;
 
 public class PlayerItemUsageController : MonoBehaviour
 {
+    /*
     public ItemBase itemBase; // Will need to be updated if another item is being used.
 
     [SerializeField] public GameObject heldItemWorldObject;
@@ -55,4 +56,5 @@ public class PlayerItemUsageController : MonoBehaviour
         // swordPrefab = GameObject.FindGameObjectWithTag("Sword");
         //Instantiate(swordPrefab, heldItemWorldObject.transform);
     }
+    */
 }

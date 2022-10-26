@@ -27,6 +27,11 @@ public class Weapon : MonoBehaviour
 
     private PlayerMovement player;
 
+    [SerializeField] GameObject revolver;
+    [SerializeField] GameObject Grenade;
+    [SerializeField] GameObject Sword;
+    [SerializeField] PickUp_ProtoV1 pickUp_Proto;
+
     private void Start(){
         _muzzleFlash = projectileOrigin.GetComponent<ParticleSystem>();
         _projectile = projectile.GetComponent<Projectile>();
@@ -43,8 +48,16 @@ public class Weapon : MonoBehaviour
         if (!g.enabled) return;
         if (ammo <= 0) 
         {
+            // "ta bort" vapnet från spelaren
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Weapon>().enabled = false;
+
+            // Man ska alltid få tillbaka svärdet när bullet är slut
+            Sword.GetComponentInChildren<MeshRenderer>().enabled = true;
+            Sword.GetComponent<Sword_Prototype>().enabled = true;
+
+            pickUp_Proto.isHoldingWeapon = false;
+
         }//Destroy(gameObject);}
         if (Time.time >= _nextTimeToFire)
         {

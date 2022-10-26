@@ -11,6 +11,7 @@ namespace Inventory_scripts
 {
     public class PlayerInventory : MonoBehaviour
     {
+        /*
         
         [SerializeField] public ItemBase[] inventory;
         //[SerializeField] private TMP_Text armorDisplayText;
@@ -78,6 +79,7 @@ namespace Inventory_scripts
         {
             gameObject.GetComponent<PlayerItemUsageController>().ChangeItem(inventory[index]);
         }
-        
+        */
     }
+
 }

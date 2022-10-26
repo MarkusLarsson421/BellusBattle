@@ -11,13 +11,15 @@ public class PickUp_ProtoV1 : MonoBehaviour
     private Weapon currentWeapon;
     [SerializeField] GameObject revolver;
     [SerializeField] GameObject Grenade;
+    [SerializeField] GameObject Sword;
+    public bool isHoldingWeapon;
 
     private void PickUpWeapon(Vector3 center, float radius)
     {
         hitColliders = Physics.OverlapSphere(center, radius);
         foreach (Collider col in hitColliders)
         {
-            if (col.CompareTag("Revolver"))
+            if (col.CompareTag("Revolver") && !isHoldingWeapon)
             {
                 Debug.Log(col.gameObject.name);
                 col.gameObject.SetActive(false);
@@ -26,9 +28,14 @@ public class PickUp_ProtoV1 : MonoBehaviour
                 revolver.GetComponent<Weapon>().enabled = true;
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
+                Sword.GetComponentInChildren<MeshRenderer>().enabled = false;
+                Sword.GetComponent<Sword_Prototype>().enabled = false;
+
+                isHoldingWeapon = true;
+
                 return;
             }
-            if (col.CompareTag("Grenade"))
+            if (col.CompareTag("Grenade") && isHoldingWeapon)
             {
                 Debug.Log(col.gameObject.name);
                 col.gameObject.SetActive(false);
@@ -37,6 +44,11 @@ public class PickUp_ProtoV1 : MonoBehaviour
                 Grenade.GetComponent<Grenade>().enabled = true;
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
+                Sword.GetComponentInChildren<MeshRenderer>().enabled = false;
+                Sword.GetComponent<Sword_Prototype>().enabled = false;
+
+                isHoldingWeapon = true;
+                
                 return;
             }
         }

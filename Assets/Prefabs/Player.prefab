@@ -55,6 +55,10 @@ MonoBehaviour:
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
   projectileForce: 40
+  revolver: {fileID: 0}
+  Grenade: {fileID: 0}
+  Sword: {fileID: 0}
+  pickUp_Proto: {fileID: 0}
 --- !u!1 &2953532988127057366
 GameObject:
   m_ObjectHideFlags: 0
@@ -5555,8 +5559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef73a00c721b464985e655334e9fb56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemBase: {fileID: 11400000, guid: 92d996991213a2b42bcc8c8847e25a89, type: 2}
-  heldItemWorldObject: {fileID: 7620139512519653882}
 --- !u!114 &5848063662496004996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5569,14 +5571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38caaf45a590a5149811373fbd912975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory:
-  - {fileID: 11400000, guid: 92d996991213a2b42bcc8c8847e25a89, type: 2}
-  - {fileID: 11400000, guid: 78a431ab740819b4c8c0825621023485, type: 2}
-  animator: {fileID: 0}
-  weaponStats: []
-  playerItemUsageController: {fileID: 3190741225450955571}
-  wieldedItemBase: {fileID: 11400000, guid: 92d996991213a2b42bcc8c8847e25a89, type: 2}
-  weaponPosition: {fileID: 6057357241832643687}
 --- !u!114 &565460013329476676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5591,7 +5585,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPosition: {fileID: 6057357241832643687}
   revolver: {fileID: 6258587146885472999}
-  Grenade: {fileID: 0}
+  Grenade: {fileID: 8433992383910851699}
+  Sword: {fileID: 243362842806509488}
+  isHoldingWeapon: 0
 --- !u!1 &6588929984795507144
 GameObject:
   m_ObjectHideFlags: 0
@@ -10770,12 +10766,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1945654659546191973}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8433992383910851699}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee1cf0900b2d24b4885dfeed19dc3e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8433992383910851699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7929666838174018582, guid: e6495995ebe266c4aa513e23ff180d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1945654659546191973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2088393504146825161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10918,10 +10920,55 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2277677801750241011, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: Sword
+      value: 
+      objectReference: {fileID: 243362842806509488}
+    - target: {fileID: 2277677801750241011, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2277677801750241013, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284953535141017485, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.36491916
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284953535141017485, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.2603033
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284953535141017485, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.10689151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284953535141017485, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284953535141017485, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.017278647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284953535141017485, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.42754626
+      objectReference: {fileID: 0}
+    - target: {fileID: 5284953535141017485, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.012233252
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59a8b008c1ec8f5449123dcd2a856ffe, type: 3}
@@ -10931,12 +10978,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2088393504146825161}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 243362842806509488}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c45dd60a14f3ccf43b0be20fd8d130c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &243362842806509488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2277677801528443001, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
+    type: 3}
+  m_PrefabInstance: {fileID: 2088393504146825161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6492957045550096310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11062,6 +11115,10 @@ MonoBehaviour:
     type: 3}
   projectileOrigin: {fileID: 6588929984795507144}
   projectileForce: 40
+  revolver: {fileID: 6258587146885472999}
+  Grenade: {fileID: 8433992383910851699}
+  Sword: {fileID: 243362842806509488}
+  pickUp_Proto: {fileID: 565460013329476676}
 --- !u!4 &6742213502215092317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 457cfa393a91a6c429d84ade259841f4,
