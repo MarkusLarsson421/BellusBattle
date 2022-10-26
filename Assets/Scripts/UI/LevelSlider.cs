@@ -10,23 +10,39 @@ public class LevelSlider : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textS;
     [SerializeField] private ScoreManager scoreManager;
     private Slider slider;
+    private int nmrOfLevels;
     // Start is called before the first frame update
     void Start()
     {
+        nmrOfLevels = 1;
+        /*
         slider = GetComponent<Slider>();
         slider.minValue = 1;
         slider.maxValue = levelManager.GetScencesList().Count;
+        */
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        textS.text = slider.value.ToString();
+        textS.text = nmrOfLevels.ToString();
 
+    }
+
+    public void Increase()
+    {
+        nmrOfLevels++;
+    }
+
+    public void Decrease()
+    {
+        if (nmrOfLevels == 1) return;
+
+        nmrOfLevels--;
     }
     public void OnPlay()
     {
-        scoreManager.SetPointsToWin((int)slider.value);
+        scoreManager.SetPointsToWin(nmrOfLevels);
         levelManager.LoadNextScene();
     }
 }
