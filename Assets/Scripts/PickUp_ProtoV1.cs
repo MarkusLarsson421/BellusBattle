@@ -21,7 +21,7 @@ public class PickUp_ProtoV1 : MonoBehaviour
         {
             if (col.CompareTag("Revolver") && !isHoldingWeapon)
             {
-                //Debug.Log(col.gameObject.name);
+                Debug.Log(col.gameObject.name);
                 col.gameObject.SetActive(false);
 
                 revolver.GetComponent<MeshRenderer>().enabled = true;
@@ -38,7 +38,7 @@ public class PickUp_ProtoV1 : MonoBehaviour
             }
             if (col.CompareTag("Grenade") && !isHoldingWeapon)
             {
-                //Debug.Log(col.gameObject.name);
+                Debug.Log(col.gameObject.name);
                 col.gameObject.SetActive(false);
                 Debug.Log("1");
 

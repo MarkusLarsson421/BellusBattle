@@ -32,6 +32,14 @@ public class Bullet : Projectile
 
 			Die();
 		}
+
+		if (other.gameObject.tag == "Obstacle")
+		{
+			Debug.Log("Obstacle");
+			Destroy(gameObject);
+			return;
+		}
+
 	}
 
 	private IEnumerator Shoot(float seconds){

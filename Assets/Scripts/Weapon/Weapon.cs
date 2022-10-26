@@ -25,13 +25,43 @@ public class Weapon : MonoBehaviour
     private Projectile _projectile;
     private readonly Random _random = new();
 
+    private PlayerMovement player;
+
+    //[SerializeField] GameObject revolver;
+    //[SerializeField] GameObject Grenade;
+    [SerializeField] GameObject Sword;
+    [SerializeField] PickUp_ProtoV1 pickUp_Proto;
+
     private void Start(){
         _muzzleFlash = projectileOrigin.GetComponent<ParticleSystem>();
         _projectile = projectile.GetComponent<Projectile>();
     }
 
+    public void OnPickUpWeapon()
+    {
+        player = gameObject.GetComponent<PlayerMovement>();
+        aim = player.GetComponentInChildren<Aim>();
+    }
+
     public void Fire(){
-        if (ammo <= 0) {Destroy(gameObject);}
+        MeshRenderer g = gameObject.GetComponent<MeshRenderer>();
+        if (!g.enabled)
+        {
+            Debug.Log(g.ToString());
+            return;
+        }
+        if (ammo <= 0)
+        {
+            // "ta bort" vapnet från spelaren
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Weapon>().enabled = false;
+
+            // Man ska alltid få tillbaka svärdet när bullet är slut
+            Sword.GetComponentInChildren<MeshRenderer>().enabled = true;
+            Sword.GetComponent<Sword_Prototype>().enabled = true;
+
+            pickUp_Proto.isHoldingWeapon = false;
+        }
         if (Time.time >= _nextTimeToFire)
         {
             _nextTimeToFire = Time.time + 1.0f / fireRate;

@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuse: 3
   explosionSize: 10
-  pickUp_Proto: {fileID: 565460013329476676, guid: b1192d4dc8bc4b442b24e1abf65dd17e,
+  pickUp_Proto: {fileID: 7452349033133948718, guid: b1192d4dc8bc4b442b24e1abf65dd17e,
     type: 3}
 --- !u!54 &1847170834815601240
 Rigidbody:
