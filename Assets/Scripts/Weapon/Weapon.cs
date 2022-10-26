@@ -38,10 +38,11 @@ public class Weapon : MonoBehaviour
             ammo--;
             if (_muzzleFlash != null){_muzzleFlash.Play();}
             GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, transform.rotation);
-            
+
             //Force calculation uses 'aim.transform' could possibly use 'transform.localPosition' or 'transform.localRotation' instead.
             //Calculation is inefficient, could possibly be improved to simulate inaccuracy better.
-            Vector3 force = new Vector3(projectileForce * aim.transform.right.x * _random.Next(0, (int)inaccuracy * 100) / 100, projectileForce * aim.transform.right.y * _random.Next(0, (int)inaccuracy * 100) / 100, 0);
+            //Vector3 force = new Vector3(projectileForce * aim.transform.right.x * _random.Next(0, (int)inaccuracy * 100) / 100, projectileForce * aim.transform.right.y * _random.Next(0, (int)inaccuracy * 100) / 100, 0);
+            Vector3 force = new Vector3(projectileForce * aim.transform.right.x, projectileForce * aim.transform.right.y, 0f);
             _projectile = firedProjectile.GetComponent<Projectile>();
             _projectile.GetComponent<Rigidbody>().AddForce(force);
         }
