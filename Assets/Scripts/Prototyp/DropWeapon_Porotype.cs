@@ -31,7 +31,7 @@ public class DropWeapon_Porotype : MonoBehaviour
             if (other.transform.tag == "Grenade")
             {
                 other.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                other.gameObject.GetComponent<Grenade>().enabled = false;
+                other.gameObject.GetComponent<Weapon>().enabled = false;
                 Debug.Log("Droped Grenade");
             }
         }

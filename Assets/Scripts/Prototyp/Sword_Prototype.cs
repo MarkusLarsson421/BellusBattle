@@ -46,7 +46,7 @@ public class Sword_Prototype : MonoBehaviour
                     col.gameObject.SetActive(false);
 
                     col.GetComponent<MeshRenderer>().enabled = true;
-                    col.GetComponent<Grenade>().enabled = true;
+                    col.GetComponent<Weapon>().enabled = true;
                     Debug.Log("disarm grenade");
                 }
 
@@ -56,7 +56,7 @@ public class Sword_Prototype : MonoBehaviour
             }
                     canAttack = false;
             StartCoroutine(ResetAttack());
-            Debug.Log(pos);
+            //Debug.Log(pos);
         }
 
         
@@ -64,7 +64,7 @@ public class Sword_Prototype : MonoBehaviour
 
     IEnumerator ResetAttack()
     {
-        Debug.Log(pos);
+        //Debug.Log(pos);
         Sword.transform.position = pos;
         yield return new WaitForSeconds(cooldown);
         canAttack = true;
