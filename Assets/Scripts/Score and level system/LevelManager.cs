@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         LoadScenesList();
-        CreateLevelsUI();
+        if(SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
     public void LoadScenesList()
     {
