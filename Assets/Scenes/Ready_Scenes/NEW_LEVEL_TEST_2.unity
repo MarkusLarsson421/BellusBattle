@@ -4705,6 +4705,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponSpawner (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 2228781965160076772, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
     - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
       propertyPath: m_Enabled
@@ -5458,6 +5475,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponSpawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 2228781965160076772, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
     - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
       propertyPath: m_Enabled
@@ -5591,8 +5625,8 @@ Transform:
   - {fileID: 118565508}
   - {fileID: 781500982}
   - {fileID: 2068972381}
-  - {fileID: 279031370}
   - {fileID: 369694704}
+  - {fileID: 279031370}
   m_Father: {fileID: 914899269}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6658,6 +6692,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponSpawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 2228781965160076772, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
     - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
       propertyPath: m_Enabled
@@ -7216,6 +7267,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponSpawner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 2228781965160076772, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+    - target: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
     - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
       propertyPath: m_Enabled
@@ -8196,7 +8264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1305816918
 Transform:
   m_ObjectHideFlags: 0
@@ -8943,11 +9011,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WeaponSpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
         type: 3}
@@ -12205,11 +12268,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1787509822}
   - {fileID: 749888749}
   - {fileID: 914452523}
-  - {fileID: 1736312030}
   - {fileID: 281097027}
-  - {fileID: 1787509822}
+  - {fileID: 1736312030}
   - {fileID: 1153002094}
   - {fileID: 1876608348}
   - {fileID: 141043547}

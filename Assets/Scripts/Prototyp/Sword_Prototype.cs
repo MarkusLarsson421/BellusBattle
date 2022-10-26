@@ -65,7 +65,7 @@ public class Sword_Prototype : MonoBehaviour
     IEnumerator ResetAttack()
     {
         //Debug.Log(pos);
-        //Sword.transform.position = pos;
+        Sword.transform.position = pos;
         yield return new WaitForSeconds(cooldown);
         canAttack = true;
         //gameObject.GetComponentInChildren<DropWeapon_Porotype>().enabled = false;
