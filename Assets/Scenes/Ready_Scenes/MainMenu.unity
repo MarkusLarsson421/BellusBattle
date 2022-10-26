@@ -408,7 +408,7 @@ PrefabInstance:
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.65
+      value: 4.5900364
       objectReference: {fileID: 0}
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
@@ -418,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.0305367
       objectReference: {fileID: 0}
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
@@ -428,17 +428,17 @@ PrefabInstance:
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 507276251728561398, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
@@ -455,30 +455,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7791868716928144953, guid: 276eed3fe76a4c5479fc03ee623fa906,
-        type: 3}
-      propertyPath: m_TagString
-      value: Revolver
-      objectReference: {fileID: 0}
-    - target: {fileID: 8510856196853466762, guid: 276eed3fe76a4c5479fc03ee623fa906,
-        type: 3}
-      propertyPath: m_TagString
-      value: Revolver
-      objectReference: {fileID: 0}
     - target: {fileID: 9109231185878699503, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
       propertyPath: m_Name
       value: Firearm (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109231185878699503, guid: 276eed3fe76a4c5479fc03ee623fa906,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109231185878699503, guid: 276eed3fe76a4c5479fc03ee623fa906,
-        type: 3}
-      propertyPath: m_TagString
-      value: Revolver
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 276eed3fe76a4c5479fc03ee623fa906, type: 3}
@@ -1083,6 +1063,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716300864232877825, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716300864232877825, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716300864232877825, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716300864232877825, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716300864232877825, guid: 276eed3fe76a4c5479fc03ee623fa906,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7791868716928144953, guid: 276eed3fe76a4c5479fc03ee623fa906,
         type: 3}
@@ -2825,25 +2830,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478093973}
   m_CullTransparentMesh: 1
---- !u!1 &1818083227 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9109231185878699503, guid: 276eed3fe76a4c5479fc03ee623fa906,
-    type: 3}
-  m_PrefabInstance: {fileID: 114014365}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1818083228
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818083227}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1877500881
 GameObject:
   m_ObjectHideFlags: 0
