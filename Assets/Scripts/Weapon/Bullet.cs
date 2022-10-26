@@ -17,7 +17,8 @@ public class Bullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player"))
 		{
-			playerGo.SetActive(false);
+			//playerGo.SetActive(false);
+			playerGo.GetComponent<PlayerHealth>().KillPlayer();
 			cf.RemoveTarget(playerGo.transform);
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(1);
 			
