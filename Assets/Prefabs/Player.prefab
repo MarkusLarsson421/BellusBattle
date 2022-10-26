@@ -108,7 +108,7 @@ MonoBehaviour:
   inaccuracy: 1
   fireRate: 1.5
   ammo: 6000
-  projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
+  projectile: {fileID: 7929666838174018582, guid: 7500d775d27326e41901fa8407617697,
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
   projectileForce: 40
@@ -5270,7 +5270,6 @@ Transform:
   - {fileID: 5442244501946298359}
   - {fileID: 1995696444269868830}
   - {fileID: 550519761581017672}
-  - {fileID: 520814458417502256}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5943,91 +5942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45dd60a14f3ccf43b0be20fd8d130c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &3413882275028012099
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6431588530169345905}
-    m_Modifications:
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4424083469801819201, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: m_Name
-      value: DashVFX
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514027298852223289, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514027298852223289, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40, type: 3}
---- !u!4 &520814458417502256 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2907854397001225331, guid: d17bb3c5ff1d5c44c86dadfbc7f77f40,
-    type: 3}
-  m_PrefabInstance: {fileID: 3413882275028012099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6492957045550096310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6138,7 +6052,7 @@ MonoBehaviour:
   inaccuracy: 1
   fireRate: 1.5
   ammo: 6000
-  projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
+  projectile: {fileID: 7929666838174018582, guid: 7500d775d27326e41901fa8407617697,
     type: 3}
   projectileOrigin: {fileID: 3857288056123225444}
   projectileForce: 40
