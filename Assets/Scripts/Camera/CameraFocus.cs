@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(Camera))]
 public class CameraFocus : MonoBehaviour
 {
@@ -15,13 +14,13 @@ public class CameraFocus : MonoBehaviour
 	private float maxZoom = 10.0f;
 	[SerializeField]
 	private float zoomLimiter = 50.0f;
-
-	[SerializeField] public List<Transform> _targets;
+	[SerializeField] [Tooltip("List of targets to track.")]
+	private List<Transform> targets;
+	[SerializeField] [Tooltip("Whether or not to automatically add players throughout the game.")]
+	private bool autoAddPlayers = true;
+	
 	private Vector3 _velocity;
 	private Camera _cam;
-
-	private float timer;
-	private bool hasReachedTime;
 
 	private void Start()
 	{
@@ -31,23 +30,15 @@ public class CameraFocus : MonoBehaviour
 
     private void Update()
     {
-		if (hasReachedTime) return;
-
-        if(timer >= 0.2f)
-        {
-			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");  // Used for when changing level
-			foreach (GameObject tr in players)
-			{
-				_targets.Add(tr.transform);
-			}
-			hasReachedTime = true;
-		}
-		timer += Time.deltaTime;
+	    if (autoAddPlayers)
+	    {
+		    AutoAdd();
+	    }
     }
 
     private void LateUpdate()
 	{
-		if (_targets.Count == 0) {return;}
+		if (targets.Count == 0) {return;}
 
 		Bounds bounds = GetTargetsBounds();
 		Reposition(bounds);
@@ -57,17 +48,35 @@ public class CameraFocus : MonoBehaviour
 	/*
 	 * Adds a target for the camera to follow.
 	 */
-	public void AddTarget(Transform t)
+	public bool AddTarget(Transform t)
 	{
-		_targets.Add(t);
+		if (targets.Contains(t)){return false;}
+		
+		targets.Add(t);
+		return true;
 	}
 	
 	/*
 	 * Removes a target for the camera to stop following.
 	 */
-	public void RemoveTarget(Transform t)
+	public bool RemoveTarget(Transform t)
 	{
-		_targets.Remove(t);
+		if (targets.Contains(t) == false) {return false;}
+
+		targets.Remove(t);
+		return true;
+	}
+
+	/*
+	 * Automatically adds players to the list.
+	 */
+	private void AutoAdd()
+	{
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in players)
+		{
+			AddTarget(player.transform);
+		}
 	}
 
 	/*
@@ -94,9 +103,9 @@ public class CameraFocus : MonoBehaviour
 	 */
 	private Vector3 GetMedian(Bounds bounds)
 	{
-		if (_targets.Count == 1)
+		if (targets.Count == 1)
 		{
-			return _targets[0].position;
+			return targets[0].position;
 		}
 		
 		return bounds.center;
@@ -107,10 +116,10 @@ public class CameraFocus : MonoBehaviour
 	 */
 	private Bounds GetTargetsBounds()
 	{
-		Bounds bounds = new Bounds(_targets[0].position, Vector3.zero);
-		for (int i = 0; i < _targets.Count; i++)
+		Bounds bounds = new Bounds(targets[0].position, Vector3.zero);
+		for (int i = 0; i < targets.Count; i++)
 		{
-			bounds.Encapsulate(_targets[i].position);
+			bounds.Encapsulate(targets[i].position);
 		}
 
 		return bounds;

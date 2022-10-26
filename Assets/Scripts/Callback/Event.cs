@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Event<T> where T : Event<T>
 {
 	public string Description;
-
 	public delegate void EventListener(T info);
+	
 	private static event EventListener Listeners;
-
 	private bool _hasFired;
 
 	public static void RegisterListener(EventListener listener)
@@ -36,6 +36,13 @@ public class DebugEvent : Event<DebugEvent>
 	public int VerbosityLevel;
 }
 
+public class SceneChangeEvent : Event<SceneChangeEvent>
+{
+	public GameObject[] players;
+	public String scene;
+	public GameManager.GameState state;
+}
+
 public class ExplodeEvent : Event<ExplodeEvent>
 {
 	public GameObject ExplosionGo;
@@ -48,6 +55,12 @@ public class ExplodeEvent : Event<ExplodeEvent>
 public class PickUpEvent : Event<PickUpEvent>
 {
 	public GameObject PickedUpGo;
+}
+
+public class PlayerSpawnEvent : Event<PlayerSpawnEvent>
+{
+	public GameObject Player;
+	public PlayerInput PlayerInput;
 }
 
 public class PlayerDeathEvent : Event<PlayerDeathEvent>
