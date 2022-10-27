@@ -15,7 +15,7 @@ public class WinningUIManager : MonoBehaviour
         StartCoroutine(TimeToQuit());
         for(int i = 0; i < panels.Length; i++)
         {
-            if(scoreManager.winner == i)
+            if(scoreManager.winner == i+1)
             {
                 panels.ElementAt(i).gameObject.SetActive(true);
             }

@@ -107,9 +107,12 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
             if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
             {
+                
                 winner = cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID;
+                Debug.Log("vinanren är"+winner);
                 levelManager.Finish();
-                //Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+                Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+                return;
             }
         }
         else

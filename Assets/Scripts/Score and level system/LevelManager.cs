@@ -109,6 +109,7 @@ public class LevelManager : MonoBehaviour
     }
     public void Finish() 
     {
+        Debug.Log("FAN VA COOOLOT SPELET ÄR SLUT");
         SceneManager.LoadScene("The_End");
     }
 
