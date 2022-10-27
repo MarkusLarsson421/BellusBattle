@@ -28,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
     
 
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] private VFX_Manager vfxManager;
+    [SerializeField] private GameObject doubleJumpVFX;
+
 
     public UnityEvent jumpEvent;
 
@@ -86,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
-        vfxManager = GameObject.FindGameObjectWithTag("VFX_Manager").GetComponent<VFX_Manager>();
+       
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
@@ -189,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
             if (!hasCoyoteTime && hasDoubleJump)
             {
 
-                vfxManager.PlayDoubleJumpVFX(gameObject);
+                GameObject MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }

@@ -5434,7 +5434,6 @@ Transform:
   - {fileID: 5442244501946298359}
   - {fileID: 1995696444269868830}
   - {fileID: 550519761581017672}
-  - {fileID: 53634629798713152}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5483,7 +5482,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerAnimator: {fileID: 8727384561011662934}
-  vfxManager: {fileID: 0}
+  doubleJumpVFX: {fileID: 2055174566135126261, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
+    type: 3}
   jumpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -6159,81 +6159,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!1001 &131396304900860126
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6431588530169345905}
-    m_Modifications:
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2055174566135126261, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-        type: 3}
-      propertyPath: m_Name
-      value: VFX_Graph_StylizedDoubleJumpSmoke
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7a35352e4f6730646bda6a3b5dbdd2cd, type: 3}
---- !u!4 &53634629798713152 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 102558421842526110, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 131396304900860126}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2088393504146825161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6733,31 +6658,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6492957045550096310}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7432570583900512928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258587146885472999}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aim: {fileID: 4782767669193128058}
-  inaccuracy: 1
-  fireRate: 2.5
-  ammo: 6
-  projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
-    type: 3}
-  projectileOrigin: {fileID: 4607468897157483292}
-  projectileForce: 110
-  MuzzleFlash: {fileID: 1298385045497319875, guid: c4f13cda770c9714ba5f9ea0f462adbd,
-    type: 3}
-  shootSound: {fileID: 5106922075457548135}
-  Sword: {fileID: 243362842806509488}
-  pickUp_Proto: {fileID: 7452349033133948718}
 --- !u!82 &5106922075457548135
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6854,6 +6754,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7432570583900512928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258587146885472999}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aim: {fileID: 4782767669193128058}
+  inaccuracy: 1
+  fireRate: 2.5
+  ammo: 6
+  projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
+    type: 3}
+  projectileOrigin: {fileID: 4607468897157483292}
+  projectileForce: 110
+  MuzzleFlash: {fileID: 1298385045497319875, guid: c4f13cda770c9714ba5f9ea0f462adbd,
+    type: 3}
+  shootSound: {fileID: 5106922075457548135}
+  Sword: {fileID: 243362842806509488}
+  pickUp_Proto: {fileID: 7452349033133948718}
 --- !u!4 &6742213502215092317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 457cfa393a91a6c429d84ade259841f4,
