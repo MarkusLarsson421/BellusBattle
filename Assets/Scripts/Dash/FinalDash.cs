@@ -20,6 +20,7 @@ public class FinalDash : MonoBehaviour
     private float currentDashingDistace;
     private float currentDashingDuration;
     private float gravity;
+    [SerializeField] private AudioSource dashSound;
     public UnityEvent dashEvent;
 
     public void ResetValues()
@@ -77,6 +78,7 @@ public class FinalDash : MonoBehaviour
 
     private IEnumerator DashAction()
     {
+        dashSound.Play();
         CheckForCollision();
         canDash = false;
         isDashing = true;
