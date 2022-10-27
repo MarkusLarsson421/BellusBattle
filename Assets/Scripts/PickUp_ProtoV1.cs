@@ -26,6 +26,8 @@ public class PickUp_ProtoV1 : MonoBehaviour
 
                 revolver.GetComponent<MeshRenderer>().enabled = true;
                 revolver.GetComponent<Weapon>().enabled = true;
+                revolver.GetComponent<Weapon>().ammo = 6;
+
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
                 Sword.GetComponentInChildren<MeshRenderer>().enabled = false;
@@ -40,17 +42,18 @@ public class PickUp_ProtoV1 : MonoBehaviour
             {
                 Debug.Log(col.gameObject.name);
                 col.gameObject.SetActive(false);
-                Debug.Log("1");
+                //Debug.Log("1");
 
                 Grenade.GetComponent<MeshRenderer>().enabled = true;
                 Grenade.GetComponent<Weapon>().enabled = true;
-                Debug.Log("2");
+                revolver.GetComponent<Weapon>().ammo = 1;
+                //Debug.Log("2");
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
                 Sword.GetComponentInChildren<MeshRenderer>().enabled = false;
                 Sword.GetComponent<Sword_Prototype>().enabled = false;
                 Sword.GetComponentInChildren<DropWeapon_Porotype>().enabled = false;
-                Debug.Log("3");
+                //Debug.Log("3");
 
                 isHoldingWeapon = true;
                 

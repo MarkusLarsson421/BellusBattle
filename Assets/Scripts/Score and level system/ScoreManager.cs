@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
 
     [SerializeField] private bool gameHasStarted; //för att den inte ska börja räkna poäng i lobbyn, är tänkt att sättas till true när man går igenom teleportern
+    public int winner;
 
     public bool GameHasStarted
     {
@@ -106,7 +107,12 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
             if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
             {
+                
+                winner = cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID;
+                Debug.Log("vinanren är"+winner);
+                levelManager.Finish();
                 Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+                return;
             }
         }
         else

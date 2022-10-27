@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class Sword_Prototype : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Sword_Prototype : MonoBehaviour
     public bool canAttack = true;
     public float cooldown = 3;
     public Transform ShootPoint;
+    public UnityEvent shootEvent;
 
     Collider[] hitColliders;
     private void Start()
@@ -28,6 +30,7 @@ public class Sword_Prototype : MonoBehaviour
         if (canAttack)
         {
             Sword.transform.position += ShootPoint.transform.up * 1.02f;
+            shootEvent.Invoke();
             foreach (Collider col in hitColliders)
             {
                 if (col.CompareTag("Revolver"))

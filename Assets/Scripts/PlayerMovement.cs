@@ -28,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
     
 
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] private VFX_Manager vfxManager;
+    [SerializeField] private GameObject doubleJumpVFX;
+
 
     public UnityEvent jumpEvent;
 
@@ -86,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
-        //vfxManager = GameObject.FindGameObjectWithTag("VFX_Manager").GetComponent<VFX_Manager>();
+       
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
@@ -175,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
         float jumpDecreaser = 1f;
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
-            Debug.Log("jump down!");
+            //Debug.Log("jump down!");
             transform.position += Vector3.down * 1.8f;
             isStandingOnOneWayPlatform = false;
             return;
@@ -189,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
             if (!hasCoyoteTime && hasDoubleJump)
             {
 
-                //vfxManager.PlayDoubleJumpVFX(gameObject);
+                GameObject MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }
@@ -198,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("JUMPY");
+            //Debug.Log("JUMPY");
             runBufferTimer = true;
             bufferTimer = 0;
         }
