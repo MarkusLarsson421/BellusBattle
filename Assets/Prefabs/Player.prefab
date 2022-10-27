@@ -5705,6 +5705,7 @@ MonoBehaviour:
   dashingDuration: 0.124
   dashingActivationCooldown: 1
   dashingInvincibilityDuration: 1
+  dashSound: {fileID: 1079757518853252576}
   dashEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5720,7 +5721,6 @@ MonoBehaviour:
           m_StringArgument: Roll
           m_BoolArgument: 0
         m_CallState: 2
-  dashSound: {fileID: 1079757518853252576}
 --- !u!114 &1991130997618187709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5892,7 +5892,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: df6d503cb831df3499c12a19b2741571, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2b876d830b1015c43a5ff1374919d5a6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
