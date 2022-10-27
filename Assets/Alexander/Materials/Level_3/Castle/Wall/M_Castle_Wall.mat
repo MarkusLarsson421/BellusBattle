@@ -23,7 +23,6 @@ Material:
   m_Name: M_Castle_Wall
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
-  - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   - _OCCLUSIONMAP
   m_InvalidKeywords: []
@@ -38,11 +37,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 72eebb086b3c57c4dbbd55d4ea6199da, type: 3}
+        m_Texture: {fileID: 2800000, guid: c332f7d3d386510408bd2a6124f1a283, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 08a213a62c9ec5c4d9b015bcfcc39f15, type: 3}
+        m_Texture: {fileID: 2800000, guid: 95924dd6ef6017548a88c401b81a2a64, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -62,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 72eebb086b3c57c4dbbd55d4ea6199da, type: 3}
+        m_Texture: {fileID: 2800000, guid: c332f7d3d386510408bd2a6124f1a283, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -70,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: bff66d25f2eb4794483499b73648f331, type: 3}
+        m_Texture: {fileID: 2800000, guid: 53d180954f67b514fb04010946fbcbb9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
