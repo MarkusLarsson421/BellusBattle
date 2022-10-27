@@ -26,13 +26,18 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Ded");
-            
+            KillPlayer();
             //onGameOver.Invoke();
         }
     }
     public void SetInvincible( bool value)
     {
         isInvinsable = value;
+    }
+
+public void TurnOffWeapon()
+    {
+        gunMesh.enabled = false;
     }
 
 
