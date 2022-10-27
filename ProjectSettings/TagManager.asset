@@ -7,8 +7,11 @@ TagManager:
   - LevelManager
   - ScoreManager
   - Sword
-  - Obstacle
-  - Weapon
+  - VFX_Manager
+  - RightHand
+  - CharacterLow
+  - Grenade
+  - Revolver
   layers:
   - Default
   - TransparentFX

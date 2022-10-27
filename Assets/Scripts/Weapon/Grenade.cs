@@ -1,35 +1,56 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Grenade : MonoBehaviour{
+public class Grenade : Projectile
+{
 	[SerializeField] [Tooltip("Time until the grenade explodes.")] 
 	private float fuse = 5.0f;
 	[SerializeField] [Tooltip("Size of the explosion.")]
 	private float explosionSize = 5.0f;
-	
-	private ParticleSystem _explosion;
-	
+
+	[SerializeField] PickUp_ProtoV1 pickUp_Proto;
+
 	private void Start(){
-		_explosion = GetComponent<ParticleSystem>();
+		StartCoroutine(StartFuse());
 	}
 
-	private void Update(){
-		fuse -= Time.deltaTime;
-		if (fuse <= 0){StartCoroutine(Explode(_explosion.time, explosionSize));}
+	private IEnumerator StartFuse(){
+		yield return new WaitForSeconds(fuse);
+		Explode();
 	}
 
-	private IEnumerator Explode(float seconds, float explosionSize){
-		_explosion.Play();
+	public void OnPickUp(InputAction.CallbackContext ctx)
+	{
+		if (ctx.started)
+		{
+			StartFuse();
+		}
+	}
+
+	private void Explode(){
+
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
 		for (int i = 0; i < hits.Length; i++){
-			if (hits[i].CompareTag("Player")){
-				//TODO deal damage.
+			if (hits[i].CompareTag("Player"))
+			{
+				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
+				ph.TakeDamage(1);
+				pickUp_Proto.isHoldingWeapon = false;
+
+				/*
+				PlayerDeathEvent pde = new PlayerDeathEvent{
+					PlayerGo = hits[i].gameObject,
+					Kille = hits[i].name,
+					KilledBy = "No Idea-chan",
+					KilledWith = "Bullets",
+				};
+				pde.FireEvent();
+				*/
 			}
 		}
-		yield return new WaitForSeconds(seconds);
-		
-		Die();
+		Destroy(gameObject);
+		//Die();
 	}
 
 	private void Die(){

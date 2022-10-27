@@ -22,6 +22,10 @@ public class ScoreManager : MonoBehaviour
         get { return gameHasStarted; }
         set { gameHasStarted = value; }
     }
+    public void SetPointsToWin(int value)
+    {
+        pointsToWin = value;
+    }
 
     private void OnLevelWasLoaded(int level)
     {
@@ -32,7 +36,9 @@ public class ScoreManager : MonoBehaviour
         }
         if (cameraFocus == null)
         {
-            cameraFocus = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
+            
+           cameraFocus =  GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
+           //Debug.Log("camammammam");
         }
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         
@@ -68,9 +74,8 @@ public class ScoreManager : MonoBehaviour
         players.Add(player);
     }
 
-    private void AddScore(GameObject winner) 
+    private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
     {
-
         if (!scoreDic.ContainsKey(winner))
         {
             scoreDic[winner] = 1;
@@ -79,6 +84,7 @@ public class ScoreManager : MonoBehaviour
         {
             scoreDic[winner]++;
         }
+
     }
 
     public int getScore(GameObject player)
@@ -91,11 +97,13 @@ public class ScoreManager : MonoBehaviour
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
 
+        
         if (cameraFocus._targets.Count != 0)
         {
             AddScore(cameraFocus._targets[0].transform.gameObject);
             hasGivenScore = true;
-
+            Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+            Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
             if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
             {
                 Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
