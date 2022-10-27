@@ -171,6 +171,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1ffd465e-e8e1-4523-ab81-010db9283d99",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4c824bf9-e120-4e85-9c2b-9466aad002d3",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -195,6 +206,17 @@
                     "name": "",
                     "id": "7ade83f8-293d-4a12-badb-9fb5723e1c6e",
                     "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bf36b76-9a96-4c59-ae49-ed286a736371",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

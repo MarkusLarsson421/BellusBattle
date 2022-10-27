@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Prototypes/Namnlöst-1.psd.meta
 guid: 900d9bc4b49770c429016bee74357811
+========
+guid: b8d4852d82a3b80408b60bcf48d05d81
+>>>>>>>> GameTestTime2.0:Assets/Prefabs/Prototypes/Gray/highlights 1.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

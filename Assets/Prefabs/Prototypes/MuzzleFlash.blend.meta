@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Prototypes/MuzzleFlash.blend.meta
 guid: f8da5439a05bd3146b592b3431438c82
+========
+guid: 58481a850b59fb2499e2955e1797671e
+>>>>>>>> GameTestTime2.0:Assets/Alexander/Meshes/Level_3/Meshes/bottom_middle_platforms.fbx.meta
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []

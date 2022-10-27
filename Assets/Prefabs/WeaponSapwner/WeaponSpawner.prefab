@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8619433398501993539}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -97,6 +97,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 2228781965160076772, guid: 50de0d4361df98f4b8b5c33fec6147a4, type: 3}
-  - {fileID: 2228781965160076772, guid: fd78c44ac842f734f86ab489ce43ce60, type: 3}
-  - {fileID: 2228781965160076772, guid: 00ed857b3c4c7804996306f758fa832d, type: 3}
+  - {fileID: 2228781965160076772, guid: 276eed3fe76a4c5479fc03ee623fa906, type: 3}
+  - {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326, type: 3}

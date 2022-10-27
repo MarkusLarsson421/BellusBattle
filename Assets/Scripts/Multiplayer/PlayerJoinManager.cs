@@ -35,7 +35,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         //inputDevices.Add(playerInput.GetComponent<InputDevice>().deviceId);
         listOfPlayers.Add(playerInput);
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
-        
+
 
         // Set the start spawn position of the player using the location at the associated element into the array.
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.
@@ -52,9 +52,9 @@ public class PlayerJoinManager : PlayerSpawnManager
         // Changes the texture/material of the player
         playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
         // Finds where the accessory should be placed (HeadSlot)
-        accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
+        //accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
         // Put the accessory on the HeadSlot
-        Instantiate(accessorites[playerInput.playerIndex], accessoritesSlot.transform);
+        //Instantiate(accessorites[playerInput.playerIndex], accessoritesSlot.transform);
     }
     private void AddPlayerInFocus(Transform player)
     {
