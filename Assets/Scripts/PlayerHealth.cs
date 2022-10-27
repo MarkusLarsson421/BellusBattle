@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Ded");
-            
+            KillPlayer();
             //onGameOver.Invoke();
         }
     }
