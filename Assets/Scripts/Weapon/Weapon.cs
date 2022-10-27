@@ -52,7 +52,7 @@ public class Weapon : MonoBehaviour
         MeshRenderer g = gameObject.GetComponent<MeshRenderer>();
         if (!g.enabled)
         {
-            Debug.Log(g.ToString());
+            //Debug.Log(g.ToString());
             return;
         }
         if (ammo <= 0)

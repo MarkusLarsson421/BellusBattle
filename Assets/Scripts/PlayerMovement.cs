@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
-        vfxManager = GameObject.FindGameObjectWithTag("VFX_Manager").GetComponent<VFX_Manager>();
+        //vfxManager = GameObject.FindGameObjectWithTag("VFX_Manager").GetComponent<VFX_Manager>();
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
             if (!hasCoyoteTime && hasDoubleJump)
             {
 
-                vfxManager.PlayDoubleJumpVFX(gameObject);
+                //vfxManager.PlayDoubleJumpVFX(gameObject);
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }
@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("JUMPY");
+            //Debug.Log("JUMPY");
             runBufferTimer = true;
             bufferTimer = 0;
         }
