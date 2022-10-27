@@ -10,6 +10,14 @@ public class PlayerHealth : MonoBehaviour
     public static event OnGameOver onGameOver;
     private bool isInvinsable=false;
 
+    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private GameObject rightArm;
+    [SerializeField] private SkinnedMeshRenderer skr;
+    [SerializeField] private MeshRenderer gunMesh;
+    [SerializeField] private MeshRenderer swordMesh;
+    [SerializeField] private MeshRenderer grenadeMesh;
+    [SerializeField] private PickUp_ProtoV1 ppV1;
+
     private void Start()
     {
         
@@ -21,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Ded");
-            
+            KillPlayer();
             //onGameOver.Invoke();
         }
     }
@@ -29,4 +37,28 @@ public class PlayerHealth : MonoBehaviour
     {
         isInvinsable = value;
     }
+
+
+
+
+    public void KillPlayer()
+    {
+        boxCollider.enabled = false;
+        rightArm.SetActive(false);
+        skr.enabled = false;
+        gunMesh.enabled = false;
+        grenadeMesh.enabled = false;
+    }
+
+    public void UnkillPlayer()
+    {
+        boxCollider.enabled = true;
+        rightArm.SetActive(true);
+        skr.enabled = true;
+        gunMesh.enabled = false;
+        grenadeMesh.enabled = false;
+        swordMesh.enabled = true;
+        ppV1.isHoldingWeapon = false;
+    }
+    
 }
