@@ -4,26 +4,37 @@ using UnityEngine;
 
 public class DropWeapon_Porotype : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject Sword;
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "Player")
+        if (!Sword.GetComponent<Sword_Prototype>().canAttack)
         {
-            other.gameObject.transform.Find("revolver_low").gameObject.SetActive(false);
-            other.gameObject.transform.Find("Sword").gameObject.SetActive(true);
+            if (other.transform.tag == "Revolver")
+            {
+                other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                other.gameObject.GetComponent<Weapon>().enabled = false;
 
+                //other.gameObject.transform.Find("revolver").gameObject.SetActive(false);
+                //other.gameObject.transform.Find("Sword").gameObject.SetActive(true);
+                Debug.Log("Droped Revolver");
+            }
 
-
+            if (other.transform.tag == "Grenade")
+            {
+                other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                other.gameObject.GetComponent<Weapon>().enabled = false;
+                Debug.Log("Droped Grenade");
+            }
         }
+        
     }
 }

@@ -3,9 +3,8 @@ using Random = System.Random;
 
 public class Weapon : MonoBehaviour
 {
-	[SerializeField] 
+	[SerializeField]
 	public Aim aim; // test to make bullet shoot in correct direction
-	
 	[SerializeField] [Tooltip("How accurate the firearm is.")] [Range(0, 1)]
     private float inaccuracy = 1.0f;
     [SerializeField] [Tooltip("Rounds per second.")]
@@ -25,25 +24,57 @@ public class Weapon : MonoBehaviour
     private Projectile _projectile;
     private readonly Random _random = new();
 
+    private PlayerMovement player;
+
+    //[SerializeField] GameObject revolver;
+    //[SerializeField] GameObject Grenade;
+    [SerializeField] GameObject Sword;
+    [SerializeField] PickUp_ProtoV1 pickUp_Proto;
+
     private void Start(){
         _muzzleFlash = projectileOrigin.GetComponent<ParticleSystem>();
         _projectile = projectile.GetComponent<Projectile>();
     }
 
+    public void OnPickUpWeapon()
+    {
+        player = gameObject.GetComponent<PlayerMovement>();
+        aim = player.GetComponentInChildren<Aim>();
+    }
+
     public void Fire(){
-        if (ammo <= 0) {Destroy(gameObject);}
+        MeshRenderer g = gameObject.GetComponent<MeshRenderer>();
+        if (!g.enabled)
+        {
+            Debug.Log(g.ToString());
+            return;
+        }
+        if (ammo <= 0)
+        {
+            // "ta bort" vapnet från spelaren
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Weapon>().enabled = false;
+
+            // Man ska alltid få tillbaka svärdet när bullet är slut
+            Sword.GetComponentInChildren<MeshRenderer>().enabled = true;
+            Sword.GetComponent<Sword_Prototype>().enabled = true;
+
+            pickUp_Proto.isHoldingWeapon = false;
+        }
         if (Time.time >= _nextTimeToFire)
         {
             _nextTimeToFire = Time.time + 1.0f / fireRate;
             ammo--;
             if (_muzzleFlash != null){_muzzleFlash.Play();}
             GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, transform.rotation);
-            
+
             //Force calculation uses 'aim.transform' could possibly use 'transform.localPosition' or 'transform.localRotation' instead.
             //Calculation is inefficient, could possibly be improved to simulate inaccuracy better.
-            Vector3 force = new Vector3(projectileForce * aim.transform.right.x * _random.Next(0, (int)inaccuracy * 100) / 100, projectileForce * aim.transform.right.y * _random.Next(0, (int)inaccuracy * 100) / 100, 0);
+            //Vector3 force = new Vector3(projectileForce * aim.transform.right.x * _random.Next(0, (int)inaccuracy * 100) / 100, projectileForce * aim.transform.right.y * _random.Next(0, (int)inaccuracy * 100) / 100, 0);
+            Vector3 force = new Vector3(projectileForce * aim.transform.right.x, projectileForce * aim.transform.right.y, 0f);
             _projectile = firedProjectile.GetComponent<Projectile>();
             _projectile.GetComponent<Rigidbody>().AddForce(force);
+            _projectile.SetShooter(gameObject);
         }
     }
 }
