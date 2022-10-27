@@ -31,10 +31,10 @@ public class Grenade : Projectile
 	private void Explode(){
 
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
-		for (int i = 0; i < hits.Length; i++){
-			if (hits[i].CompareTag("Player"))
+		foreach (Collider col in hits){
+			if (col.CompareTag("Player"))
 			{
-				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
+				PlayerHealth ph = col.GetComponent<PlayerHealth>();
 				ph.TakeDamage(1);
 				pickUp_Proto.isHoldingWeapon = false;
 
