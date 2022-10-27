@@ -6448,12 +6448,17 @@ PrefabInstance:
     - target: {fileID: 4492956909744926773, guid: 11c41a91053289a4285c252a2fd18326,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.0846157
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492956909744926773, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4492956909744926773, guid: 11c41a91053289a4285c252a2fd18326,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.33524337
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4492956909744926773, guid: 11c41a91053289a4285c252a2fd18326,
         type: 3}
@@ -6727,12 +6732,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aim: {fileID: 4782767669193128058}
   inaccuracy: 1
-  fireRate: 1.5
+  fireRate: 2.5
   ammo: 6
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
   projectileOrigin: {fileID: 4607468897157483292}
-  projectileForce: 40
+  projectileForce: 110
   Sword: {fileID: 243362842806509488}
   pickUp_Proto: {fileID: 7452349033133948718}
 --- !u!4 &6742213502215092317 stripped

@@ -3641,6 +3641,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -42.1
       objectReference: {fileID: 0}
+    - target: {fileID: 260714415767226247, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: maxZoom
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 260714415767226247, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: minZoom
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 260714415767226247, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: zoomLimiter
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3135143824948328303, guid: 6bbf5b6599b5f714ea352cfb4677488f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8122,16 +8137,16 @@ Transform:
   - {fileID: 1645962119}
   - {fileID: 799166991}
   - {fileID: 707740075}
-  - {fileID: 2048630043}
-  - {fileID: 846042967}
   - {fileID: 50942004}
   - {fileID: 372473312}
   - {fileID: 1870997076}
-  - {fileID: 653173094}
+  - {fileID: 2048630043}
+  - {fileID: 846042967}
   - {fileID: 1126861750}
+  - {fileID: 653173094}
+  - {fileID: 2142019319}
   - {fileID: 835109699}
   - {fileID: 606313010}
-  - {fileID: 2142019319}
   - {fileID: 1278472654}
   - {fileID: 116468986}
   - {fileID: 64890912}
