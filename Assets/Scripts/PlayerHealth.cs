@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject rightArm;
     [SerializeField] private SkinnedMeshRenderer skr;
     [SerializeField] private MeshRenderer gunMesh;
+    [SerializeField] private MeshRenderer swordMesh;
+    [SerializeField] private MeshRenderer grenadeMesh;
+    [SerializeField] private PickUp_ProtoV1 ppV1;
 
     private void Start()
     {
@@ -35,10 +38,7 @@ public class PlayerHealth : MonoBehaviour
         isInvinsable = value;
     }
 
-public void TurnOffWeapon()
-    {
-        gunMesh.enabled = false;
-    }
+
 
 
     public void KillPlayer()
@@ -47,6 +47,7 @@ public void TurnOffWeapon()
         rightArm.SetActive(false);
         skr.enabled = false;
         gunMesh.enabled = false;
+        grenadeMesh.enabled = false;
     }
 
     public void UnkillPlayer()
@@ -54,7 +55,10 @@ public void TurnOffWeapon()
         boxCollider.enabled = true;
         rightArm.SetActive(true);
         skr.enabled = true;
-        gunMesh.enabled = true;
+        gunMesh.enabled = false;
+        grenadeMesh.enabled = false;
+        swordMesh.enabled = true;
+        ppV1.isHoldingWeapon = false;
     }
     
 }
