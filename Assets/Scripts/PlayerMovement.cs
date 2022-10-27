@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using UnityEngine.VFX;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
+    private GameObject MuzzleFlashIns;
+    [SerializeField] private AudioSource JumpSound;
+    [SerializeField] private AudioSource doubleJumpSound;
 
 
     public UnityEvent jumpEvent;
@@ -186,11 +190,13 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded)
             {
                 hasJumpedOnGround = true;
+                JumpSound.Play();
             }
             if (!hasCoyoteTime && hasDoubleJump)
             {
-
-                GameObject MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
+                doubleJumpSound.Play();
+                MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
+                StartCoroutine(VFXRemover());
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }
@@ -203,6 +209,11 @@ public class PlayerMovement : MonoBehaviour
             runBufferTimer = true;
             bufferTimer = 0;
         }
+    }
+    private IEnumerator VFXRemover()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(MuzzleFlashIns);
     }
 
     private void JumpBuffer()
