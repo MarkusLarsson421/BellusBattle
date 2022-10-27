@@ -35,6 +35,11 @@ public class PlayerHealth : MonoBehaviour
         isInvinsable = value;
     }
 
+public void TurnOffWeapon()
+    {
+        gunMesh.enabled = false;
+    }
+
 
     public void KillPlayer()
     {
