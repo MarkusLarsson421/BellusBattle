@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Grenade : Projectile
 {
@@ -7,6 +8,8 @@ public class Grenade : Projectile
 	private float fuse = 5.0f;
 	[SerializeField] [Tooltip("Size of the explosion.")]
 	private float explosionSize = 5.0f;
+
+	[SerializeField] PickUp_ProtoV1 pickUp_Proto;
 
 	private void Start(){
 		StartCoroutine(StartFuse());
@@ -17,14 +20,25 @@ public class Grenade : Projectile
 		Explode();
 	}
 
+	public void OnPickUp(InputAction.CallbackContext ctx)
+	{
+		if (ctx.started)
+		{
+			StartFuse();
+		}
+	}
+
 	private void Explode(){
+
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
 		for (int i = 0; i < hits.Length; i++){
 			if (hits[i].CompareTag("Player"))
 			{
 				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
 				ph.TakeDamage(1);
-				
+				pickUp_Proto.isHoldingWeapon = false;
+
+				/*
 				PlayerDeathEvent pde = new PlayerDeathEvent{
 					PlayerGo = hits[i].gameObject,
 					Kille = hits[i].name,
@@ -32,9 +46,11 @@ public class Grenade : Projectile
 					KilledWith = "Bullets",
 				};
 				pde.FireEvent();
+				*/
 			}
 		}
-		Die();
+		Destroy(gameObject);
+		//Die();
 	}
 
 	private void Die(){

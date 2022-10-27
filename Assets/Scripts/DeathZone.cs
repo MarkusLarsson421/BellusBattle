@@ -11,11 +11,12 @@ public class DeathZone : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             // Sätter isAlive bool till false
+            other.gameObject.GetComponent<PlayerHealth>().KillPlayer();
             other.gameObject.GetComponent<PlayerDetails>().isAlive = false;
             other.gameObject.GetComponent<PlayerMovement>().StopPlayer();
             CF.RemoveTarget(other.transform);
             //other.gameObject.GetComponent<PlayerInputManager>().gameObject.SetActive(false);
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
         }
     }
 }

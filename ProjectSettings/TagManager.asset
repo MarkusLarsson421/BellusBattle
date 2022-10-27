@@ -8,6 +8,10 @@ TagManager:
   - ScoreManager
   - Sword
   - VFX_Manager
+  - RightHand
+  - CharacterLow
+  - Grenade
+  - Revolver
   layers:
   - Default
   - TransparentFX

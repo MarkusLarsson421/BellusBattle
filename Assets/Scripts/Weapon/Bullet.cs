@@ -5,16 +5,21 @@ public class Bullet : Projectile
 {
 	[SerializeField] [Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 5.0f;
+	CameraFocus cf;
 
 	private void Start(){
+		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
 		StartCoroutine(Shoot(lifeSpan));
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		GameObject playerGo = other.gameObject;
-		if (playerGo.CompareTag("Player"))
+		if (playerGo.CompareTag("Player") && Shooter != playerGo)
 		{
+			//playerGo.SetActive(false);
+			playerGo.GetComponent<PlayerHealth>().KillPlayer();
+			cf.RemoveTarget(playerGo.transform);
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(1);
 			
 			PlayerDeathEvent pde = new PlayerDeathEvent{
@@ -27,6 +32,14 @@ public class Bullet : Projectile
 
 			Die();
 		}
+
+		if (other.gameObject.tag == "Obstacle")
+		{
+			Debug.Log("Obstacle");
+			Destroy(gameObject);
+			return;
+		}
+
 	}
 
 	private IEnumerator Shoot(float seconds){

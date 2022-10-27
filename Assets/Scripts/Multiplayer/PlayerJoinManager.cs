@@ -52,9 +52,9 @@ public class PlayerJoinManager : PlayerSpawnManager
         // Changes the texture/material of the player
         playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
         // Finds where the accessory should be placed (HeadSlot)
-        accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
+        //accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
         // Put the accessory on the HeadSlot
-        Instantiate(accessorites[playerInput.playerIndex], accessoritesSlot.transform);
+        //Instantiate(accessorites[playerInput.playerIndex], accessoritesSlot.transform);
     }
     private void AddPlayerInFocus(Transform player)
     {
