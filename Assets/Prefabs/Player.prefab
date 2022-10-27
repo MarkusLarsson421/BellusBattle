@@ -6251,46 +6251,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 243362842923368765}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTrigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Animator, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2277677801528443001, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
         type: 3}
       propertyPath: m_Name
@@ -6341,16 +6301,6 @@ PrefabInstance:
       propertyPath: Sword
       value: 
       objectReference: {fileID: 243362842806509488}
-    - target: {fileID: 2277677801750241012, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277677801750241012, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: a824d542d7d3a27438e4f8102dddf9f1, type: 2}
     - target: {fileID: 2277677801750241013, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
         type: 3}
       propertyPath: m_Enabled
@@ -6409,12 +6359,6 @@ GameObject:
 --- !u!23 &243362842923368704 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2277677801750240969, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-    type: 3}
-  m_PrefabInstance: {fileID: 2088393504146825161}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &243362842923368765 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2277677801750241012, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
     type: 3}
   m_PrefabInstance: {fileID: 2088393504146825161}
   m_PrefabAsset: {fileID: 0}
@@ -6700,11 +6644,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 457cfa393a91a6c429d84ade259841f4,
-        type: 3}
-      propertyPath: m_TagString
-      value: Revolver
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 457cfa393a91a6c429d84ade259841f4, type: 3}
 --- !u!23 &5609809110401844018 stripped
@@ -6730,7 +6669,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 65a79d8539bdd724e8aae1cbfbd9c4fe, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
