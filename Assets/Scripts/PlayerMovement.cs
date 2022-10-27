@@ -176,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
         float jumpDecreaser = 1f;
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
-            Debug.Log("jump down!");
+            //Debug.Log("jump down!");
             transform.position += Vector3.down * 1.8f;
             isStandingOnOneWayPlatform = false;
             return;
@@ -199,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("JUMPY");
+            //Debug.Log("JUMPY");
             runBufferTimer = true;
             bufferTimer = 0;
         }
