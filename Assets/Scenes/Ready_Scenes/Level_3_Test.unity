@@ -3970,6 +3970,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -42.1
       objectReference: {fileID: 0}
+    - target: {fileID: 260714415767226247, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: maxZoom
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 260714415767226247, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: minZoom
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 260714415767226247, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
+      propertyPath: zoomLimiter
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3135143824948328303, guid: 6bbf5b6599b5f714ea352cfb4677488f,
         type: 3}
       propertyPath: m_LocalPosition.x
