@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlatformAttach : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject Player;
+
+    private void OnTriggerEnter(Collision other)
     {
-        
+        if(other.gameObject.tag == "Player")
+        {
+            Player.transform.parent = transform;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.tag == "Player")
+        {
+            Player.transform.parent = null;
+        }
     }
 }
