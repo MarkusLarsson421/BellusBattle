@@ -58,6 +58,6 @@ public class PlayerJoinManager : PlayerSpawnManager
     }
     private void AddPlayerInFocus(Transform player)
     {
-        camera.gameObject.GetComponent<CameraFocus>()._targets.Add(player);
+        camera.gameObject.GetComponent<CameraFocus>().AddTarget(player);
     }
 }

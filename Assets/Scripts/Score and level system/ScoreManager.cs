@@ -53,11 +53,11 @@ public class ScoreManager : MonoBehaviour
     {
         if (!gameHasStarted) return;
         
-        if(cameraFocus._targets.Count == 1)
+        if(cameraFocus.GetTargetCount() == 1)
         {
             hasOnePlayerLeft = true;
         }
-        else if(cameraFocus._targets.Count > 1)
+        else if(cameraFocus.GetTargetCount() > 1)
         {
             hasOnePlayerLeft = false;
         }
@@ -98,15 +98,15 @@ public class ScoreManager : MonoBehaviour
         if (giveScoreTimer <= giveScoreTime) return;
 
         
-        if (cameraFocus._targets.Count != 0)
+        if (cameraFocus.GetTargetCount() != 0)
         {
-            AddScore(cameraFocus._targets[0].transform.gameObject);
+            AddScore(cameraFocus.GetTarget(0).transform.gameObject);
             hasGivenScore = true;
-            Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
-            Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
-            if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
+            Debug.Log("Has given score to " + cameraFocus.GetTarget(0).gameObject.GetComponent<PlayerDetails>().playerID);
+            Debug.Log("score " + getScore(cameraFocus.GetTarget(0).gameObject));
+            if (getScore(cameraFocus.GetTarget(0).gameObject) == pointsToWin)
             {
-                Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+                Debug.Log("YOU HAVE WON, " + cameraFocus.GetTarget(0).gameObject.GetComponent<PlayerDetails>().playerID);
             }
         }
         else

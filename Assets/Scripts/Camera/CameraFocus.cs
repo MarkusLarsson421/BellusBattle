@@ -67,6 +67,17 @@ public class CameraFocus : MonoBehaviour
 		return true;
 	}
 
+	public int GetTargetCount()
+	{
+		return targets.Count;
+	}
+
+	public Transform GetTarget(int index)
+	{
+		if (targets.Count == 0) {return null;}
+		return targets[index];
+	}
+
 	/*
 	 * Automatically adds players to the list.
 	 */
