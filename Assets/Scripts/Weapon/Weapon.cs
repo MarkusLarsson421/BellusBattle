@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] [Tooltip("Rounds per second.")]
     private float fireRate = 5.0f;
     [SerializeField] [Tooltip("Ammunition of the firearm.")]
-    private int ammo = 6;
+    public int ammo = 6;
     [SerializeField] [Tooltip("What projectile is being fired.")] 
     private GameObject projectile;
     [SerializeField] [Tooltip("Where the projectile is fired from.")] 

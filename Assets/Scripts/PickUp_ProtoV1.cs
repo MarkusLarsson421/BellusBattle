@@ -26,6 +26,8 @@ public class PickUp_ProtoV1 : MonoBehaviour
 
                 revolver.GetComponent<MeshRenderer>().enabled = true;
                 revolver.GetComponent<Weapon>().enabled = true;
+                revolver.GetComponent<Weapon>().ammo = 6;
+
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
                 Sword.GetComponentInChildren<MeshRenderer>().enabled = false;
@@ -44,6 +46,7 @@ public class PickUp_ProtoV1 : MonoBehaviour
 
                 Grenade.GetComponent<MeshRenderer>().enabled = true;
                 Grenade.GetComponent<Weapon>().enabled = true;
+                revolver.GetComponent<Weapon>().ammo = 1;
                 Debug.Log("2");
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
