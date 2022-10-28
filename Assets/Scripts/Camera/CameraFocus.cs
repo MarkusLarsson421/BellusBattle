@@ -1,17 +1,19 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 [RequireComponent(typeof(Camera))]
 public class CameraFocus : MonoBehaviour
 {
-	[SerializeField] [Tooltip("Offset relative to its' starting position.")]
+	private bool _isOrthographic;
+	
+	[SerializeField, Tooltip("Offset relative to its' starting position.")]
 	private Vector3 offset;
-	[SerializeField] [Tooltip("How smooth the camera repositions itself.")]
+	[SerializeField, Tooltip("How smooth the camera repositions itself.")]
 	private float smoothTime = 0.5f;
-	[SerializeField] [Tooltip("The furthest out the camera can zoom out.")]
+	[SerializeField, Tooltip("The furthest out the camera can zoom out.")]
 	private float minZoom = 40.0f;
-	[SerializeField] [Tooltip("The closest in the camera can zoom in.")]
+	[SerializeField, Tooltip("The closest in the camera can zoom in.")]
 	private float maxZoom = 10.0f;
 	[SerializeField]
 	private float zoomLimiter = 50.0f;
@@ -23,8 +25,8 @@ public class CameraFocus : MonoBehaviour
 	private float timer;
 	private bool hasReachedTime;
 
-	private void Start()
-	{
+	private void Start(){
+		_targets = new();
 		offset = transform.position;
 		_cam = GetComponent<Camera>();
 	}
@@ -86,7 +88,13 @@ public class CameraFocus : MonoBehaviour
 	private void Focus(Bounds bounds)
 	{
 		float newZoom = Mathf.Lerp(maxZoom, minZoom, (bounds.size.x + bounds.size.y) / zoomLimiter);
-		_cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, newZoom, Time.deltaTime);
+		if (_isOrthographic){
+			_cam.orthographicSize = Mathf.Lerp(_cam.orthographicSize, newZoom, Time.deltaTime);
+		}
+		else{
+			_cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, newZoom, Time.deltaTime);
+		}
+		
 	}
 
 	/*
@@ -115,4 +123,33 @@ public class CameraFocus : MonoBehaviour
 
 		return bounds;
 	}
+
+	private void OnValidate(){
+		_isOrthographic = gameObject.GetComponent<Camera>().orthographic;
+	}
+}
+
+[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+public class ShowIfAttribute : PropertyAttribute
+{
+	public ActionOnConditionFail Action {get;private set;}
+	public ConditionOperator Operator {get;private set;}
+	public string[] Conditions {get;private set;}
+
+	public ShowIfAttribute(ActionOnConditionFail action, ConditionOperator conditionOperator, params string[] conditions)
+	{
+		Action  = action;
+		Operator = conditionOperator;
+		Conditions = conditions;
+	}
+}
+
+public enum ConditionOperator{
+	And,
+	Or,
+}
+
+public enum ActionOnConditionFail{ 
+	DontDraw, 
+	JustDisable,
 }
