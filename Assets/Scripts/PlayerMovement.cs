@@ -66,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private BoxCollider boxCollider;
 
-    private int horizontalRayCount, verticalRayCount = 4;
+    private int horizontalRayCount = 4; 
+    private int verticalRayCount = 4;
 
     private float movementX, movementY;
     private float deceleration;
@@ -131,9 +132,16 @@ public class PlayerMovement : MonoBehaviour
       
         velocity = new Vector2(movementX, movementY);
 
-        HandleVerticalCollisions(ref velocity);
-        HandleHorizontalCollisions(ref velocity);
-        EdgeControl(); //Experimentelt!
+        if(velocity.y != 0)
+        {
+            HandleVerticalCollisions(ref velocity);
+        }
+        if(velocity.x != 0)
+        {
+            HandleHorizontalCollisions(ref velocity);
+        }
+        
+        
         JumpBuffer();
 
         if (!CheckCollision())
@@ -159,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
             movingRight = false;
             movingLeft = true;
         }
-        else if (ctx.ReadValue<Vector2>().x < 0.2f || ctx.ReadValue<Vector2>().x > -0.2f)
+        else if (ctx.ReadValue<Vector2>().x < 0.1f || ctx.ReadValue<Vector2>().x > -0.1f)
         {
             movingRight = false;
             movingLeft = false;
@@ -231,38 +239,52 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void EdgeControl()
+    private void EdgeControl(RaycastHit hit)
     {
-        if (isGrounded) return;
+        //if (isGrounded) return;
 
-        Bounds bound = boxCollider.bounds;
-        Vector2 rayCastOrgin = new Vector3(bound.center.x, bound.min.y, transform.position.z);
-        RaycastHit hit;
-
-        Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.4f + horizontalSkinWidth), Color.blue);
+        //RaycastHit hit;
+        /*
+        Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.5f + horizontalSkinWidth), Color.blue);
         if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.35f + horizontalSkinWidth, collisionLayer))
         {
-            float hitpointY = hit.point.y;
-            Collider platformCollider = hit.collider;
-            Bounds col = platformCollider.bounds;
+         
+        }
+        */
 
-            float colliderDif = col.max.y - hitpointY;
-            //Debug.Log(colliderDif);
 
-            if(colliderDif > 0 && colliderDif < 0.25f)
+        float hitpointY = hit.point.y;
+        Collider platformCollider = hit.collider;
+        Bounds col = platformCollider.bounds;
+
+        float colliderDif = col.max.y - hitpointY;
+        Debug.Log(colliderDif);
+
+        if (colliderDif > 0 && colliderDif < 0.5f)
+        {
+            if (velocity.x < 0f)
             {
-                if(velocity.x < 0f)
-                {
-                    transform.position = new Vector3(col.max.x, col.max.y + 0.2f, transform.position.z);
-                    Debug.Log("ayy");
-                }
-                else
-                {
-                    transform.position = new Vector3(col.min.x, col.max.y + 0.2f, transform.position.z);
-                    Debug.Log("ayy");
-                }
+                transform.position = new Vector3(col.max.x, col.max.y + 0.2f, transform.position.z);
+                Debug.Log("ayy");
+            }
+            else
+            {
+                transform.position = new Vector3(col.min.x, col.max.y + 0.2f, transform.position.z);
+                Debug.Log("ayy");
             }
         }
+    }
+
+    private void JumpEdgeDetection(RaycastHit hit, int rayIndex) //WIP
+    {
+        float hitpointX = hit.point.x;
+        Collider platformCollider = hit.collider;
+        Bounds col = platformCollider.bounds;
+
+        float colliderDif = rayIndex == 0 ? col.min.x - hitpointX : col.max.x - hitpointX;
+        
+
+
     }
     private void UpdateMovementForce()
     {
@@ -343,7 +365,11 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+            if(i == 0)
+            {
+                Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+            }
+            
 
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
@@ -385,13 +411,23 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastBottomRight - horizontalRayOffset;
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            
+            /*
+            if(i == 0)
+            {
+                Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
+            }
+            */
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
+
 
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
-                Debug.Log("stop");
+                if(i == 0)
+                {
+                    EdgeControl(hit);
+                }
+                //EdgeControl();
                 velocity.x = 0;
                 movementX = 0;
             }

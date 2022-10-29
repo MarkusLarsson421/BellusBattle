@@ -53,15 +53,8 @@ public class ScoreManager : MonoBehaviour
     private void Update()
     {
         if (!gameHasStarted) return;
-        
-        if(cameraFocus._targets.Count == 1)
-        {
-            hasOnePlayerLeft = true;
-        }
-        else if(cameraFocus._targets.Count > 1)
-        {
-            hasOnePlayerLeft = false;
-        }
+        CheckPlayersLeft();
+      
         if(hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
@@ -73,6 +66,18 @@ public class ScoreManager : MonoBehaviour
     public void AddPlayers(GameObject player)
     {
         players.Add(player);
+    }
+
+    private void CheckPlayersLeft()
+    {
+        if (cameraFocus._targets.Count < 1)
+        {
+            hasOnePlayerLeft = true;
+        }
+        else if (cameraFocus._targets.Count > 1)
+        {
+            hasOnePlayerLeft = false;
+        }
     }
 
     private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
