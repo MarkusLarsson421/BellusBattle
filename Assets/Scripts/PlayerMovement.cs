@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private BoxCollider boxCollider;
 
-    private int horizontalRayCount = 4; 
+    private int horizontalRayCount = 6; 
     private int verticalRayCount = 4;
 
     private float movementX, movementY;
@@ -92,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
-       
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
@@ -103,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         updateRayCastOrgins();
         UpdateMovementForce();
         CheckIsGrounded();
@@ -129,25 +129,18 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
-      
         velocity = new Vector2(movementX, movementY);
+        JumpBuffer();
 
-        if(velocity.y != 0)
+        if (velocity.y != 0)
         {
             HandleVerticalCollisions(ref velocity);
         }
-        if(velocity.x != 0)
+        if (velocity.x != 0)
         {
             HandleHorizontalCollisions(ref velocity);
         }
-        
-        
-        JumpBuffer();
-
-        if (!CheckCollision())
-        {
-            transform.Translate(velocity * Time.deltaTime);
-        }
+        transform.Translate(velocity * Time.deltaTime);
         
         playerAnimator.SetFloat("Speed", movementX);
     }
@@ -241,18 +234,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void EdgeControl(RaycastHit hit)
     {
-        //if (isGrounded) return;
-
-        //RaycastHit hit;
-        /*
-        Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.5f + horizontalSkinWidth), Color.blue);
-        if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.35f + horizontalSkinWidth, collisionLayer))
-        {
-         
-        }
-        */
-
-
         float hitpointY = hit.point.y;
         Collider platformCollider = hit.collider;
         Bounds col = platformCollider.bounds;
@@ -265,27 +246,14 @@ public class PlayerMovement : MonoBehaviour
             if (velocity.x < 0f)
             {
                 transform.position = new Vector3(col.max.x, col.max.y + 0.2f, transform.position.z);
-                Debug.Log("ayy");
             }
             else
             {
                 transform.position = new Vector3(col.min.x, col.max.y + 0.2f, transform.position.z);
-                Debug.Log("ayy");
             }
         }
     }
 
-    private void JumpEdgeDetection(RaycastHit hit, int rayIndex) //WIP
-    {
-        float hitpointX = hit.point.x;
-        Collider platformCollider = hit.collider;
-        Bounds col = platformCollider.bounds;
-
-        float colliderDif = rayIndex == 0 ? col.min.x - hitpointX : col.max.x - hitpointX;
-        
-
-
-    }
     private void UpdateMovementForce()
     {
         if(movementAmount > 0.1f || movementAmount < -0.1f)
@@ -338,13 +306,6 @@ public class PlayerMovement : MonoBehaviour
         coyoteTimer += Time.deltaTime;
     }
 
-    private bool CheckCollision()
-    {
-        Bounds bounds = boxCollider.bounds;
-        Debug.DrawRay(boxCollider.center, velocity , Color.black);
-        return Physics.Raycast(boxCollider.center, velocity,((bounds.max.x - bounds.min.x) / 2), collisionLayer);
-    }
-
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
@@ -365,19 +326,14 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            if(i == 0)
-            {
-                Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
-            }
             
-
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+           
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
                 velocity.y = 0;
-                movementY = 0f;
-                
-                 
+                movementY = 0f;  
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, oneWayLayer))
             {
@@ -411,15 +367,8 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastBottomRight - horizontalRayOffset;
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            /*
-            if(i == 0)
-            {
-                Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-            }
-            */
+     
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-
-
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
@@ -427,7 +376,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     EdgeControl(hit);
                 }
-                //EdgeControl();
                 velocity.x = 0;
                 movementX = 0;
             }
@@ -437,8 +385,6 @@ public class PlayerMovement : MonoBehaviour
     private void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
-        //bounds.Expand(skinWidth * -2);
-
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
         verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
 
@@ -449,8 +395,6 @@ public class PlayerMovement : MonoBehaviour
     private void updateRayCastOrgins()
     {
         Bounds bounds = boxCollider.bounds;
-        //bounds.Expand(skinWidth * -2);
-      
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
         rayCastBottomRight = new Vector2(bounds.max.x, bounds.min.y);
