@@ -9,25 +9,27 @@ using Unity.VisualScripting;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Forces")]
-    [SerializeField] [Tooltip("Variabel som påverkar spelarens hastighet")] [Range(1f, 25f)] private float moveSpeed;
-    [SerializeField] [Tooltip("Hur högt spelaren kan hoppa")] [Range(1f, 25f)] private float jumpForce;
-    [SerializeField] [Tooltip("Hur snabbt spelaren decelererar i luften")] [Range(25f, 150f)] private float airDeceleration;
-    [SerializeField] [Tooltip("Hursnabbt spelaren decelererar på marken")] [Range(25f, 150f)] private float groundDeceleration;
-    [SerializeField] [Tooltip("Påverkar hur snabbt spelaren förlorar energi i ett hopp")] [Range(10f, 300f)] private float airResistance;
-    [SerializeField] [Tooltip("Hur mycket gravitation som påverkar spelaren i luften")] [Range(-100f, 0f)] private float downwardForce;
-    [SerializeField] [Tooltip("ACCELERATION!!")] [Range(1f, 50000f)] private float acceleration;
+    [SerializeField, Range(1f, 25f)] private float moveSpeed;
+    [SerializeField, Range(1f, 25f)] private float jumpForce;
+    [SerializeField, Range(25f, 150f)] private float airDeceleration;
+    [SerializeField, Range(25f, 150f)] private float groundDeceleration;
+    [SerializeField, Range(10f, 300f)] private float airResistance;
+    [SerializeField, Range(-100f, 0f)] private float downwardForce;
+    [SerializeField, Range(1f, 50000f)] private float acceleration;
    
-    
+    [Header("Jump & Edgecontrol")]
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
+    [SerializeField, Range(0.1f, 2f)] private float edgeControlAmount;
     [SerializeField] private float jumpBufferTime = 0.2f;
+    [SerializeField] private float coyoteTime = 0.2f;
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private LayerMask oneWayLayer;
     
-
+    [Header("Sound & VFX")]
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
     
@@ -73,12 +75,13 @@ public class PlayerMovement : MonoBehaviour
 
     private float movementX, movementY;
     private float deceleration;
-    private float coyoteTime = 0.2f;
+    
     private float coyoteTimer;
     private float horizontalSkinWidth = 0.2f;
     private float verticalSkinWidth = 0.1f;
     private float downwardInput;
     private float verticalRaySpacing, horizontalRaySpacing;
+    private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
     
     private float bufferTimer;
@@ -96,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
     {
         initialSpeed = moveSpeed - 5; //Används för acceleration
         boxCollider = GetComponent<BoxCollider>();
+        CalculateRayLength();
         CalculateRaySpacing();
         DontDestroyOnLoad(gameObject);
         CalculateRaycastOffset();
@@ -184,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
         float playerHeight = 1.8f;
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
-            //Debug.Log("jump down!");
             transform.position += Vector3.down * playerHeight;
             isStandingOnOneWayPlatform = false;
             return;
@@ -209,7 +212,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //Debug.Log("JUMPY");
             runBufferTimer = true;
             bufferTimer = 0;
         }
@@ -237,6 +239,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void EdgeControl(RaycastHit hit)
     {
+        float hitColliderBuffer = 0.2f;
         float hitpointY = hit.point.y;
         Collider platformCollider = hit.collider;
         Bounds col = platformCollider.bounds;
@@ -244,15 +247,15 @@ public class PlayerMovement : MonoBehaviour
         float colliderDif = col.max.y - hitpointY;
         Debug.Log(colliderDif);
 
-        if (colliderDif > 0 && colliderDif < 0.5f)
+        if (colliderDif > 0 && colliderDif < edgeControlAmount)
         {
             if (velocity.x < 0f)
             {
-                transform.position = new Vector3(col.max.x, col.max.y + 0.2f, transform.position.z);
+                transform.position = new Vector3(col.max.x, col.max.y + hitColliderBuffer, transform.position.z);
             }
             else
             {
-                transform.position = new Vector3(col.min.x, col.max.y + 0.2f, transform.position.z);
+                transform.position = new Vector3(col.min.x, col.max.y + hitColliderBuffer, transform.position.z);
             }
         }
     }
@@ -279,13 +282,13 @@ public class PlayerMovement : MonoBehaviour
     private bool CheckIsGrounded()
     {
         
-        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, 0.9f + verticalSkinWidth, oneWayLayer))
+        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, oneWayLayer))
         {
             isStandingOnOneWayPlatform = true;
             deceleration = groundDeceleration;
             return true;
         }
-        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, 0.9f + verticalSkinWidth, groundLayer))
+        if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, groundLayer))
         {
             deceleration = groundDeceleration;
             isStandingOnOneWayPlatform = false;
@@ -312,10 +315,6 @@ public class PlayerMovement : MonoBehaviour
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
-        Bounds bounds = boxCollider.bounds;
-
-        float rayLength = ((bounds.max.y - bounds.min.y) / 2f) + verticalSkinWidth;
-
         for (int i = 0; i < verticalRayCount; i++)
         {
             Vector2 rayOrigin;
@@ -330,21 +329,21 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
             
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
            
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
                 velocity.y = 0;
                 movementY = 0f;  
             }
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, oneWayLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
             {
                 if (velocity.y > 0)
                 {
                     return;
                 }
-                else if(hit.collider.bounds.min.y < bounds.min.y)
+                else if(hit.collider.bounds.min.y < boxCollider.bounds.min.y)
                 {
                     velocity.y = 0;
                 }
@@ -355,9 +354,6 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        Bounds bounds = boxCollider.bounds;
-        float rayLength = ((bounds.max.x - bounds.min.x) / 2) + horizontalSkinWidth;
-
         for (int i = 0; i < horizontalRayCount; i++)
         {
             Vector2 rayOrigin;
@@ -371,9 +367,9 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
      
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
                 if(i == 0)
                 {
@@ -409,6 +405,12 @@ public class PlayerMovement : MonoBehaviour
         Bounds bounds = boxCollider.bounds;
         horizontalRayOffset = new Vector2((bounds.max.x - bounds.min.x) / 2, 0f);
         verticalRayOffset = new Vector2(0f, (bounds.max.y - bounds.min.y) / 2);
+    }
+
+    private void CalculateRayLength()
+    {
+        verticalRayLength = ((boxCollider.bounds.max.y - boxCollider.bounds.min.y) / 2f) + verticalSkinWidth;
+        horizontalRayLength = ((boxCollider.bounds.max.x - boxCollider.bounds.min.x) / 2) + horizontalSkinWidth;
     }
 
     public void StopPlayer()

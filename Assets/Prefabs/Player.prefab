@@ -409,7 +409,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotations: 0
-  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4607468897157483292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5474,7 +5473,9 @@ MonoBehaviour:
   acceleration: 35245
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
+  edgeControlAmount: 0.5
   jumpBufferTime: 0.04
+  coyoteTime: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -5504,7 +5505,6 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
-  boxCollider: {fileID: 0}
 --- !u!114 &2786539736660453916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5747,7 +5747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a854214b306134d938f50acf848ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g: {fileID: 7210684032876526358}
+  gameObj: {fileID: 2645330954739622038}
 --- !u!114 &8544227076739203574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5761,7 +5761,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CF: {fileID: 0}
-  health: 1
   boxCollider: {fileID: 6431588530169345906}
   rightArm: {fileID: 2915926472710746649}
   skr: {fileID: 6010799286257098507}
@@ -8966,6 +8965,12 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &2645330954739622038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6257321559319323172, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8241695838658003634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2842460971312104397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6129981298904580479, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
@@ -9608,7 +9613,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotations: 0
-  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &7600359564593042094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
