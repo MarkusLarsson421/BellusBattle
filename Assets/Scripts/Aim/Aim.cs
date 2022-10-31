@@ -7,6 +7,7 @@ public class Aim : MonoBehaviour
 {
     enum AngleRotations{ FullAngleRotation, HalvAngleRotation, EightFixedAnglesRotation, FourFixedAnglesRotation }
     [SerializeField] AngleRotations rotations;
+    [SerializeField] AngleRotations rotationsOverride;
 
     Vector3 mousePos;
     Vector3 direction;
@@ -17,7 +18,6 @@ public class Aim : MonoBehaviour
     private void Update()
     {
         //MouseInputToAngleCalculation();
-        ChooseAngleRotation();
         transform.rotation = rotation;
     }
     private void MouseInputToAngleCalculation()
@@ -36,6 +36,7 @@ public class Aim : MonoBehaviour
         direction = t - (Vector2)transform.position;
         direction.Normalize();
         angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg; // -90 degrees
+        ChooseAngleRotation(rotations);
     }
     public void OverrideJoystickInputToAngleCalculation(InputAction.CallbackContext context)
     {
@@ -49,10 +50,11 @@ public class Aim : MonoBehaviour
         direction = t - (Vector2)transform.position;
         direction.Normalize();
         angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg; // -90 degrees
+        ChooseAngleRotation(rotationsOverride);
     }
-    private void ChooseAngleRotation()
+    private void ChooseAngleRotation(AngleRotations type)
     {
-        switch (rotations)
+        switch (type)
         {
             case AngleRotations.FullAngleRotation:
                 FullAngleRotation();
