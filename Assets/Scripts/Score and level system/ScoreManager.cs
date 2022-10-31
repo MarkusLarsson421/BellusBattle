@@ -70,7 +70,7 @@ public class ScoreManager : MonoBehaviour
 
     private void CheckPlayersLeft()
     {
-        if (cameraFocus._targets.Count < 1)
+        if (cameraFocus._targets.Count <= 1)
         {
             hasOnePlayerLeft = true;
         }
