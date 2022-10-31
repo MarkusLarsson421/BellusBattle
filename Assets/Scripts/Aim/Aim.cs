@@ -9,10 +9,10 @@ public class Aim : MonoBehaviour
     [SerializeField] AngleRotations rotations;
     [SerializeField] AngleRotations rotationsOverride;
 
-    Vector3 mousePos;
-    Vector3 direction;
+    private Vector3 mousePos;
+    private Vector3 direction;
     public Quaternion rotation;
-    float angle;
+    private float angle;
     private bool usingOverride = false;
 
     private void Update()
