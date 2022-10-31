@@ -66,15 +66,17 @@ public class Dash : MonoBehaviour
     }
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
-        if (isDashing)
-        {
-            return;
-        }
-        if (canDash)
+        Vector2 t = context.ReadValue<Vector2>();
+
+        if (canDash && !isDashing)
         {
             StartCoroutine(DashAction());
         }
     }
+    //public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
+    //{
+    //    Vector2 t = context.ReadValue<Vector2>();
+    //}
 
     private IEnumerator DashAction()
     {
