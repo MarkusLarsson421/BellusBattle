@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
-    [SerializeField] CameraFocus cameraFocus;
-    [SerializeField] LevelManager levelManager;
-    [SerializeField] int pointsToWin;
+    [SerializeField] private CameraFocus cameraFocus;
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private int pointsToWin;
     [SerializeField] public List<GameObject> players = new List<GameObject>();
     [SerializeField] private bool hasGivenScore;
     [SerializeField] private float giveScoreTimer;
@@ -16,17 +16,27 @@ public class ScoreManager : MonoBehaviour
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
 
     [SerializeField] private bool gameHasStarted; //för att den inte ska börja räkna poäng i lobbyn, är tänkt att sättas till true när man går igenom teleportern
-    public int winner;
+    private int winner;
+
+    public int Winner
+    {
+        get { return winner; }
+    }
 
     public bool GameHasStarted
     {
         get { return gameHasStarted; }
         set { gameHasStarted = value; }
     }
-    public void SetPointsToWin(int value)
+
+    private void Start()
     {
-        pointsToWin = value;
+        DontDestroyOnLoad(gameObject);
     }
+
+
+
+   
 
     private void OnLevelWasLoaded(int level)
     {
@@ -37,19 +47,14 @@ public class ScoreManager : MonoBehaviour
         }
         if (cameraFocus == null)
         {
-            
            cameraFocus =  GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
-           //Debug.Log("camammammam");
         }
-        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-        
+        if(levelManager == null)
+        {
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        }
+          
     }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void Update()
     {
         if (!gameHasStarted) return;
@@ -60,7 +65,6 @@ public class ScoreManager : MonoBehaviour
             GiveScoreAfterTimer();
         }
        
-
     }
 
     public void AddPlayers(GameObject player)
@@ -98,6 +102,11 @@ public class ScoreManager : MonoBehaviour
         return !scoreDic.ContainsKey(player) ? 0 : scoreDic[player];
     }
 
+    public void SetPointsToWin(int value)
+    {
+        pointsToWin = value;
+    }
+
     private void GiveScoreAfterTimer()
     {
         giveScoreTimer += Time.deltaTime;
@@ -108,15 +117,11 @@ public class ScoreManager : MonoBehaviour
         {
             AddScore(cameraFocus._targets[0].transform.gameObject);
             hasGivenScore = true;
-            Debug.Log("Has given score to " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
-            Debug.Log("score " + getScore(cameraFocus._targets[0].transform.gameObject));
             if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
             {
-                
                 winner = cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID;
-                Debug.Log("vinanren är"+winner);
                 levelManager.Finish();
-                Debug.Log("YOU HAVE WON, " + cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID);
+                //Nån har vunnit!
                 return;
             }
         }

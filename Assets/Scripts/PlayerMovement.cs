@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
-    private GameObject MuzzleFlashIns;
+    
     [SerializeField] private AudioSource JumpSound;
     [SerializeField] private AudioSource doubleJumpSound;
 
@@ -64,7 +64,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 verticalRayOffset;
     private Vector2 horizontalRayOffset;
 
-    [SerializeField] private BoxCollider boxCollider;
+    private GameObject MuzzleFlashIns;
+
+    private BoxCollider boxCollider;
 
     private int horizontalRayCount = 6; 
     private int verticalRayCount = 4;
@@ -92,18 +94,18 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
-        initialSpeed = moveSpeed - 5;
+        initialSpeed = moveSpeed - 5; //Används för acceleration
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
         DontDestroyOnLoad(gameObject);
-        calculateRaycastOffset();
+        CalculateRaycastOffset();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        updateRayCastOrgins();
+        UpdateRayCastOrgins();
         UpdateMovementForce();
         CheckIsGrounded();
         UpdateCoyoteTime();
@@ -179,10 +181,11 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         float jumpDecreaser = 1f;
+        float playerHeight = 1.8f;
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
             //Debug.Log("jump down!");
-            transform.position += Vector3.down * 1.8f;
+            transform.position += Vector3.down * playerHeight;
             isStandingOnOneWayPlatform = false;
             return;
         }
@@ -392,7 +395,7 @@ public class PlayerMovement : MonoBehaviour
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
-    private void updateRayCastOrgins()
+    private void UpdateRayCastOrgins()
     {
         Bounds bounds = boxCollider.bounds;
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
@@ -401,7 +404,7 @@ public class PlayerMovement : MonoBehaviour
         rayCastTopRight = new Vector2(bounds.max.x, bounds.max.y);
     }
 
-    private void calculateRaycastOffset()
+    private void CalculateRaycastOffset()
     {
         Bounds bounds = boxCollider.bounds;
         horizontalRayOffset = new Vector2((bounds.max.x - bounds.min.x) / 2, 0f);

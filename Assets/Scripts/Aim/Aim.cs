@@ -5,13 +5,14 @@ using UnityEngine.InputSystem;
 
 public class Aim : MonoBehaviour
 {
-    enum AngleRotations{ FullAngleRotation, HalvAngleRotation, EightFixedAnglesRotation, FourFixedAnglesRotation }
+    //Ta bort magiska nummer, KHALED >:(!
+    enum AngleRotations { FullAngleRotation, HalvAngleRotation, EightFixedAnglesRotation, FourFixedAnglesRotation }
     [SerializeField] AngleRotations rotations;
 
-    Vector3 mousePos;
-    Vector3 direction;
-    public Quaternion rotation;
-    float angle;
+    private Vector3 mousePos;
+    private Vector3 direction;
+    private Quaternion rotation; //USCH
+    private float angle;
 
     private void Update()
     {
@@ -70,7 +71,7 @@ public class Aim : MonoBehaviour
     {
         for (int i = -180; i < 180; i += 45)
         {
-            if (angle >= i - 22.5 && angle < i +45)
+            if (angle >= i - 22.5 && angle < i +45) //Ta bort magiska nummer, KHALED!
             {
                 rotation = Quaternion.AngleAxis(i , Vector3.forward);
             }

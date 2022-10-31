@@ -4,12 +4,15 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] CameraFocus CF;
-    public float health = 1;
+    [SerializeField] private CameraFocus CF;
     public delegate void OnGameOver();
     public static event OnGameOver onGameOver;
+   
+    
+    private float health = 1;
     private bool isInvinsable=false;
 
+    //USCH
     [SerializeField] private BoxCollider boxCollider;
     [SerializeField] private GameObject rightArm;
     [SerializeField] private SkinnedMeshRenderer skr;
@@ -18,17 +21,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private MeshRenderer grenadeMesh;
     [SerializeField] private PickUp_ProtoV1 ppV1;
 
-    private void Start()
-    {
-        
-    }
+   
     public void TakeDamage(float damage)
     {
         if(isInvinsable) return;
         health -= damage;
         if (health <= 0)
         {
-            Debug.Log("Ded");
             KillPlayer();
             //onGameOver.Invoke();
         }

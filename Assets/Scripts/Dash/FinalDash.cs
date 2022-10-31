@@ -6,12 +6,11 @@ public class FinalDash : MonoBehaviour
 {
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool stopGravityWhileDashing = true;
-    private bool isDashing;
-    private bool isFacingRight = true;
     [SerializeField] private float dashingDistace = 24f;
     [SerializeField] private float dashingDuration = 0.2f;
     [SerializeField] private float dashingActivationCooldown = 1f;
     [SerializeField] private float dashingInvincibilityDuration = 1f;
+    [SerializeField] private AudioSource dashSound;
     //[SerializeField] private TrailRenderer tr; // these variable makes visual effect
 
     private Vector3 velocity;
@@ -20,7 +19,10 @@ public class FinalDash : MonoBehaviour
     private float currentDashingDistace;
     private float currentDashingDuration;
     private float gravity;
-    [SerializeField] private AudioSource dashSound;
+
+    private bool isDashing;
+    private bool isFacingRight = true;
+
     public UnityEvent dashEvent;
 
     public void ResetValues()
@@ -116,7 +118,6 @@ public class FinalDash : MonoBehaviour
             isFacingRight = !isFacingRight;
         }
     }
-    float x;
     private void CheckForCollision()
     {
         RaycastHit hit;
