@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using UnityEngine.VFX;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
+    private GameObject MuzzleFlashIns;
+    [SerializeField] private AudioSource JumpSound;
+    [SerializeField] private AudioSource doubleJumpSound;
 
 
     public UnityEvent jumpEvent;
@@ -62,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private BoxCollider boxCollider;
 
-    private int horizontalRayCount, verticalRayCount = 4;
+    private int horizontalRayCount = 6; 
+    private int verticalRayCount = 4;
 
     private float movementX, movementY;
     private float deceleration;
@@ -87,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
   
     void Start()
     {
-       
         initialSpeed = moveSpeed - 5;
         boxCollider = GetComponent<BoxCollider>();
         CalculateRaySpacing();
@@ -98,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         updateRayCastOrgins();
         UpdateMovementForce();
         CheckIsGrounded();
@@ -124,18 +129,18 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
-      
         velocity = new Vector2(movementX, movementY);
-
-        HandleVerticalCollisions(ref velocity);
-        HandleHorizontalCollisions(ref velocity);
-        EdgeControl(); //Experimentelt!
         JumpBuffer();
 
-        if (!CheckCollision())
+        if (velocity.y != 0)
         {
-            transform.Translate(velocity * Time.deltaTime);
+            HandleVerticalCollisions(ref velocity);
         }
+        if (velocity.x != 0)
+        {
+            HandleHorizontalCollisions(ref velocity);
+        }
+        transform.Translate(velocity * Time.deltaTime);
         
         playerAnimator.SetFloat("Speed", movementX);
     }
@@ -155,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
             movingRight = false;
             movingLeft = true;
         }
-        else if (ctx.ReadValue<Vector2>().x < 0.2f || ctx.ReadValue<Vector2>().x > -0.2f)
+        else if (ctx.ReadValue<Vector2>().x < 0.1f || ctx.ReadValue<Vector2>().x > -0.1f)
         {
             movingRight = false;
             movingLeft = false;
@@ -186,11 +191,13 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded)
             {
                 hasJumpedOnGround = true;
+                JumpSound.Play();
             }
             if (!hasCoyoteTime && hasDoubleJump)
             {
-
-                GameObject MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
+                doubleJumpSound.Play();
+                MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
+                StartCoroutine(VFXRemover());
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
             }
@@ -203,6 +210,11 @@ public class PlayerMovement : MonoBehaviour
             runBufferTimer = true;
             bufferTimer = 0;
         }
+    }
+    private IEnumerator VFXRemover()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(MuzzleFlashIns);
     }
 
     private void JumpBuffer()
@@ -220,39 +232,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void EdgeControl()
+    private void EdgeControl(RaycastHit hit)
     {
-        if (isGrounded) return;
+        float hitpointY = hit.point.y;
+        Collider platformCollider = hit.collider;
+        Bounds col = platformCollider.bounds;
 
-        Bounds bound = boxCollider.bounds;
-        Vector2 rayCastOrgin = new Vector3(bound.center.x, bound.min.y, transform.position.z);
-        RaycastHit hit;
+        float colliderDif = col.max.y - hitpointY;
+        Debug.Log(colliderDif);
 
-        Debug.DrawRay(rayCastOrgin, Vector3.right * velocity.x * (0.4f + horizontalSkinWidth), Color.blue);
-        if (Physics.Raycast(rayCastOrgin, Vector3.right * velocity.x, out hit, 0.35f + horizontalSkinWidth, collisionLayer))
+        if (colliderDif > 0 && colliderDif < 0.5f)
         {
-            float hitpointY = hit.point.y;
-            Collider platformCollider = hit.collider;
-            Bounds col = platformCollider.bounds;
-
-            float colliderDif = col.max.y - hitpointY;
-            //Debug.Log(colliderDif);
-
-            if(colliderDif > 0 && colliderDif < 0.25f)
+            if (velocity.x < 0f)
             {
-                if(velocity.x < 0f)
-                {
-                    transform.position = new Vector3(col.max.x, col.max.y + 0.2f, transform.position.z);
-                    Debug.Log("ayy");
-                }
-                else
-                {
-                    transform.position = new Vector3(col.min.x, col.max.y + 0.2f, transform.position.z);
-                    Debug.Log("ayy");
-                }
+                transform.position = new Vector3(col.max.x, col.max.y + 0.2f, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(col.min.x, col.max.y + 0.2f, transform.position.z);
             }
         }
     }
+
     private void UpdateMovementForce()
     {
         if(movementAmount > 0.1f || movementAmount < -0.1f)
@@ -305,13 +306,6 @@ public class PlayerMovement : MonoBehaviour
         coyoteTimer += Time.deltaTime;
     }
 
-    private bool CheckCollision()
-    {
-        Bounds bounds = boxCollider.bounds;
-        Debug.DrawRay(boxCollider.center, velocity , Color.black);
-        return Physics.Raycast(boxCollider.center, velocity,((bounds.max.x - bounds.min.x) / 2), collisionLayer);
-    }
-
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
@@ -332,15 +326,14 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
+            
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
-
+           
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
             {
                 velocity.y = 0;
-                movementY = 0f;
-                
-                 
+                movementY = 0f;  
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, rayLength, oneWayLayer))
             {
@@ -374,13 +367,15 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastBottomRight - horizontalRayOffset;
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            
+     
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, rayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
             {
-                Debug.Log("stop");
+                if(i == 0)
+                {
+                    EdgeControl(hit);
+                }
                 velocity.x = 0;
                 movementX = 0;
             }
@@ -390,8 +385,6 @@ public class PlayerMovement : MonoBehaviour
     private void CalculateRaySpacing()
     {
         Bounds bounds = boxCollider.bounds;
-        //bounds.Expand(skinWidth * -2);
-
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
         verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
 
@@ -402,8 +395,6 @@ public class PlayerMovement : MonoBehaviour
     private void updateRayCastOrgins()
     {
         Bounds bounds = boxCollider.bounds;
-        //bounds.Expand(skinWidth * -2);
-      
         rayCastBottomLeft = new Vector2(bounds.min.x, bounds.min.y);
         rayCastTopLeft = new Vector2(bounds.min.x, bounds.max.y);
         rayCastBottomRight = new Vector2(bounds.max.x, bounds.min.y);

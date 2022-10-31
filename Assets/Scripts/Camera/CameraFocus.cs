@@ -1,44 +1,55 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class CameraFocus : MonoBehaviour
 {
-	[SerializeField] [Tooltip("Offset relative to its' starting position.")]
+	private bool _isOrthographic;
+	
+	[SerializeField, Tooltip("Offset relative to its' starting position.")]
 	private Vector3 offset;
-	[SerializeField] [Tooltip("How smooth the camera repositions itself.")]
+	[SerializeField, Tooltip("How smooth the camera repositions itself.")]
 	private float smoothTime = 0.5f;
-	[SerializeField] [Tooltip("The furthest out the camera can zoom out.")]
+	[SerializeField, Tooltip("The furthest out the camera can zoom out.")]
 	private float minZoom = 40.0f;
-	[SerializeField] [Tooltip("The closest in the camera can zoom in.")]
+	[SerializeField, Tooltip("The closest in the camera can zoom in.")]
 	private float maxZoom = 10.0f;
 	[SerializeField]
 	private float zoomLimiter = 50.0f;
-	[SerializeField] [Tooltip("List of targets to track.")]
-	private List<Transform> targets;
-	[SerializeField] [Tooltip("Whether or not to automatically add players throughout the game.")]
-	private bool autoAddPlayers = true;
-	
+
+	[SerializeField] public List<Transform> _targets;
 	private Vector3 _velocity;
 	private Camera _cam;
 
-	private void Start()
-	{
+	private float timer;
+	private bool hasReachedTime;
+
+	private void Start(){
+		_targets = new();
 		offset = transform.position;
 		_cam = GetComponent<Camera>();
 	}
 
     private void Update()
     {
-	    if (autoAddPlayers)
-	    {
-		    AutoAdd();
-	    }
+		if (hasReachedTime) return;
+
+        if(timer >= 0.2f)
+        {
+			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");  // Used for when changing level
+			foreach (GameObject tr in players)
+			{
+				_targets.Add(tr.transform);
+			}
+			hasReachedTime = true;
+		}
+		timer += Time.deltaTime;
     }
 
     private void LateUpdate()
 	{
-		if (targets.Count == 0) {return;}
+		if (_targets.Count == 0) {return;}
 
 		Bounds bounds = GetTargetsBounds();
 		Reposition(bounds);
@@ -48,35 +59,17 @@ public class CameraFocus : MonoBehaviour
 	/*
 	 * Adds a target for the camera to follow.
 	 */
-	public bool AddTarget(Transform t)
+	public void AddTarget(Transform t)
 	{
-		if (targets.Contains(t)){return false;}
-		
-		targets.Add(t);
-		return true;
+		_targets.Add(t);
 	}
 	
 	/*
 	 * Removes a target for the camera to stop following.
 	 */
-	public bool RemoveTarget(Transform t)
+	public void RemoveTarget(Transform t)
 	{
-		if (targets.Contains(t) == false) {return false;}
-
-		targets.Remove(t);
-		return true;
-	}
-
-	/*
-	 * Automatically adds players to the list.
-	 */
-	private void AutoAdd()
-	{
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-		foreach (GameObject player in players)
-		{
-			AddTarget(player.transform);
-		}
+		_targets.Remove(t);
 	}
 
 	/*
@@ -95,7 +88,13 @@ public class CameraFocus : MonoBehaviour
 	private void Focus(Bounds bounds)
 	{
 		float newZoom = Mathf.Lerp(maxZoom, minZoom, (bounds.size.x + bounds.size.y) / zoomLimiter);
-		_cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, newZoom, Time.deltaTime);
+		if (_isOrthographic){
+			_cam.orthographicSize = Mathf.Lerp(_cam.orthographicSize, newZoom, Time.deltaTime);
+		}
+		else{
+			_cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, newZoom, Time.deltaTime);
+		}
+		
 	}
 
 	/*
@@ -103,9 +102,9 @@ public class CameraFocus : MonoBehaviour
 	 */
 	private Vector3 GetMedian(Bounds bounds)
 	{
-		if (targets.Count == 1)
+		if (_targets.Count == 1)
 		{
-			return targets[0].position;
+			return _targets[0].position;
 		}
 		
 		return bounds.center;
@@ -116,12 +115,41 @@ public class CameraFocus : MonoBehaviour
 	 */
 	private Bounds GetTargetsBounds()
 	{
-		Bounds bounds = new Bounds(targets[0].position, Vector3.zero);
-		for (int i = 0; i < targets.Count; i++)
+		Bounds bounds = new Bounds(_targets[0].position, Vector3.zero);
+		for (int i = 0; i < _targets.Count; i++)
 		{
-			bounds.Encapsulate(targets[i].position);
+			bounds.Encapsulate(_targets[i].position);
 		}
 
 		return bounds;
 	}
+
+	private void OnValidate(){
+		_isOrthographic = gameObject.GetComponent<Camera>().orthographic;
+	}
+}
+
+[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+public class ShowIfAttribute : PropertyAttribute
+{
+	public ActionOnConditionFail Action {get;private set;}
+	public ConditionOperator Operator {get;private set;}
+	public string[] Conditions {get;private set;}
+
+	public ShowIfAttribute(ActionOnConditionFail action, ConditionOperator conditionOperator, params string[] conditions)
+	{
+		Action  = action;
+		Operator = conditionOperator;
+		Conditions = conditions;
+	}
+}
+
+public enum ConditionOperator{
+	And,
+	Or,
+}
+
+public enum ActionOnConditionFail{ 
+	DontDraw, 
+	JustDisable,
 }

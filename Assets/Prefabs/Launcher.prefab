@@ -120,11 +120,11 @@ MonoBehaviour:
     type: 3}
   projectileOrigin: {fileID: 8219942326039036527}
   projectileForce: 100
-  MuzzleFlash: {fileID: 0}
+  MuzzleFlash: {fileID: 8832398278110330611, guid: 6a51a15650e5e9f4d9b75377e960e8ce,
+    type: 3}
   shootSound: {fileID: 0}
   Sword: {fileID: 0}
-  pickUp_Proto: {fileID: 565460013329476676, guid: b1192d4dc8bc4b442b24e1abf65dd17e,
-    type: 3}
+  pickUp_Proto: {fileID: 0}
 --- !u!1 &8219942326039036527
 GameObject:
   m_ObjectHideFlags: 0
