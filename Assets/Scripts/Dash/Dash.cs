@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 public class Dash : MonoBehaviour
 {
+    enum DashType { FullAngleDash , FourFixedAnglesDash, HorizantalAngleDash }
+    [SerializeField] DashType dashType;
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool stopGravityWhileDashing = true;
     private bool isDashing;
@@ -66,8 +68,6 @@ public class Dash : MonoBehaviour
     }
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
-        Vector2 t = context.ReadValue<Vector2>();
-
         if (canDash && !isDashing)
         {
             StartCoroutine(DashAction());
