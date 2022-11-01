@@ -5657,6 +5657,7 @@ MonoBehaviour:
   playerID: 0
   startPos: {x: 0, y: 0, z: 0}
   isAlive: 0
+  headGearSlot: {fileID: 0}
 --- !u!114 &6592616742247666660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6041,6 +6042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 300225489857970639}
   equippedWeapon: {fileID: 0}
+  aim: {fileID: 0}
 --- !u!114 &786125547027356455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7366,6 +7368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893873290572829414, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
+        type: 3}
+      propertyPath: m_TagString
+      value: HeadSlot
       objectReference: {fileID: 0}
     - target: {fileID: 1282957094468786186, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}

@@ -8,7 +8,7 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private Camera camera;
     [SerializeField] GameObject characterLow;
     [SerializeField] GameObject[] accessorites;
-    [SerializeField] GameObject accessoritesSlot;
+    //[SerializeField] GameObject accessoritesSlot;
 
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
     public Material[] colors;
@@ -36,8 +36,10 @@ public class PlayerJoinManager : PlayerSpawnManager
         playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
         // Finds where the accessory should be placed (HeadSlot)
         //accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
+        PlayerDetails playerDetails = playerInput.gameObject.GetComponent<PlayerDetails>();
         // Put the accessory on the HeadSlot
-        //Instantiate(accessorites[playerInput.playerIndex], accessoritesSlot.transform);
+        GameObject accessory = Instantiate(accessorites[playerInput.playerIndex], playerDetails.HeadGearSlot());//accessoritesSlot.transform);
+        accessory.transform.SetParent(playerInput.gameObject.transform);
     }
     private void AddPlayerInFocus(Transform player)
     {
