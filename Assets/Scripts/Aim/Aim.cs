@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class Aim : MonoBehaviour
 {
     enum AngleRotations{ FullAngleRotation, HalvAngleRotation, EightFixedAnglesRotation, FourFixedAnglesRotation }
-    [SerializeField] AngleRotations rotations;
-    [SerializeField] AngleRotations rotationsOverride;
+    [SerializeField] private AngleRotations rotations;
+    [SerializeField] private AngleRotations rotationsOverride;
 
     private Vector3 mousePos;
     private Vector3 direction;
-    public Quaternion rotation;
+    private Quaternion rotation;
     private float angle;
     private bool usingOverride = false;
 
