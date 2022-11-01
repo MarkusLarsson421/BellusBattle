@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     public UnityEvent jumpEvent;
 
-    public LayerMask WallLayer
+    public LayerMask CollisionLayer
     {
         get { return collisionLayer; }
     }
@@ -243,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
         Bounds col = platformCollider.bounds;
 
         float colliderDif = col.max.y - hitpointY;
-        Debug.Log(colliderDif);
+        //Debug.Log(colliderDif);
 
         if (colliderDif > 0 && colliderDif < edgeControlAmount)
         {

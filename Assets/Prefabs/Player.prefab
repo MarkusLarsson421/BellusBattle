@@ -5415,6 +5415,7 @@ GameObject:
   - component: {fileID: 761715777191676976}
   - component: {fileID: 7204374830010860157}
   - component: {fileID: 1079757518853252576}
+  - component: {fileID: 7604770547986073551}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5670,6 +5671,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6592616742247666660}
+        m_TargetAssemblyTypeName: Dash, Assembly-CSharp
+        m_MethodName: CheckDashWithJoystickDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 97c78426-b574-4300-877c-93debf7375e8
     m_ActionName: Player/AimOverride[/XInputControllerWindows/leftStick/left]
   m_NeverAutoSwitchControlSchemes: 0
@@ -5699,7 +5712,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6431588530169345916}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9e7e3762a3fa3f44b3ad82306d8c8aa, type: 3}
   m_Name: 
@@ -6079,6 +6092,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7604770547986073551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431588530169345916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e79b9e064f7d1d49b73b65411f257d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canDash: 1
+  stopGravityWhileDashing: 1
+  isInvincibileWhileDashing: 1
+  dashingActivationCooldown: 1
+  dashType: 0
 --- !u!1 &6655365121378666022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7745,7 +7775,7 @@ PrefabInstance:
     - target: {fileID: 3476690299495660232, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: rotations
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3491017541839909693, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}

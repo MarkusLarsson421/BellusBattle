@@ -21,6 +21,8 @@ public class Dash : MonoBehaviour
     private float currentDashingDistace;
     private float currentDashingDuration;
     private float gravity;
+    Vector3 direction;
+    private float angle;
 
     private bool isDashing;
     private bool isFacingRight = true;
@@ -75,34 +77,37 @@ public class Dash : MonoBehaviour
             StartCoroutine(DashAction());
         }
     }
-    //public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
-    //{
-    //    Vector2 t = context.ReadValue<Vector2>();
-    //}
+    public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
+    {
+        direction = context.ReadValue<Vector2>();
+        if (direction.x == 0 && direction.y == 0)
+        {
+            if(isFacingRight) direction = Vector2.right;
+            else direction = Vector2.left;
+        }
+        else if (isFacingRight)
+        {
+            direction = Vector2.right * direction;
+            direction.Normalize();
+        }
+        else
+        {
+            direction = Vector2.left * direction;
+            direction.Normalize();
+        }
+    }
 
     private IEnumerator DashAction()
     {
-        dashSound.Play();
-        CheckForCollision();
-        canDash = false;
-        isDashing = true;
-        StartCoroutine(Invincibility());
-        dashEvent.Invoke();
+        StartDashProtocol();
         if (stopGravityWhileDashing) movement.DownwardForce = -15f; // should be 0???
-
-        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
-        if (!isFacingRight)
-        {
-            velocity *= -1;
-        }
+        Debug.Log(movement.Velocity.x);
+        if(isFacingRight)velocity = new Vector3(currentDashingDistace - movement.Velocity.x, direction.y*4 * currentDashingDistace, 0f);
+        else velocity = new Vector3(-currentDashingDistace - movement.Velocity.x, direction.y*4 * currentDashingDistace, 0f);
 
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
-        //tr.emitting = false; //See variable TrailRenderer tr
-        currentDashingDistace = dashingDistace;
-        currentDashingDuration = dashingDuration;
-        movement.DownwardForce = gravity;
-        isDashing = false;
+        EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
 
@@ -123,25 +128,32 @@ public class Dash : MonoBehaviour
     private void CheckForCollision()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.right, out hit, currentDashingDistace/4, movement.WallLayer) && isFacingRight) //4 is a the number that make dash distance works correct 
+        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace/4, movement.CollisionLayer)) //4 is a the number that make dash distance works correct 
         {
-            if (hit.distance * 4 < 3)
+            if (hit.distance * 4 < currentDashingDistace / 4)
             {
                 currentDashingDistace = 0;
                 return;
             }
             currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
         }
-        else if (Physics.Raycast(transform.position, Vector3.left, out hit, currentDashingDistace / 4, movement.WallLayer) && !isFacingRight) // 4 is a the number that make dash distance works correct 
-        {
-            if (hit.distance * 4 < 3)
-            {
-                currentDashingDistace = 0;
-                return;
-            }
-            currentDashingDistace = hit.distance * 4 - 0.5f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
-        }
-
+    }
+    private void StartDashProtocol()
+    {
+        dashSound.Play();
+        CheckForCollision();
+        canDash = false;
+        isDashing = true;
+        StartCoroutine(Invincibility());
+        dashEvent.Invoke();
+    }
+    private void EndDashProtocol()
+    {
+        //tr.emitting = false; //See variable TrailRenderer tr
+        currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
+        movement.DownwardForce = gravity;
+        isDashing = false;
     }
 
 
