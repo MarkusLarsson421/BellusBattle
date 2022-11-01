@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEditor.Rendering.LookDev;
+using UnityEditor.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -68,8 +69,8 @@ public class DashAdvanced : MonoBehaviour
         {
             EditorGUILayout.LabelField("Details E1", EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Distace", GUILayout.MaxWidth(100));
-            dash.dashingDistace = EditorGUILayout.FloatField(dash.dashingDistace);
+            GUILayout.Label("Distace", GUILayout.MaxWidth(100));
+            dash.SetDashingDistance(EditorGUILayout.FloatField(dash.dashingDistace));
             EditorGUILayout.LabelField("Duration", GUILayout.MaxWidth(100));
             dash.dashingDuration = EditorGUILayout.FloatField(dash.dashingDuration);
             EditorGUILayout.EndHorizontal();
@@ -111,7 +112,10 @@ public class DashAdvanced : MonoBehaviour
     }
 #endif
     #endregion
-
+    public void SetDashingDistance(float amount)
+    {
+        dashingDistace = amount;
+    }
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
         if (canDash && !isDashing)
