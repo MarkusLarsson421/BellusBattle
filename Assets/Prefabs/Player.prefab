@@ -409,6 +409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotations: 0
+  rotationsOverride: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4607468897157483292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5473,9 +5475,7 @@ MonoBehaviour:
   acceleration: 35245
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
-  edgeControlAmount: 0.5
   jumpBufferTime: 0.04
-  coyoteTime: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -5505,6 +5505,7 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
+  boxCollider: {fileID: 0}
 --- !u!114 &2786539736660453916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5567,19 +5568,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4782767669193128058}
         m_TargetAssemblyTypeName: Aim, Assembly-CSharp
-        m_MethodName: JoiStickInputToAngleCalculation
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4628858658940424812}
-        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
-        m_MethodName: JoiStickInputToAngleCalculation
+        m_MethodName: OverrideJoystickInputToAngleCalculation
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5667,6 +5656,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8b4c91bd-af96-4030-be35-ca6edf77ff28
     m_ActionName: Player/PickUp/Drop[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4782767669193128058}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: DefualtJoystickInputToAngleCalculation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 97c78426-b574-4300-877c-93debf7375e8
+    m_ActionName: Player/AimOverride[/XInputControllerWindows/leftStick/left]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5747,7 +5752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a854214b306134d938f50acf848ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObj: {fileID: 2645330954739622038}
+  g: {fileID: 7210684032876526358}
 --- !u!114 &8544227076739203574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5761,6 +5766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CF: {fileID: 0}
+  health: 1
   boxCollider: {fileID: 6431588530169345906}
   rightArm: {fileID: 2915926472710746649}
   skr: {fileID: 6010799286257098507}
@@ -7739,7 +7745,7 @@ PrefabInstance:
     - target: {fileID: 3476690299495660232, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: rotations
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3491017541839909693, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
@@ -8965,12 +8971,6 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!1 &2645330954739622038 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6257321559319323172, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8241695838658003634}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2842460971312104397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6129981298904580479, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
@@ -9594,25 +9594,6 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!1 &7014410788076907946 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1384948970756468504, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8241695838658003634}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4628858658940424812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7014410788076907946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440f69ea1c96fba4684c107bfef131b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotations: 0
 --- !u!4 &7600359564593042094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,

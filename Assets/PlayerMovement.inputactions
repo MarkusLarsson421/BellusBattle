@@ -33,6 +33,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "AimOverride",
+                    "type": "Value",
+                    "id": "97c78426-b574-4300-877c-93debf7375e8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "fee1f234-7f70-425c-b842-d6bbc553708a",
@@ -287,6 +296,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PickUp/Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7a532d3-f49c-4522-b6d3-152a395b5eaa",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimOverride",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

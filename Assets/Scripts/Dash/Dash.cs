@@ -2,8 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-public class FinalDash : MonoBehaviour
+public class Dash : MonoBehaviour
 {
+    enum DashType { FullAngleDash , FourFixedAnglesDash, HorizantalAngleDash }
+    [SerializeField] DashType dashType;
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool stopGravityWhileDashing = true;
     [SerializeField] private float dashingDistace = 24f;
@@ -68,15 +70,15 @@ public class FinalDash : MonoBehaviour
     }
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
-        if (isDashing)
-        {
-            return;
-        }
-        if (canDash)
+        if (canDash && !isDashing)
         {
             StartCoroutine(DashAction());
         }
     }
+    //public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
+    //{
+    //    Vector2 t = context.ReadValue<Vector2>();
+    //}
 
     private IEnumerator DashAction()
     {

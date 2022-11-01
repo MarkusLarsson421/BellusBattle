@@ -21,10 +21,6 @@ public class Item : MonoBehaviour{
 		Rotate();
 	}
 
-	private void OnCollisionEnter(){
-		//TODO handle pickup functionality.
-	}
-
 	private void Rotate(){
 		transform.Rotate(Vector3.up * (speed * Time.deltaTime));
 	}
