@@ -13,6 +13,8 @@ TagManager:
   - Grenade
   - Revolver
   - Obstacle
+  - Wind
+  - Muzzle
   layers:
   - Default
   - TransparentFX

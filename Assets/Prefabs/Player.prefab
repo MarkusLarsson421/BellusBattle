@@ -5303,14 +5303,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5880428358489751191}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.4851478, y: -0.47226548, z: -0.5831768, w: 0.44888952}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8000850111832111331}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -6.619, y: -85.196, z: -98.739}
 --- !u!1 &5954001412046255214
 GameObject:
   m_ObjectHideFlags: 0
@@ -5411,10 +5411,11 @@ GameObject:
   - component: {fileID: 1991130997618187709}
   - component: {fileID: 4997217773707887276}
   - component: {fileID: 8544227076739203574}
-  - component: {fileID: 7452349033133948718}
   - component: {fileID: 761715777191676976}
   - component: {fileID: 7204374830010860157}
   - component: {fileID: 1079757518853252576}
+  - component: {fileID: 7012220651076465371}
+  - component: {fileID: 786125547027356455}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5602,34 +5603,10 @@ MonoBehaviour:
     m_ActionName: Player/Join Game[/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7432570583900512928}
-        m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
-        m_MethodName: Fire
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 243362842806509486}
-        m_TargetAssemblyTypeName: Sword_Prototype, Assembly-CSharp
-        m_MethodName: Attack
+      - m_Target: {fileID: 786125547027356455}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: OnGunShot
         m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8730448016148002197}
-        m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
-        m_MethodName: Fire
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5641,19 +5618,7 @@ MonoBehaviour:
     m_ActionId: 797709a1-c0ec-43f5-bf66-7178908db49e
     m_ActionName: Player/Shoot/Attack[/XInputControllerWindows/rightTrigger]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7452349033133948718}
-        m_TargetAssemblyTypeName: PickUp_ProtoV1, Assembly-CSharp
-        m_MethodName: OnPickUp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 8b4c91bd-af96-4030-be35-ca6edf77ff28
     m_ActionName: Player/PickUp/Drop[/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
@@ -5773,24 +5738,7 @@ MonoBehaviour:
   gunMesh: {fileID: 5609809110401844018}
   swordMesh: {fileID: 243362842923368704}
   grenadeMesh: {fileID: 5834055624622029484}
-  ppV1: {fileID: 7452349033133948718}
---- !u!114 &7452349033133948718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6431588530169345916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: deafe8dd0898b68458e1be6daa22cf23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponPosition: {fileID: 300225489857970639}
-  revolver: {fileID: 6258587146885472999}
-  Grenade: {fileID: 3877872590549164000}
-  Sword: {fileID: 243362842806509488}
-  isHoldingWeapon: 0
+  ppV1: {fileID: 0}
 --- !u!82 &761715777191676976
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6079,6 +6027,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7012220651076465371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431588530169345916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd7fbd359d2c6a48bf51ac00a7cac49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlot: {fileID: 300225489857970639}
+  equippedWeapon: {fileID: 0}
+--- !u!114 &786125547027356455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431588530169345916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197ea498ad3d3d541bf0fbfeca4b7b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6655365121378666022
 GameObject:
   m_ObjectHideFlags: 0
@@ -6598,7 +6572,7 @@ PrefabInstance:
     - target: {fileID: 2277677801528443001, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277677801750240969, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
         type: 3}
@@ -6687,18 +6661,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59a8b008c1ec8f5449123dcd2a856ffe, type: 3}
---- !u!114 &243362842806509486 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2277677801528442983, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-    type: 3}
-  m_PrefabInstance: {fileID: 2088393504146825161}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243362842806509488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45dd60a14f3ccf43b0be20fd8d130c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &243362842806509488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2277677801528443001, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
@@ -6728,6 +6690,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Launcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456660403862733717, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4492956909744926773, guid: 11c41a91053289a4285c252a2fd18326,
         type: 3}
@@ -6828,7 +6795,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pickUp_Proto
       value: 
-      objectReference: {fileID: 7452349033133948718}
+      objectReference: {fileID: 0}
     - target: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
         type: 3}
       propertyPath: projectileForce
@@ -6895,18 +6862,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2443168129568054389}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8730448016148002197 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
-    type: 3}
-  m_PrefabInstance: {fileID: 2443168129568054389}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3877872590549164000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6492957045550096310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6997,7 +6952,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 457cfa393a91a6c429d84ade259841f4,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 457cfa393a91a6c429d84ade259841f4,
         type: 3}
@@ -7138,7 +7093,7 @@ MonoBehaviour:
     type: 3}
   shootSound: {fileID: 5106922075457548135}
   Sword: {fileID: 243362842806509488}
-  pickUp_Proto: {fileID: 7452349033133948718}
+  pickUp_Proto: {fileID: 0}
 --- !u!4 &6742213502215092317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 457cfa393a91a6c429d84ade259841f4,
