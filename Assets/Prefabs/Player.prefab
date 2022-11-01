@@ -5583,8 +5583,8 @@ MonoBehaviour:
     m_ActionName: Player/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6592616742247666660}
-        m_TargetAssemblyTypeName: FinalDash, Assembly-CSharp
+      - m_Target: {fileID: 7604770547986073551}
+        m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
         m_MethodName: DashWithJoystick
         m_Mode: 0
         m_Arguments:
@@ -5671,8 +5671,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6592616742247666660}
-        m_TargetAssemblyTypeName: Dash, Assembly-CSharp
+      - m_Target: {fileID: 7604770547986073551}
+        m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
         m_MethodName: CheckDashWithJoystickDirection
         m_Mode: 0
         m_Arguments:
@@ -6108,7 +6108,23 @@ MonoBehaviour:
   stopGravityWhileDashing: 1
   isInvincibileWhileDashing: 1
   dashingActivationCooldown: 1
-  dashType: 0
+  dashingInvincibilityDuration: 1
+  dashEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8727384561011662934}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Roll
+          m_BoolArgument: 0
+        m_CallState: 2
+  dashType: 1
 --- !u!1 &6655365121378666022
 GameObject:
   m_ObjectHideFlags: 0

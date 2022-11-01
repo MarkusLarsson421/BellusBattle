@@ -277,7 +277,7 @@ public class PlayerMovement : MonoBehaviour
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
     }
-    private bool CheckIsGrounded()
+    public bool CheckIsGrounded()
     {
         
         if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, oneWayLayer))

@@ -22,7 +22,6 @@ public class Dash : MonoBehaviour
     private float currentDashingDuration;
     private float gravity;
     Vector3 direction;
-    private float angle;
 
     private bool isDashing;
     private bool isFacingRight = true;
