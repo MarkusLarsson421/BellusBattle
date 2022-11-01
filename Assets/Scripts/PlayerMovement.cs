@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
     private float initialSpeed;
+    private float playerHeight;
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
     
@@ -98,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
         initialSpeed = moveSpeed - 5; //Används för acceleration
         boxCollider = GetComponent<BoxCollider>();
         CalculateRayLength();
+        playerHeight = verticalRayLength * 2;
         CalculateRaySpacing();
         DontDestroyOnLoad(gameObject);
         CalculateRaycastOffset();
@@ -183,7 +185,6 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         float jumpDecreaser = 1f;
-        float playerHeight = 1.8f;
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
             transform.position += Vector3.down * playerHeight;
@@ -237,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void EdgeControl(RaycastHit hit)
     {
-        float hitColliderBuffer = 0.2f;
+        float hitColliderBuffer = 0.2f; // Avståndet spelaren kommer att placeras över den träffade colliderns största y-värde
         float hitpointY = hit.point.y;
         Collider platformCollider = hit.collider;
         Bounds col = platformCollider.bounds;
