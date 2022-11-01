@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,9 +28,10 @@ public class PlayerJoinManager : PlayerSpawnManager
         }
         */
         // Set the player ID, add one to the index to start at Player 1
-        playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
+        GameObject o = playerInput.gameObject;
+        o.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
         //
-        scoreManager.AddPlayers(playerInput.gameObject);
+        scoreManager.AddPlayers(o);
         //inputDevices.Add(playerInput.GetComponent<InputDevice>().deviceId);
         listOfPlayers.Add(playerInput);
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);

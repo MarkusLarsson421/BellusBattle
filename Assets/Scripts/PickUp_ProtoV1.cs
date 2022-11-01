@@ -1,25 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PickUp_ProtoV1 : MonoBehaviour
 {
+	[SerializeField] 
+	private GameObject revolver;
+	[SerializeField] 
+	private GameObject grenade;
+	[SerializeField] 
+	private GameObject sword;
+	[SerializeField] 
+	private Transform weaponPosition;
+	
+	private Collider[] _hitColliders;
+	private Weapon _currentWeapon;
+	private bool _isHoldingWeapon;
 
-    Collider[] hitColliders;
-    [SerializeField] private Transform weaponPosition;
-    private Weapon currentWeapon;
-    [SerializeField] GameObject revolver;
-    [SerializeField] GameObject Grenade;
-    [SerializeField] GameObject Sword;
-    public bool isHoldingWeapon;
+	public void DropWeapon()
+	{
+		_isHoldingWeapon = false;
+	}
+	
 
     private void PickUpWeapon(Vector3 center, float radius)
     {
-        hitColliders = Physics.OverlapSphere(center, radius);
-        foreach (Collider col in hitColliders)
+        _hitColliders = Physics.OverlapSphere(center, radius);
+        foreach (Collider col in _hitColliders)
         {
-            if (col.CompareTag("Revolver") && !isHoldingWeapon)
+            if (col.CompareTag("Revolver") && !_isHoldingWeapon)
             {
                 Debug.Log(col.gameObject.name);
                 col.gameObject.SetActive(false);
@@ -28,31 +36,31 @@ public class PickUp_ProtoV1 : MonoBehaviour
                 revolver.GetComponent<Weapon>().enabled = true;
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
-                Sword.GetComponentInChildren<MeshRenderer>().enabled = false;
-                Sword.GetComponent<Sword_Prototype>().enabled = false;
-                Sword.GetComponentInChildren<DropWeapon_Porotype>().enabled = false;
+                sword.GetComponentInChildren<MeshRenderer>().enabled = false;
+                sword.GetComponent<Sword_Prototype>().enabled = false;
+                sword.GetComponentInChildren<DropWeapon_Porotype>().enabled = false;
 
-                isHoldingWeapon = true;
+                _isHoldingWeapon = true;
 
                 return;
             }
-            if (col.CompareTag("Grenade") && !isHoldingWeapon)
+            if (col.CompareTag("Grenade") && !_isHoldingWeapon)
             {
                 Debug.Log(col.gameObject.name);
                 col.gameObject.SetActive(false);
                 Debug.Log("1");
 
-                Grenade.GetComponent<MeshRenderer>().enabled = true;
-                Grenade.GetComponent<Weapon>().enabled = true;
+                grenade.GetComponent<MeshRenderer>().enabled = true;
+                grenade.GetComponent<Weapon>().enabled = true;
                 Debug.Log("2");
                 //currentWeapon = col.gameObject.GetComponent<Weapon>();
                 //currentWeapon.transform.parent = weaponPosition.transform;
-                Sword.GetComponentInChildren<MeshRenderer>().enabled = false;
-                Sword.GetComponent<Sword_Prototype>().enabled = false;
-                Sword.GetComponentInChildren<DropWeapon_Porotype>().enabled = false;
+                sword.GetComponentInChildren<MeshRenderer>().enabled = false;
+                sword.GetComponent<Sword_Prototype>().enabled = false;
+                sword.GetComponentInChildren<DropWeapon_Porotype>().enabled = false;
                 Debug.Log("3");
 
-                isHoldingWeapon = true;
+                _isHoldingWeapon = true;
                 
                 return;
             }

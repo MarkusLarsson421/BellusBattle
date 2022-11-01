@@ -33,11 +33,10 @@ public class Bullet : Projectile
 			Die();
 		}
 
-		if (other.gameObject.tag == "Obstacle")
+		if (other.gameObject.CompareTag("Obstacle"))
 		{
 			Debug.Log("Obstacle");
 			Destroy(gameObject);
-			return;
 		}
 
 	}

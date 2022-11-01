@@ -4,19 +4,22 @@ using Random = System.Random;
 public class Weapon : MonoBehaviour
 {
 	[SerializeField] 
-	public Aim aim; // test to make bullet shoot in correct direction
-	
-	[SerializeField] [Tooltip("How accurate the firearm is.")] [Range(0, 1)]
+	private GameObject Sword;
+	[SerializeField] 
+	private PickUp_ProtoV1 pickUp_Proto;
+	[SerializeField] 
+	public Aim aim;
+	[SerializeField, Tooltip("How accurate the firearm is."), Range(0, 1)]
     private float inaccuracy = 1.0f;
-    [SerializeField] [Tooltip("Rounds per second.")]
+    [SerializeField, Tooltip("Rounds per second.")]
     private float fireRate = 5.0f;
-    [SerializeField] [Tooltip("Ammunition of the firearm.")]
+    [SerializeField, Tooltip("Ammunition of the firearm.")]
     private int ammo = 6;
-    [SerializeField] [Tooltip("What projectile is being fired.")] 
+    [SerializeField, Tooltip("What projectile is being fired.")] 
     private GameObject projectile;
-    [SerializeField] [Tooltip("Where the projectile is fired from.")] 
+    [SerializeField, Tooltip("Where the projectile is fired from.")] 
     private GameObject projectileOrigin;
-    [SerializeField] [Tooltip("The amount of force placed on the projectile.")]
+    [SerializeField, Tooltip("The amount of force placed on the projectile.")]
     private float projectileForce = 100.0f; 
     
     private float _nextTimeToFire;
@@ -24,13 +27,7 @@ public class Weapon : MonoBehaviour
     private ParticleSystem _muzzleFlash;
     private Projectile _projectile;
     private readonly Random _random = new();
-
-    private PlayerMovement player;
-
-    //[SerializeField] GameObject revolver;
-    //[SerializeField] GameObject Grenade;
-    [SerializeField] GameObject Sword;
-    [SerializeField] PickUp_ProtoV1 pickUp_Proto;
+    private PlayerMovement _player;
 
     private void Start(){
         _muzzleFlash = projectileOrigin.GetComponent<ParticleSystem>();
@@ -39,8 +36,8 @@ public class Weapon : MonoBehaviour
 
     public void OnPickUpWeapon()
     {
-        player = gameObject.GetComponent<PlayerMovement>();
-        aim = player.GetComponentInChildren<Aim>();
+        _player = gameObject.GetComponent<PlayerMovement>();
+        aim = _player.GetComponentInChildren<Aim>();
     }
 
     public void Fire(){
@@ -60,7 +57,7 @@ public class Weapon : MonoBehaviour
             Sword.GetComponentInChildren<MeshRenderer>().enabled = true;
             Sword.GetComponent<Sword_Prototype>().enabled = true;
 
-            pickUp_Proto.isHoldingWeapon = false;
+            pickUp_Proto.DropWeapon();
         }
         if (Time.time >= _nextTimeToFire)
         {
