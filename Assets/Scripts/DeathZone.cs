@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class DeathZone : MonoBehaviour
 {
-    [SerializeField] CameraFocus CF;
+    [SerializeField] private CameraFocus CF;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -15,8 +15,6 @@ public class DeathZone : MonoBehaviour
             other.gameObject.GetComponent<PlayerDetails>().isAlive = false;
             other.gameObject.GetComponent<PlayerMovement>().StopPlayer();
             CF.RemoveTarget(other.transform);
-            //other.gameObject.GetComponent<PlayerInputManager>().gameObject.SetActive(false);
-            //other.gameObject.SetActive(false);
         }
     }
 }

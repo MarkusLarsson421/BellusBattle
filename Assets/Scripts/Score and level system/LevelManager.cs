@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
         scenesToChooseFrom.Remove("MainMenu");
+        scenesToChooseFrom.Remove("The_End");
     }
     private void CreateListOfScenesFromBuild()
     {
@@ -105,6 +106,11 @@ public class LevelManager : MonoBehaviour
         int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
         scenesToChooseFrom.RemoveAt(randomNumber);
+    }
+    public void Finish() 
+    {
+        Debug.Log("FAN VA COOOLOT SPELET ÄR SLUT");
+        SceneManager.LoadScene("The_End");
     }
 
 }

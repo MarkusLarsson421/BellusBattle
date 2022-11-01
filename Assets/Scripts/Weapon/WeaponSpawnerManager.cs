@@ -66,7 +66,7 @@ public class WeaponSpawnerManager : MonoBehaviour
             choosenSpawners.Add(spawnersToChooseFrom.ElementAt(temporaryNumber));
             //spawnersToChooseFrom.RemoveAt(temporaryNumber);
         }
-        Debug.Log(spawnersToChooseFrom.Count);
+        //Debug.Log(spawnersToChooseFrom.Count);
     }
     private void SpawnWeaponsInSpawners()
     {

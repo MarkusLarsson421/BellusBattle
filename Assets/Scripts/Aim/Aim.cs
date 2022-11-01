@@ -6,17 +6,18 @@ using UnityEngine.InputSystem;
 public class Aim : MonoBehaviour
 {
     enum AngleRotations{ FullAngleRotation, HalvAngleRotation, EightFixedAnglesRotation, FourFixedAnglesRotation }
-    [SerializeField] AngleRotations rotations;
+    [SerializeField] private AngleRotations rotations;
+    [SerializeField] private AngleRotations rotationsOverride;
 
-    Vector3 mousePos;
-    Vector3 direction;
-    public Quaternion rotation;
-    float angle;
+    private Vector3 mousePos;
+    private Vector3 direction;
+    private Quaternion rotation;
+    private float angle;
+    private bool usingOverride = false;
 
     private void Update()
     {
         //MouseInputToAngleCalculation();
-        ChooseAngleRotation();
         transform.rotation = rotation;
     }
     private void MouseInputToAngleCalculation()
@@ -28,18 +29,32 @@ public class Aim : MonoBehaviour
         direction.Normalize();
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
-    public void JoiStickInputToAngleCalculation(InputAction.CallbackContext context)
+    public void DefualtJoystickInputToAngleCalculation(InputAction.CallbackContext context)
     {
         Vector2 t = context.ReadValue<Vector2>();
-        if (t.x == 0 && t.y == 0) return;
+        if (t.x == 0 && t.y == 0 || usingOverride) return;
         direction = t - (Vector2)transform.position;
         direction.Normalize();
         angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg; // -90 degrees
-        //Debug.Log(direction);
+        ChooseAngleRotation(rotations);
     }
-    private void ChooseAngleRotation()
+    public void OverrideJoystickInputToAngleCalculation(InputAction.CallbackContext context)
     {
-        switch (rotations)
+        Vector2 t = context.ReadValue<Vector2>();
+        if (t.x == 0 && t.y == 0)
+        {
+            usingOverride = false;
+            return;
+        }
+        usingOverride = true;
+        direction = t - (Vector2)transform.position;
+        direction.Normalize();
+        angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg; // -90 degrees
+        ChooseAngleRotation(rotationsOverride);
+    }
+    private void ChooseAngleRotation(AngleRotations type)
+    {
+        switch (type)
         {
             case AngleRotations.FullAngleRotation:
                 FullAngleRotation();
