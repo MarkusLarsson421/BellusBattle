@@ -11,14 +11,19 @@ public class Weapon : MonoBehaviour
     [SerializeField] [Tooltip("Rounds per second.")]
     private float fireRate = 5.0f;
     [SerializeField] [Tooltip("Ammunition of the firearm.")]
-    private int ammo = 6;
+    public int ammo = 6;
     [SerializeField] [Tooltip("What projectile is being fired.")] 
     private GameObject projectile;
     [SerializeField] [Tooltip("Where the projectile is fired from.")] 
     private GameObject projectileOrigin;
     [SerializeField] [Tooltip("The amount of force placed on the projectile.")]
-    private float projectileForce = 100.0f; 
-    
+    private float projectileForce = 100.0f;
+    [SerializeField]
+    [Tooltip("Muzzle flash")]
+    public GameObject MuzzleFlash;
+
+    public AudioSource shootSound;
+
     private float _nextTimeToFire;
     private bool _isFiring;
     private ParticleSystem _muzzleFlash;
@@ -47,7 +52,7 @@ public class Weapon : MonoBehaviour
         MeshRenderer g = gameObject.GetComponent<MeshRenderer>();
         if (!g.enabled)
         {
-            Debug.Log(g.ToString());
+            //Debug.Log(g.ToString());
             return;
         }
         if (ammo <= 0)
@@ -67,7 +72,11 @@ public class Weapon : MonoBehaviour
             _nextTimeToFire = Time.time + 1.0f / fireRate;
             ammo--;
             if (_muzzleFlash != null){_muzzleFlash.Play();}
+
             GameObject firedProjectile = Instantiate(projectile, projectileOrigin.transform.position, transform.rotation);
+            GameObject MuzzleFlashIns = Instantiate(MuzzleFlash, projectileOrigin.transform.position, transform.rotation);
+            MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
+            shootSound.Play();
 
             //Force calculation uses 'aim.transform' could possibly use 'transform.localPosition' or 'transform.localRotation' instead.
             //Calculation is inefficient, could possibly be improved to simulate inaccuracy better.

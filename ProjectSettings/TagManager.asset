@@ -12,6 +12,7 @@ TagManager:
   - CharacterLow
   - Grenade
   - Revolver
+  - Obstacle
   layers:
   - Default
   - TransparentFX
