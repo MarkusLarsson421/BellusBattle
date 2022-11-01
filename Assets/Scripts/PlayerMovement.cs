@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 velocity;
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
-    private Vector2 verticalRayOffset;
-    private Vector2 horizontalRayOffset;
+    private Vector2 verticalRayOffset, horizontalRayOffset;
+    
 
     private GameObject MuzzleFlashIns;
 
@@ -76,21 +76,19 @@ public class PlayerMovement : MonoBehaviour
     private float movementX, movementY;
     private float deceleration;
     
-    private float coyoteTimer;
+    private float coyoteTimer, bufferTimer;
     private float horizontalSkinWidth = 0.2f;
     private float verticalSkinWidth = 0.1f;
     private float downwardInput;
     private float verticalRaySpacing, horizontalRaySpacing;
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
-    
-    private float bufferTimer;
     private float initialSpeed;
 
-    private bool hasJumpedOnGround;
-    private bool hasCoyoteTime;
-    private bool hasDoubleJump;
-    private bool movingLeft, movingRight;
+    private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
+    
+    
+    private bool isMovingLeft, isMovingRight;
     private bool isStandingOnOneWayPlatform;
     private bool runBufferTimer;
     private bool hasJumpBuffer;
@@ -158,18 +156,18 @@ public class PlayerMovement : MonoBehaviour
       
         if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
-            movingRight = true;
-            movingLeft = false;
+            isMovingRight = true;
+            isMovingLeft = false;
         }
         else if (ctx.ReadValue<Vector2>().x < -0.1f)
         {
-            movingRight = false;
-            movingLeft = true;
+            isMovingRight = false;
+            isMovingLeft = true;
         }
         else if (ctx.ReadValue<Vector2>().x < 0.1f || ctx.ReadValue<Vector2>().x > -0.1f)
         {
-            movingRight = false;
-            movingLeft = false;
+            isMovingRight = false;
+            isMovingLeft = false;
         }
 
     }
@@ -264,11 +262,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if(movementAmount > 0.1f || movementAmount < -0.1f)
         {
-            if (movingRight)
+            if (isMovingRight)
             {
                 movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
             }
-            if (movingLeft)
+            if (isMovingLeft)
             {
                 movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
             }
