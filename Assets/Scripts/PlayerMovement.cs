@@ -111,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateRayCastOrgins();
         UpdateMovementForce();
-        CheckIsGrounded();
         UpdateCoyoteTime();
         
         if (!CheckIsGrounded())
