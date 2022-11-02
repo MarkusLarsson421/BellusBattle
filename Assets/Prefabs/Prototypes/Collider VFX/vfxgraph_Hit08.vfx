@@ -11754,7 +11754,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615971}
   m_ExposedName: TrailsRate
   m_Exposed: 1
-  m_Order: 33
+  m_Order: 34
   m_Category: PARTICLES
   m_Min:
     m_Type:
@@ -11834,7 +11834,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615973}
   m_ExposedName: TrailsColor
   m_Exposed: 1
-  m_Order: 31
+  m_Order: 32
   m_Category: PARTICLES
   m_Min:
     m_Type:
@@ -12050,7 +12050,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615979}
   m_ExposedName: TrailsSize
   m_Exposed: 1
-  m_Order: 35
+  m_Order: 36
   m_Category: PARTICLES
   m_Min:
     m_Type:
@@ -12130,7 +12130,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615981}
   m_ExposedName: TrailsTexture
   m_Exposed: 1
-  m_Order: 32
+  m_Order: 33
   m_Category: PARTICLES
   m_Min:
     m_Type:
@@ -12210,7 +12210,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615983}
   m_ExposedName: TrailsLifetime
   m_Exposed: 1
-  m_Order: 34
+  m_Order: 35
   m_Category: PARTICLES
   m_Min:
     m_Type:
@@ -17315,7 +17315,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616138}
   m_ExposedName: ParticlesScale
   m_Exposed: 1
-  m_Order: 30
+  m_Order: 31
   m_Category: PARTICLES
   m_Min:
     m_Type:
@@ -20932,7 +20932,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616309}
   m_ExposedName: SmokeSize 1
   m_Exposed: 1
-  m_Order: 29
+  m_Order: 30
   m_Category: SMOKE
   m_Min:
     m_Type:
