@@ -26,8 +26,9 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float airDashingDistace = 24f;
     [SerializeField] private float airDashingDuration = 0.2f;
     [Header("E3")]
-    [SerializeField] private float dashUpAngle = 20f;
-    [SerializeField] private float dashDownAngle = 20f;
+    [SerializeField] private float dashUpAngle = 90f;
+    [SerializeField] private float dashDownAngle = -90f;
+    [SerializeField] private float angleRange = 20;
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
     [SerializeField] private float dashingInvincibilityDuration = 1f;
@@ -165,7 +166,7 @@ public class DashAdvanced : MonoBehaviour
                 TwoStateDashAction();
                 break;
             case DashType.E3_AdvancedDash:
-               StartCoroutine(AdvancedDashAction());
+               AdvancedDashAction();
                 break;
             case DashType.E4_GigaChadDash:
                 break;
@@ -207,9 +208,13 @@ public class DashAdvanced : MonoBehaviour
         {
             return;
         }
-        else if (isFacingRight && !onControlOverride)
+        else if (isFacingRight)
         {
-            direction = Vector2.right * direction;
+            direction = Vector2.right;
+        }
+        else
+        {
+            direction = Vector2.left;
         }
     }
     private void CheckBoolValues()
@@ -227,17 +232,24 @@ public class DashAdvanced : MonoBehaviour
             currentDashingDistace *= -1;
         }
     }
-
-    private IEnumerator AdvancedDashAction()
+    private void AdvancedDashAction()
     {
         float angle;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
 
-        if (angle >= dashUpAngle - 20 && angle < dashUpAngle + 20) // make variable instead for 20
+        if (angle >= dashUpAngle - angleRange && angle <= angleRange + 20) // make variable instead for 20
         {
             onControlOverride = true;
             direction = Vector3.up;
+            StartCoroutine(AdvcDashAction());
         }
+        else
+        {
+            TwoStateDashAction();
+        }
+    }
+    private IEnumerator AdvcDashAction()
+    {
         if (!movement.CheckIsGrounded())
         {
             currentDashingDistace = airDashingDistace;
@@ -287,7 +299,7 @@ public class DashAdvanced : MonoBehaviour
             }
             else
             {
-            currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
+§            currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
             }
         }
     }
