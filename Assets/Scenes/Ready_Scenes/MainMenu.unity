@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1091961803}
   m_HandleRect: {fileID: 1091961802}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1884,6 +1884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: playingScenesOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840680792378777891, guid: 26748b17d5f5e994cab620063817464f,
+        type: 3}
+      propertyPath: timeTillRestartGame
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2840680792378777891, guid: 26748b17d5f5e994cab620063817464f,
         type: 3}

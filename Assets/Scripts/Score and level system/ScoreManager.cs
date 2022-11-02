@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -71,6 +70,11 @@ public class ScoreManager : MonoBehaviour
     {
         players.Add(player);
     }
+    private void ClearScore()
+    {
+        // loopa genom alla spelarna
+        // sätta deras score till 0
+    }
 
     private void CheckPlayersLeft()
     {
@@ -120,7 +124,8 @@ public class ScoreManager : MonoBehaviour
             if (getScore(cameraFocus._targets[0].transform.gameObject) == pointsToWin)
             {
                 winner = cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID;
-                levelManager.Finish();
+                ClearScore();
+                levelManager.Finish(gameObject);
                 //Nån har vunnit!
                 return;
             }
