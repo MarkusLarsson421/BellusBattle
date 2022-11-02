@@ -33,7 +33,6 @@ public class Aim : MonoBehaviour
     {
         Vector2 t = context.ReadValue<Vector2>();
         if (t.x == 0 && t.y == 0 || usingOverride) return;
-        direction = t - (Vector2)transform.position;
         direction.Normalize();
         angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg; // -90 degrees
         ChooseAngleRotation(rotations);
@@ -83,21 +82,31 @@ public class Aim : MonoBehaviour
     }
     private void EightFixedAnglesRotation()
     {
-        for (int i = -180; i < 180; i += 45)
+        if ((angle >= -180 && angle < -157.5) || (angle >= 157.5 && angle < 180))
         {
-            if (angle >= i - 22.5 && angle < i +45)
+            rotation = Quaternion.AngleAxis(-180, Vector3.forward);
+            return;
+        }
+        for (float i = -157.5f; i < 157.5; i += 45)
+        {
+            if (angle >= i && angle < i +45)
             {
-                rotation = Quaternion.AngleAxis(i , Vector3.forward);
+                rotation = Quaternion.AngleAxis(i + 22.5f , Vector3.forward);
             }
         }
     }
     private void FourFixedAnglesRotation()
     {
-        for (int i = -180; i < 180; i+= 90)
+        if ((angle >= -180 && angle < -135) || (angle >= 135 && angle < 180))
         {
-            if (angle >= i+45 && angle < i + 90+45)
+            rotation = Quaternion.AngleAxis(-180, Vector3.forward);
+            return;
+        }
+        for (int i = -135; i < 135; i+= 90)
+        {
+            if (angle >= i && angle < i + 90)
             {
-                rotation = Quaternion.AngleAxis(i+90, Vector3.forward);
+                rotation = Quaternion.AngleAxis(i+45, Vector3.forward);
             }
         }
     }
