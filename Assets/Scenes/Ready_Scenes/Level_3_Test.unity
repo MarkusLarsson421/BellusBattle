@@ -1298,7 +1298,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ecc1089d1d86c7f4ca1c9e45c65522eb, type: 2}
+      objectReference: {fileID: 2100000, guid: 50ac2d40b2ce54341b1bf58fba32ad60, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 765ddfd0471730a47ac8721c56db8da6, type: 3}
 --- !u!4 &94856348 stripped
@@ -6021,6 +6021,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UpperMiddleSideTower (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351720916045452087, guid: 80e584f9c29ab1e4d9d74e8da52c8502,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80e584f9c29ab1e4d9d74e8da52c8502, type: 3}
@@ -14199,6 +14204,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UpperMiddleSideTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351720916045452087, guid: 80e584f9c29ab1e4d9d74e8da52c8502,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80e584f9c29ab1e4d9d74e8da52c8502, type: 3}
