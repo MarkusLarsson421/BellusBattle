@@ -123,8 +123,6 @@ public class Gun : MonoBehaviour
                 GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
                 float forceForwrd = weaponData.projectileForce;
-                Debug.Log(muzzle.transform.right.x);
-                Debug.Log(muzzle.transform.right.y);
                 float aimx = muzzle.transform.forward.x;
                 float aimy = muzzle.transform.forward.y;
                 Vector3 force = new Vector3(forceForwrd * aimx, forceForwrd * aimy, 0f);
