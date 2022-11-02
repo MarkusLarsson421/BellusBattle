@@ -159,17 +159,9 @@ public class DashAdvanced : MonoBehaviour
         switch (dashType)
         {
             case DashType.E1_BasicDash:
-                if (!isFacingRight)
-                {
-                    currentDashingDistace *= -1;
-                }
                 StartCoroutine(BasicDashAction());
                 break;
             case DashType.E2_TwoStateDash:
-                if (!isFacingRight)
-                {
-                    currentDashingDistace *= -1;
-                }
                 TwoStateDashAction();
                 break;
             case DashType.E3_AdvancedDash:
@@ -180,12 +172,40 @@ public class DashAdvanced : MonoBehaviour
         }
 
     }
+    private IEnumerator BasicDashAction()
+    {
+        StartDashProtocol();
+        CheckBoolValues();
+        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
+        //tr.emitting = true; //See variable TrailRenderer tr
+        yield return new WaitForSeconds(currentDashingDuration);
+        EndDashProtocol();
+        yield return new WaitForSeconds(dashingActivationCooldown);
+        canDash = true;
+        //direction.y * 4 * currentDashingDistace
+    }
+    private void StartDashProtocol()
+    {
+        SetDirection();
+        CheckForCollision();
+        canDash = false;
+        isDashing = true;
+        dashEvent.Invoke();
+    }
+    private void EndDashProtocol()
+    {
+        //tr.emitting = false; //See variable TrailRenderer tr
+        currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
+        movement.DownwardForce = gravity;
+        isDashing = false;
+        onControlOverride = false;
+    }
     private void SetDirection()
     {
-        if (direction.x == 0 && direction.y == 0)
+        if (onControlOverride)
         {
-            if (isFacingRight) direction = Vector2.right;
-            else direction = Vector2.left;
+            return;
         }
         else if (isFacingRight && !onControlOverride)
         {
@@ -202,19 +222,12 @@ public class DashAdvanced : MonoBehaviour
         {
             StartCoroutine(Invincibility());
         }
+        if (!isFacingRight && !onControlOverride)
+        {
+            currentDashingDistace *= -1;
+        }
     }
-    private IEnumerator BasicDashAction()
-    {
-        StartDashProtocol();
-        CheckBoolValues();
-        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
-        //tr.emitting = true; //See variable TrailRenderer tr
-        yield return new WaitForSeconds(currentDashingDuration);
-        EndDashProtocol();
-        yield return new WaitForSeconds(dashingActivationCooldown);
-        canDash = true;
-        //direction.y * 4 * currentDashingDistace
-    }
+
     private IEnumerator AdvancedDashAction()
     {
         float angle;
@@ -249,23 +262,7 @@ public class DashAdvanced : MonoBehaviour
         }
         StartCoroutine(BasicDashAction());
     }
-    private void StartDashProtocol()
-    {
-        SetDirection();
-        CheckForCollision();
-        canDash = false;
-        isDashing = true;
-        dashEvent.Invoke();
-    }
-    private void EndDashProtocol()
-    {
-        //tr.emitting = false; //See variable TrailRenderer tr
-        currentDashingDistace = dashingDistace;
-        currentDashingDuration = dashingDuration;
-        movement.DownwardForce = gravity;
-        isDashing = false;
-        onControlOverride = false;
-    }
+
     private IEnumerator Invincibility()
     {
         health.SetInvincible(true);
