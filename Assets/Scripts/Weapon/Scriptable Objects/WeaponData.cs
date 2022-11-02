@@ -15,6 +15,9 @@ public class WeaponData : ScriptableObject
     public float damage;
     public float maxDistance;
     [SerializeField] public Transform muzzle;
+    [SerializeField] public GameObject projectile;
+    [SerializeField, Tooltip("The amount of force placed on the projectile.")]
+    public float projectileForce;
 
     [Header("Reloading")]
     public int currentAmmo;
@@ -22,4 +25,9 @@ public class WeaponData : ScriptableObject
     [Tooltip("In RPM")] public float fireRate;
     //public float reloadTime;
     //[HideInInspector] public bool reloading;
+
+    [Header("Sounds")]
+    [SerializeField, Tooltip("Sound made when picking up weapon")]
+    public AudioSource pickupSound;
+    
 }

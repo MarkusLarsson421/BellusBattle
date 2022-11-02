@@ -7,9 +7,6 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private Transform weaponSlot;
 
-    //[SerializeField]
-    //AudioSource pickupSound;
-
     [SerializeField]
     private WeaponData equippedWeapon;
 
@@ -22,19 +19,34 @@ public class WeaponManager : MonoBehaviour
     {
         aim = gameObject.GetComponentInChildren<Aim>();
     }
-
-    public void EquipWeapon(WeaponData weaponData)
+    private void Update()
     {
-        //pickupSound.Play();
+
+    }
+
+    public void EquipWeapon(WeaponData weaponData, GameObject nowWeapon)
+    {
         equippedWeapon = weaponData;
+
+        if (equippedWeapon.pickupSound != null)
+        {
+            equippedWeapon.pickupSound.Play();
+        }
+
+        /*
         if (currentWeapon != null)
         {
             Destroy(currentWeapon);
         }
+        */
 
-        currentWeapon = Instantiate(weaponData.weaponPrefab);
-        currentWeapon.transform.SetParent(weaponSlot);
-        currentWeapon.transform.localPosition = Vector3.zero;
-        currentWeapon.transform.localRotation = Quaternion.identity;
+        //currentWeapon = Instantiate(weaponData.weaponPrefab);
+        //currentWeapon.transform.SetParent(weaponSlot);
+        nowWeapon.transform.SetParent(weaponSlot);
+        nowWeapon.transform.localPosition = Vector3.zero;
+        nowWeapon.transform.localRotation = Quaternion.identity;
+        //weaponData.currentAmmo = weaponData.magSize;
+        //currentWeapon.GetComponent<BoxCollider>().enabled = false;
+        nowWeapon.GetComponent<BoxCollider>().enabled = false;
     }
 }

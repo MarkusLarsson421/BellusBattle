@@ -373,7 +373,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5442244501946298359}
-  - component: {fileID: 3103152835013345525}
   m_Layer: 0
   m_Name: AimPivot
   m_TagString: Untagged
@@ -396,20 +395,6 @@ Transform:
   m_Father: {fileID: 6431588530169345905}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
---- !u!114 &3103152835013345525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2953532988127057366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440f69ea1c96fba4684c107bfef131b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotations: 0
-  rotationsOverride: 0
 --- !u!1 &4607468897157483292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5618,7 +5603,19 @@ MonoBehaviour:
     m_ActionId: 797709a1-c0ec-43f5-bf66-7178908db49e
     m_ActionName: Player/Shoot/Attack[/XInputControllerWindows/rightTrigger]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: d67f3d9f04de78d4eb6f57277782e385, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 8b4c91bd-af96-4030-be35-ca6edf77ff28
     m_ActionName: Player/PickUp/Drop[/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:

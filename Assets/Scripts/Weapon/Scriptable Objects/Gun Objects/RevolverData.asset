@@ -18,6 +18,10 @@ MonoBehaviour:
   damage: 1
   maxDistance: 10
   muzzle: {fileID: 0}
-  currentAmmo: 3
+  projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
+    type: 3}
+  projectileForce: 200
+  currentAmmo: 0
   magSize: 6
   fireRate: 20
+  pickupSound: {fileID: 0}
