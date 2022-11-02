@@ -41,23 +41,23 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask CollisionLayer
     {
-        get { return collisionLayer; }
+        get => collisionLayer; 
     }
 
     public Vector2 Velocity
     {
-        get { return velocity; }
+        get => velocity; 
     }
 
     public float DownwardForce
     {
-        get { return downwardForce; }
-        set { downwardForce = value; }
+        get => downwardForce;
+        set => downwardForce = value; 
     }
 
     private bool isGrounded
     {
-        get { return CheckIsGrounded(); }
+        get => CheckIsGrounded(); 
     }
 
     private Vector2 velocity;
@@ -108,14 +108,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(velocity.y);
         UpdateRayCastOrgins();
         UpdateMovementForce();
         UpdateCoyoteTime();
         
-        if (!CheckIsGrounded())
+        if (isGrounded == false)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
+            
         }
 
         if (isGrounded && velocity.y < 0)
@@ -417,5 +418,14 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = 0;
         movementX = 0;
         movementY = 0;
+    }
+
+
+    public void AddExternalForce(Vector2 force)
+    {
+        movementY = force.y;
+        movementX = force.x;
+        velocity.y = 0;
+        
     }
 }
