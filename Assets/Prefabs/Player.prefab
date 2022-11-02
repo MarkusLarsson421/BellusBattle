@@ -6092,6 +6092,12 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 1
   isInvincibileWhileDashing: 1
+  dashingDistace: 24
+  dashingDuration: 0.124
+  airDashingDistace: 60
+  airDashingDuration: 0.124
+  dashUpAngle: 90
+  dashDownAngle: 20
   dashingActivationCooldown: 1
   dashingInvincibilityDuration: 1
   dashEvent:
@@ -6109,7 +6115,7 @@ MonoBehaviour:
           m_StringArgument: Roll
           m_BoolArgument: 0
         m_CallState: 2
-  dashType: 1
+  dashType: 2
 --- !u!1 &6655365121378666022
 GameObject:
   m_ObjectHideFlags: 0
