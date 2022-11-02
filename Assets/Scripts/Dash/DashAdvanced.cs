@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEditor.Rendering.LookDev;
 using UnityEditor.SceneManagement;
+using UnityEngine.UIElements;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -17,13 +18,18 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private bool isInvincibileWhileDashing = true;
     private bool isFacingRight;
     private bool isDashing;
-    [Header(" ")]
-    private float dashingDistace = 24f;
-    private float dashingDuration = 0.2f;
-    private float airDashingDistace = 24f;
-    private float airDashingDuration = 0.2f;
-    private float dashUpAngle = 20f;
-    private float dashDownAngle = 20f;
+    private bool onControlOverride;
+    [Header("E1")]
+    [SerializeField] private float dashingDistace = 24f;
+    [SerializeField] private float dashingDuration = 0.2f;
+    [Header("E2")]
+    [SerializeField] private float airDashingDistace = 24f;
+    [SerializeField] private float airDashingDuration = 0.2f;
+    [Header("E3")]
+    [SerializeField] private float dashUpAngle = 90f;
+    [SerializeField] private float dashDownAngle = -90f;
+    [SerializeField] private float angleRange = 20;
+    [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
     [SerializeField] private float dashingInvincibilityDuration = 1f;
 
@@ -38,84 +44,83 @@ public class DashAdvanced : MonoBehaviour
 
     enum DashType { E1_BasicDash, E2_TwoStateDash, E3_AdvancedDash, E4_GigaChadDash }
     [SerializeField] private DashType dashType;
-    #region Editor
-#if UNITY_EDITOR
-    [CustomEditor(typeof(DashAdvanced))]
-    public class DashAdvancedEditor : Editor
-    {
-        DashAdvanced dash;
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-            dash = (DashAdvanced)target;
-            switch (dash.dashType)
-            {
-                case DashType.E1_BasicDash:
-                    DrawDetailsE1();
-                    break;
-                case DashType.E2_TwoStateDash:
-                    DrawDetailsE2();
-                    break;
-                case DashType.E3_AdvancedDash:
-                    DrawDetailsE3();
-                    break;
-                case DashType.E4_GigaChadDash:
-                    DrawDetailsE4();
-                    break;
-            }
-        }
 
-        private void DrawDetailsE1()
-        {
-            EditorGUILayout.LabelField("Details E1", EditorStyles.boldLabel);
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("Distace", GUILayout.MaxWidth(100));
-            dash.SetDashingDistance(EditorGUILayout.FloatField(dash.dashingDistace));
-            EditorGUILayout.LabelField("Duration", GUILayout.MaxWidth(100));
-            dash.dashingDuration = EditorGUILayout.FloatField(dash.dashingDuration);
-            EditorGUILayout.EndHorizontal();
-        }
-        private void DrawDetailsE2()
-        {
-            DrawDetailsE1();
-            EditorGUILayout.LabelField("Details E2", EditorStyles.boldLabel);
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("AirDistace", GUILayout.MaxWidth(100));
-            dash.airDashingDistace = EditorGUILayout.FloatField(dash.airDashingDistace);
-            EditorGUILayout.LabelField("AirDuration", GUILayout.MaxWidth(100));
-            dash.airDashingDuration = EditorGUILayout.FloatField(dash.airDashingDuration);
-            EditorGUILayout.EndHorizontal();
-        }
-        private void DrawDetailsE3()
-        {
-            DrawDetailsE2();
-            EditorGUILayout.LabelField("Details E3", EditorStyles.boldLabel);
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Up Angle", GUILayout.MaxWidth(100));
-            dash.dashUpAngle = EditorGUILayout.FloatField(dash.dashUpAngle);
-            EditorGUILayout.LabelField("Down Angle", GUILayout.MaxWidth(100));
-            dash.dashDownAngle = EditorGUILayout.FloatField(dash.dashDownAngle);
-            EditorGUILayout.EndHorizontal();
-        }
-        private void DrawDetailsE4()
-        {
-            DrawDetailsE3();
-            EditorGUILayout.LabelField("Details E4", EditorStyles.boldLabel);
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.EndHorizontal();
-        }
-        //private void TextIO(string title, float widthSpacing, DashAdvanced d)
-        //{
-        //    EditorGUILayout.LabelField(title, GUILayout.MaxWidth(widthSpacing));
-        //    dash.airDashingDuration = EditorGUILayout.FloatField(dash.airDashingDuration);
-        //}
-    }
-#endif
-    #endregion
-    public void SetDashingDistance(float amount)
-    {
-        dashingDistace = amount;
-    }
+    //#region Editor
+    //[CustomEditor(typeof(DashAdvanced))]
+    //public class DashAdvancedEditor : Editor
+    //{
+    //    DashAdvanced dash;
+    //    public float dashingDistac;
+    //    public override void OnInspectorGUI()
+    //    {
+    //        dash = (DashAdvanced)target;
+    //        base.OnInspectorGUI();
+    //        switch (dash.dashType)
+    //        {
+    //            case DashType.E1_BasicDash:
+    //                DrawDetailsE1();
+    //                break;
+    //            case DashType.E2_TwoStateDash:
+    //                DrawDetailsE2();
+    //                break;
+    //            case DashType.E3_AdvancedDash:
+    //                DrawDetailsE3();
+    //                break;
+    //            case DashType.E4_GigaChadDash:
+    //                DrawDetailsE4();
+    //                break;
+    //        }
+    //    }
+
+    //    private void DrawDetailsE1()
+    //    {
+    //        EditorGUILayout.LabelField("Details E1", EditorStyles.boldLabel);
+    //        EditorGUILayout.BeginHorizontal();
+    //        GUILayout.Label("Distace", GUILayout.MaxWidth(100));
+    //        //dash.SetDashingDistance(EditorGUILayout.FloatField(dash.dashingDistace));
+    //        dashingDistac = EditorGUILayout.FloatField("", dashingDistac);
+    //        DashAdvanced.dashingDistace = dashingDistac;
+    //        EditorGUILayout.LabelField("Duration", GUILayout.MaxWidth(100));
+    //        dash.dashingDuration = EditorGUILayout.FloatField(dash.dashingDuration);
+    //        EditorGUILayout.EndHorizontal();
+    //    }
+    //    private void DrawDetailsE2()
+    //    {
+    //        DrawDetailsE1();
+    //        EditorGUILayout.LabelField("Details E2", EditorStyles.boldLabel);
+    //        EditorGUILayout.BeginHorizontal();
+    //        EditorGUILayout.LabelField("AirDistace", GUILayout.MaxWidth(100));
+    //        dash.airDashingDistace = EditorGUILayout.FloatField(dash.airDashingDistace);
+    //        EditorGUILayout.LabelField("AirDuration", GUILayout.MaxWidth(100));
+    //        dash.airDashingDuration = EditorGUILayout.FloatField(dash.airDashingDuration);
+    //        EditorGUILayout.EndHorizontal();
+    //    }
+    //    private void DrawDetailsE3()
+    //    {
+    //        DrawDetailsE2();
+    //        EditorGUILayout.LabelField("Details E3", EditorStyles.boldLabel);
+    //        EditorGUILayout.BeginHorizontal();
+    //        EditorGUILayout.LabelField("Up Angle", GUILayout.MaxWidth(100));
+    //        dash.dashUpAngle = EditorGUILayout.FloatField(dash.dashUpAngle);
+    //        EditorGUILayout.LabelField("Down Angle", GUILayout.MaxWidth(100));
+    //        dash.dashDownAngle = EditorGUILayout.FloatField(dash.dashDownAngle);
+    //        EditorGUILayout.EndHorizontal();
+    //    }
+    //    private void DrawDetailsE4()
+    //    {
+    //        DrawDetailsE3();
+    //        EditorGUILayout.LabelField("Details E4", EditorStyles.boldLabel);
+    //        EditorGUILayout.BeginHorizontal();
+    //        EditorGUILayout.EndHorizontal();
+    //    }
+    //    //private void TextIO(string title, float widthSpacing, DashAdvanced d)
+    //    //{
+    //    //    EditorGUILayout.LabelField(title, GUILayout.MaxWidth(widthSpacing));
+    //    //    dash.airDashingDuration = EditorGUILayout.FloatField(dash.airDashingDuration);
+    //    //}
+    //}
+    ////#endregion
+
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
         if (canDash && !isDashing)
@@ -155,12 +160,15 @@ public class DashAdvanced : MonoBehaviour
         switch (dashType)
         {
             case DashType.E1_BasicDash:
+                SetDirection();
                 StartCoroutine(BasicDashAction());
                 break;
             case DashType.E2_TwoStateDash:
+                SetDirection();
                 TwoStateDashAction();
                 break;
             case DashType.E3_AdvancedDash:
+                SetDirectionWithControlOverride();
                 AdvancedDashAction();
                 break;
             case DashType.E4_GigaChadDash:
@@ -168,26 +176,23 @@ public class DashAdvanced : MonoBehaviour
         }
 
     }
-    private void SetDirection()
+    private IEnumerator BasicDashAction()
     {
-        if (direction.x == 0 && direction.y == 0)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace / 4, movement.CollisionLayer)) //4 is a the number that make dash distance works correct 
         {
-            if (isFacingRight) direction = Vector2.right;
-            else direction = Vector2.left;
+            if (hit.distance * 4 < 3)
+            {
+                currentDashingDistace = 0;
+            }
+            else
+            {
+                currentDashingDistace = hit.distance * 5f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
+            }
         }
-        else if (isFacingRight)
-        {
-            direction = Vector2.right * direction;
-            direction.Normalize();
-        }
-        else
-        {
-            direction = Vector2.left * direction;
-            direction.Normalize();
-        }
-    }
-    private void CheckBoolValues()
-    {
+        canDash = false;
+        isDashing = true;
+        dashEvent.Invoke();
         if (stopGravityWhileDashing)
         {
             movement.DownwardForce = 0f;
@@ -196,36 +201,21 @@ public class DashAdvanced : MonoBehaviour
         {
             StartCoroutine(Invincibility());
         }
-        if (!isFacingRight)
+        if (!isFacingRight && !onControlOverride)
         {
             currentDashingDistace *= -1;
         }
-    }
-    private IEnumerator BasicDashAction()
-    {
-        StartDashProtocol();
-        CheckBoolValues();
-        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, direction.y * 4 * currentDashingDistace, 0f);
+        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
-        EndDashProtocol();
+        //tr.emitting = false; //See variable TrailRenderer tr
+        currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
+        movement.DownwardForce = gravity;
+        isDashing = false;
+        onControlOverride = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
-
-    }
-    private void TwoStateDashAction()
-    {
-        if (movement.CheckIsGrounded())
-        {
-            currentDashingDistace = airDashingDistace;
-            currentDashingDuration = airDashingDuration;
-        }
-        StartCoroutine(BasicDashAction());
-    }
-    private void AdvancedDashAction()
-    {
-        //Change Direction
-        TwoStateDashAction();
     }
     private void StartDashProtocol()
     {
@@ -242,7 +232,91 @@ public class DashAdvanced : MonoBehaviour
         currentDashingDuration = dashingDuration;
         movement.DownwardForce = gravity;
         isDashing = false;
+        onControlOverride = false;
     }
+    private void SetDirection()
+    {
+        if (onControlOverride)
+        {
+            return;
+        }
+        else if (isFacingRight)
+        {
+            direction = Vector2.right;
+        }
+        else
+        {
+            direction = Vector2.left;
+        }
+    }
+    private void SetDirectionWithControlOverride()
+    {
+        float angle;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
+
+        if (angle >= dashUpAngle - angleRange && angle <= dashUpAngle + angleRange) 
+        {
+            onControlOverride = true;
+            direction = Vector3.up;
+        }
+        else
+        {
+            SetDirection();
+        }
+    }
+    private void CheckBoolValues()
+    {
+        if (stopGravityWhileDashing)
+        {
+            movement.DownwardForce = 0f;
+        }
+        if (isInvincibileWhileDashing)
+        {
+            StartCoroutine(Invincibility());
+        }
+        if (!isFacingRight && !onControlOverride)
+        {
+            currentDashingDistace *= -1;
+        }
+    }
+    private void AdvancedDashAction()
+    {
+        if (onControlOverride) 
+        {
+            StartCoroutine(UpDashAction());
+        }
+        else
+        {
+            TwoStateDashAction();
+        }
+    }
+    private IEnumerator UpDashAction()
+    {
+        if (!movement.CheckIsGrounded())
+        {
+            currentDashingDistace = airDashingDistace;
+            currentDashingDuration = airDashingDuration;
+        }
+        StartDashProtocol();
+        CheckBoolValues();
+        velocity = new Vector3(0f, direction.y * currentDashingDistace, 0f);
+        //tr.emitting = true; //See variable TrailRenderer tr
+        yield return new WaitForSeconds(currentDashingDuration);
+        EndDashProtocol();
+        yield return new WaitForSeconds(dashingActivationCooldown);
+        canDash = true;
+        //direction.y * 4 * currentDashingDistace
+    }
+    private void TwoStateDashAction()
+    {
+        if (!movement.CheckIsGrounded())
+        {
+            currentDashingDistace = airDashingDistace;
+            currentDashingDuration = airDashingDuration;
+        }
+        StartCoroutine(BasicDashAction());
+    }
+
     private IEnumerator Invincibility()
     {
         health.SetInvincible(true);
@@ -267,7 +341,7 @@ public class DashAdvanced : MonoBehaviour
             }
             else
             {
-            currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
+                currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
             }
         }
     }
