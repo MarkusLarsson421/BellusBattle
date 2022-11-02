@@ -160,13 +160,16 @@ public class DashAdvanced : MonoBehaviour
         switch (dashType)
         {
             case DashType.E1_BasicDash:
+                SetDirection();
                 StartCoroutine(BasicDashAction());
                 break;
             case DashType.E2_TwoStateDash:
+                SetDirection();
                 TwoStateDashAction();
                 break;
             case DashType.E3_AdvancedDash:
-               AdvancedDashAction();
+                SetDirectionWithControlOverride();
+                AdvancedDashAction();
                 break;
             case DashType.E4_GigaChadDash:
                 break;
@@ -175,15 +178,44 @@ public class DashAdvanced : MonoBehaviour
     }
     private IEnumerator BasicDashAction()
     {
-        StartDashProtocol();
-        CheckBoolValues();
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace / 4, movement.CollisionLayer)) //4 is a the number that make dash distance works correct 
+        {
+            if (hit.distance * 4 < 3)
+            {
+                currentDashingDistace = 0;
+            }
+            else
+            {
+                currentDashingDistace = hit.distance * 5f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
+            }
+        }
+        canDash = false;
+        isDashing = true;
+        dashEvent.Invoke();
+        if (stopGravityWhileDashing)
+        {
+            movement.DownwardForce = 0f;
+        }
+        if (isInvincibileWhileDashing)
+        {
+            StartCoroutine(Invincibility());
+        }
+        if (!isFacingRight && !onControlOverride)
+        {
+            currentDashingDistace *= -1;
+        }
         velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
-        EndDashProtocol();
+        //tr.emitting = false; //See variable TrailRenderer tr
+        currentDashingDistace = dashingDistace;
+        currentDashingDuration = dashingDuration;
+        movement.DownwardForce = gravity;
+        isDashing = false;
+        onControlOverride = false;
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
-        //direction.y * 4 * currentDashingDistace
     }
     private void StartDashProtocol()
     {
@@ -217,6 +249,21 @@ public class DashAdvanced : MonoBehaviour
             direction = Vector2.left;
         }
     }
+    private void SetDirectionWithControlOverride()
+    {
+        float angle;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
+
+        if (angle >= dashUpAngle - angleRange && angle <= dashUpAngle + angleRange) 
+        {
+            onControlOverride = true;
+            direction = Vector3.up;
+        }
+        else
+        {
+            SetDirection();
+        }
+    }
     private void CheckBoolValues()
     {
         if (stopGravityWhileDashing)
@@ -234,21 +281,16 @@ public class DashAdvanced : MonoBehaviour
     }
     private void AdvancedDashAction()
     {
-        float angle;
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
-
-        if (angle >= dashUpAngle - angleRange && angle <= angleRange + 20) // make variable instead for 20
+        if (onControlOverride) 
         {
-            onControlOverride = true;
-            direction = Vector3.up;
-            StartCoroutine(AdvcDashAction());
+            StartCoroutine(UpDashAction());
         }
         else
         {
             TwoStateDashAction();
         }
     }
-    private IEnumerator AdvcDashAction()
+    private IEnumerator UpDashAction()
     {
         if (!movement.CheckIsGrounded())
         {
@@ -299,7 +341,7 @@ public class DashAdvanced : MonoBehaviour
             }
             else
             {
-§            currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
+                currentDashingDistace = hit.distance * 4 - 1f; /// 4 is a the number that make dash distance works correct // 0.5f är Players halv storlek
             }
         }
     }

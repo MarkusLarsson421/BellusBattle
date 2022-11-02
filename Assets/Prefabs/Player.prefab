@@ -6094,10 +6094,11 @@ MonoBehaviour:
   isInvincibileWhileDashing: 1
   dashingDistace: 24
   dashingDuration: 0.124
-  airDashingDistace: 60
+  airDashingDistace: 24
   airDashingDuration: 0.124
   dashUpAngle: 90
   dashDownAngle: 20
+  angleRange: 20
   dashingActivationCooldown: 1
   dashingInvincibilityDuration: 1
   dashEvent:
