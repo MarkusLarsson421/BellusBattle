@@ -72,8 +72,7 @@ public class ScoreManager : MonoBehaviour
     }
     private void ClearScore()
     {
-        // loopa genom alla spelarna
-        // sätta deras score till 0
+        scoreDic.Clear();
     }
 
     private void CheckPlayersLeft()
