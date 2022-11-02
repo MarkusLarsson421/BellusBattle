@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440f69ea1c96fba4684c107bfef131b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotations: 0
+  rotations: 3
   rotationsOverride: 0
 --- !u!1 &4607468897157483292
 GameObject:
@@ -6836,6 +6836,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 85.695
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937763799677506203, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a39d7201301ef554598bbed21ccab31e, type: 3}
+    - target: {fileID: 6201525818585368969, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
+      propertyPath: m_Name
+      value: ExplosionPlaceHolder4
       objectReference: {fileID: 0}
     - target: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
         type: 3}

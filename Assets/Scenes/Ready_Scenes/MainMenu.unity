@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1091961803}
   m_HandleRect: {fileID: 1091961802}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3029,6 +3029,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
+        type: 3}
+      propertyPath: maxZoom
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
+        type: 3}
+      propertyPath: minZoom
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243822597589709032, guid: 7fd267a9208675545ada65258a64089a,
+        type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: m_RootOrder
