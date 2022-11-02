@@ -24,8 +24,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625590031068301035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7149675897892172911}
   m_Father: {fileID: 0}
@@ -59,6 +60,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1625590031068301032}
   m_RootOrder: 0
@@ -89,6 +91,15 @@ VisualEffect:
       - m_Value: 1
         m_Name: ShockwaveRate
         m_Overridden: 0
+      - m_Value: 50
+        m_Name: TrailsRate
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: DecalRate
+        m_Overridden: 1
+      - m_Value: 0.45
+        m_Name: DecalSize
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -98,7 +109,7 @@ VisualEffect:
       - m_Value: {x: 1.7207954, y: 0.75678957, z: 0.180188, w: 1}
         m_Name: ShockwaveColor
         m_Overridden: 1
-      - m_Value: {x: 1.5135791, y: 1.5135791, z: 1.5135791, w: 1}
+      - m_Value: {x: 0.3490566, y: 0.34411713, z: 0.34411713, w: 1}
         m_Name: TrailsColor
         m_Overridden: 1
       - m_Value: {x: 0, y: 0, z: 0, w: 0}
@@ -115,11 +126,15 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Name: TrailsTexture
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &5935079843821030916
 VFXRenderer:
+  serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -129,6 +144,7 @@ VFXRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -136,16 +152,6 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
