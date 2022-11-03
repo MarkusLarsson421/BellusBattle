@@ -6096,10 +6096,10 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 0
   isInvincibileWhileDashing: 1
-  dashingDistace: 45.36
-  dashingDuration: 0.104
-  airDashingDistace: 45.36
-  airDashingDuration: 0.104
+  dashingDistace: 48
+  dashingDuration: 0.1
+  airDashingDistace: 48
+  airDashingDuration: 0.1
   dashUpAngle: 90
   dashUpAngleRange: 3
   canDashDown: 0

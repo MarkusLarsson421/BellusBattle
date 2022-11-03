@@ -136,6 +136,7 @@ public class DashAdvanced : MonoBehaviour
     }
     public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
     {
+        Flip();
         direction = context.ReadValue<Vector2>();
     }
     private void Start()
@@ -149,7 +150,6 @@ public class DashAdvanced : MonoBehaviour
     }
     void Update()
     {
-        Flip();
         //DashWithKeyboard();
     }
 
@@ -215,7 +215,7 @@ public class DashAdvanced : MonoBehaviour
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
-        currentCanDashDown = canDash;
+        currentCanDashDown = canDashDown;
         movement.DownwardForce = gravity;
         isDashing = false;
         onControlOverride = false;
