@@ -28,14 +28,16 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float airDashingDuration = 0.2f;
     [Header("E3")]
     [SerializeField] private float dashUpAngle = 90f;
+    [SerializeField] private float dashUpAngleRange = 20;
+    [SerializeField] private bool canDashDown = false;
+    private bool currentCanDashDown;
     [SerializeField] private float dashDownAngle = -90f;
-    [SerializeField] private float angleRange = 20;
+    [SerializeField] private float dashDownAngleRange = 20;
     [Header("E4")]
     [SerializeField] private float deadZoneAngle = -90;
     [SerializeField] private float deadZoneAngleRange = 90;
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
-    [SerializeField] private float dashingInvincibilityDuration = 1f;
 
     private Vector3 direction;
     private Vector3 velocity;
@@ -140,6 +142,7 @@ public class DashAdvanced : MonoBehaviour
     {
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
+        currentCanDashDown = canDashDown;
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
         gravity = movement.DownwardForce;
@@ -165,22 +168,19 @@ public class DashAdvanced : MonoBehaviour
         {
             case DashType.E1_BasicDash:
                 SetDirection();
-                StartCoroutine(BasicDashAction());
                 break;
             case DashType.E2_TwoStateDash:
-                SetDirection();
                 CheckIfGrounded();
-                StartCoroutine(BasicDashAction());
+                SetDirection();
                 break;
             case DashType.E3_AdvancedDash:
-                SetDirectionWithControlOverride();
                 CheckIfGrounded();
-                AdvancedDashAction();
+                SetDirectionWithControlOverride();
                 break;
             case DashType.E4_GigaChadDash:
-                SetDirectionWithControlOverride();
+                onGigaChadMode = true;
                 CheckIfGrounded();
-                AdvancedDashAction();
+                SetDirectionWithControlOverride();
                 break;
         }
 
@@ -219,6 +219,7 @@ public class DashAdvanced : MonoBehaviour
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
+        currentCanDashDown = canDash;
         movement.DownwardForce = gravity;
         isDashing = false;
         onControlOverride = false;
@@ -234,6 +235,7 @@ public class DashAdvanced : MonoBehaviour
         {
             direction = Vector2.left;
         }
+        StartCoroutine(BasicDashAction());
     }
     private void SetDirectionWithControlOverride()
     {
@@ -241,31 +243,30 @@ public class DashAdvanced : MonoBehaviour
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
         if(direction.x != 0 && direction.y != 0)
         {
-            onControlOverride = true;
-            if (angle >= dashUpAngle - angleRange && angle <= dashUpAngle + angleRange)
+            if (angle >= dashUpAngle - dashUpAngleRange && angle <= dashUpAngle + dashUpAngleRange)
             {
+                onControlOverride = true;
                 direction = Vector3.up;
+                StartCoroutine(UpDashAction());
                 return;
             }
-            else if(angle <= deadZoneAngle - deadZoneAngleRange && angle >= deadZoneAngle + deadZoneAngleRange)
+            else if (currentCanDashDown && angle >= dashDownAngle - dashDownAngleRange && angle <= dashDownAngle + dashDownAngleRange)
             {
-                onGigaChadMode = true;
+                onControlOverride = true;
+                direction = Vector3.down;
+                StartCoroutine(UpDashAction());
+                return;
+            }
+            else if(onGigaChadMode && !currentCanDashDown && (angle <= deadZoneAngle - deadZoneAngleRange && angle >= deadZoneAngle + deadZoneAngleRange))
+            {
+                StartCoroutine(GigaChadDashAction());
+                return;
+            }else if (onGigaChadMode){
+                StartCoroutine(GigaChadDashAction());
                 return;
             }
         }
         SetDirection();
-    }
-    private void AdvancedDashAction()
-    {
-        if (onControlOverride) 
-        {
-            if (!onGigaChadMode) StartCoroutine(UpDashAction());
-            else StartCoroutine(GigaChadDashAction());
-        }
-        else
-        {
-            StartCoroutine(BasicDashAction());
-        }
     }
     private IEnumerator UpDashAction()
     {
@@ -291,6 +292,7 @@ public class DashAdvanced : MonoBehaviour
     {
         if (!movement.CheckIsGrounded())
         {
+            currentCanDashDown = true;
             currentDashingDistace = airDashingDistace;
             currentDashingDuration = airDashingDuration;
         }
