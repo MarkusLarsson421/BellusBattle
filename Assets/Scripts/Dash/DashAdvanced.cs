@@ -188,7 +188,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator BasicDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
+        velocity = new Vector3(direction.x * currentDashingDistace, 0f, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
@@ -208,10 +208,6 @@ public class DashAdvanced : MonoBehaviour
         if (isInvincibileWhileDashing)
         {
             health.SetInvincible(true);
-        }
-        if (!isFacingRight && !onControlOverride)
-        {
-            currentDashingDistace *= -1; // remove in future
         }
     }
     private void EndDashProtocol()
@@ -257,11 +253,8 @@ public class DashAdvanced : MonoBehaviour
                 StartCoroutine(UpDashAction());
                 return;
             }
-            else if(onGigaChadMode && !currentCanDashDown && (angle <= deadZoneAngle - deadZoneAngleRange && angle >= deadZoneAngle + deadZoneAngleRange))
+            else if(onGigaChadMode)
             {
-                StartCoroutine(GigaChadDashAction());
-                return;
-            }else if (onGigaChadMode){
                 StartCoroutine(GigaChadDashAction());
                 return;
             }
@@ -281,7 +274,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator GigaChadDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, direction.y * Mathf.Abs(currentDashingDistace), 0f);
+        velocity = new Vector3(direction.x * currentDashingDistace, direction.y * currentDashingDistace, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
@@ -309,13 +302,13 @@ public class DashAdvanced : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace / 4, movement.CollisionLayer)) //4 is a the number that make dash distance works correct 
         {
-            if (hit.distance * 4 < 3)
+            if (hit.distance * 4 < 1)
             {
                 currentDashingDistace = 0;
             }
             else
             {
-                currentDashingDistace = hit.distance * 5f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
+                currentDashingDistace = hit.distance * 7f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
             }
         }
     }

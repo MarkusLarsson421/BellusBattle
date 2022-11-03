@@ -6090,19 +6090,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDash: 1
-  stopGravityWhileDashing: 1
+  stopGravityWhileDashing: 0
   isInvincibileWhileDashing: 1
-  dashingDistace: 24
-  dashingDuration: 0.124
-  airDashingDistace: 24
-  airDashingDuration: 0.124
+  dashingDistace: 45.36
+  dashingDuration: 0.104
+  airDashingDistace: 45.36
+  airDashingDuration: 0.104
   dashUpAngle: 90
+  dashUpAngleRange: 3
+  canDashDown: 0
   dashDownAngle: -90
-  angleRange: 20
+  dashDownAngleRange: 3
   deadZoneAngle: -90
   deadZoneAngleRange: 85
-  dashingActivationCooldown: 1
-  dashingInvincibilityDuration: 1
+  dashingActivationCooldown: 0.5
   dashEvent:
     m_PersistentCalls:
       m_Calls:
