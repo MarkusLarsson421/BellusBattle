@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject doubleJumpVFX;
     
     [SerializeField] private AudioSource JumpSound;
+    [SerializeField] private AudioSource landSound;
     [SerializeField] private AudioSource doubleJumpSound;
 
 
@@ -126,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
             hasCoyoteTime = true;
             hasDoubleJump = true;
             hasJumpedOnGround = false;
-            
+            landSound.Play();
             if (hasJumpBuffer)
             {
                 Jump();
