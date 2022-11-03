@@ -48,6 +48,10 @@ public class Grenade : Projectile
 				pde.FireEvent();
 				*/
 			}
+            if (hits[i].CompareTag("Door"))
+            {
+				hits[i].GetComponent<Door>().DestroyDoor();
+            }
 		}
 		Destroy(gameObject);
 		//Die();
