@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class Gun : MonoBehaviour
 {
     /**
-     * Put on every gun
+     * Put on every weapon
     **/
     [Header("References")]
     [SerializeField] private WeaponData weaponData;
@@ -34,21 +34,21 @@ public class Gun : MonoBehaviour
 
     private float _nextTimeToFire;
 
+    bool isStartTimer;
+    [Tooltip("time before the weapon can be picked up again")]
+    [SerializeField] float timeToWait = 2f;
+    float timer;
+
     private void Start()
     {
-        // Get the ammo the weapon has
-        //ammoNow = weaponData.Ammo;
-
         // Reload it
         weaponData.SetNewAmmoAmount(weaponData.magSize);
 
-        playerShoot.dropInput += Drop;
-        //PlayerShoot.reloadInput += StartReload;
-        //muzzle = GameObject.FindGameObjectWithTag("Muzzle").transform;
-
         projectile = weaponData.projectile;
-        _projectile = projectile.GetComponent<Projectile>();
-
+        if (weaponData.projectile != null)
+        {
+            _projectile = projectile.GetComponent<Projectile>();
+        }
     }
 
     private void Update()
@@ -59,10 +59,23 @@ public class Gun : MonoBehaviour
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
-        // Placeholder for future
+        // Placeholder for future destory timer
         if (gunsAmmo >= 0) // && Time runs out
         {
             // Delete this gun
+        }
+
+        // USED FOR DROP
+        if (!isStartTimer)
+        {
+            return;
+        }
+        timer += Time.unscaledDeltaTime;
+        if (timer >= timeToWait)
+        {
+            timer = 0;
+            isStartTimer = false;
+            gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
 
@@ -75,17 +88,13 @@ public class Gun : MonoBehaviour
             if (weaponManager != null)
             {
                 playerShoot.shootInput += Shoot;
+                playerShoot.dropInput += Drop;
                 weaponManager.EquipWeapon(weaponData, gameObject);
                 isPickedUp = true;
 
                 gunsAmmo = weaponData.Ammo;
             }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        isPickedUp = false;
     }
 
     private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
@@ -100,8 +109,14 @@ public class Gun : MonoBehaviour
 
             gunsAmmo--;
             Debug.Log(gunsAmmo);
-            //Muzzleflash
             //Sound
+            if (weaponData.shootAttackSound != null)
+            {
+                weaponData.shootAttackSound.Play();
+            }
+            
+            //VFX
+            
             //Animation
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
@@ -117,8 +132,11 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void Drop()
+    public void Drop()
     {
-
+        isPickedUp = false;
+        weaponManager.UnEquipWeapon(gameObject);
+        gameObject.transform.SetParent(null);
+        isStartTimer = true;
     }
 }

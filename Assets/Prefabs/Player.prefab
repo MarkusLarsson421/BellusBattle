@@ -5590,7 +5590,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 786125547027356455}
         m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
-        m_MethodName: OnGunShot
+        m_MethodName: OnWeaponShoot
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5604,13 +5604,13 @@ MonoBehaviour:
     m_ActionName: Player/Shoot/Attack[/XInputControllerWindows/rightTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: d67f3d9f04de78d4eb6f57277782e385, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 786125547027356455}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: OnWeaponDrop
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6039,7 +6039,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 300225489857970639}
   equippedWeapon: {fileID: 0}
-  aim: {fileID: 0}
 --- !u!114 &786125547027356455
 MonoBehaviour:
   m_ObjectHideFlags: 0
