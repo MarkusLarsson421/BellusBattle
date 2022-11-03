@@ -22,6 +22,7 @@ MonoBehaviour:
     type: 3}
   projectileForce: 200
   currentAmmo: 0
+  initialAmmo: 6
   magSize: 6
   fireRate: 20
   pickupSound: {fileID: 0}

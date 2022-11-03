@@ -12,6 +12,7 @@ public class Gun : MonoBehaviour
     **/
     [Header("References")]
     [SerializeField] private WeaponData weaponData;
+    [SerializeField] private PlayerShoot playerShoot;
     [SerializeField] private WeaponManager weaponManager;
 
     [Tooltip("What projectile is being fired.")]
@@ -22,27 +23,47 @@ public class Gun : MonoBehaviour
     [Tooltip("Used for FireRate")]
     private float timeSinceLastShot;
 
+    //int ammoNow;
+
+    [SerializeField] private PlayerMovement player;
+    [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
+
+    [SerializeField] bool isPickedUp;
+
+    private float _nextTimeToFire;
+
     private void Start()
     {
-        weaponData.currentAmmo = weaponData.magSize;
-        PlayerShoot.shootInput += Shoot;
+        // Get the ammo the weapon has
+        //ammoNow = weaponData.Ammo;
+
+        // Reload it
+        weaponData.SetNewAmmoAmount(weaponData.magSize);
+
+        
         //PlayerShoot.reloadInput += StartReload;
         muzzle = GameObject.FindGameObjectWithTag("Muzzle").transform;
 
         projectile = weaponData.projectile;
         _projectile = projectile.GetComponent<Projectile>();
+
     }
 
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
-
-        if (weaponData.currentAmmo <= 0)
+        if (Time.deltaTime >= _nextTimeToFire)
         {
-            // Destroy weapon
-            Destroy(this.gameObject);
+            _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
+        /*
+        if (weaponData.Ammo <= 0)
+        {
+            // Destroy weapon
+            //Destroy(this.gameObject);
+        }
+        */
         if (muzzle == null)
         {
             muzzle = GameObject.FindGameObjectWithTag("Muzzle").transform;
@@ -55,25 +76,23 @@ public class Gun : MonoBehaviour
 
     //float aimingy, aimingx;
 
-
-    [SerializeField] private PlayerMovement player;
-    [SerializeField]
-    public Aim aim; // test to make bullet shoot in correct direction
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            player = other.gameObject.GetComponent<PlayerMovement>();
+            playerShoot = other.gameObject.GetComponent<PlayerShoot>();
             //player = gameObject.GetComponent<PlayerMovement>();
-            aim = player.GetComponentInChildren<Aim>();
+            //aim = player.GetComponentInChildren<Aim>();
             weaponManager = other.gameObject.GetComponent<WeaponManager>();
             if (weaponManager != null)
             {
+                playerShoot.shootInput += Shoot;
                 //aimingx = weaponManager.aim.transform.right.x;
                 //aimingy = weaponManager.aim.transform.right.y;
                 weaponManager.EquipWeapon(weaponData, gameObject);
+                isPickedUp = true;
 
+                
 
             }
             //Destroy(gameObject);
@@ -81,6 +100,10 @@ public class Gun : MonoBehaviour
 
         }
 
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        isPickedUp = false;
     }
 
 
@@ -104,45 +127,43 @@ public class Gun : MonoBehaviour
         gunData.reloading = false;
     }
     */
-    private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && weaponData.currentAmmo > 0;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+    private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && weaponData.Ammo > 0;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
 
-    private float _nextTimeToFire;
+
     private void Shoot()
     {
-        if (weaponData.currentAmmo > 0)
+        if (CanShoot() && isPickedUp)
         {
+            //_nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
 
-            if (Time.time >= _nextTimeToFire)
+
+            //weaponData.ChangeAmmoBy(ammoNow--);
+            weaponData.currentAmmo--;
+            Debug.Log(weaponData.currentAmmo);
+            //Muzzleflash
+            //Sound
+
+            GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+
+            float forceForwrd = weaponData.projectileForce;
+            float aimx = muzzle.transform.forward.x;
+            float aimy = muzzle.transform.forward.y;
+            Vector3 force = new Vector3(forceForwrd * aimx, forceForwrd * aimy, 0f);
+            _projectile = firedProjectile.GetComponent<Projectile>();
+            _projectile.GetComponent<Rigidbody>().AddForce(force);
+
+            /*
+            if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, weaponData.maxDistance))
             {
-                _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
-                weaponData.currentAmmo--;
-                Debug.Log(weaponData.currentAmmo); 
-                //Muzzleflash
-                //Sound
-
-                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-
-                float forceForwrd = weaponData.projectileForce;
-                float aimx = muzzle.transform.forward.x;
-                float aimy = muzzle.transform.forward.y;
-                Vector3 force = new Vector3(forceForwrd * aimx, forceForwrd * aimy, 0f);
-                _projectile = firedProjectile.GetComponent<Projectile>();
-                _projectile.GetComponent<Rigidbody>().AddForce(force);
-
-                /*
-                if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, weaponData.maxDistance))
-                {
-                    PlayerHealth damageable = hitInfo.transform.GetComponent<PlayerHealth>();
-                    damageable?.TakeDamage(weaponData.damage);
-                }
-                */
-                
-                timeSinceLastShot = 0;
-                //OnGunShot();
+                PlayerHealth damageable = hitInfo.transform.GetComponent<PlayerHealth>();
+                damageable?.TakeDamage(weaponData.damage);
             }
+            */
 
-
+            timeSinceLastShot = 0;
+            //OnGunShot();
         }
+
     }
 
 

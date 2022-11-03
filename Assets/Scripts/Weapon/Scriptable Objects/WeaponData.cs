@@ -20,7 +20,7 @@ public class WeaponData : ScriptableObject
     public float projectileForce;
 
     [Header("Reloading")]
-    public int currentAmmo;
+    public int currentAmmo, initialAmmo;
     public int magSize;
     [Tooltip("In RPM")] public float fireRate;
     //public float reloadTime;
@@ -29,5 +29,25 @@ public class WeaponData : ScriptableObject
     [Header("Sounds")]
     [SerializeField, Tooltip("Sound made when picking up weapon")]
     public AudioSource pickupSound;
+
+    // Getters
+    public int Ammo { get => currentAmmo; }
+
+
+    // Metods
+    public void ChangeAmmoBy(int changeBy)
+    {
+        currentAmmo += changeBy;
+    }
+
+    public void SetNewAmmoAmount(int newAmount)
+    {
+        currentAmmo = newAmount;
+    }
+
+    public void ResetAmmo()
+    {
+        currentAmmo = initialAmmo;
+    }
     
 }

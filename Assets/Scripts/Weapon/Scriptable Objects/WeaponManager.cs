@@ -45,6 +45,8 @@ public class WeaponManager : MonoBehaviour
         nowWeapon.transform.SetParent(weaponSlot);
         nowWeapon.transform.localPosition = Vector3.zero;
         nowWeapon.transform.localRotation = Quaternion.identity;
+        // When you pickup a weaon you want the ammo to be right (basically reload on pickup)
+        weaponData.ResetAmmo();
         //weaponData.currentAmmo = weaponData.magSize;
         //currentWeapon.GetComponent<BoxCollider>().enabled = false;
         nowWeapon.GetComponent<BoxCollider>().enabled = false;

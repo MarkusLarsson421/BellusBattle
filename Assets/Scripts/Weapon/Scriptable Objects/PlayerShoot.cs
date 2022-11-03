@@ -6,11 +6,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public static Action shootInput;
+    public  Action shootInput;
 
     public void OnGunShot(InputAction.CallbackContext ctx)
     {
         shootInput?.Invoke();
-        // used for effects
     }
 }
