@@ -30,6 +30,9 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float dashUpAngle = 90f;
     [SerializeField] private float dashDownAngle = -90f;
     [SerializeField] private float angleRange = 20;
+    [Header("E4")]
+    [SerializeField] private float deadZoneAngle = -90;
+    [SerializeField] private float deadZoneAngleRange = 90;
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
     [SerializeField] private float dashingInvincibilityDuration = 1f;
@@ -175,9 +178,9 @@ public class DashAdvanced : MonoBehaviour
                 AdvancedDashAction();
                 break;
             case DashType.E4_GigaChadDash:
-                onGigaChadMode = true;
+                SetDirectionWithControlOverride();
                 CheckIfGrounded();
-                GigaChadDash();
+                AdvancedDashAction();
                 break;
         }
 
@@ -236,33 +239,28 @@ public class DashAdvanced : MonoBehaviour
     {
         float angle;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
-
-        if (angle >= dashUpAngle - angleRange && angle <= dashUpAngle + angleRange) 
+        if(direction.x != 0 && direction.y != 0)
         {
             onControlOverride = true;
-            direction = Vector3.up;
+            if (angle >= dashUpAngle - angleRange && angle <= dashUpAngle + angleRange)
+            {
+                direction = Vector3.up;
+                return;
+            }
+            else if(angle <= deadZoneAngle - deadZoneAngleRange && angle >= deadZoneAngle + deadZoneAngleRange)
+            {
+                onGigaChadMode = true;
+                return;
+            }
         }
-        else
-        {
-            SetDirection();
-        }
+        SetDirection();
     }
     private void AdvancedDashAction()
     {
         if (onControlOverride) 
         {
-            StartCoroutine(UpDashAction());
-        }
-        else
-        {
-            StartCoroutine(BasicDashAction());
-        }
-    }
-    private void GigaChadDash()
-    {
-        if (onGigaChadMode)
-        {
-            StartCoroutine(GigaChadDashAction());
+            if (!onGigaChadMode) StartCoroutine(UpDashAction());
+            else StartCoroutine(GigaChadDashAction());
         }
         else
         {
@@ -278,7 +276,6 @@ public class DashAdvanced : MonoBehaviour
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
-        //direction.y * 4 * currentDashingDistace
     }
     private IEnumerator GigaChadDashAction()
     {
@@ -289,7 +286,6 @@ public class DashAdvanced : MonoBehaviour
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
-        //direction.y * 4 * currentDashingDistace
     }
     private void CheckIfGrounded()
     {

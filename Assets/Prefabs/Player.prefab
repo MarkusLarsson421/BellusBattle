@@ -6097,8 +6097,10 @@ MonoBehaviour:
   airDashingDistace: 24
   airDashingDuration: 0.124
   dashUpAngle: 90
-  dashDownAngle: 20
+  dashDownAngle: -90
   angleRange: 20
+  deadZoneAngle: -90
+  deadZoneAngleRange: 85
   dashingActivationCooldown: 1
   dashingInvincibilityDuration: 1
   dashEvent:
@@ -6116,7 +6118,7 @@ MonoBehaviour:
           m_StringArgument: Roll
           m_BoolArgument: 0
         m_CallState: 2
-  dashType: 2
+  dashType: 3
 --- !u!1 &6655365121378666022
 GameObject:
   m_ObjectHideFlags: 0
