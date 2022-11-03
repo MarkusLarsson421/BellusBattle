@@ -29,7 +29,6 @@ public class PlayerJoinManager : PlayerSpawnManager
         playerInput.gameObject.GetComponent<PlayerDetails>().startPos = SpawnLocations[playerInput.playerIndex].position;
         //playerInput.gameObject.GetComponent<PlayerDetails>().startPos = LevelSpawnsDic[1][playerInput.playerIndex - 1].position;
 
-        playerInput.gameObject.GetComponent<CameraTest>().focus = camera.gameObject.GetComponent<CameraFocus>();
         AddPlayerInFocus(playerInput.transform);
 
         // Changes the texture/material of the player

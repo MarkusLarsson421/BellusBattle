@@ -1,5 +1,11 @@
 using UnityEngine;
 
+//Collection class containing all projectiles.
 public class Projectile : MonoBehaviour{
-	//Collection class containing all projectiles.
+	protected GameObject Shooter;
+
+	public void SetShooter(GameObject playerGo)
+	{
+		Shooter = playerGo;
+	}
 }
