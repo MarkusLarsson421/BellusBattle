@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440f69ea1c96fba4684c107bfef131b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotations: 0
+  rotations: 3
   rotationsOverride: 0
 --- !u!1 &4607468897157483292
 GameObject:
@@ -5408,13 +5408,13 @@ GameObject:
   - component: {fileID: 2786539736660453916}
   - component: {fileID: -163156915827499938}
   - component: {fileID: 6592616742247666660}
-  - component: {fileID: 1991130997618187709}
   - component: {fileID: 4997217773707887276}
   - component: {fileID: 8544227076739203574}
   - component: {fileID: 7452349033133948718}
   - component: {fileID: 761715777191676976}
   - component: {fileID: 7204374830010860157}
   - component: {fileID: 1079757518853252576}
+  - component: {fileID: 7604770547986073551}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5490,6 +5490,7 @@ MonoBehaviour:
   doubleJumpVFX: {fileID: 2055174566135126261, guid: 7a35352e4f6730646bda6a3b5dbdd2cd,
     type: 3}
   JumpSound: {fileID: 7204374830010860157}
+  landSound: {fileID: 761715777191676976}
   doubleJumpSound: {fileID: 761715777191676976}
   jumpEvent:
     m_PersistentCalls:
@@ -5582,8 +5583,8 @@ MonoBehaviour:
     m_ActionName: Player/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6592616742247666660}
-        m_TargetAssemblyTypeName: FinalDash, Assembly-CSharp
+      - m_Target: {fileID: 7604770547986073551}
+        m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
         m_MethodName: DashWithJoystick
         m_Mode: 0
         m_Arguments:
@@ -5670,6 +5671,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7604770547986073551}
+        m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
+        m_MethodName: CheckDashWithJoystickDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 97c78426-b574-4300-877c-93debf7375e8
     m_ActionName: Player/AimOverride[/XInputControllerWindows/leftStick/left]
   m_NeverAutoSwitchControlSchemes: 0
@@ -5699,7 +5712,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6431588530169345916}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9e7e3762a3fa3f44b3ad82306d8c8aa, type: 3}
   m_Name: 
@@ -5727,20 +5740,6 @@ MonoBehaviour:
           m_StringArgument: Roll
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1991130997618187709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6431588530169345916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5583f3c9c5eaa9b4ba4510c1c46a0551, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  max: 10
-  focus: {fileID: 0}
 --- !u!114 &4997217773707887276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5800,8 +5799,9 @@ AudioSource:
   m_GameObject: {fileID: 6431588530169345916}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 94cb476c9d878a74cbdcd832b6491603, type: 3}
+  OutputAudioMixerGroup: {fileID: 6991506972303938642, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 8c8e23b0550039945bcef6c1541b6205, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5896,8 +5896,9 @@ AudioSource:
   m_GameObject: {fileID: 6431588530169345916}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2b876d830b1015c43a5ff1374919d5a6, type: 3}
+  OutputAudioMixerGroup: {fileID: -1882101160383270893, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: db8712dff4df9bd4da57131b18994aae, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5992,7 +5993,8 @@ AudioSource:
   m_GameObject: {fileID: 6431588530169345916}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8178948413094560883, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: e06e4957f14f4e44abf7e0db47b99c75, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -6079,6 +6081,49 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7604770547986073551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431588530169345916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e79b9e064f7d1d49b73b65411f257d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canDash: 1
+  stopGravityWhileDashing: 0
+  isInvincibileWhileDashing: 1
+  dashingDistace: 45.36
+  dashingDuration: 0.104
+  airDashingDistace: 45.36
+  airDashingDuration: 0.104
+  dashUpAngle: 90
+  dashUpAngleRange: 3
+  canDashDown: 0
+  dashDownAngle: -90
+  dashDownAngleRange: 3
+  deadZoneAngle: -90
+  deadZoneAngleRange: 85
+  dashingActivationCooldown: 0.5
+  dashEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8727384561011662934}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Roll
+          m_BoolArgument: 0
+        m_CallState: 2
+  dashType: 3
 --- !u!1 &6655365121378666022
 GameObject:
   m_ObjectHideFlags: 0
@@ -6799,6 +6844,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 85.695
       objectReference: {fileID: 0}
+    - target: {fileID: 4937763799677506203, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a39d7201301ef554598bbed21ccab31e, type: 3}
+    - target: {fileID: 6201525818585368969, guid: 11c41a91053289a4285c252a2fd18326,
+        type: 3}
+      propertyPath: m_Name
+      value: ExplosionPlaceHolder4
+      objectReference: {fileID: 0}
     - target: {fileID: 6399377914579020256, guid: 11c41a91053289a4285c252a2fd18326,
         type: 3}
       propertyPath: aim
@@ -7027,7 +7082,8 @@ AudioSource:
   m_GameObject: {fileID: 6258587146885472999}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8993324497048929882, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 65a79d8539bdd724e8aae1cbfbd9c4fe, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -7785,17 +7841,17 @@ PrefabInstance:
     - target: {fileID: 3901932808931750151, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0299
+      value: -1.03
       objectReference: {fileID: 0}
     - target: {fileID: 3901932808931750151, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1009
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3901932808931750151, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.2595
+      value: -0.259
       objectReference: {fileID: 0}
     - target: {fileID: 4047537326887347944, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
@@ -8310,17 +8366,17 @@ PrefabInstance:
     - target: {fileID: 6491676215669448556, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1600009
+      value: 1.16
       objectReference: {fileID: 0}
     - target: {fileID: 6491676215669448556, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.29299968
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6491676215669448556, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.2260004
+      value: -0.226
       objectReference: {fileID: 0}
     - target: {fileID: 6491676215669448556, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
@@ -8380,17 +8436,17 @@ PrefabInstance:
     - target: {fileID: 6491676216654945447, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.420011
+      value: 12.42
       objectReference: {fileID: 0}
     - target: {fileID: 6491676216654945447, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.7599964
+      value: -0.27
       objectReference: {fileID: 0}
     - target: {fileID: 6491676216654945447, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1200026
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 6491676216654945447, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
