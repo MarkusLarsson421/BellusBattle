@@ -28,11 +28,16 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float airDashingDuration = 0.2f;
     [Header("E3")]
     [SerializeField] private float dashUpAngle = 90f;
+    [SerializeField] private float dashUpAngleRange = 20;
+    [SerializeField] private bool canDashDown = false;
+    private bool currentCanDashDown;
     [SerializeField] private float dashDownAngle = -90f;
-    [SerializeField] private float angleRange = 20;
+    [SerializeField] private float dashDownAngleRange = 20;
+    [Header("E4")]
+    [SerializeField] private float deadZoneAngle = -90;
+    [SerializeField] private float deadZoneAngleRange = 90;
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
-    [SerializeField] private float dashingInvincibilityDuration = 1f;
 
     private Vector3 direction;
     private Vector3 velocity;
@@ -131,19 +136,20 @@ public class DashAdvanced : MonoBehaviour
     }
     public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
     {
+        Flip();
         direction = context.ReadValue<Vector2>();
     }
     private void Start()
     {
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
+        currentCanDashDown = canDashDown;
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
         gravity = movement.DownwardForce;
     }
     void Update()
     {
-        Flip();
         //DashWithKeyboard();
     }
 
@@ -162,22 +168,19 @@ public class DashAdvanced : MonoBehaviour
         {
             case DashType.E1_BasicDash:
                 SetDirection();
-                StartCoroutine(BasicDashAction());
                 break;
             case DashType.E2_TwoStateDash:
-                SetDirection();
                 CheckIfGrounded();
-                StartCoroutine(BasicDashAction());
+                SetDirection();
                 break;
             case DashType.E3_AdvancedDash:
-                SetDirectionWithControlOverride();
                 CheckIfGrounded();
-                AdvancedDashAction();
+                SetDirectionWithControlOverride();
                 break;
             case DashType.E4_GigaChadDash:
                 onGigaChadMode = true;
                 CheckIfGrounded();
-                GigaChadDash();
+                SetDirectionWithControlOverride();
                 break;
         }
 
@@ -185,7 +188,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator BasicDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, 0f, 0f);
+        velocity = new Vector3(direction.x * currentDashingDistace, 0f, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
@@ -206,16 +209,13 @@ public class DashAdvanced : MonoBehaviour
         {
             health.SetInvincible(true);
         }
-        if (!isFacingRight && !onControlOverride)
-        {
-            currentDashingDistace *= -1; // remove in future
-        }
     }
     private void EndDashProtocol()
     {
         //tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
+        currentCanDashDown = canDashDown;
         movement.DownwardForce = gravity;
         isDashing = false;
         onControlOverride = false;
@@ -231,43 +231,35 @@ public class DashAdvanced : MonoBehaviour
         {
             direction = Vector2.left;
         }
+        StartCoroutine(BasicDashAction());
     }
     private void SetDirectionWithControlOverride()
     {
         float angle;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
-
-        if (angle >= dashUpAngle - angleRange && angle <= dashUpAngle + angleRange) 
+        if(direction.x != 0 && direction.y != 0)
         {
-            onControlOverride = true;
-            direction = Vector3.up;
+            if (angle >= dashUpAngle - dashUpAngleRange && angle <= dashUpAngle + dashUpAngleRange)
+            {
+                onControlOverride = true;
+                direction = Vector3.up;
+                StartCoroutine(UpDashAction());
+                return;
+            }
+            else if (currentCanDashDown && angle >= dashDownAngle - dashDownAngleRange && angle <= dashDownAngle + dashDownAngleRange)
+            {
+                onControlOverride = true;
+                direction = Vector3.down;
+                StartCoroutine(UpDashAction());
+                return;
+            }
+            else if(onGigaChadMode)
+            {
+                StartCoroutine(GigaChadDashAction());
+                return;
+            }
         }
-        else
-        {
-            SetDirection();
-        }
-    }
-    private void AdvancedDashAction()
-    {
-        if (onControlOverride) 
-        {
-            StartCoroutine(UpDashAction());
-        }
-        else
-        {
-            StartCoroutine(BasicDashAction());
-        }
-    }
-    private void GigaChadDash()
-    {
-        if (onGigaChadMode)
-        {
-            StartCoroutine(GigaChadDashAction());
-        }
-        else
-        {
-            StartCoroutine(BasicDashAction());
-        }
+        SetDirection();
     }
     private IEnumerator UpDashAction()
     {
@@ -278,23 +270,22 @@ public class DashAdvanced : MonoBehaviour
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
-        //direction.y * 4 * currentDashingDistace
     }
     private IEnumerator GigaChadDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(currentDashingDistace - movement.Velocity.x, direction.y * Mathf.Abs(currentDashingDistace), 0f);
+        velocity = new Vector3(direction.x * currentDashingDistace, direction.y * currentDashingDistace, 0f);
         //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
         canDash = true;
-        //direction.y * 4 * currentDashingDistace
     }
     private void CheckIfGrounded()
     {
         if (!movement.CheckIsGrounded())
         {
+            currentCanDashDown = true;
             currentDashingDistace = airDashingDistace;
             currentDashingDuration = airDashingDuration;
         }
@@ -311,13 +302,13 @@ public class DashAdvanced : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace / 4, movement.CollisionLayer)) //4 is a the number that make dash distance works correct 
         {
-            if (hit.distance * 4 < 3)
+            if (hit.distance * 4 < 1)
             {
                 currentDashingDistace = 0;
             }
             else
             {
-                currentDashingDistace = hit.distance * 5f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
+                currentDashingDistace = hit.distance * 7f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
             }
         }
     }

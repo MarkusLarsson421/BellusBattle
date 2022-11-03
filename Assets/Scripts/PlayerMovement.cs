@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject doubleJumpVFX;
     
     [SerializeField] private AudioSource JumpSound;
+    [SerializeField] private AudioSource landSound;
     [SerializeField] private AudioSource doubleJumpSound;
 
 
@@ -121,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
+            landSound.Play();
             movementY = 0;
             coyoteTimer = 0;
             hasCoyoteTime = true;
@@ -132,8 +134,10 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
                 hasJumpBuffer = false;
                 runBufferTimer = false;
+
             }
             
+
         }
         velocity = new Vector2(movementX, movementY);
         JumpBuffer();
@@ -211,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            
             runBufferTimer = true;
             bufferTimer = 0;
         }
