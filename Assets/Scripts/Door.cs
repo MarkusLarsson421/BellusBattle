@@ -22,8 +22,6 @@ public class Door : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
     }
-
-
     private void FixedUpdate()
     {
         CheckForPlayers();
@@ -32,13 +30,8 @@ public class Door : MonoBehaviour
         {
             currentPlayer = null;
         }
-        if(doorHealth <= 0)
-        {
-            DestroyDoor();
-        }
+      
     }
-
-    
 
    private void CheckForPlayers()
     {
@@ -72,7 +65,7 @@ public class Door : MonoBehaviour
         anchor.transform.Rotate(new Vector3(0f,rotationAmount, 0f));
     }
 
-    private void DestroyDoor()
+    public void DestroyDoor()
     {
         gameObject.SetActive(false);
     }
