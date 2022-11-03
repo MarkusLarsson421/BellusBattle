@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2905449221449962342}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,8 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor: {fileID: 2905449221393081786}
-  playerLayer: 8
   colliders: []
+  doorHealth: 1
 --- !u!1001 &2905449220227699674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,5 +268,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5000002, y: 2.5, z: 0.29998806}
-  m_Center: {x: 0, y: 0, z: 0.00000023841858}
+  m_Size: {x: 1.5000002, y: 2.5, z: 0.6500792}
+  m_Center: {x: 2.2741338e-12, y: 0, z: -0.0025326274}
