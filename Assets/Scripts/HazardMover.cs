@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HazardMover : MonoBehaviour
 {
-    [SerializeField] private float highestPoint;
+    [SerializeField] private Transform highestPoint;
     [SerializeField] private float timeBetweenMoving;
     [SerializeField] private float movingSpeed;
     [SerializeField] private float smoothTime;
@@ -22,7 +22,7 @@ public class HazardMover : MonoBehaviour
         lowestPoint = boxCollider.bounds.max.y;
         moveVector = new Vector3(0f, movingSpeed, 0f);
         lowestPosition = new Vector3(transform.position.x, lowestPoint - transform.localScale.y / 2, 0f);
-        highestPosition = new Vector3(transform.position.x, highestPoint + transform.localScale.y / 2, 0f);
+        highestPosition = new Vector3(transform.position.x, highestPoint.transform.position.y + transform.localScale.y / 2, 0f);
         
     }
 
@@ -48,7 +48,7 @@ public class HazardMover : MonoBehaviour
         if(hasReachedHighestPoint == false)
         {
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);
-            if (boxCollider.bounds.max.y >= highestPoint)
+            if (boxCollider.bounds.max.y >= highestPoint.position.y)
             {
                 Debug.Log(boxCollider.bounds.max.y);
                 hasReachedHighestPoint = true;

@@ -25,6 +25,8 @@ public class Door : MonoBehaviour
     private void FixedUpdate()
     {
         CheckForPlayers();
+        if (currentPlayer == null) return;
+
         colliderList = new List<Collider>(colliders);
         if (!colliderList.Contains(currentPlayer.GetComponent<Collider>()))
         {
