@@ -6,6 +6,7 @@ public class WeaponManager : MonoBehaviour
 {
     [SerializeField]
     private Transform weaponSlot;
+    public GameObject heldWeapon;
 
     [SerializeField]
     private WeaponData equippedWeapon;
@@ -21,8 +22,14 @@ public class WeaponManager : MonoBehaviour
     }
     private void Update()
     {
-
+        if (equippedWeapon != null)
+        {
+            heldWeapon = weaponSlot.GetChild(0).gameObject;
+        }
+        
     }
+
+    public GameObject HeldWeapon { get => heldWeapon; }
 
     public void EquipWeapon(WeaponData weaponData, GameObject nowWeapon)
     {
@@ -50,5 +57,6 @@ public class WeaponManager : MonoBehaviour
         //weaponData.currentAmmo = weaponData.magSize;
         //currentWeapon.GetComponent<BoxCollider>().enabled = false;
         nowWeapon.GetComponent<BoxCollider>().enabled = false;
+        heldWeapon = nowWeapon;
     }
 }

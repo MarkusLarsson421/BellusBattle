@@ -14,7 +14,7 @@ public class WeaponData : ScriptableObject
     [Header("Shooting")]
     public float damage;
     public float maxDistance;
-    [SerializeField] public Transform muzzle;
+    //[SerializeField] public Transform muzzle;
     [SerializeField] public GameObject projectile;
     [SerializeField, Tooltip("The amount of force placed on the projectile.")]
     public float projectileForce;
