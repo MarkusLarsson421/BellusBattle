@@ -122,19 +122,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
+            landSound.Play();
             movementY = 0;
             coyoteTimer = 0;
             hasCoyoteTime = true;
             hasDoubleJump = true;
             hasJumpedOnGround = false;
-            landSound.Play();
+            
             if (hasJumpBuffer)
             {
                 Jump();
                 hasJumpBuffer = false;
                 runBufferTimer = false;
+
             }
             
+
         }
         velocity = new Vector2(movementX, movementY);
         JumpBuffer();
@@ -212,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            
             runBufferTimer = true;
             bufferTimer = 0;
         }
