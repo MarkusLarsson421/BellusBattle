@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
 
 
     public List<string> scenesToChooseFrom = new List<string>();
+    public List<string> scenesToRemove = new List<string>();
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
@@ -29,6 +30,8 @@ public class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         sceneCount = SceneManager.sceneCountInBuildSettings;
+        scenesToRemove.Add("MainMenu");
+        scenesToRemove.Add("The_End");
         LoadScenesList();
         if(SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
@@ -37,8 +40,10 @@ public class LevelManager : MonoBehaviour
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
-        scenesToChooseFrom.Remove("MainMenu");
-        scenesToChooseFrom.Remove("The_End");
+        foreach(string scene in scenesToRemove)
+        {
+            scenesToChooseFrom.Remove(scene);
+        }
     }
     private void CreateListOfScenesFromBuild()
     {
@@ -78,8 +83,13 @@ public class LevelManager : MonoBehaviour
         if (scene.GetToggle() && scenesToChooseFrom.Count > 0)
         {
             scenesToChooseFrom.Remove(scene.GetName());
+            scenesToRemove.Add(scene.GetName());
         }
-        else scenesToChooseFrom.Add(scene.GetName());
+        else 
+        {
+            scenesToChooseFrom.Add(scene.GetName());
+            scenesToRemove.Remove(scene.GetName());
+        }
     }
 
     public void LoadNextScene()
