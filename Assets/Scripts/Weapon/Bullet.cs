@@ -15,7 +15,7 @@ public class Bullet : Projectile
 	private void OnTriggerEnter(Collider other)
 	{
 		GameObject playerGo = other.gameObject;
-		if (playerGo.CompareTag("Player"))
+		if (playerGo.CompareTag("Player") && Shooter != playerGo)
 		{
 			//playerGo.SetActive(false);
 			playerGo.GetComponent<PlayerHealth>().KillPlayer();

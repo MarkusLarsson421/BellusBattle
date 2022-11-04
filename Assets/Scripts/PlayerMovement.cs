@@ -34,30 +34,31 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject doubleJumpVFX;
     
     [SerializeField] private AudioSource JumpSound;
+    [SerializeField] private AudioSource landSound;
     [SerializeField] private AudioSource doubleJumpSound;
 
 
     public UnityEvent jumpEvent;
 
-    public LayerMask WallLayer
+    public LayerMask CollisionLayer
     {
-        get { return collisionLayer; }
+        get => collisionLayer; 
     }
 
     public Vector2 Velocity
     {
-        get { return velocity; }
+        get => velocity; 
     }
 
     public float DownwardForce
     {
-        get { return downwardForce; }
-        set { downwardForce = value; }
+        get => downwardForce;
+        set => downwardForce = value; 
     }
 
     private bool isGrounded
     {
-        get { return CheckIsGrounded(); }
+        get => CheckIsGrounded(); 
     }
 
     private Vector2 velocity;
@@ -84,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
     private float initialSpeed;
+    private float playerHeight;
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
     
@@ -98,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         initialSpeed = moveSpeed - 5; //Används för acceleration
         boxCollider = GetComponent<BoxCollider>();
         CalculateRayLength();
+        playerHeight = verticalRayLength * 2;
         CalculateRaySpacing();
         DontDestroyOnLoad(gameObject);
         CalculateRaycastOffset();
@@ -106,19 +109,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(velocity.y);
         UpdateRayCastOrgins();
         UpdateMovementForce();
-        CheckIsGrounded();
         UpdateCoyoteTime();
         
-        if (!CheckIsGrounded())
+        if (isGrounded == false)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
+            
         }
 
         if (isGrounded && velocity.y < 0)
         {
+            landSound.Play();
             movementY = 0;
             coyoteTimer = 0;
             hasCoyoteTime = true;
@@ -130,8 +134,10 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
                 hasJumpBuffer = false;
                 runBufferTimer = false;
+
             }
             
+
         }
         velocity = new Vector2(movementX, movementY);
         JumpBuffer();
@@ -183,7 +189,6 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         float jumpDecreaser = 1f;
-        float playerHeight = 1.8f;
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
             transform.position += Vector3.down * playerHeight;
@@ -210,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            
             runBufferTimer = true;
             bufferTimer = 0;
         }
@@ -237,13 +243,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void EdgeControl(RaycastHit hit)
     {
-        float hitColliderBuffer = 0.2f;
+        float hitColliderBuffer = 0.2f; // Avståndet spelaren kommer att placeras över den träffade colliderns största y-värde
         float hitpointY = hit.point.y;
         Collider platformCollider = hit.collider;
         Bounds col = platformCollider.bounds;
 
         float colliderDif = col.max.y - hitpointY;
-        Debug.Log(colliderDif);
+        //Debug.Log(colliderDif);
 
         if (colliderDif > 0 && colliderDif < edgeControlAmount)
         {
@@ -277,7 +283,7 @@ public class PlayerMovement : MonoBehaviour
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
     }
-    private bool CheckIsGrounded()
+    public bool CheckIsGrounded()
     {
         
         if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, oneWayLayer))
@@ -417,5 +423,14 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = 0;
         movementX = 0;
         movementY = 0;
+    }
+
+
+    public void AddExternalForce(Vector2 force)
+    {
+        movementY = force.y;
+        movementX = force.x;
+        velocity.y = 0;
+        
     }
 }

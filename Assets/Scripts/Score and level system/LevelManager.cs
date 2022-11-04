@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     private int sceneCount;
     [SerializeField] private string[] scenes;
     [SerializeField] private List<LevelDetails> levels = new List<LevelDetails>();
+    [SerializeField] private float timeTillRestartGame;
     [SerializeField] private GameObject content;
     [SerializeField] private GameObject levelXPrefab;
 
@@ -107,12 +108,18 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
         scenesToChooseFrom.RemoveAt(randomNumber);
     }
-    public void Finish() 
+    public void Finish(GameObject destroyMe) 
     {
-        Debug.Log("FAN VA COOOLOT SPELET ÄR SLUT");
         SceneManager.LoadScene("The_End");
+        StartCoroutine(RestartGame(destroyMe));
     }
-
+    private IEnumerator RestartGame(GameObject destroyMe)
+    {
+        yield return new WaitForSeconds(timeTillRestartGame);
+        Destroy(destroyMe);
+        Destroy(gameObject);
+        SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
+    }
 }
 
 

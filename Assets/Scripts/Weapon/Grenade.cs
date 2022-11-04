@@ -8,12 +8,12 @@ public class Grenade : Projectile
 	private float fuse = 5.0f;
 	[SerializeField] [Tooltip("Size of the explosion.")]
 	private float explosionSize = 5.0f;
-	CameraFocus cf;
+	private CameraFocus cf; //shitfx
 
 	[SerializeField] PickUp_ProtoV1 pickUp_Proto;
 
 	private void Start(){
-		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
+		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
 		StartCoroutine(StartFuse());
 	}
 
@@ -33,12 +33,12 @@ public class Grenade : Projectile
 	private void Explode(){
 
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
-		foreach (Collider col in hits){
-			if (col.CompareTag("Player"))
+		for (int i = 0; i < hits.Length; i++){
+			if (hits[i].CompareTag("Player"))
 			{
-				PlayerHealth ph = col.GetComponent<PlayerHealth>();
+				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
 				ph.TakeDamage(1);
-				cf.RemoveTarget(col.gameObject.transform);
+				cf.RemoveTarget(hits[i].transform); //shitfix
 				pickUp_Proto.isHoldingWeapon = false;
 
 				/*
@@ -51,6 +51,10 @@ public class Grenade : Projectile
 				pde.FireEvent();
 				*/
 			}
+            if (hits[i].CompareTag("Door"))
+            {
+				hits[i].GetComponent<Door>().DestroyDoor();
+            }
 		}
 		Destroy(gameObject);
 		//Die();
