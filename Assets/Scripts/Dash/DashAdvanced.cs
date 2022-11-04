@@ -239,16 +239,15 @@ public class DashAdvanced : MonoBehaviour
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
         if(direction.x != 0 && direction.y != 0)
         {
+            onControlOverride = true;
             if (angle >= dashUpAngle - dashUpAngleRange && angle <= dashUpAngle + dashUpAngleRange)
             {
-                onControlOverride = true;
                 direction = Vector3.up;
                 StartCoroutine(UpDashAction());
                 return;
             }
             else if (currentCanDashDown && angle >= dashDownAngle - dashDownAngleRange && angle <= dashDownAngle + dashDownAngleRange)
             {
-                onControlOverride = true;
                 direction = Vector3.down;
                 StartCoroutine(UpDashAction());
                 return;
@@ -300,15 +299,20 @@ public class DashAdvanced : MonoBehaviour
     private void CheckForCollision()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace / 4, movement.CollisionLayer)) //4 is a the number that make dash distance works correct 
+        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace*currentDashingDuration + 5 , movement.CollisionLayer)) //10 is a the number that make dash distance works correct 
         {
-            if (hit.distance * 4 < 1)
+            if (hit.distance < 1f)
             {
                 currentDashingDistace = 0;
             }
+            else if(onControlOverride)
+            {
+                currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) + Mathf.Abs(movement.Velocity.y);
+            }
             else
             {
-                currentDashingDistace = hit.distance * 7f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
+                currentDashingDistace = hit.distance / currentDashingDuration - 2*Mathf.Abs(movement.Velocity.x) - 5;
+                //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
             }
         }
     }
