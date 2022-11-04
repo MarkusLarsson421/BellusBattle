@@ -38,6 +38,7 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float deadZoneAngleRange = 90;
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
+    [SerializeField] private TrailRenderer tr;
 
     private Vector3 direction;
     private Vector3 velocity;
@@ -147,6 +148,7 @@ public class DashAdvanced : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
         gravity = movement.DownwardForce;
+        tr.time = dashingDuration;
     }
     void Update()
     {
@@ -189,7 +191,6 @@ public class DashAdvanced : MonoBehaviour
     {
         StartDashProtocol();
         velocity = new Vector3(direction.x * currentDashingDistace, 0f, 0f);
-        //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
@@ -201,6 +202,7 @@ public class DashAdvanced : MonoBehaviour
         canDash = false;
         isDashing = true;
         dashEvent.Invoke();
+        tr.emitting = true; //See variable TrailRenderer tr
         if (stopGravityWhileDashing)
         {
             movement.DownwardForce = 0f;
@@ -212,7 +214,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void EndDashProtocol()
     {
-        //tr.emitting = false; //See variable TrailRenderer tr
+        tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
         currentCanDashDown = canDashDown;
@@ -252,7 +254,7 @@ public class DashAdvanced : MonoBehaviour
                 StartCoroutine(UpDashAction());
                 return;
             }
-            else if(onGigaChadMode)
+            else if(onGigaChadMode && (direction.y >= 0|| currentCanDashDown))
             {
                 StartCoroutine(GigaChadDashAction());
                 return;
@@ -263,8 +265,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator UpDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(0f, direction.y * currentDashingDistace, 0f);
-        //tr.emitting = true; //See variable TrailRenderer tr
+        velocity = new Vector3(0f, direction.y * currentDashingDistace - movement.Velocity.y, 0f);
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
@@ -273,8 +274,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator GigaChadDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(direction.x * currentDashingDistace, direction.y * currentDashingDistace, 0f);
-        //tr.emitting = true; //See variable TrailRenderer tr
+        velocity = new Vector3(direction.x * currentDashingDistace - movement.Velocity.x, direction.y * currentDashingDistace - movement.Velocity.y, 0f);
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
