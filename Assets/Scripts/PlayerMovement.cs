@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump & Edgecontrol")]
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
-    [SerializeField, Range(0.1f, 2f)] private float edgeControlAmount;
+    [SerializeField] private float edgeControlAmount;
     [SerializeField] private float jumpBufferTime = 0.2f;
     [SerializeField] private float coyoteTime = 0.2f;
 
