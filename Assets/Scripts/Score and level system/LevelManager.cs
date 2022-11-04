@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        sceneCount = SceneManager.sceneCountInBuildSettings;
         LoadScenesList();
         if(SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
@@ -41,27 +42,21 @@ public class LevelManager : MonoBehaviour
     }
     private void CreateListOfScenesFromBuild()
     {
-        string tempStr = "";
-        GameObject g;
-        sceneCount = SceneManager.sceneCountInBuildSettings;
         for (int i = 0; i < sceneCount; i++)
         {
-            tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             scenesToChooseFrom.Add(tempStr);
         }
         if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in build or choose ScencesFromList from " + gameObject);
     }
     private void CreateLevelsUI ()
     {
-        string tempStr = "";
-        GameObject g;
-        sceneCount = SceneManager.sceneCountInBuildSettings;
-        for (int i = 0; i < sceneCount; i++)
+        for (int i = 0; i < sceneCount-1; i++)
         {
-            tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             if (i != 0)
             {
-                g = Instantiate(levelXPrefab);
+                GameObject g = Instantiate(levelXPrefab);
                 g.transform.parent = content.transform;
                 levels.Add(g.GetComponent<LevelDetails>());
                 levels.ElementAt(i - 1).SetName(tempStr);
@@ -83,7 +78,6 @@ public class LevelManager : MonoBehaviour
         if (scene.GetToggle() && scenesToChooseFrom.Count > 0)
         {
             scenesToChooseFrom.Remove(scene.GetName());
-            Debug.Log("I work " + scene.GetName());
         }
         else scenesToChooseFrom.Add(scene.GetName());
     }
