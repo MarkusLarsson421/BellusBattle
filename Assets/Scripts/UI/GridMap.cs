@@ -23,6 +23,22 @@ public class GridMap : MonoBehaviour
         movableObject.transform.position = new Vector2(grid.GetX(movableObject.transform.position) * cellSize + transform.position.x + (cellSize * 0.5f), grid.GetY(movableObject.transform.position) * cellSize + transform.position.y + (cellSize * 0.5f));
         grid.SetValue(GetMaouseWorldPosition(), 1);
     }
+    public void SS2(int w, int h)
+    {
+        float tempw = 0;
+        float temph = 0;
+        for(int i = 0; i < w; i++)
+        {
+            tempw += grid.GetX(movableObject.transform.position + new Vector3(cellSize * i, 0)) * cellSize + transform.position.x + (cellSize * 0.5f);
+            grid.SetValue(GetMaouseWorldPosition() + new Vector3(cellSize * i, 0), 1);
+        }
+        for(int i = 0; i < h; i++)
+        {
+            temph += grid.GetY(movableObject.transform.position + new Vector3(0, cellSize * i)) * cellSize + transform.position.y + (cellSize * 0.5f);
+            grid.SetValue(GetMaouseWorldPosition() + new Vector3(0, cellSize * i), 1);
+        }
+        movableObject.transform.position = new Vector2(tempw / w, temph / h);
+    }
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))

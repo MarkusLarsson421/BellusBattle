@@ -5,6 +5,8 @@ using UnityEngine;
 public class MovableObject : MonoBehaviour
 {
     private Vector3 difference = Vector3.zero;
+    [Range(1, 5)] public int widthInGridUnits = 1;
+    [Range(1, 5)] public int heightInGridUnits = 1;
     GridMap gridMap;
     private void Start()
     {
@@ -24,7 +26,7 @@ public class MovableObject : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        gridMap.SS();
+        gridMap.SS2(widthInGridUnits, heightInGridUnits);
         gridMap.SetMovableObject(null);
     }
 }

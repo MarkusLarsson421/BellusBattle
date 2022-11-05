@@ -11,6 +11,8 @@ public class ContentX : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private GameObject spawnPoint;
+    [SerializeField, Range(1, 5)] private int widthInGridUnits = 1;
+    [SerializeField, Range(1, 5)] private int heightInGridUnits = 1;
     private static int amountOfObjectToSpawn;
     private static List<float> xPos = new List<float>();
     private static List<float> yPos = new List<float>();
@@ -51,7 +53,9 @@ public class ContentX : MonoBehaviour
         p.Add(Instantiate(prefab, spawnPoint.transform));
         p.ElementAt(amountOfObjectToSpawn).transform.parent = null;
         p.ElementAt(amountOfObjectToSpawn).AddComponent<MovableObject>();
-
+        p.ElementAt(amountOfObjectToSpawn).GetComponent<MovableObject>().widthInGridUnits = widthInGridUnits;
+        p.ElementAt(amountOfObjectToSpawn).GetComponent<MovableObject>().heightInGridUnits = heightInGridUnits;
+        if (p.ElementAt(amountOfObjectToSpawn).GetComponent<BoxCollider>() == null) p.ElementAt(amountOfObjectToSpawn).AddComponent<BoxCollider>();
 
         prefabName.Add(p.ElementAt(amountOfObjectToSpawn).name);
         tranformList.Add(p.ElementAt(amountOfObjectToSpawn).transform);
