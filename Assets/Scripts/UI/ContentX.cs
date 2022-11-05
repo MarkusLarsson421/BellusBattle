@@ -40,18 +40,38 @@ public class ContentX : MonoBehaviour
             }
         }
     }
+    static List<GameObject> p = new List<GameObject>();
+    int temp = 0;
     public void SpawnObject()
     {
         Vector3 pos = Input.mousePosition;
         pos.z = 10;
         pos = Camera.main.ScreenToWorldPoint(pos);
         spawnPoint.transform.position = pos;
-        GameObject p = Instantiate(prefab, spawnPoint.transform);
-        p.transform.parent = null;
-        xPos.Add(p.transform.position.x);
-        yPos.Add(p.transform.position.y);
-        prefabName.Add(p.name);
-        tranformList.Add(p.transform);
+        p.Add(Instantiate(prefab, spawnPoint.transform));
+        p.ElementAt(amountOfObjectToSpawn).transform.parent = null;
+        p.ElementAt(amountOfObjectToSpawn).AddComponent<MovableObject>();
+
+
+        prefabName.Add(p.ElementAt(amountOfObjectToSpawn).name);
+        tranformList.Add(p.ElementAt(amountOfObjectToSpawn).transform);
         amountOfObjectToSpawn++;
+    }
+    static ContentX()
+    {
+        EditorApplication.playmodeStateChanged += ModeChanged;
+    }
+
+    static void ModeChanged()
+    {
+        if (!EditorApplication.isPlayingOrWillChangePlaymode &&
+             EditorApplication.isPlaying)
+        {
+            for(int i = 0; i < p.Count; i++) 
+            {
+                xPos.Add(p.ElementAt(i).transform.position.x);
+                yPos.Add(p.ElementAt(i).transform.position.y);
+            }
+        }
     }
 }
