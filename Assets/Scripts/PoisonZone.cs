@@ -5,27 +5,36 @@ using UnityEngine;
 public class PoisonZone : MonoBehaviour
 {
     [SerializeField] private float timeToKill;
-    private static Dictionary<GameObject, int> poisonDic = new Dictionary<GameObject, int>();
+    private static Dictionary<GameObject, float> poisonDic = new Dictionary<GameObject, float>();
+    private static Dictionary<GameObject, bool> isInZoneDic = new Dictionary<GameObject, bool>();
     private List<GameObject> playersInZone = new List<GameObject>();
-    private Collider[] collidersInZone;
+    private List<Collider> objectsInZone = new List<Collider>();
     
-    private BoxCollider zoneCollider;
-    // Start is called before the first frame update
     void Start()
     {
-        zoneCollider = GetComponent<BoxCollider>(); 
+        
+      
     }
 
-    // Update is called once per frame
     void Update()
     {
         LookForPLayers();
+        PoisionPlayers();
+        if (playersInZone.Count == 0) return;
+        
+        for (int i = playersInZone.Count - 1; i >= 0; i--)
+        {
+            if (objectsInZone.Contains(playersInZone[i].GetComponent<BoxCollider>()) == false)
+            {
+                isInZoneDic[playersInZone[i]] = false;
+            }
+        }
     }
 
     private void LookForPLayers()
     {
-        collidersInZone = Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity);
-        foreach(Collider col in collidersInZone)
+        objectsInZone = new List<Collider>(Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity)); 
+        foreach (Collider col in objectsInZone)
         {
             if (col.gameObject.CompareTag("Player"))
             {
@@ -37,13 +46,31 @@ public class PoisonZone : MonoBehaviour
 
     private void AddPLayerToDictionary(GameObject player)
     {
+        isInZoneDic[player] = true;
         if (poisonDic.ContainsKey(player) == true) return;
-        poisonDic[player] = 0;
+        poisonDic[player] = 0;   
     }
 
     private void AddPlayerToList(GameObject player)
     {
         if (playersInZone.Contains(player)) return;
         playersInZone.Add(player);
+    }
+
+    private void PoisionPlayers()
+    {
+        if (isInZoneDic.Count == 0) return;
+
+        foreach(GameObject player in playersInZone)
+        {
+            if (isInZoneDic[player] == false && poisonDic[player] <= 0f) continue;
+            poisonDic[player] += isInZoneDic[player] == true ? Time.deltaTime : -Time.deltaTime;
+
+            Debug.Log(poisonDic[player]);
+            if(poisonDic[player] >= timeToKill)
+            {
+                player.GetComponent<PlayerHealth>().KillPlayer();
+            }
+        }
     }
 }
