@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump & Edgecontrol")]
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
-    [SerializeField, Range(0.1f, 2f)] private float edgeControlAmount;
+    [SerializeField] private float edgeControlAmount;
     [SerializeField] private float jumpBufferTime = 0.2f;
     [SerializeField] private float coyoteTime = 0.2f;
 
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(velocity.y);
+        //Debug.Log(velocity.y);
         UpdateRayCastOrgins();
         UpdateMovementForce();
         UpdateCoyoteTime();
@@ -336,7 +336,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
            
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
             {
                 velocity.y = 0;
                 movementY = 0f;  
@@ -373,7 +373,7 @@ public class PlayerMovement : MonoBehaviour
      
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))
             {
                 if(i == 0)
                 {
