@@ -11,9 +11,12 @@ public class Gun : MonoBehaviour
      * Put on every weapon
     **/
     [Header("References")]
-    [SerializeField] private WeaponData weaponData;
-    [SerializeField] private PlayerShoot playerShoot;
+    [SerializeField] private WeaponData weaponData; // The data of the weapon
+    [SerializeField] private PlayerShoot playerShoot; // Actions
+    [SerializeField] private int ownerID; // Player ID
     [SerializeField] private WeaponManager weaponManager;
+
+    public int OwnerID { get => ownerID; }
 
     [Tooltip("What projectile is being fired.")]
     private GameObject projectile;
@@ -84,6 +87,10 @@ public class Gun : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerShoot = other.gameObject.GetComponent<PlayerShoot>();
+
+            // Check who the owner of the weapon is 
+            ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
+
             weaponManager = other.gameObject.GetComponent<WeaponManager>();
             if (weaponManager != null)
             {

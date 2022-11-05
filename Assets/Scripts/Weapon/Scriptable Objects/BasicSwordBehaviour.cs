@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BasicSwordBehaviour : MonoBehaviour
 {
+    [SerializeField] private int playerHoldingThisWeaponID;
+    private PlayerMovement playerMovement;
+
+    [SerializeField] private Transform swordPointDirection;
+
     private void Start()
     {
 
@@ -13,13 +18,28 @@ public class BasicSwordBehaviour : MonoBehaviour
     {
 
     }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("ahhh");
-        if (other.transform.tag == "Revolver")
+        Vector2 forceDir = swordPointDirection.right;
+
+        if (other.transform.tag == "Player")
         {
-            other.gameObject.GetComponent<Gun>().Drop();
-            Debug.Log("Disarmed weapon");
+            // Find the ID of the player it's colliding with
+            playerHoldingThisWeaponID = other.gameObject.GetComponent<PlayerDetails>().playerID;
+
+            if (other.gameObject.GetComponent<PlayerDetails>().playerID.Equals(playerHoldingThisWeaponID))
+            {
+                Debug.Log("Is owner");
+                return;
+            }
+            else
+            {
+                playerMovement = other.gameObject.GetComponent<PlayerMovement>();
+                playerMovement.AddExternalForce(forceDir * 10f);
+                Debug.Log("Knocked back player");
+            }
         }
     }
 }
