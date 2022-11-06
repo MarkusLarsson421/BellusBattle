@@ -9,10 +9,12 @@ public class PoisonZone : MonoBehaviour
     private static Dictionary<GameObject, bool> isInZoneDic = new Dictionary<GameObject, bool>();
     private List<GameObject> playersInZone = new List<GameObject>();
     private List<Collider> objectsInZone = new List<Collider>();
+
+    private CameraFocus cameraFocus; //shitfix;
     
     void Start()
     {
-        
+        cameraFocus = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
       
     }
 
@@ -69,8 +71,16 @@ public class PoisonZone : MonoBehaviour
             Debug.Log(poisonDic[player]);
             if(poisonDic[player] >= timeToKill)
             {
+                cameraFocus.RemoveTarget(player.transform); //shitfix
                 player.GetComponent<PlayerHealth>().KillPlayer();
             }
         }
+    }
+
+    public void Clear()
+    {
+        poisonDic.Clear();
+        isInZoneDic.Clear();
+        playersInZone.Clear();
     }
 }
