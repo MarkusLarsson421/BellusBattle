@@ -14,11 +14,12 @@ public class MovableObject : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        gridMap.SetMovableObject(this);
+        gridMap.SS2(widthInGridUnits, heightInGridUnits, 0, false);
         difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
     }
     private void OnMouseDrag()
     {
-        gridMap.SetMovableObject(this);
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - difference;
         // see mouse position
         // get grid mouse is on
@@ -26,7 +27,7 @@ public class MovableObject : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        gridMap.SS2(widthInGridUnits, heightInGridUnits);
+        gridMap.SS2(widthInGridUnits, heightInGridUnits, 1, true);
         gridMap.SetMovableObject(null);
     }
 }
