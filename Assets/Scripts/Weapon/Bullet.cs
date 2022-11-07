@@ -40,6 +40,12 @@ public class Bullet : Projectile
 			return;
 		}
 
+        if (other.gameObject.CompareTag("Breakable"))
+        {
+			Destroy(other.gameObject);
+			Destroy(gameObject);
+        }
+
 	}
 
 	private IEnumerator Shoot(float seconds){
