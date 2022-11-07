@@ -5,8 +5,8 @@ using UnityEngine;
 public class MovableObject : MonoBehaviour
 {
     private Vector3 difference = Vector3.zero;
-    [Range(1, 5)] public int widthInGridUnits = 1;
-    [Range(1, 5)] public int heightInGridUnits = 1;
+    [Range(1, 10)] public int widthInGridUnits = 1;
+    [Range(1, 10)] public int heightInGridUnits = 1;
     GridMap gridMap;
     private void Start()
     {

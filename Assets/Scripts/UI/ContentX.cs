@@ -11,8 +11,8 @@ public class ContentX : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private GameObject spawnPoint;
-    [SerializeField, Range(1, 5)] private int widthInGridUnits = 1;
-    [SerializeField, Range(1, 5)] private int heightInGridUnits = 1;
+    [SerializeField, Range(1, 10)] private int widthInGridUnits = 1;
+    [SerializeField, Range(1, 10)] private int heightInGridUnits = 1;
     private static int amountOfObjectToSpawn;
     private static List<float> xPos = new List<float>();
     private static List<float> yPos = new List<float>();
