@@ -25,6 +25,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform muzzle;
     [Tooltip("Used for FireRate")]
     private float timeSinceLastShot;
+    private float _nextTimeToFire;
 
     [Header("Sounds")]
     [SerializeField, Tooltip("Sound made when weapon out of ammo")]
@@ -35,14 +36,19 @@ public class Gun : MonoBehaviour
 
     [SerializeField] bool isPickedUp;
 
-    int gunsAmmo;
+    [SerializeField] int gunsAmmo;
 
-    private float _nextTimeToFire;
-
-    bool isStartTimer;
+    [Header("Dropping")]
+    bool isStartTimerForDrop;
     [Tooltip("time before the weapon can be picked up again")]
-    [SerializeField] float timeToWait = 2f;
-    float timer;
+    [SerializeField] float timeToWaitForPickup = 2f;
+    float dropTimer;
+
+    [Header("DeSpawning")]
+    bool isStartTimerForDeSpawn;
+    [Tooltip("time before the weapon can be picked up again")]
+    [SerializeField] float timeToWaitForDeSpawn = 2f;
+    float deSpawnTimer;
 
     private void Start()
     {
@@ -58,29 +64,40 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        // Might need to change calculation
+        // USED FOR FIRERATE
         timeSinceLastShot += Time.deltaTime;
         if (Time.deltaTime >= _nextTimeToFire)
         {
+            // Might need to change calculation
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
-        // Placeholder for future destory timer
-        if (gunsAmmo >= 0) // && Time runs out
-        {
-            // Delete this gun
-        }
-
-        // USED FOR DROP
-        if (!isStartTimer)
+        // USED FOR DE-SPAWNING
+        if (!isStartTimerForDeSpawn)
         {
             return;
         }
-        timer += Time.unscaledDeltaTime;
-        if (timer >= timeToWait)
+        deSpawnTimer += Time.deltaTime;
+        Debug.Log(deSpawnTimer);
+        if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0) // No ammo && Time runs out
         {
-            timer = 0;
-            isStartTimer = false;
+            isStartTimerForDeSpawn = false;
+            // Delete this gun
+            Destroy(gameObject);
+
+        }
+       
+
+        // USED FOR DROP
+        if (!isStartTimerForDrop)
+        {
+            return;
+        }
+        dropTimer += Time.unscaledDeltaTime;
+        if (dropTimer >= timeToWaitForPickup)
+        {
+            dropTimer = 0;
+            isStartTimerForDrop = false;
             gameObject.GetComponent<BoxCollider>().enabled = true;
         }
     }
@@ -102,11 +119,12 @@ public class Gun : MonoBehaviour
                     playerShoot.shootInput += Shoot;
                     playerShoot.dropInput += Drop;
                     weaponManager.EquipWeapon(weaponData, gameObject);
+                    deSpawnTimer = 0f;
                     isPickedUp = true;
 
                     gunsAmmo = weaponData.Ammo;
                 }
-                
+
             }
         }
     }
@@ -115,12 +133,13 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        if (gunsAmmo >= 0)
+        if (gunsAmmo == 0)
         {
             // Play click sound to indicate no ammo left
             if (emptyGunSound != null)
             {
                 emptyGunSound.Play();
+                
             }
             Debug.Log("Click clack");
         }
@@ -161,6 +180,7 @@ public class Gun : MonoBehaviour
         isPickedUp = false;
         weaponManager.UnEquipWeapon(gameObject);
         gameObject.transform.SetParent(null);
-        isStartTimer = true;
+        isStartTimerForDrop = true;
+        isStartTimerForDeSpawn = true;
     }
 }

@@ -33,7 +33,7 @@ public class WeaponData : ScriptableObject
     public AudioSource shootAttackSound;
     
 
-[Header("VFX")]
+    [Header("VFX")]
     private int placeholder;
 
     // Getters
@@ -55,5 +55,4 @@ public class WeaponData : ScriptableObject
     {
         currentAmmo = initialAmmo;
     }
-    
 }
