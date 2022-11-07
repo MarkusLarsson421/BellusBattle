@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = System.Random;
 
 public class Gun : MonoBehaviour
 {
@@ -26,7 +27,9 @@ public class Gun : MonoBehaviour
     [Tooltip("Used for FireRate")]
     private float timeSinceLastShot;
 
-    //int ammoNow;
+    [Header("Sounds")]
+    [SerializeField, Tooltip("Sound made when picking up weapon")]
+    public AudioSource[] emptyGunSounds;
 
     [SerializeField] private PlayerMovement player;
     [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
@@ -94,12 +97,16 @@ public class Gun : MonoBehaviour
             weaponManager = other.gameObject.GetComponent<WeaponManager>();
             if (weaponManager != null)
             {
-                playerShoot.shootInput += Shoot;
-                playerShoot.dropInput += Drop;
-                weaponManager.EquipWeapon(weaponData, gameObject);
-                isPickedUp = true;
+                if (weaponManager.EquippedWeapon == null)
+                {
+                    playerShoot.shootInput += Shoot;
+                    playerShoot.dropInput += Drop;
+                    weaponManager.EquipWeapon(weaponData, gameObject);
+                    isPickedUp = true;
 
-                gunsAmmo = weaponData.Ammo;
+                    gunsAmmo = weaponData.Ammo;
+                }
+                
             }
         }
     }
@@ -108,6 +115,15 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
+        if (gunsAmmo >= 0)
+        {
+            // Play click sound to indicate no ammo left
+            if (emptyGunSounds.Length > 0)
+            {
+                emptyGunSounds[UnityEngine.Random.Range(0, emptyGunSounds.Length)].Play();
+            }
+            Debug.Log("Click clack");
+        }
         if (CanShoot())
         {
             //weaponData.ChangeAmmoBy(ammoNow--);
@@ -121,9 +137,9 @@ public class Gun : MonoBehaviour
             {
                 weaponData.shootAttackSound.Play();
             }
-            
+
             //VFX
-            
+
             //Animation
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);

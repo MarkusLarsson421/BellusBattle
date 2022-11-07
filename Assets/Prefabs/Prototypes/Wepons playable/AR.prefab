@@ -4960,7 +4960,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9109231185878699503}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.566, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4999,7 +4999,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9bc0993b490c3044f8b09cd877bbf6b4, type: 2}
+  - {fileID: 2100000, guid: 1bd38fa106bc3474fab3a58525e8f696, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5038,6 +5038,7 @@ MonoBehaviour:
   ownerID: 0
   weaponManager: {fileID: 0}
   muzzle: {fileID: 5716300864232877825}
+  emptyGunSound: {fileID: 0}
   player: {fileID: 0}
   aim: {fileID: 0}
   isPickedUp: 0

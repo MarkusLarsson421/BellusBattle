@@ -16,7 +16,7 @@ public class WeaponManager : MonoBehaviour
     //public Aim aim; // test to make bullet shoot in correct direction
 
   
-
+    public WeaponData EquippedWeapon { get => equippedWeapon; }
 
     private void Start()
     {
