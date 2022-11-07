@@ -37,7 +37,7 @@ public class Door : MonoBehaviour
 
    private void CheckForPlayers()
     {
-        colliders = Physics.OverlapBox(transform.position, transform.localScale * 2, Quaternion.identity);
+        colliders = Physics.OverlapBox(transform.position, boxCollider.size / 2, Quaternion.identity);
         foreach(Collider col in colliders)
         {
             if (col.CompareTag("Player") && col.gameObject != currentPlayer && currentPlayer == null)

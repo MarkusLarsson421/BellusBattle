@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump & Edgecontrol")]
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
-    [SerializeField, Range(0.1f, 2f)] private float edgeControlAmount;
+    [SerializeField] private float edgeControlAmount;
     [SerializeField] private float jumpBufferTime = 0.2f;
     [SerializeField] private float coyoteTime = 0.2f;
 
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         set => downwardForce = value; 
     }
 
-    private bool isGrounded
+    public bool IsGrounded
     {
         get => CheckIsGrounded(); 
     }
@@ -114,13 +114,13 @@ public class PlayerMovement : MonoBehaviour
         UpdateMovementForce();
         UpdateCoyoteTime();
         
-        if (isGrounded == false)
+        if (IsGrounded == false)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
             
         }
 
-        if (isGrounded && velocity.y < 0)
+        if (IsGrounded && velocity.y < 0)
         {
             landSound.Play();
             movementY = 0;
@@ -195,9 +195,9 @@ public class PlayerMovement : MonoBehaviour
             isStandingOnOneWayPlatform = false;
             return;
         }
-        else if (isGrounded || hasCoyoteTime || hasDoubleJump)
+        else if (IsGrounded || hasCoyoteTime || hasDoubleJump)
         {
-            if (isGrounded)
+            if (IsGrounded)
             {
                 hasJumpedOnGround = true;
                 JumpSound.Play();
@@ -283,7 +283,7 @@ public class PlayerMovement : MonoBehaviour
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
     }
-    public bool CheckIsGrounded()
+    private bool CheckIsGrounded()
     {
         
         if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, oneWayLayer))
@@ -307,7 +307,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void UpdateCoyoteTime()
     {
-        if (isGrounded || !hasCoyoteTime) return;
+        if (IsGrounded || !hasCoyoteTime) return;
  
         if (coyoteTimer > coyoteTime || hasJumpedOnGround)
         {
@@ -336,7 +336,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
            
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))//rayOrigin, Vector2.up * directionY, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
             {
                 velocity.y = 0;
                 movementY = 0f;  
@@ -373,7 +373,7 @@ public class PlayerMovement : MonoBehaviour
      
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))//rayOrigin, Vector2.right * directionX, out hit, rayLength, wallLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))
             {
                 if(i == 0)
                 {
