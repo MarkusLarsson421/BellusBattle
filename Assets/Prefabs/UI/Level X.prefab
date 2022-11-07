@@ -288,4 +288,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: 
   color1: {r: 1, g: 0.3726415, b: 0.3726415, a: 1}
-  color2: {r: 0.495283, g: 1, b: 0.4952942, a: 1}
+  color2: {r: 1, g: 1, b: 1, a: 1}
