@@ -6,7 +6,7 @@ public class CharacterCustimization : MonoBehaviour
 {
     [SerializeField] List<CharacterItem> characterItems;
 
-    public int currentIndex { get; set; }
+    public int currentIndex { get; private set; }
 
     [System.Serializable]
     public struct CharacterItem
