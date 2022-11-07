@@ -5750,10 +5750,6 @@ MonoBehaviour:
   boxCollider: {fileID: 6431588530169345906}
   rightArm: {fileID: 2915926472710746649}
   skr: {fileID: 6010799286257098507}
-  gunMesh: {fileID: 5609809110401844018}
-  swordMesh: {fileID: 243362842923368704}
-  grenadeMesh: {fileID: 5834055624622029484}
-  ppV1: {fileID: 0}
 --- !u!114 &7604770547986073551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6935,12 +6931,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2088393504146825161}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &243362842923368704 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2277677801750240969, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
-    type: 3}
-  m_PrefabInstance: {fileID: 2088393504146825161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &243362842923368765 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2277677801750241012, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
@@ -7128,12 +7118,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2443168129568054389}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &5834055624622029484 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8147393076462266073, guid: 11c41a91053289a4285c252a2fd18326,
-    type: 3}
-  m_PrefabInstance: {fileID: 2443168129568054389}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6049734556485213722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8219942326039036527, guid: 11c41a91053289a4285c252a2fd18326,
@@ -7239,12 +7223,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 457cfa393a91a6c429d84ade259841f4, type: 3}
---- !u!23 &5609809110401844018 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 457cfa393a91a6c429d84ade259841f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6492957045550096310}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6258587146885472999 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 457cfa393a91a6c429d84ade259841f4,
@@ -9828,6 +9806,53 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &6998119037449280601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1404615784500993771, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8241695838658003634}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5590397766349360738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998119037449280601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd72d7ce7eb86034b8fed68d3bec395d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterItems:
+  - characterName: Cat
+    accessoryItems:
+    - {fileID: 5954001412046255214}
+    - {fileID: 7116945895633401266}
+    characterMaterial: {fileID: 2100000, guid: 01b1fa9942b514446b155eab3c6e3d89, type: 2}
+    characterIndex: 0
+    isAvailable: 1
+  - characterName: Panda
+    accessoryItems:
+    - {fileID: 1248163224415574784}
+    - {fileID: 1201284879550055216}
+    characterMaterial: {fileID: 2100000, guid: 51bc165d55a731448bdcc12efe6e60dc, type: 2}
+    characterIndex: 1
+    isAvailable: 1
+  - characterName: Monkey
+    accessoryItems:
+    - {fileID: 6719419452861098708}
+    - {fileID: 6655365121378666022}
+    characterMaterial: {fileID: 2100000, guid: 0755f92c78e1f9441b718e920cdada9a, type: 2}
+    characterIndex: 2
+    isAvailable: 1
+  - characterName: Pig
+    accessoryItems:
+    - {fileID: 1799832788444642896}
+    - {fileID: 1863916498678763179}
+    characterMaterial: {fileID: 2100000, guid: fb35d03ef6c871243ac3087919e20527, type: 2}
+    characterIndex: 3
+    isAvailable: 1
 --- !u!4 &7600359564593042094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
