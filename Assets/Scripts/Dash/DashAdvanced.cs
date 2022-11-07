@@ -39,6 +39,8 @@ public class DashAdvanced : MonoBehaviour
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
+    [Header("Sounds")]
+    [SerializeField] private AudioSource dashSound;
 
     private Vector3 direction;
     private Vector3 velocity;
@@ -198,6 +200,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void StartDashProtocol()
     {
+        dashSound.Play();
         CheckForCollision();
         canDash = false;
         isDashing = true;

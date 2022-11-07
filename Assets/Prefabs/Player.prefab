@@ -5782,6 +5782,7 @@ MonoBehaviour:
   deadZoneAngleRange: 85
   dashingActivationCooldown: 0.5
   tr: {fileID: 7687228209419224627}
+  dashSound: {fileID: 1079757518853252576}
   dashEvent:
     m_PersistentCalls:
       m_Calls:
