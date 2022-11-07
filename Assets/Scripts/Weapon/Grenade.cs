@@ -55,6 +55,10 @@ public class Grenade : Projectile
             {
 				hits[i].GetComponent<Door>().DestroyDoor();
             }
+			if (hits[i].CompareTag("Breakable"))
+			{
+				Destroy(hits[i].gameObject);
+			}
 		}
 		Destroy(gameObject);
 		//Die();
