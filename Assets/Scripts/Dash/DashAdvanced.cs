@@ -282,7 +282,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void CheckIfGrounded()
     {
-        if (!movement.CheckIsGrounded())
+        if (!movement.IsGrounded)
         {
             currentCanDashDown = true;
             currentDashingDistace = airDashingDistace;
