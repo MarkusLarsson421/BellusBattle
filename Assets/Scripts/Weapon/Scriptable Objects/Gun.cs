@@ -83,7 +83,7 @@ public class Gun : MonoBehaviour
         {
             isStartTimerForDeSpawn = false;
             // Delete this gun
-            Destroy(gameObject);
+            //Destroy(gameObject);
 
         }
        
