@@ -6,8 +6,6 @@ public class CharacterCustimization : MonoBehaviour
 {
     [SerializeField] List<CharacterItem> characterItems;
 
-    public int currentIndex { get; private set; }
-
     [System.Serializable]
     public struct CharacterItem
     {
@@ -16,7 +14,6 @@ public class CharacterCustimization : MonoBehaviour
         public Material characterMaterial;
         public int characterIndex;
         public bool isAvailable;
-
 
         public void SetIsAvailable(bool toggle)
         {
