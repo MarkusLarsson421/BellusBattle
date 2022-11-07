@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using Random = System.Random;
 
 public class Bullet : Projectile
 {
 	[SerializeField] [Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 5.0f;
 	CameraFocus cf;
+	[SerializeField, Tooltip("Sound made when bullet hits something")]
+	public AudioSource[] hitSounds;
 
 	private void Start(){
 		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
@@ -38,6 +41,17 @@ public class Bullet : Projectile
 			Debug.Log("Obstacle");
 			Destroy(gameObject);
 			return;
+		}
+
+        if (other.gameObject.CompareTag("Breakable"))
+        {
+			Destroy(other.gameObject);
+			Destroy(gameObject);
+        }
+
+		if (hitSounds.Length > 0)
+		{
+			hitSounds[UnityEngine.Random.Range(0, hitSounds.Length)].Play();
 		}
 
 	}

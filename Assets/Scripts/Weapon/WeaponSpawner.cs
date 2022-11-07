@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponSpawner : MonoBehaviour
 {
-    [SerializeField]private Weapon[] weapons;
+    [SerializeField]private Gun[] weapons;
     private WeaponSpawnerManager manager;
 
     void Start()
