@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = System.Random;
 
 public class Gun : MonoBehaviour
 {
@@ -28,8 +27,8 @@ public class Gun : MonoBehaviour
     private float timeSinceLastShot;
 
     [Header("Sounds")]
-    [SerializeField, Tooltip("Sound made when picking up weapon")]
-    public AudioSource[] emptyGunSounds;
+    [SerializeField, Tooltip("Sound made when weapon out of ammo")]
+    public AudioSource emptyGunSound;
 
     [SerializeField] private PlayerMovement player;
     [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
@@ -59,6 +58,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        // Might need to change calculation
         timeSinceLastShot += Time.deltaTime;
         if (Time.deltaTime >= _nextTimeToFire)
         {
@@ -118,12 +118,13 @@ public class Gun : MonoBehaviour
         if (gunsAmmo >= 0)
         {
             // Play click sound to indicate no ammo left
-            if (emptyGunSounds.Length > 0)
+            if (emptyGunSound != null)
             {
-                emptyGunSounds[UnityEngine.Random.Range(0, emptyGunSounds.Length)].Play();
+                emptyGunSound.Play();
             }
             Debug.Log("Click clack");
         }
+
         if (CanShoot())
         {
             //weaponData.ChangeAmmoBy(ammoNow--);

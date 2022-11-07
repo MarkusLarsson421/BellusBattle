@@ -31,8 +31,9 @@ public class WeaponData : ScriptableObject
     public AudioSource pickupSound;
     [SerializeField, Tooltip("Sound made when using weapon")]
     public AudioSource shootAttackSound;
+    
 
-    [Header("VFX")]
+[Header("VFX")]
     private int placeholder;
 
     // Getters
