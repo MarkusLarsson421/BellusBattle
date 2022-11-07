@@ -3723,7 +3723,7 @@ PrefabInstance:
         type: 3}
       propertyPath: content
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 670050217}
     - target: {fileID: 2840680792378777891, guid: 26748b17d5f5e994cab620063817464f,
         type: 3}
       propertyPath: levelXPrefab
@@ -6895,9 +6895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa6dd1ea8ba25d649951a17b5791c06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 0}
+  levelManager: {fileID: 872281406}
   textS: {fileID: 1649380807}
-  scoreManager: {fileID: 0}
+  scoreManager: {fileID: 165493304}
 --- !u!114 &1360444675
 MonoBehaviour:
   m_ObjectHideFlags: 0
