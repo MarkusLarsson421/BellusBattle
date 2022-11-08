@@ -15,7 +15,7 @@ public class ControlChooser : MonoBehaviour
     public void LeftControllerMode()
     {
         toggledLeft = !toggledLeft;
-        //toggledRight = false;
+        toggledRight = false;
         ControlScheme();
 
 
@@ -23,7 +23,7 @@ public class ControlChooser : MonoBehaviour
     public void RightControllerMode()
     {
         toggledRight = !toggledRight;
-        //toggledLeft = false;
+        toggledLeft = false;
         ControlScheme();
     }
 

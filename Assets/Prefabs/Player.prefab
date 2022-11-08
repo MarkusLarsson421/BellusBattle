@@ -5713,7 +5713,19 @@ MonoBehaviour:
     m_ActionId: 86ff95fc-2d3d-4f3c-a6c1-c2a31b281ce3
     m_ActionName: PlayerAccessibility/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7604770547986073551}
+        m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
+        m_MethodName: CheckDashWithJoystickDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b21c882c-1f65-48cd-b354-cbb48aa39d4b
     m_ActionName: PlayerAccessibility/AimOverride[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
   - m_PersistentCalls:
@@ -5845,7 +5857,19 @@ MonoBehaviour:
     m_ActionId: 9b476859-6455-4334-b5d7-8faf6d7ee616
     m_ActionName: PlayerAccessibilityRight/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7604770547986073551}
+        m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
+        m_MethodName: CheckDashWithJoystickDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cb488d19-f146-4f2a-92de-d0c5acc7c155
     m_ActionName: PlayerAccessibilityRight/AimOverride[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
   - m_PersistentCalls:
