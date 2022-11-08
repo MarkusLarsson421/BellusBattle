@@ -36,10 +36,9 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-
-
     public void KillPlayer()
     {
+
         boxCollider.enabled = false;
         rightArm.SetActive(false);
         skr.enabled = false;

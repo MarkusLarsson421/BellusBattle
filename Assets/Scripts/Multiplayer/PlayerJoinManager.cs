@@ -7,6 +7,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] private Camera camera;
     [SerializeField] GameObject characterLow;
+    [SerializeField] ControlChooser cc;
     //[SerializeField] GameObject[] accessorites;
     //[SerializeField] GameObject accessoritesSlot;
 
@@ -21,6 +22,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         //
         scoreManager.AddPlayers(playerInput.gameObject);
         listOfPlayers.Add(playerInput);
+        cc.AddToList(playerInput);
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
 
@@ -31,7 +33,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         AddPlayerInFocus(playerInput.transform);
 
-        //playerInput.SwitchCurrentActionMap("PlayerAccessibility");
+       
         
 
         // Changes the texture/material of the player

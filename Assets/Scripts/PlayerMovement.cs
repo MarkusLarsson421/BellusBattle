@@ -249,8 +249,7 @@ public class PlayerMovement : MonoBehaviour
         Bounds col = platformCollider.bounds;
 
         float colliderDif = col.max.y - hitpointY;
-        //Debug.Log(colliderDif);
-
+        
         if (colliderDif > 0 && colliderDif < edgeControlAmount)
         {
             if (velocity.x < 0f)
