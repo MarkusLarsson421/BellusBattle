@@ -31,6 +31,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         AddPlayerInFocus(playerInput.transform);
 
+        //playerInput.SwitchCurrentActionMap("PlayerAccessibility");
         
 
         // Changes the texture/material of the player
