@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
@@ -53,7 +54,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         // Reload it
-        weaponData.SetNewAmmoAmount(weaponData.magSize);
+        gunsAmmo = weaponData.Ammo;
 
         projectile = weaponData.projectile;
         if (weaponData.projectile != null)
@@ -78,13 +79,15 @@ public class Gun : MonoBehaviour
             return;
         }
         deSpawnTimer += Time.deltaTime;
-        Debug.Log(deSpawnTimer);
+        Debug.Log("Despawn: " + deSpawnTimer);
         if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0) // No ammo && Time runs out
         {
             isStartTimerForDeSpawn = false;
+            deSpawnTimer = 0f;
             // Delete this gun
-            //Destroy(gameObject);
-
+            Drop();
+            gameObject.SetActive(false);
+            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
        
 
@@ -122,7 +125,7 @@ public class Gun : MonoBehaviour
                     deSpawnTimer = 0f;
                     isPickedUp = true;
 
-                    gunsAmmo = weaponData.Ammo;
+                    //gunsAmmo = weaponData.Ammo;
                 }
 
             }
@@ -180,6 +183,8 @@ public class Gun : MonoBehaviour
         isPickedUp = false;
         weaponManager.UnEquipWeapon(gameObject);
         gameObject.transform.SetParent(null);
+        // Otherwise it stays in DontDestroyOnLoad
+        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
         isStartTimerForDrop = true;
         isStartTimerForDeSpawn = true;
     }

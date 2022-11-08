@@ -25,4 +25,4 @@ MonoBehaviour:
   magSize: 6
   fireRate: 50
   pickupSound: {fileID: 0}
-  shootSound: {fileID: 0}
+  shootAttackSound: {fileID: 0}
