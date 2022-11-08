@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: GrenadeLauncherData
   m_EditorClassIdentifier: 
+  amountToSpawn: 0
   name: GrenadeLauncher
   weaponPrefab: {fileID: 9109231185878699503, guid: fd78c44ac842f734f86ab489ce43ce60,
     type: 3}
@@ -19,7 +20,7 @@ MonoBehaviour:
   maxDistance: 3
   projectile: {fileID: 2217352063105504401, guid: ed45301ffa672bf43b5fdda7e7f92191,
     type: 3}
-  projectileForce: 5
+  projectileForce: 100
   currentAmmo: 4
   initialAmmo: 4
   magSize: 4

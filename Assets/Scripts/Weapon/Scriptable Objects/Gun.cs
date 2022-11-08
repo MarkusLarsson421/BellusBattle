@@ -79,6 +79,12 @@ public class Gun : MonoBehaviour
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
+        if (gunsAmmo == 0)
+        {
+            // Placeholder för när vi fixat riktiga drop
+            Drop();
+        }
+
         /*
         // USED FOR DE-SPAWNING
         if (!isStartTimerForDeSpawn)
@@ -151,8 +157,6 @@ public class Gun : MonoBehaviour
             if (emptyGunSound != null)
             {
                 emptyGunSound.Play();
-                // Placeholder för när vi fixat riktiga drop
-                Drop();
                 
             }
             //Debug.Log("Click clack");
