@@ -5,12 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gun", menuName = "Weapon/Gun")]
 public class WeaponData : ScriptableObject
 {
-    /*
+    
     [Header("Pooling")]
     private Queue<GameObject> spawnedObjs;
     public int amountToSpawn;
     private Transform parent;
-    */
 
     [Header("Info")]
     public new string name;
@@ -27,7 +26,8 @@ public class WeaponData : ScriptableObject
     public float projectileForce;
 
     [Header("Reloading")]
-    public int currentAmmo, initialAmmo;
+    public int currentAmmo;
+    public int initialAmmo;
     public int magSize;
     [Tooltip("In RPM")] public float fireRate;
     //public float reloadTime;
@@ -46,10 +46,10 @@ public class WeaponData : ScriptableObject
     public int Ammo { get => currentAmmo; }
 
     
-    //public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
+    public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
 
     // Metods
-    /*public void SpawnPool()
+    public void SpawnPool()
     {
         if (spawnedObjs == null || spawnedObjs.Count == 0)
         {
@@ -94,7 +94,7 @@ public class WeaponData : ScriptableObject
         return obj;
     }
     
-    */
+    
 
 
     /*

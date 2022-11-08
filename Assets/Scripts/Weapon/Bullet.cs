@@ -22,15 +22,15 @@ public class Bullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player") && Shooter != playerGo)
 		{
-			playerGo.GetComponent<PlayerHealth>().TakeDamage(bulletDamage);
+			playerGo.GetComponent<PlayerHealth>().TakeDamage(1);
 
             if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
             {
 				//playerGo.SetActive(false);
-				playerGo.GetComponent<PlayerHealth>().KillPlayer();
+				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
 				cf.RemoveTarget(playerGo.transform);
 			}
-			
+			/*
 			PlayerDeathEvent pde = new PlayerDeathEvent{
 				PlayerGo = other.gameObject,
 				Kille = other.name,
@@ -38,10 +38,11 @@ public class Bullet : Projectile
 				KilledWith = "Bullets",
 			};
 			pde.FireEvent();
-
+			*/
 			Die();
 		}
-		if(other.CompareTag( "target"))
+
+		if(other.gameObject.CompareTag("Target"))
         {
 			GetComponent<Destroy>().gone();
 

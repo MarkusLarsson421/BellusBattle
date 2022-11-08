@@ -61,6 +61,12 @@ public class Gun : MonoBehaviour
         {
             _projectile = projectile.GetComponent<Projectile>();
         }
+
+        dropTimer = 0f;
+        deSpawnTimer = 0f;
+        //Drop();
+
+        
     }
 
     private void Update()
@@ -73,13 +79,14 @@ public class Gun : MonoBehaviour
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
+        /*
         // USED FOR DE-SPAWNING
         if (!isStartTimerForDeSpawn)
         {
             return;
         }
         deSpawnTimer += Time.deltaTime;
-        Debug.Log("Despawn: " + deSpawnTimer);
+        //Debug.Log("Despawn: " + deSpawnTimer);
         if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0) // No ammo && Time runs out
         {
             isStartTimerForDeSpawn = false;
@@ -89,20 +96,22 @@ public class Gun : MonoBehaviour
             gameObject.SetActive(false);
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }
-       
-
+       */
+        /*
         // USED FOR DROP
         if (!isStartTimerForDrop)
         {
             return;
         }
-        dropTimer += Time.unscaledDeltaTime;
+        dropTimer += Time.deltaTime;
+        //Debug.Log("droppper: " + dropTimer +" poda " + timeToWaitForPickup);
         if (dropTimer >= timeToWaitForPickup)
         {
             dropTimer = 0;
             isStartTimerForDrop = false;
             gameObject.GetComponent<BoxCollider>().enabled = true;
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other)
@@ -142,21 +151,18 @@ public class Gun : MonoBehaviour
             if (emptyGunSound != null)
             {
                 emptyGunSound.Play();
+                // Placeholder för när vi fixat riktiga drop
+                Drop();
                 
             }
-            Debug.Log("Click clack");
+            //Debug.Log("Click clack");
         }
 
         if (CanShoot())
         {
-            
-
-            //weaponData.ChangeAmmoBy(ammoNow--);
-            //weaponData.currentAmmo--;
-            //Debug.Log(weaponData.currentAmmo);
-
             gunsAmmo--;
-            Debug.Log(gunsAmmo);
+            //Debug.Log(gunsAmmo);
+
             //Sound
             if (weaponData.shootAttackSound != null)
             {
@@ -169,7 +175,8 @@ public class Gun : MonoBehaviour
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
-            firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
+            // mainly used for Lobby gun atm
+            //firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;
@@ -188,8 +195,11 @@ public class Gun : MonoBehaviour
         weaponManager.UnEquipWeapon(gameObject);
         gameObject.transform.SetParent(null);
         // Otherwise it stays in DontDestroyOnLoad
-        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
         isStartTimerForDrop = true;
         isStartTimerForDeSpawn = true;
+
+        gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 }

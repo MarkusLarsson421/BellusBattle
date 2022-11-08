@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1740366451591659435}
   - component: {fileID: 8147393076462266073}
   - component: {fileID: 4086238510996197660}
-  - component: {fileID: 6399377914579020256}
+  - component: {fileID: 8126127108314885367}
+  - component: {fileID: 3582224188800866614}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Grenade
@@ -96,12 +97,12 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456660403862733717}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6399377914579020256
+--- !u!114 &8126127108314885367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,22 +111,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1456660403862733717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3363a3b4eb4e0f4091f9f0373bcee33, type: 3}
+  m_Script: {fileID: 11500000, guid: d67f3d9f04de78d4eb6f57277782e385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: ccc8f5de5009bbd4885f5869766eca74, type: 2}
+  playerShoot: {fileID: 0}
+  ownerID: 0
+  weaponManager: {fileID: 0}
+  muzzle: {fileID: 8477728059306019790}
+  emptyGunSound: {fileID: 0}
+  player: {fileID: 0}
   aim: {fileID: 0}
-  inaccuracy: 1
-  fireRate: 5
-  ammo: 1
-  projectile: {fileID: 7929666838174018582, guid: e6495995ebe266c4aa513e23ff180d7d,
-    type: 3}
-  projectileOrigin: {fileID: 8219942326039036527}
-  projectileForce: 100
-  MuzzleFlash: {fileID: 8832398278110330611, guid: 6a51a15650e5e9f4d9b75377e960e8ce,
-    type: 3}
-  shootSound: {fileID: 4937763799677506203}
-  Sword: {fileID: 0}
-  pickUp_Proto: {fileID: 0}
+  isPickedUp: 0
+  gunsAmmo: 0
+  timeToWaitForPickup: 2
+  timeToWaitForDeSpawn: 2
+--- !u!54 &3582224188800866614
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456660403862733717}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!1 &6201525818585368969
 GameObject:
   m_ObjectHideFlags: 0
