@@ -5812,7 +5812,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6431588530169345917}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: PassThroughDownwardsPlattform
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5822,8 +5822,108 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: a60b01e3-ea8f-45af-85de-91d82934fd4f
-    m_ActionName: PlayerAccessibility/GoThroughtOneWayPlattformsRight[/XInputControllerWindows/rightStick/down]
+    m_ActionId: 9f057c1a-4bb2-48a8-9fd7-a5f4384c39ba
+    m_ActionName: PlayerAccessibilityRight/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6431588530169345917}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 044d826a-21aa-4ef7-ad72-26e8ada74eb6
+    m_ActionName: PlayerAccessibilityRight/Jump[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/XInputControllerWindows/dpad/down,/XInputControllerWindows1/dpad/down,/Keyboard/space,/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder,/XInputControllerWindows/rightStick/up,/XInputControllerWindows1/rightStick/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4782767669193128058}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: OverrideJoystickInputToAngleCalculation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9b476859-6455-4334-b5d7-8faf6d7ee616
+    m_ActionName: PlayerAccessibilityRight/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cb488d19-f146-4f2a-92de-d0c5acc7c155
+    m_ActionName: PlayerAccessibilityRight/AimOverride[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7604770547986073551}
+        m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
+        m_MethodName: DashWithJoystick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5ed89da7-7c50-4b61-bffa-860ec215bb5c
+    m_ActionName: PlayerAccessibilityRight/Dash[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/XInputControllerWindows/dpad/right,/XInputControllerWindows1/dpad/right,/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger,/XInputControllerWindows/leftShoulder,/XInputControllerWindows1/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f92a5357-af53-406f-9c4e-8d1c4fdf8a17
+    m_ActionName: PlayerAccessibilityRight/Join Game[/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest,/XInputControllerWindows/dpad/left,/XInputControllerWindows1/dpad/left,/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 151876198800240814}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: OnWeaponShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 39ef49ff-67a6-4e03-a57a-a037b718261f
+    m_ActionName: PlayerAccessibilityRight/Shoot/Attack[/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: add8dcfe-2496-499c-895d-54de21bfa05e
+    m_ActionName: PlayerAccessibilityRight/PickUp/Drop[/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth,/XInputControllerWindows/dpad/up,/XInputControllerWindows1/dpad/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2a86719-aec7-4fd4-8064-27d6f192e048
+    m_ActionName: PlayerAccessibilityRight/AccesabilityJumpLeft[/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd559d4f-8941-45ce-84b5-111d563de212
+    m_ActionName: PlayerAccessibilityRight/AcessabilityJumpRight[/XInputControllerWindows/rightStick/up,/XInputControllerWindows1/rightStick/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0a018611-3097-439b-aea8-c934591ea498
+    m_ActionName: PlayerAccessibilityRight/AccssabilityShootLeft[/XInputControllerWindows/leftShoulder,/XInputControllerWindows1/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6604f7f2-66fe-4a5e-a33a-eff4aebcd8b0
+    m_ActionName: PlayerAccessibilityRight/AcessabiliyDashRight[/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2114e2b2-dc96-47a8-a6ac-54ec4e5d3e53
+    m_ActionName: PlayerAccessibilityRight/AcessabilityRightStickMove[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 960e3237-e7f0-454f-b97c-1d6ac3dc8dd5
+    m_ActionName: PlayerAccessibilityRight/GoThroughtOneWayPlattformsRight[/XInputControllerWindows/rightStick/down,/XInputControllerWindows1/rightStick/down]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

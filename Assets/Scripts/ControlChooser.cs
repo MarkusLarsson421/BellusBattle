@@ -15,7 +15,7 @@ public class ControlChooser : MonoBehaviour
     public void LeftControllerMode()
     {
         toggledLeft = !toggledLeft;
-        toggledRight = false;
+        //toggledRight = false;
         ControlScheme();
 
 
@@ -39,18 +39,27 @@ public class ControlChooser : MonoBehaviour
         {
             foreach (PlayerInput input in playerInputs)
             {
-                input.SwitchCurrentActionMap("PlayerAccessibility");
+                input.SwitchCurrentActionMap("PlayerAccessibilityLeft");
             }
             Debug.Log("sätt in left controller control scheme här");
         }
         if (toggledRight)
         {
             Debug.Log("sätt in right controller control scheme här");
-            
+            foreach (PlayerInput input in playerInputs)
+            {
+                input.SwitchCurrentActionMap("PlayerAccessibilityRight");
+            }
+
         }
         if(!toggledRight && !toggledLeft)
         {
             Debug.Log("Sätt in normal kotroller här");
+            foreach (PlayerInput input in playerInputs)
+            {
+                input.SwitchCurrentActionMap("Player");
+            }
+
         }
     }
 }
