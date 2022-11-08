@@ -588,7 +588,7 @@
                 {
                     "name": "",
                     "id": "bb25fec4-e9f9-4c89-99dc-034514f9c0ef",
-                    "path": "<Gamepad>/rightStick",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -984,9 +984,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "GoThroughtOneWayPlattformsRight",
+                    "name": "GoThroughtOneWayPlattformsLeft",
                     "type": "Button",
-                    "id": "960e3237-e7f0-454f-b97c-1d6ac3dc8dd5",
+                    "id": "7f9756a5-2e5b-4d15-b72e-6ffbc2f6973b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1348,12 +1348,12 @@
                 },
                 {
                     "name": "",
-                    "id": "88232927-ba89-4699-a5fb-162f4dffa4a8",
+                    "id": "78444316-2dbd-4e65-8631-c07a13635fc6",
                     "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GoThroughtOneWayPlattformsRight",
+                    "action": "GoThroughtOneWayPlattformsLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
