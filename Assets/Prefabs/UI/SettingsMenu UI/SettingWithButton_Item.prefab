@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1309279547363178670}
   m_Layer: 5
-  m_Name: Setting1_Item
+  m_Name: SettingWithButton_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
