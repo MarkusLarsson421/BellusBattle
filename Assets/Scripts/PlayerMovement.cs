@@ -185,7 +185,18 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
     }
-
+    public void PassThroughDownwardsPlattform(InputAction.CallbackContext ctx)
+    {
+       
+            if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
+            {
+                transform.position += Vector3.down * playerHeight;
+                isStandingOnOneWayPlatform = false;
+                return;
+            }
+        
+       
+    }
     private void Jump()
     {
         float jumpDecreaser = 1f;

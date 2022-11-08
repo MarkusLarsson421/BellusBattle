@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GoThroughOneWayPlattforms",
+                    "type": "Button",
+                    "id": "0e4c3aad-0776-4a20-9044-1b4ae011848e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -320,6 +329,17 @@
                     "action": "AimOverride",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72888789-e4e6-4b7f-8ba9-404d6f486fdb",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoThroughOneWayPlattforms",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -443,6 +463,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "GoThroughtOneWayPlattformsLeft",
+                    "type": "Button",
+                    "id": "05e8c255-e4c7-4d06-8021-08cf8c7eb839",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GoThroughtOneWayPlattformsRight",
+                    "type": "Button",
+                    "id": "a60b01e3-ea8f-45af-85de-91d82934fd4f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -817,6 +855,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c2a1078-237f-4936-8945-7af2a2ac7d69",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoThroughtOneWayPlattformsLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d58e53cb-51c7-434a-b24f-122e233bbe4a",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoThroughtOneWayPlattformsRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
