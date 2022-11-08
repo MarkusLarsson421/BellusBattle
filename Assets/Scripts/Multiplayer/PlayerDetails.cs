@@ -19,7 +19,7 @@ public class PlayerDetails : MonoBehaviour
     {
         transform.position = startPos; // Puts the player on the spawn position
         isAlive = true;
-        headGearSlot = GameObject.FindGameObjectWithTag("HeadSlot").transform;
+        //headGearSlot = GameObject.FindGameObjectWithTag("HeadSlot").transform;
     }
 
 

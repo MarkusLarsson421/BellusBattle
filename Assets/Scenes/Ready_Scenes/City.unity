@@ -4592,7 +4592,12 @@ PrefabInstance:
     - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: minZoom
-      value: 60
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
+        type: 3}
+      propertyPath: offset.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709032, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}

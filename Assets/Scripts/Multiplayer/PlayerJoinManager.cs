@@ -7,11 +7,11 @@ public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] private Camera camera;
     [SerializeField] GameObject characterLow;
-    [SerializeField] GameObject[] accessorites;
+    //[SerializeField] GameObject[] accessorites;
     //[SerializeField] GameObject accessoritesSlot;
 
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
-    public Material[] colors;
+    //public Material[] colors;
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -31,14 +31,21 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         AddPlayerInFocus(playerInput.transform);
 
+        
+
         // Changes the texture/material of the player
-        playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
+        //playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
         // Finds where the accessory should be placed (HeadSlot)
         //accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
         PlayerDetails playerDetails = playerInput.gameObject.GetComponent<PlayerDetails>();
         // Put the accessory on the HeadSlot
-        GameObject accessory = Instantiate(accessorites[playerInput.playerIndex], playerDetails.HeadGearSlot());//accessoritesSlot.transform);
-        accessory.transform.SetParent(playerInput.gameObject.transform);
+        //GameObject accessory = Instantiate(accessorites[playerInput.playerIndex], playerDetails.HeadGearSlot());//accessoritesSlot.transform);
+        //accessory.transform.SetParent(playerInput.gameObject.transform);
+
+        Renderer renderer = playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        //Activates Player characteraccessories and assigns material based on characterIndex
+        playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer);
+
     }
     private void AddPlayerInFocus(Transform player)
     {
