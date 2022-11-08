@@ -39,7 +39,7 @@ public class Grenade : Projectile
 			if (hits[i].CompareTag("Player"))
 			{
 				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
-				ph.TakeDamage(1);
+				ph.TakeDamage(damage);
 				cf.RemoveTarget(hits[i].transform); //shitfix
 				//pickUp_Proto.isHoldingWeapon = false;
 

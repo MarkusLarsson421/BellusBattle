@@ -180,13 +180,14 @@ public class Gun : MonoBehaviour
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
             // mainly used for Lobby gun atm
-            firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
+            //firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;
             float aimy = muzzle.transform.forward.y;
             Vector3 force = new Vector3(forceForwrd * aimx, forceForwrd * aimy, 0f);
             _projectile = firedProjectile.GetComponent<Projectile>();
+            _projectile.SetDamage(weaponData.damage);
             _projectile.GetComponent<Rigidbody>().AddForce(force);
 
             timeSinceLastShot = 0;
