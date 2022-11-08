@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     private float health = 1;
     private bool isInvinsable=false;
 
+    public float Health { get => health; }
+
     //USCH
     [SerializeField] private BoxCollider boxCollider;
     [SerializeField] private GameObject rightArm;

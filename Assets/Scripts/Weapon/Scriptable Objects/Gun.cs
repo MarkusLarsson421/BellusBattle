@@ -149,6 +149,8 @@ public class Gun : MonoBehaviour
 
         if (CanShoot())
         {
+            
+
             //weaponData.ChangeAmmoBy(ammoNow--);
             //weaponData.currentAmmo--;
             //Debug.Log(weaponData.currentAmmo);
@@ -166,6 +168,8 @@ public class Gun : MonoBehaviour
             //Animation
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+
+            firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;
