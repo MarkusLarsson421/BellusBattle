@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Grid
@@ -9,29 +7,49 @@ public class Grid
     private int height;
     private float cellSize;
     Vector3 originPosition;
-    private int[,] gridArray;
+    private int[,] gridArrayValue;
     private TextMesh[,] debugTextArray;
+    private int[,] gridArrayNumber;
+    private Dictionary<int, GameObject> gridArrayDict = new Dictionary<int, GameObject>();
+
     public Grid(int width, int height, float cellSize, Vector3 originPosition)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
         this.originPosition = originPosition;
-
-        gridArray = new int[width, height];
+        int temp = 0;
+        gridArrayValue = new int[width, height];
         debugTextArray = new TextMesh[width, height];
-
-        for (int x = 0; x < gridArray.GetLength(0); x++)
+        gridArrayNumber = new int[width, height];
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < gridArray.GetLength(1); y++)
+            for (int y = 0; y < height; y++)
             {
-                debugTextArray[x, y] = CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, 5, Color.black, TextAnchor.MiddleCenter);
+                GameObject g = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                g.transform.position = originPosition + new Vector3(x * cellSize + 0.5f, y * cellSize + 0.5f, +5f);
+                g.transform.rotation = Quaternion.AngleAxis(90, Vector3.left);
+                g.transform.localScale = Vector3.one * cellSize / 10;
+                gridArrayNumber[x, y] = temp;
+                temp++;
+                gridArrayDict.Add(gridArrayNumber[x,y], g);
+            }
+        }
+        for (int x = 0; x < gridArrayValue.GetLength(0); x++)
+        {
+            for (int y = 0; y < gridArrayValue.GetLength(1); y++)
+            {
+                debugTextArray[x, y] = CreateWorldText(gridArrayValue[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, 5, Color.black, TextAnchor.MiddleCenter);
                 Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.black, 100f);
                 Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.black, 100f);
             }
         }
         Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.black, 100f);
         Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.black, 100f);
+    }
+    public void ChangeColor(GameObject gameObject, Color color)
+    {
+        gameObject.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", color);
     }
     public Vector3 GetWorldPosition(int x, int y)
     {
@@ -64,12 +82,14 @@ public class Grid
     {
         return Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
     }
-    public void SetValue(int x, int y, int value)
+    private void SetValue(int x, int y, int value)
     {
         if(x >= 0 && y >= 0 && x < width && y < height)
         {
-            gridArray[x, y] = value;
-            debugTextArray[x, y].text = gridArray[x, y].ToString();
+            gridArrayValue[x, y] = value;
+            if(value == 0)ChangeColor(gridArrayDict[gridArrayNumber[x, y]], Color.gray);
+            if(value == 1)ChangeColor(gridArrayDict[gridArrayNumber[x, y]], Color.red);
+            debugTextArray[x, y].text = gridArrayValue[x, y].ToString();
         }
     }
     public void SetValue(Vector3 worldPosition, int value)
@@ -83,7 +103,7 @@ public class Grid
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
-            return gridArray[x, y];
+            return gridArrayValue[x, y];
         }
         return -1;
     }

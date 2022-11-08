@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!hasCoyoteTime && hasDoubleJump)
             {
-                doubleJumpSound.Play();
+                JumpSound.Play();
                 MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
                 StartCoroutine(VFXRemover());
                 hasDoubleJump = false;
