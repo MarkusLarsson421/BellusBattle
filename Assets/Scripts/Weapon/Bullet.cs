@@ -35,6 +35,11 @@ public class Bullet : Projectile
 
 			Die();
 		}
+		if(other.CompareTag( "target"))
+        {
+			GetComponent<Destroy>().gone();
+
+		}
 
 		if (other.gameObject.tag == "Obstacle")
 		{
