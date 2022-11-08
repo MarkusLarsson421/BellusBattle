@@ -22,7 +22,7 @@ public class Bullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player") && Shooter != playerGo)
 		{
-			playerGo.GetComponent<PlayerHealth>().TakeDamage(1);
+			playerGo.GetComponent<PlayerHealth>().TakeDamage(bulletDamage);
 
             if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
             {
