@@ -1017,6 +1017,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90b20aed440e0ad429d91dd7df98dc82, type: 3}
+--- !u!114 &68674173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7911348344160824931, guid: 97e8cc2afba364044a6184d42a66c79a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1720716823}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &73312116
 GameObject:
   m_ObjectHideFlags: 0
@@ -12153,6 +12165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717455257723370687, guid: 97e8cc2afba364044a6184d42a66c79a,
         type: 3}
+      propertyPath: m_MinValue
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717455257723370687, guid: 97e8cc2afba364044a6184d42a66c79a,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -12188,8 +12205,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717455257919362862, guid: 97e8cc2afba364044a6184d42a66c79a,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2717455257919362862, guid: 97e8cc2afba364044a6184d42a66c79a,
+        type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264921394815064448, guid: 97e8cc2afba364044a6184d42a66c79a,
+        type: 3}
+      propertyPath: m_text
+      value: Valume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e8cc2afba364044a6184d42a66c79a, type: 3}
@@ -12218,6 +12245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myAudioMixer: {fileID: 24100000, guid: 66b12940d28b0d94ea93cc1bea189c8b, type: 2}
+  valumeValue: {fileID: 68674173}
 --- !u!1 &1743562096
 GameObject:
   m_ObjectHideFlags: 0
