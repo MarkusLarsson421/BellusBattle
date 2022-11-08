@@ -61,7 +61,7 @@ public class ScoreManager : MonoBehaviour
       
         if(hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
-            //GiveScoreAfterTimer();
+            GiveScoreAfterTimer();
         }
        
     }
