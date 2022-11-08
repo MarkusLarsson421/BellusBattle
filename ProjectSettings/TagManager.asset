@@ -16,6 +16,8 @@ TagManager:
   - Door
   - GridMap
   - Breakable
+  - Muzzle
+  - Target
   layers:
   - Default
   - TransparentFX
