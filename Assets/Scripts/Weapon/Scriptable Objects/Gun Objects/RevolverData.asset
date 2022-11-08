@@ -24,6 +24,6 @@ MonoBehaviour:
   currentAmmo: 6
   initialAmmo: 6
   magSize: 6
-  fireRate: 50
+  fireRate: 100
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}

@@ -20,7 +20,7 @@ MonoBehaviour:
   maxDistance: 80
   projectile: {fileID: 7929666838174018582, guid: e6495995ebe266c4aa513e23ff180d7d,
     type: 3}
-  projectileForce: 100
+  projectileForce: 400
   currentAmmo: 1
   initialAmmo: 1
   magSize: 1

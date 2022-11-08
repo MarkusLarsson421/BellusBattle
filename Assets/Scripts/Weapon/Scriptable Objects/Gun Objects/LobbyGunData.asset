@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: LobbyGunData
   m_EditorClassIdentifier: 
+  amountToSpawn: 0
   name: Lobby Gun
   weaponPrefab: {fileID: 5397083654919640403, guid: cd0b295efc6b434459314494a9a99ccc,
     type: 3}
@@ -19,7 +20,7 @@ MonoBehaviour:
   maxDistance: 3
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
-  projectileForce: 0
+  projectileForce: 50
   currentAmmo: 6
   initialAmmo: 6
   magSize: 6
