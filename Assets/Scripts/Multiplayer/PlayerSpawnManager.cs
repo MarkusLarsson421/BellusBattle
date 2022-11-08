@@ -27,7 +27,7 @@ public class PlayerSpawnManager : MonoBehaviour
         {
             players[i].gameObject.SetActive(true);
             players[i].GetComponent<Dash>().ResetValues();
-            players[i].GetComponent<PlayerHealth>().UnkillPlayer();
+            //players[i].GetComponent<PlayerHealth>().UnkillPlayer();
             players[i].transform.position = spawnLocations[i].position;
             
         }

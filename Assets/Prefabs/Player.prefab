@@ -410,6 +410,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotations: 3
   rotationsOverride: 0
+--- !u!1 &4036185387566594912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5916060800904582881}
+  m_Layer: 0
+  m_Name: "giofs\xF6dg b"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5916060800904582881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4036185387566594912}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.10889827, y: 0.8774986, z: 1845}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6431588530169345905}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4607468897157483292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,6 +5471,7 @@ Transform:
   - {fileID: 5442244501946298359}
   - {fileID: 1995696444269868830}
   - {fileID: 550519761581017672}
+  - {fileID: 5916060800904582881}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5747,6 +5779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CF: {fileID: 0}
   playerDeathSound: {fileID: 5042949326614459676}
+  deathPosition: {fileID: 5916060800904582881}
   boxCollider: {fileID: 6431588530169345906}
   rightArm: {fileID: 2915926472710746649}
   skr: {fileID: 6010799286257098507}
@@ -5779,6 +5812,7 @@ MonoBehaviour:
   dashingActivationCooldown: 0.7
   tr: {fileID: 7687228209419224627}
   dashSound: {fileID: 1079757518853252576}
+  movement: {fileID: 6431588530169345917}
   dashEvent:
     m_PersistentCalls:
       m_Calls:
@@ -8388,6 +8422,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.0015425679
+      objectReference: {fileID: 0}
+    - target: {fileID: 6129981298904580479, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6257321559319323172, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
