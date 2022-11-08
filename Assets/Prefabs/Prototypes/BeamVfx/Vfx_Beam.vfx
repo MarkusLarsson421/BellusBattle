@@ -21,22 +21,7 @@ MonoBehaviour:
       width: 664
       height: 1956
     contents:
-    - model: {fileID: 0}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661614603}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614608}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614617}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614623}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614628}
       id: 0
       isStickyNote: 0
   - title: Elektro
@@ -65,10 +50,10 @@ MonoBehaviour:
   - title: Contrast
     position:
       serializedVersion: 2
-      x: 2720
-      y: -239
-      width: 664
-      height: 1956
+      x: 2651
+      y: 810
+      width: 474
+      height: 927
     contents:
     - model: {fileID: 8926484042661614775}
       id: 0
@@ -4034,7 +4019,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614797}
   - {fileID: 8926484042661614803}
   - {fileID: 8926484042661614920}
-  m_UIPosition: {x: 2922, y: 849}
+  m_UIPosition: {x: 2676, y: 869}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
