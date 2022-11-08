@@ -620,17 +620,6 @@
                 },
                 {
                     "name": "",
-                    "id": "74c8390d-b3e1-4b44-b013-b48b765074d2",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "82fb719b-e094-4ed9-8b19-25e3974ef4f8",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
@@ -676,7 +665,7 @@
                 {
                     "name": "",
                     "id": "099f926c-1c54-4379-9ccd-7c0df8f970eb",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
