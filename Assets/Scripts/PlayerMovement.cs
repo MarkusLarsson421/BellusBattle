@@ -16,8 +16,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(10f, 300f)] private float airResistance;
     [SerializeField, Range(-100f, 0f)] private float downwardForce;
     [SerializeField, Range(1f, 50000f)] private float acceleration;
-   
+
     [Header("Jump & Edgecontrol")]
+    [Tooltip("Controller input setting @ jump")]
+    [SerializeField] JumpSetting jumpSetting = JumpSetting.Press;
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
     [SerializeField] private float edgeControlAmount;
@@ -28,11 +30,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private LayerMask oneWayLayer;
-    
+
     [Header("Sound & VFX")]
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
-    
+
     [SerializeField] private AudioSource JumpSound;
     [SerializeField] private AudioSource landSound;
     [SerializeField] private AudioSource doubleJumpSound;
@@ -42,41 +44,41 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask CollisionLayer
     {
-        get => collisionLayer; 
+        get => collisionLayer;
     }
 
     public Vector2 Velocity
     {
-        get => velocity; 
+        get => velocity;
     }
 
     public float DownwardForce
     {
         get => downwardForce;
-        set => downwardForce = value; 
+        set => downwardForce = value;
     }
 
     public bool IsGrounded
     {
-        get => CheckIsGrounded(); 
+        get => CheckIsGrounded();
     }
 
     private Vector2 velocity;
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private Vector2 verticalRayOffset, horizontalRayOffset;
-    
+
 
     private GameObject MuzzleFlashIns;
 
     private BoxCollider boxCollider;
 
-    private int horizontalRayCount = 6; 
+    private int horizontalRayCount = 6;
     private int verticalRayCount = 4;
 
     private float movementX, movementY;
     private float deceleration;
-    
+
     private float coyoteTimer, bufferTimer;
     private float horizontalSkinWidth = 0.2f;
     private float verticalSkinWidth = 0.1f;
@@ -89,12 +91,20 @@ public class PlayerMovement : MonoBehaviour
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
     
-    
+    private bool toggleJump = false;
+
     private bool isMovingLeft, isMovingRight;
     private bool isStandingOnOneWayPlatform;
     private bool runBufferTimer;
     private bool hasJumpBuffer;
-  
+    [System.Serializable]
+    public enum JumpSetting
+    {
+        Press,
+        Toggle,
+        Hold
+    }
+
     void Start()
     {
         initialSpeed = moveSpeed - 5; //Används för acceleration
@@ -113,11 +123,31 @@ public class PlayerMovement : MonoBehaviour
         UpdateRayCastOrgins();
         UpdateMovementForce();
         UpdateCoyoteTime();
-        
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+
+            if (jumpSetting == JumpSetting.Press)
+            {
+                jumpSetting = JumpSetting.Hold;
+            }
+            else if (jumpSetting == JumpSetting.Hold)
+            {
+                jumpSetting = JumpSetting.Toggle;
+            }
+            else if (jumpSetting == JumpSetting.Toggle)
+            {
+                jumpSetting = JumpSetting.Press;
+            }
+
+            CancelInvoke();
+        }
+
+
         if (IsGrounded == false)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
-            
+
         }
 
         if (IsGrounded && velocity.y < 0)
@@ -128,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
             hasCoyoteTime = true;
             hasDoubleJump = true;
             hasJumpedOnGround = false;
-            
+
             if (hasJumpBuffer)
             {
                 Jump();
@@ -136,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
                 runBufferTimer = false;
 
             }
-            
+
 
         }
         velocity = new Vector2(movementX, movementY);
@@ -151,15 +181,25 @@ public class PlayerMovement : MonoBehaviour
             HandleHorizontalCollisions(ref velocity);
         }
         transform.Translate(velocity * Time.deltaTime);
-        
+
         playerAnimator.SetFloat("Speed", movementX);
     }
+
+
+    private IEnumerator ToggleDoubleJump(float waitTime)
+    {
+        Jump();
+        yield return new WaitForSeconds(waitTime);
+        Jump();
+    }
+
+
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
         downwardInput = ctx.ReadValue<Vector2>().y;
         movementAmount = ctx.ReadValue<Vector2>().x;
-      
+
         if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
             isMovingRight = true;
@@ -180,10 +220,35 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.started)
+        if (ctx.started && jumpSetting==JumpSetting.Press)
         {
             Jump();
         }
+
+        else if(ctx.started && jumpSetting == JumpSetting.Hold)
+        {
+            InvokeRepeating("JumpCoroutine", 0.1f, 1f);
+        }
+        else if (ctx.canceled && jumpSetting == JumpSetting.Hold)
+        {
+            CancelInvoke();
+        }
+
+        else if (ctx.started && jumpSetting == JumpSetting.Toggle && toggleJump)
+        {
+            CancelInvoke();
+            toggleJump = false;
+        }
+        else if (ctx.started && jumpSetting == JumpSetting.Toggle && !toggleJump)
+        {
+            InvokeRepeating("JumpCoroutine", 0.1f, 1.5f);
+            toggleJump = true;
+        }
+    }
+
+    void JumpCoroutine()
+    {
+        StartCoroutine(ToggleDoubleJump(0.25f));
     }
 
     private void Jump()
@@ -215,7 +280,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            
+
             runBufferTimer = true;
             bufferTimer = 0;
         }
@@ -226,11 +291,12 @@ public class PlayerMovement : MonoBehaviour
         Destroy(MuzzleFlashIns);
     }
 
+
     private void JumpBuffer()
     {
         if (!runBufferTimer) return;
         bufferTimer += Time.deltaTime;
-        if(bufferTimer <= jumpBufferTime)
+        if (bufferTimer <= jumpBufferTime)
         {
             hasJumpBuffer = true;
         }
@@ -266,7 +332,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateMovementForce()
     {
-        if(movementAmount > 0.1f || movementAmount < -0.1f)
+        if (movementAmount > 0.1f || movementAmount < -0.1f)
         {
             if (isMovingRight)
             {
@@ -285,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool CheckIsGrounded()
     {
-        
+
         if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, oneWayLayer))
         {
             isStandingOnOneWayPlatform = true;
@@ -308,7 +374,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateCoyoteTime()
     {
         if (IsGrounded || !hasCoyoteTime) return;
- 
+
         if (coyoteTimer > coyoteTime || hasJumpedOnGround)
         {
             hasCoyoteTime = false;
@@ -332,14 +398,14 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            
+
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
-           
+
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
             {
                 velocity.y = 0;
-                movementY = 0f;  
+                movementY = 0f;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
             {
@@ -347,11 +413,11 @@ public class PlayerMovement : MonoBehaviour
                 {
                     return;
                 }
-                else if(hit.collider.bounds.min.y < boxCollider.bounds.min.y)
+                else if (hit.collider.bounds.min.y < boxCollider.bounds.min.y)
                 {
                     velocity.y = 0;
                 }
-            } 
+            }
         }
     }
 
@@ -370,12 +436,12 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastBottomRight - horizontalRayOffset;
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-     
+
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))
             {
-                if(i == 0)
+                if (i == 0)
                 {
                     EdgeControl(hit);
                 }
@@ -431,6 +497,6 @@ public class PlayerMovement : MonoBehaviour
         movementY = force.y;
         movementX = force.x;
         velocity.y = 0;
-        
+
     }
 }

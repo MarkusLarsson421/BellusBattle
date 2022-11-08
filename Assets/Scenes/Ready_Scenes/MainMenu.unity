@@ -2804,6 +2804,11 @@ PrefabInstance:
       propertyPath: cameraFocus
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3811216812318420032, guid: 2419d59ae6139464d82a73547f006732,
+        type: 3}
+      propertyPath: giveScoreTime
+      value: 999999
+      objectReference: {fileID: 0}
     - target: {fileID: 6654202594948050944, guid: 2419d59ae6139464d82a73547f006732,
         type: 3}
       propertyPath: m_RootOrder
@@ -4038,13 +4043,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 715163499}
   - {fileID: 160988967}
   - {fileID: 407104327}
   - {fileID: 365388964}
   - {fileID: 2144045598}
   - {fileID: 241431862}
   - {fileID: 1407962202}
+  - {fileID: 715163499}
   - {fileID: 240949073}
   - {fileID: 1218920388}
   - {fileID: 1327652600}

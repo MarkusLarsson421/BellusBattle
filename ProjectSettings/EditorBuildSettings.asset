@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Ready_Scenes/Castle.unity
     guid: d4c5a61e3b26ac74099d724133ff699f
   - enabled: 1
+    path: Assets/Scenes/Ready_Scenes/Castle_proto.unity
+    guid: 345590ba831883e4e8afe7965f058c06
+  - enabled: 1
     path: Assets/Scenes/Ready_Scenes/The_End.unity
     guid: d72bb7d9bb78cd64e82411e7502b593c
   m_configObjects: {}
