@@ -5650,6 +5650,18 @@ MonoBehaviour:
     m_ActionName: Player/PickUp/Drop[/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4782767669193128058}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: DefualtJoystickInputToAngleCalculation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 7604770547986073551}
         m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
         m_MethodName: CheckDashWithJoystickDirection
@@ -5934,8 +5946,8 @@ MonoBehaviour:
     m_ActionName: PlayerAccessibilityRight/AcessabilityRightStickMove[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 960e3237-e7f0-454f-b97c-1d6ac3dc8dd5
-    m_ActionName: PlayerAccessibilityRight/GoThroughtOneWayPlattformsRight[/XInputControllerWindows/rightStick/down,/XInputControllerWindows1/rightStick/down]
+    m_ActionId: 7f9756a5-2e5b-4d15-b72e-6ffbc2f6973b
+    m_ActionName: PlayerAccessibilityRight/GoThroughtOneWayPlattformsLeft[/XInputControllerWindows/rightStick/down,/XInputControllerWindows1/rightStick/down]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
