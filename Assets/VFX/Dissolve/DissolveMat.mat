@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 7386ec438ad4fd844ac189c5948dc722, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
@@ -43,10 +43,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cutoff_Heigh: -31.57
-    - _Edge_Width: 10
-    - _Noise_Scale: 40
-    - _Noise_Strength: 31.4
+    - _Cutoff_Heigh: -31.4
+    - _Edge_Width: 4.7
+    - _Noise_Scale: 61.5
+    - _Noise_Strength: 54.71
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

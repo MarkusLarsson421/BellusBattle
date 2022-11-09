@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Deformation_Speed: 0.593
-    - _Deformation_Strength: 0.2
+    - _Deformation_Strength: 0
     - _Displacement_Speed: 0.1
     - _Displacement_Strength: 0.3
     - _NoiseScale: 4
