@@ -4203,6 +4203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d57a6d38723974ca0d4479681e5647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundStartingPause: 10
   roundEndingPause: 10
 --- !u!1 &401647104
 GameObject:
@@ -7378,6 +7379,11 @@ PrefabInstance:
         type: 3}
       propertyPath: scenes.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840680792378777891, guid: 26748b17d5f5e994cab620063817464f,
+        type: 3}
+      propertyPath: scenesToRemove.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7370360072466686956, guid: 26748b17d5f5e994cab620063817464f,
         type: 3}
