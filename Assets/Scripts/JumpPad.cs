@@ -19,7 +19,7 @@ public class JumpPad : MonoBehaviour
     {
         if (other.CompareTag("Player")) 
         {
-            //effect.Play();
+            effect.Play();
             other.gameObject.GetComponent<PlayerMovement>().AddExternalForce(force);
         }
         
