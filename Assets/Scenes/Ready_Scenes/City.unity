@@ -1551,7 +1551,10 @@ MonoBehaviour:
   - {fileID: 1751019601}
   - {fileID: 450905273}
   - {fileID: 125367297}
-  darkenMaterial3: []
+  darkenMaterial3:
+  - {fileID: 2100000, guid: 37a9cfd6de1f76844b968b6f51042d97, type: 2}
+  - {fileID: 2100000, guid: 0e3ed161fe619d642a81f3944f32a549, type: 2}
+  - {fileID: 2100000, guid: 6128aa09283e74246a6deccbfb697106, type: 2}
 --- !u!4 &537152291
 Transform:
   m_ObjectHideFlags: 0
