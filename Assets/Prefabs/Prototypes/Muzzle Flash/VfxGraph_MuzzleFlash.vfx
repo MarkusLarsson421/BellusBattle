@@ -8053,7 +8053,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615142}
   m_ExposedName: New Color 1
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:
