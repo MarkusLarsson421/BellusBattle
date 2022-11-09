@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField, Tooltip("For how long the game shall wait until giving the remaining players their score.")] 
+	[SerializeField, Tooltip("For how long the game shall wait until the round starts.")] 
 	private float roundStartingPause = 10.0f;
 	[SerializeField, Tooltip("For how long the game shall wait until giving the remaining players their score.")] 
 	private float roundEndingPause = 10.0f;
