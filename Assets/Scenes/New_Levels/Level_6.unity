@@ -1194,8 +1194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d78c8e8630f396428a0e9fa0e398eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceAmountY: 40
-  forceAmountX: -20
+  forceAmountY: 35
+  forceAmountX: 0
 --- !u!65 &624029785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1910,8 +1910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d78c8e8630f396428a0e9fa0e398eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceAmountY: 50
-  forceAmountX: -20
+  forceAmountY: 35
+  forceAmountX: 0
 --- !u!65 &803449590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2953,8 +2953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d78c8e8630f396428a0e9fa0e398eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceAmountY: 40
-  forceAmountX: -20
+  forceAmountY: 35
+  forceAmountX: 0
 --- !u!65 &1230363489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3365,7 +3365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceAmountY: 50
-  forceAmountX: -20
+  forceAmountX: -30
 --- !u!65 &1317249677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4273,7 +4273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceAmountY: 50
-  forceAmountX: -20
+  forceAmountX: 30
 --- !u!65 &1869643548
 BoxCollider:
   m_ObjectHideFlags: 0
