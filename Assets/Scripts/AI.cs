@@ -7,6 +7,7 @@ public class AI : MonoBehaviour
     [SerializeField] private float speed = 10;
     [SerializeField] private Vector3 velocity;
     [SerializeField] private Vector3 direction;
+    [SerializeField] private float checkDistance = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class AI : MonoBehaviour
     }
     private void CheckCollision()
     {
-        if (Physics.BoxCast(transform.position, transform.localScale, direction, Quaternion.identity, speed/2))
+        if (Physics.BoxCast(transform.position, transform.localScale, direction, Quaternion.identity, checkDistance))
         {
             if (direction == Vector3.right) direction = Vector2.left;
             else direction = Vector2.right;
