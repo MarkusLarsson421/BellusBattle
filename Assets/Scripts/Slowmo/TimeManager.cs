@@ -8,10 +8,16 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float slowdownAmount = 0.05f;
     [SerializeField] private bool isSlowMo;
     [SerializeField] private Slider slider;
+    [SerializeField] private Text percentageText;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Start()
+    {
+        //percentageText = GetComponent<Text>();
     }
 
     void Update()
@@ -49,4 +55,10 @@ public class TimeManager : MonoBehaviour
         slowdownAmount = slider.value;
 
     }
+
+    public void textUpdate(float value)
+    {
+        percentageText.text = value + "%";
+    }
+
 }
