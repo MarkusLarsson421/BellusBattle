@@ -10,7 +10,7 @@ public class Bullet : Projectile
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
 
-	public float bulletDamage;
+	//public float bulletDamage;
 
 	private void Start(){
 		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
@@ -22,7 +22,7 @@ public class Bullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player") && Shooter != playerGo)
 		{
-			playerGo.GetComponent<PlayerHealth>().TakeDamage(bulletDamage);
+			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 
             if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
             {
@@ -68,10 +68,12 @@ public class Bullet : Projectile
 
 	}
 
+	/*
 	public void SetDamage(float setTo)
     {
 		bulletDamage = setTo;
     }
+	*/
 
 	private IEnumerator Shoot(float seconds){
 		yield return new WaitForSeconds(seconds);

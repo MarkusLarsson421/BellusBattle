@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public delegate void OnGameOver();
     public static event OnGameOver onGameOver;
     [SerializeField] private AudioSource playerDeathSound;
+    [SerializeField] private VisualEffect bloodSplatter;
 
     private float health = 1;
     private bool isInvinsable=false;
@@ -54,6 +56,7 @@ public class PlayerHealth : MonoBehaviour
     {
         CF.RemoveTarget(gameObject.transform);
         gameObject.transform.position = deathPosition.position;
+        bloodSplatter.Play();
         /*
         boxCollider.enabled = false;
         rightArm.SetActive(false);
