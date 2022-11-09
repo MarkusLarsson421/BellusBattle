@@ -1067,6 +1067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 0
   forceAmountX: 30
+  effect: {fileID: 0}
 --- !u!65 &437368591
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1196,6 +1197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 35
   forceAmountX: 0
+  effect: {fileID: 0}
 --- !u!65 &624029785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1422,6 +1424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 0
   forceAmountX: -30
+  effect: {fileID: 0}
 --- !u!65 &672604818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1912,6 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 35
   forceAmountX: 0
+  effect: {fileID: 0}
 --- !u!65 &803449590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2955,6 +2959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 35
   forceAmountX: 0
+  effect: {fileID: 0}
 --- !u!65 &1230363489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3366,6 +3371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 50
   forceAmountX: -30
+  effect: {fileID: 0}
 --- !u!65 &1317249677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4154,6 +4160,11 @@ PrefabInstance:
       propertyPath: maxZoom
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
+        type: 3}
+      propertyPath: offset.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709032, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: orthographic
@@ -4182,12 +4193,12 @@ PrefabInstance:
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9972178
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.07454364
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
@@ -4202,7 +4213,7 @@ PrefabInstance:
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 8.55
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
@@ -4284,6 +4295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 50
   forceAmountX: 30
+  effect: {fileID: 0}
 --- !u!65 &1869643548
 BoxCollider:
   m_ObjectHideFlags: 0
