@@ -79,7 +79,7 @@ public class Gun : MonoBehaviour
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
-        if (gunsAmmo == 0)
+        if (gunsAmmo == 0 && weaponData.name != "BasicSword")
         {
             // Placeholder för när vi fixat riktiga drop
             Drop();
@@ -162,6 +162,11 @@ public class Gun : MonoBehaviour
             //Debug.Log("Click clack");
         }
 
+        if (weaponData.name == "BasicSword")
+        {
+            GetComponent<Animator>().SetBool("Attack", true);
+        }
+
         if (CanShoot())
         {
             gunsAmmo--;
@@ -183,6 +188,7 @@ public class Gun : MonoBehaviour
 
             //Animation
 
+
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
             // mainly used for Lobby gun atm
@@ -203,7 +209,11 @@ public class Gun : MonoBehaviour
     public void Drop()
     {
         isPickedUp = false;
-        weaponManager.UnEquipWeapon(gameObject);
+        if (weaponManager != null)
+        {
+            weaponManager.UnEquipWeapon(gameObject);
+        }
+        
         gameObject.transform.SetParent(null);
         // Otherwise it stays in DontDestroyOnLoad
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());

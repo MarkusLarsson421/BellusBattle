@@ -7,7 +7,7 @@ public class BasicSwordBehaviour : MonoBehaviour
     [SerializeField] private int playerHoldingThisWeaponID;
     private PlayerMovement playerMovement;
 
-    [SerializeField] private Transform swordPointDirection;
+    [SerializeField] private Transform swordPointDirection
 
     private void Start()
     {
@@ -31,11 +31,13 @@ public class BasicSwordBehaviour : MonoBehaviour
 
             if (other.gameObject.GetComponent<PlayerDetails>().playerID.Equals(playerHoldingThisWeaponID))
             {
+                
                 Debug.Log("Is owner");
                 return;
             }
             else
             {
+                
                 playerMovement = other.gameObject.GetComponent<PlayerMovement>();
                 playerMovement.AddExternalForce(forceDir * 10f);
                 Debug.Log("Knocked back player");
