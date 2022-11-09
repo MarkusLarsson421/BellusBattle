@@ -16,7 +16,7 @@ public class WeaponSpawnerManager : MonoBehaviour
     void Start()
     {
         ControlNumberOfWeaponToSpawners();
-        ÍnitialSpawnersToChooseFrom();
+        InitialSpawnersToChooseFrom();
         StartCoroutine(InitialSpawnWeapons());
     }
     private void ControlNumberOfWeaponToSpawners()
@@ -28,7 +28,7 @@ public class WeaponSpawnerManager : MonoBehaviour
             Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
         }
     }
-    private void ÍnitialSpawnersToChooseFrom()
+    private void InitialSpawnersToChooseFrom()
     {
         foreach (var spawner in spawners)
         {

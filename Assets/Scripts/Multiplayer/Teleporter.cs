@@ -1,49 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Teleporter : MonoBehaviour
 {
-    private int playerAmountOnTeleporter = 0; // Amount of players on the Teleporter
-    [SerializeField] private PlayerJoinManager playerJoinManager; // Keeps track of players in game
-    [SerializeField] private LevelManager manager; // Keeps track of players in game
-    //[SerializeField] private string startSceneName; // The name of the scene that is the beginner scene
-    [SerializeField] private GameObject playPanel;
-
+	[SerializeField] private GameObject playPanel;
     
+	private int _playerCountOnTeleporter;
+	private GameManager _gameManager;
 
-    private void Start()
-    {
-        playPanel.SetActive(false);
-    }
+	private void Start()
+	{
+		_gameManager = GameManager.Instance;
+		playPanel.SetActive(false);
+	}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // When a player stands on the Teleporter the playerAmountOnTeleporter goes up
-        if (other.gameObject.tag == "Player")
-        {
-            playerAmountOnTeleporter++;
-        }
+	private void OnTriggerEnter(Collider other)
+	{
+		// Adds to player count on teleporter when entering.
+		if (other.gameObject.CompareTag("Player")){_playerCountOnTeleporter++;}
 
-        // There needs to be at least two players in the scene
-        // All players in game needs to be in the Teleporter for the game to start
-        if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
-        {
-            playPanel.SetActive(true);
-            
+		// Changes level once the player count on teleporter equals the total player count.
+		if (_gameManager.PlayerCount() >= 2 && _playerCountOnTeleporter == _gameManager.PlayerCount())
+		{
+			playPanel.SetActive(true);
+		}
+	}
 
-            //SceneManager.LoadScene(startSceneName);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // When a player gets off the Teleporter the playerAmountOnTeleporter goes down
-        if (other.gameObject.tag == "Player")
-        {
-            playerAmountOnTeleporter--;
-        }
-    }
-    
+	private void OnTriggerExit(Collider other)
+	{
+		// Subtracts to player count on teleporter when exiting.
+		if (other.gameObject.CompareTag("Player")){_playerCountOnTeleporter--;}
+	}
 }

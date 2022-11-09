@@ -1,49 +1,40 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField, Tooltip("The amount of score required to win.")]
-	private int scoreToWin;
-	[SerializeField, Tooltip("Main camera for the scene.")]
-	private Camera mainCamera;
+	[SerializeField, Tooltip("For how long the game shall wait until giving the remaining players their score.")] 
+	private float roundEndingPause = 10.0f;
 
 	public static GameManager Instance;
-	public GameState state;
-	public static event Action<GameState> OnGameStateChanged;
-	public List<GameObject> players;
+	
+	private GameState _state;
+	private readonly Dictionary<GameObject, int> _players = new();
+	private int _scoreToWin;
 
 	private void Awake()
 	{
 		Instance = this;
 	}
 
-	private void Start()
-	{
+	private void Start(){
+		PlayerSpawnEvent.RegisterListener(AddPlayer);
+
 		UpdateGameState(GameState.Menu);
 	}
 
 	private void Update()
 	{
-		GameObject[] addPlayers = GameObject.FindGameObjectsWithTag("Player");
-		foreach (GameObject addPlayer in addPlayers)
-		{
-			AddPlayer(addPlayer);
+		if (_state == GameState.RoundOnGoing && _players.Count <= 1){
+			UpdateGameState(GameState.RoundEnding);
 		}
-	}
-	
-	public enum GameState
-	{
-		Menu, //Players are in the menu.
-		RoundStarting, //Round is starting.
-		RoundOnGoing, //Round is on going.
-		RoundEnding, //Round has ended.
 	}
 
 	public void UpdateGameState(GameState newState)
 	{
-		state = newState;
+		_state = newState;
 		switch (newState)
 		{
 			case GameState.Menu:
@@ -56,54 +47,125 @@ public class GameManager : MonoBehaviour
 				HandleRoundOnGoing();
 				break;
 			case GameState.RoundEnding:
+				HandleRoundEnding();
+				break;
+			case GameState.GameEnding:
+				HandleGameEnding();
 				break;
 			default:
-				break;
+				throw new Exception("Unexpected GameState state.");
 		}
-		OnGameStateChanged?.Invoke(newState);
+	}
+	
+	private void AddPlayer(PlayerSpawnEvent pse)
+	{
+		if (_players.ContainsKey(pse.playerGo)){return;}
+		_players.Add(pse.playerGo, 0);
 	}
 
-	private void HandleMenu()
+	private void RemovePlayer(PlayerDeathEvent pde)
 	{
+		if (_players.ContainsKey(pde.kille) == false){return;}
+		_players.Remove(pde.kille);
+		CheckForVictor(pde.killedBy);
+	}
+
+	public int PlayerCount(){
+		return _players.Count;
+	}
+
+	public void SetScoreToWin(int score){
+		_scoreToWin = score;
+	}
+
+	public GameState GetGameState(){
+		return _state;
+	}
+
+	/*
+	 * Called while in the menu
+	 */
+	private void HandleMenu(){
+		/*foreach (var key in _players.Keys){
+			PlayerSpawnEvent pse = new PlayerSpawnEvent{
+				playerIndex = key.GetComponent<PlayerDetails>().playerID,
+				playerGo = key,
+			};
+			pse.FireEvent();
+		}*/
+	}
+	
+	/*
+	 * Called when the round is starting.
+	 */
+	private void HandleRoundStarting(){
 		
 	}
 	
-	private void HandleRoundStarting()
-	{
-		
-	}
-	
+	/*
+	 * Called after the round has started.
+	 */
 	private void HandleRoundOnGoing()
 	{
-		if(players.Count <= 1)
-		{
-			
+		//Handled in the void Update() method.
+	}
+	
+	/*
+	 * 
+	 */
+	private void HandleRoundEnding(){
+		StartCoroutine(RoundEndingPause(roundEndingPause));
+	}
+	
+	/*
+	 * 
+	 */
+	private void HandleGameEnding(){
+		
+	}
+
+	private IEnumerator RoundStartingPause(float seconds){
+		Debug.Log("Pausing for a moment before starting the round.");
+		yield return new WaitForSeconds(seconds);
+		Debug.Log("Round start!");
+		
+		UpdateGameState(GameState.RoundOnGoing);
+	}
+
+	private IEnumerator RoundEndingPause(float seconds){
+		Debug.Log("Round has ended, waiting to see if the remainder will die.");
+		yield return new WaitForSeconds(seconds);
+		Debug.Log("Giving score to the remainder.");
+		
+		//In a loop in-case we later decide to include teams.
+		foreach(var key in _players.Keys){
+			//Adds the score to the player and then checks if they have enough to win.
+			if (++_players[key] >= _scoreToWin){
+				UpdateGameState(GameState.GameEnding);
+				//Unsure if yield break will work or continue to loop through the list.
+				yield break;
+			}
+		}
+		//levelManager.LoadNextScene();
+	}
+
+	private void CheckForVictor(GameObject killer){
+		if (_players[killer] >= _scoreToWin){
+			UpdateGameState(GameState.GameEnding);
 		}
 	}
 
-	public bool AddPlayer(GameObject go)
-	{
-		if (players.Contains(go)){return false;}
-		
-		players.Add(go);
-		return true;
+	private void OnDestroy(){
+		//Unregister from the event.
+		PlayerSpawnEvent.UnregisterListener(AddPlayer);
 	}
+}
 
-	public bool RemovePlayer(GameObject go)
-	{
-		if (players.Contains(go) == false){return false;}
-		
-		players.Remove(go);
-		CheckForVictor();
-		return true;
-	}
-
-	private void CheckForVictor()
-	{
-		if (players.Count <= 1)
-		{
-			//players[1]
-			//TODO Victory!
-		}
-	}
+public enum GameState
+{
+	Menu, //Players are in the menu.
+	RoundStarting, //Round is starting.
+	RoundOnGoing, //Round is on going.
+	RoundEnding, //Round has ended.
+	GameEnding, //Game has ended.
 }

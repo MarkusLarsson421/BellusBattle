@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
@@ -16,40 +15,23 @@ public class CameraFocus : MonoBehaviour
 	private float maxZoom = 10.0f;
 	[SerializeField] 
 	private float zoomLimiter = 50.0f;
-	[SerializeField, Tooltip("Whether or not start zoom should be used.")]
-	private bool useStartZoom = true;
-
-	[SerializeField] public List<Transform> _targets;
+	
+	private List<Transform> _targets;
 	private Vector3 _velocity;
 	private Camera _cam;
 	private bool _isOrthographic;
-	private Vector3 startPos;
-
-	private float timer;
-	private bool hasReachedTime;
+	private Vector3 _startPos;
 
 	private void Start(){
 		_targets = new();
 		_cam = GetComponent<Camera>();
+		
+		//Register to events.
+		PlayerSpawnEvent.RegisterListener(AddTarget);
+		PlayerDeathEvent.RegisterListener(RemoveTarget);
 	}
 
-    private void Update()
-    {
-		if (hasReachedTime) return;
-
-        if(timer >= 0.2f)
-        {
-			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");  // Used for when changing level
-			foreach (GameObject tr in players)
-			{
-				_targets.Add(tr.transform);
-			}
-			hasReachedTime = true;
-		}
-		timer += Time.deltaTime;
-    }
-
-    private void LateUpdate()
+	private void LateUpdate()
 	{
 		Bounds bounds = GetTargetsBounds();
 		Reposition(bounds);
@@ -58,25 +40,19 @@ public class CameraFocus : MonoBehaviour
 
     /*
      * Adds a target for the camera to follow.
-     * Returns false if a copy of the given transform already exists.
      */
-	public bool AddTarget(Transform t)
+	private void AddTarget(PlayerSpawnEvent pse)
 	{
-		if (_targets.Contains(t)){return false;}
-		
-		_targets.Add(t);
-		return true;
+		if (_targets.Contains(pse.playerGo.transform)){return;}
+		_targets.Add(pse.playerGo.transform);
 	}
 	
 	/*
 	 * Removes a target for the camera to stop following.
-	 * Returns false if the given transform never existed.
 	 */
-	public bool RemoveTarget(Transform t){
-		if (_targets.Contains(t) == false){return false;}
-		
-		_targets.Remove(t);
-		return true;
+	private void RemoveTarget(PlayerDeathEvent pde){
+		if (_targets.Contains(pde.kille.transform) == false){return;}
+		_targets.Remove(pde.kille.transform);
 	}
 
 	/*
@@ -101,7 +77,6 @@ public class CameraFocus : MonoBehaviour
 		else{
 			_cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, newZoom, Time.deltaTime);
 		}
-		
 	}
 
 	/*
@@ -129,6 +104,12 @@ public class CameraFocus : MonoBehaviour
 			bounds.Encapsulate(_targets[i].position);
 		}
 		return bounds;
+	}
+
+	private void OnDestroy(){
+		//Unregister from the event.
+		PlayerSpawnEvent.UnregisterListener(AddTarget);
+		PlayerDeathEvent.UnregisterListener(RemoveTarget);
 	}
 
 	private void OnValidate(){
