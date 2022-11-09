@@ -174,6 +174,12 @@ public class Gun : MonoBehaviour
             }
 
             //VFX
+            //if (weaponData.MuzzleFlash != null) { weaponData.MuzzleFlash.Play(); }
+            if (weaponData.MuzzleFlashGameObject != null)
+            {
+                GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
+                MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
+            }
 
             //Animation
 
