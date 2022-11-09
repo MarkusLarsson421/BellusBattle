@@ -762,6 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 40
   forceAmountX: 0
+  effect: {fileID: 0}
 --- !u!65 &372796708
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2141,6 +2142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 40
   forceAmountX: 0
+  effect: {fileID: 0}
 --- !u!65 &742467108
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3401,6 +3403,11 @@ PrefabInstance:
       propertyPath: maxZoom
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
+        type: 3}
+      propertyPath: offset.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709032, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: orthographic
@@ -3429,12 +3436,12 @@ PrefabInstance:
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9961566
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.08759041
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
@@ -3449,7 +3456,7 @@ PrefabInstance:
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 10.05
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
@@ -4249,6 +4256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmountY: 40
   forceAmountX: 0
+  effect: {fileID: 0}
 --- !u!65 &1630691952
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -6055,7 +6055,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1091961803}
   m_HandleRect: {fileID: 1091961802}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8109,8 +8109,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bf48fc95ce5894494d2edbc6f9e167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objMaterials: []
-  newColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0}
+  M01: []
+  M11: []
+  M21: []
+  M31: []
+  darkenMaterial1: []
+  M02: []
+  M12: []
+  M22: []
+  M32: []
+  darkenMaterial2: []
+  M03: []
+  M13: []
+  M23: []
+  M33: []
+  darkenMaterial3: []
 --- !u!4 &945828495
 Transform:
   m_ObjectHideFlags: 0
