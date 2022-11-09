@@ -94,6 +94,11 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+        if (scenesToChooseFrom.Count <= 0)
+        {
+            Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
+            return;
+        }
         if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
         else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
         if (scenesToChooseFrom.Count <= 0)

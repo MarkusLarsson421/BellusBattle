@@ -49,7 +49,7 @@ MonoBehaviour:
   m_NotificationBehavior: 1
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 1
+  m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -136,11 +136,4 @@ MonoBehaviour:
   scoreManager: {fileID: 0}
   camera: {fileID: 0}
   characterLow: {fileID: 0}
-  accessorites: []
-  accessoritesSlot: {fileID: 0}
   listOfPlayers: []
-  colors:
-  - {fileID: 2100000, guid: 6aaced500a74efc48b94a7eea97e5ecb, type: 2}
-  - {fileID: 2100000, guid: b33560ad662fdea44b44e438febb2704, type: 2}
-  - {fileID: 2100000, guid: 7850c118b7222294a89e2bf25285078c, type: 2}
-  - {fileID: 2100000, guid: d6b4a61cda23acf49aa9e7d120fc27b3, type: 2}

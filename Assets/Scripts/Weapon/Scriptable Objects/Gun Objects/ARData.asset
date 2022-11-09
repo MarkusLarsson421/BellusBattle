@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: ARData
   m_EditorClassIdentifier: 
+  amountToSpawn: 0
   name: AR
   weaponPrefab: {fileID: 9109231185878699503, guid: 50de0d4361df98f4b8b5c33fec6147a4,
     type: 3}
@@ -19,10 +20,10 @@ MonoBehaviour:
   maxDistance: 50
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
-  projectileForce: 100
-  currentAmmo: 10
-  initialAmmo: 10
-  magSize: 10
+  projectileForce: 150
+  currentAmmo: 9
+  initialAmmo: 9
+  magSize: 9
   fireRate: 200
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}

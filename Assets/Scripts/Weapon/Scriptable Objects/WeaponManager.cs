@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -12,19 +13,22 @@ public class WeaponManager : MonoBehaviour
 
     private GameObject currentWeapon;
 
-    //[SerializeField]
-    //public Aim aim; // test to make bullet shoot in correct direction
-
-  
     public WeaponData EquippedWeapon { get => equippedWeapon; }
 
     private void Start()
     {
-        //aim = gameObject.GetComponentInChildren<Aim>();
         
     }
-    private void Update()
+
+    private void OnLevelWasLoaded(int level)
     {
+        if (weaponSlot.childCount > 0)
+        {
+            currentWeapon = weaponSlot.GetChild(0).gameObject;
+            UnEquipWeapon(currentWeapon);
+            currentWeapon.SetActive(false);
+            currentWeapon.transform.SetParent(null);
+        }
         
     }
 
@@ -41,27 +45,15 @@ public class WeaponManager : MonoBehaviour
             equippedWeapon.pickupSound.Play();
         }
 
-        /*
-        if (currentWeapon != null)
-        {
-            Destroy(currentWeapon);
-        }
-        */
-
-        //currentWeapon = Instantiate(weaponData.weaponPrefab);
-        //currentWeapon.transform.SetParent(weaponSlot);
         nowWeapon.transform.SetParent(weaponSlot);
         nowWeapon.transform.localPosition = Vector3.zero;
         nowWeapon.transform.localRotation = Quaternion.identity;
-        // When you pickup a weaon you want the ammo to be right (basically reload on pickup)
-        //weaponData.ResetAmmo();
-        //weaponData.currentAmmo = weaponData.magSize;
-        //currentWeapon.GetComponent<BoxCollider>().enabled = false;
         nowWeapon.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void UnEquipWeapon(GameObject nowWeapon)
     {
+        //nowWeapon.GetComponent<Gun>().Drop();
         equippedWeapon = null;
         nowWeapon = null;
     }

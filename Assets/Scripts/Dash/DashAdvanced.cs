@@ -44,7 +44,7 @@ public class DashAdvanced : MonoBehaviour
 
     private Vector3 direction;
     private Vector3 velocity;
-    private PlayerMovement movement;
+    [SerializeField] private PlayerMovement movement;
     private PlayerHealth health;
     private float currentDashingDistace;
     private float currentDashingDuration;

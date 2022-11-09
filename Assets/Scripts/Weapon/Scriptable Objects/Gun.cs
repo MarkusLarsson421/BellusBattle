@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
@@ -25,6 +26,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform muzzle;
     [Tooltip("Used for FireRate")]
     private float timeSinceLastShot;
+    private float _nextTimeToFire;
 
     [Header("Sounds")]
     [SerializeField, Tooltip("Sound made when weapon out of ammo")]
@@ -35,54 +37,87 @@ public class Gun : MonoBehaviour
 
     [SerializeField] bool isPickedUp;
 
-    int gunsAmmo;
+    [SerializeField] int gunsAmmo;
 
-    private float _nextTimeToFire;
-
-    bool isStartTimer;
+    [Header("Dropping")]
+    bool isStartTimerForDrop;
     [Tooltip("time before the weapon can be picked up again")]
-    [SerializeField] float timeToWait = 2f;
-    float timer;
+    [SerializeField] float timeToWaitForPickup = 2f;
+    float dropTimer;
+
+    [Header("DeSpawning")]
+    bool isStartTimerForDeSpawn;
+    [Tooltip("time before the weapon can be picked up again")]
+    [SerializeField] float timeToWaitForDeSpawn = 2f;
+    float deSpawnTimer;
 
     private void Start()
     {
         // Reload it
-        weaponData.SetNewAmmoAmount(weaponData.magSize);
+        gunsAmmo = weaponData.Ammo;
 
         projectile = weaponData.projectile;
         if (weaponData.projectile != null)
         {
             _projectile = projectile.GetComponent<Projectile>();
         }
+
+        dropTimer = 0f;
+        deSpawnTimer = 0f;
+        //Drop();
+
+        
     }
 
     private void Update()
     {
-        // Might need to change calculation
+        // USED FOR FIRERATE
         timeSinceLastShot += Time.deltaTime;
         if (Time.deltaTime >= _nextTimeToFire)
         {
+            // Might need to change calculation
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
-        // Placeholder for future destory timer
-        if (gunsAmmo >= 0) // && Time runs out
+        if (gunsAmmo == 0)
         {
-            // Delete this gun
+            // Placeholder för när vi fixat riktiga drop
+            Drop();
         }
 
-        // USED FOR DROP
-        if (!isStartTimer)
+        /*
+        // USED FOR DE-SPAWNING
+        if (!isStartTimerForDeSpawn)
         {
             return;
         }
-        timer += Time.unscaledDeltaTime;
-        if (timer >= timeToWait)
+        deSpawnTimer += Time.deltaTime;
+        //Debug.Log("Despawn: " + deSpawnTimer);
+        if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0) // No ammo && Time runs out
         {
-            timer = 0;
-            isStartTimer = false;
+            isStartTimerForDeSpawn = false;
+            deSpawnTimer = 0f;
+            // Delete this gun
+            Drop();
+            gameObject.SetActive(false);
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+       */
+        /*
+        // USED FOR DROP
+        if (!isStartTimerForDrop)
+        {
+            return;
+        }
+        dropTimer += Time.deltaTime;
+        //Debug.Log("droppper: " + dropTimer +" poda " + timeToWaitForPickup);
+        if (dropTimer >= timeToWaitForPickup)
+        {
+            dropTimer = 0;
+            isStartTimerForDrop = false;
             gameObject.GetComponent<BoxCollider>().enabled = true;
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,11 +137,12 @@ public class Gun : MonoBehaviour
                     playerShoot.shootInput += Shoot;
                     playerShoot.dropInput += Drop;
                     weaponManager.EquipWeapon(weaponData, gameObject);
+                    deSpawnTimer = 0f;
                     isPickedUp = true;
 
-                    gunsAmmo = weaponData.Ammo;
+                    //gunsAmmo = weaponData.Ammo;
                 }
-                
+
             }
         }
     }
@@ -115,24 +151,22 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        if (gunsAmmo >= 0)
+        if (gunsAmmo == 0)
         {
             // Play click sound to indicate no ammo left
             if (emptyGunSound != null)
             {
                 emptyGunSound.Play();
+                
             }
-            Debug.Log("Click clack");
+            //Debug.Log("Click clack");
         }
 
         if (CanShoot())
         {
-            //weaponData.ChangeAmmoBy(ammoNow--);
-            //weaponData.currentAmmo--;
-            //Debug.Log(weaponData.currentAmmo);
-
             gunsAmmo--;
-            Debug.Log(gunsAmmo);
+            //Debug.Log(gunsAmmo);
+
             //Sound
             if (weaponData.shootAttackSound != null)
             {
@@ -144,6 +178,9 @@ public class Gun : MonoBehaviour
             //Animation
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+
+            // mainly used for Lobby gun atm
+            firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;
@@ -161,6 +198,12 @@ public class Gun : MonoBehaviour
         isPickedUp = false;
         weaponManager.UnEquipWeapon(gameObject);
         gameObject.transform.SetParent(null);
-        isStartTimer = true;
+        // Otherwise it stays in DontDestroyOnLoad
+        //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        isStartTimerForDrop = true;
+        isStartTimerForDeSpawn = true;
+
+        gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 }
