@@ -53,7 +53,7 @@ public class Bullet : Projectile
 		{
 			Debug.Log("Obstacle");
 			GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
-			MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
+			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
 			Destroy(gameObject);
 			return;
 		}
