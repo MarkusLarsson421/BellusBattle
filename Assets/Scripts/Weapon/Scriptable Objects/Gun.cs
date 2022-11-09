@@ -152,7 +152,7 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        if (gunsAmmo == 0)
+        if (gunsAmmo == 0 || weaponData.name != "BasicSword")
         {
             // Play click sound to indicate no ammo left
             if (emptyGunSound != null)
