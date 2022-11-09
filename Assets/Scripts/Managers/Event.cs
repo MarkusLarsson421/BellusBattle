@@ -35,6 +35,12 @@ public class PlayerSpawnEvent : Event<PlayerSpawnEvent>{
 public class PlayerDeathEvent : Event<PlayerDeathEvent>
 {
 	public GameObject kille; //Player who was killed.
-	public GameObject killedBy;
+	public GameObject killer;
 	public string killedWith;
+}
+
+public class PlayerWonEvent : Event<PlayerWonEvent>
+{
+	public GameObject player;
+	public int score;
 }

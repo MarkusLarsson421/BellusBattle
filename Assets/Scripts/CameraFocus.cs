@@ -23,6 +23,7 @@ public class CameraFocus : MonoBehaviour
 	private Vector3 _startPos;
 
 	private void Start(){
+		DontDestroyOnLoad(gameObject);
 		_targets = new();
 		_cam = GetComponent<Camera>();
 		

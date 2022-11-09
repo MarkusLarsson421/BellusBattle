@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +17,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float timeTillRestartGame;
     [SerializeField] private GameObject content;
     [SerializeField] private GameObject levelXPrefab;
-
-
+    
+    private static GameObject _singleTon;
+    
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
     public List<string> GetScencesList()
@@ -28,6 +28,9 @@ public class LevelManager : MonoBehaviour
     }
     private void Awake()
     {
+        if (_singleTon == null){_singleTon = gameObject;}
+        else{Die();}
+        
         DontDestroyOnLoad(gameObject);
         sceneCount = SceneManager.sceneCountInBuildSettings;
         scenesToRemove.Add("MainMenu");
@@ -61,8 +64,7 @@ public class LevelManager : MonoBehaviour
             string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             if (i != 0)
             {
-                GameObject g = Instantiate(levelXPrefab);
-                g.transform.parent = content.transform;
+                GameObject g = Instantiate(levelXPrefab, content.transform, true);
                 levels.Add(g.GetComponent<LevelDetails>());
                 levels.ElementAt(i - 1).SetName(tempStr);
             }
@@ -129,25 +131,9 @@ public class LevelManager : MonoBehaviour
         Destroy(gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
     }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//try
-//{
-//    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(SceneManager.GetActiveScene().buildIndex + 1));
-
-//}
-//catch
-//{
-//    SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
-//}

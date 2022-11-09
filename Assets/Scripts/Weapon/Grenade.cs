@@ -55,7 +55,7 @@ public class Grenade : Projectile
         		
 				PlayerDeathEvent pde = new PlayerDeathEvent{
 					kille = hits[i].gameObject,
-					killedBy = _owner,
+					killer = _owner,
 					killedWith = gameObject.name,
 				};
 				pde.FireEvent(); 

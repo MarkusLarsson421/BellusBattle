@@ -6,14 +6,16 @@ public class Bullet : Projectile
 {
 	[SerializeField] [Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 5.0f;
-	CameraFocus cf;
+	[SerializeField, Tooltip("Type of projectile (e.g. bullet or grenade)")]
+	private string projectileName;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
 
 	public float bulletDamage;
 
+	private GameObject shooter;
+
 	private void Start(){
-		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
 		StartCoroutine(Shoot(lifeSpan));
 	}
 
@@ -26,39 +28,32 @@ public class Bullet : Projectile
 
             if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
             {
-				//playerGo.SetActive(false);
-				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
-				cf.RemoveTarget(playerGo.transform);
+				PlayerDeathEvent pde = new PlayerDeathEvent{
+					kille = other.gameObject,
+                	killer = shooter,
+                	killedWith = projectileName,
+                };
+                pde.FireEvent();
 			}
-			/*
-			PlayerDeathEvent pde = new PlayerDeathEvent{
-				PlayerGo = other.gameObject,
-				Kille = other.name,
-				KilledBy = "No Idea-chan",
-				KilledWith = "Bullets",
-			};
-			pde.FireEvent();
-			*/
 			Die();
 		}
 
 		if(other.gameObject.CompareTag("Target"))
         {
 			GetComponent<Destroy>().gone();
-
 		}
 
-		if (other.gameObject.tag == "Obstacle")
+		if (other.gameObject.CompareTag("Obstacle"))
 		{
 			Debug.Log("Obstacle");
-			Destroy(gameObject);
+			Die();
 			return;
 		}
 
         if (other.gameObject.CompareTag("Breakable"))
         {
 			Destroy(other.gameObject);
-			Destroy(gameObject);
+			Die();
         }
 
 		if (hitSounds.Length > 0)

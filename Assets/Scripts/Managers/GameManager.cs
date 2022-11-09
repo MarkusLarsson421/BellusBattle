@@ -6,20 +6,28 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField, Tooltip("For how long the game shall wait until giving the remaining players their score.")] 
+	private float roundStartingPause = 10.0f;
+	[SerializeField, Tooltip("For how long the game shall wait until giving the remaining players their score.")] 
 	private float roundEndingPause = 10.0f;
 
 	public static GameManager Instance;
-	
+
+	private static GameObject _singleTon;
+
 	private GameState _state;
 	private readonly Dictionary<GameObject, int> _players = new();
 	private int _scoreToWin;
 
 	private void Awake()
 	{
+		if (_singleTon == null){_singleTon = gameObject;}
+		else{Die();}
 		Instance = this;
 	}
 
 	private void Start(){
+		DontDestroyOnLoad(gameObject);
+		
 		PlayerSpawnEvent.RegisterListener(AddPlayer);
 
 		UpdateGameState(GameState.Menu);
@@ -67,7 +75,6 @@ public class GameManager : MonoBehaviour
 	{
 		if (_players.ContainsKey(pde.kille) == false){return;}
 		_players.Remove(pde.kille);
-		CheckForVictor(pde.killedBy);
 	}
 
 	public int PlayerCount(){
@@ -86,20 +93,15 @@ public class GameManager : MonoBehaviour
 	 * Called while in the menu
 	 */
 	private void HandleMenu(){
-		/*foreach (var key in _players.Keys){
-			PlayerSpawnEvent pse = new PlayerSpawnEvent{
-				playerIndex = key.GetComponent<PlayerDetails>().playerID,
-				playerGo = key,
-			};
-			pse.FireEvent();
-		}*/
+		
 	}
 	
 	/*
 	 * Called when the round is starting.
 	 */
-	private void HandleRoundStarting(){
-		
+	private void HandleRoundStarting()
+	{
+		RoundStartingPause(roundStartingPause);
 	}
 	
 	/*
@@ -121,13 +123,13 @@ public class GameManager : MonoBehaviour
 	 * 
 	 */
 	private void HandleGameEnding(){
-		
+		//Load in the end level.
 	}
 
 	private IEnumerator RoundStartingPause(float seconds){
-		Debug.Log("Pausing for a moment before starting the round.");
+		Debug.Log("Round start.");
 		yield return new WaitForSeconds(seconds);
-		Debug.Log("Round start!");
+		Debug.Log("Fight!");
 		
 		UpdateGameState(GameState.RoundOnGoing);
 	}
@@ -140,24 +142,39 @@ public class GameManager : MonoBehaviour
 		//In a loop in-case we later decide to include teams.
 		foreach(var key in _players.Keys){
 			//Adds the score to the player and then checks if they have enough to win.
-			if (++_players[key] >= _scoreToWin){
-				UpdateGameState(GameState.GameEnding);
-				//Unsure if yield break will work or continue to loop through the list.
-				yield break;
+			if (key.GetComponent<PlayerDetails>().isAlive)
+			{
+				_players[key]++;
+				if (CheckForVictor(key))
+				{
+					PlayerWonEvent pwe = new PlayerWonEvent
+					{
+						player = key,
+						score = _players[key],
+					};
+					pwe.FireEvent();
+					UpdateGameState(GameState.GameEnding);
+				}
 			}
 		}
-		//levelManager.LoadNextScene();
 	}
 
-	private void CheckForVictor(GameObject killer){
-		if (_players[killer] >= _scoreToWin){
-			UpdateGameState(GameState.GameEnding);
+	private bool CheckForVictor(GameObject killer){
+		if (_players[killer] >= _scoreToWin)
+		{
+			return true;
 		}
+		return false;
 	}
 
 	private void OnDestroy(){
 		//Unregister from the event.
 		PlayerSpawnEvent.UnregisterListener(AddPlayer);
+	}
+
+	private void Die()
+	{
+		Destroy(gameObject);
 	}
 }
 

@@ -22,12 +22,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject rightArm;
     [SerializeField] private SkinnedMeshRenderer skr;
 
-
-    private void Start()
-    {
-       
-    }
-
     private void OnLevelWasLoaded(int level)
     {
         CF = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
@@ -52,21 +46,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
-        CF.RemoveTarget(gameObject.transform);
         gameObject.transform.position = deathPosition.position;
-        /*
-        boxCollider.enabled = false;
-        rightArm.SetActive(false);
-        skr.enabled = false;
-        */
-        //gunMesh.enabled = false;
-        //grenadeMesh.enabled = false;
     }
 
     public void UnkillPlayer()
     {
-        skr.enabled = true;
-        skr.enabled = false;
         skr.enabled = true;
         /*
         boxCollider.enabled = true;
