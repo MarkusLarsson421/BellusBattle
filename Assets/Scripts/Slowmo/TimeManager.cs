@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] private float slowdownAmount = 0.05f;
     [SerializeField] private bool isSlowMo;
+    [SerializeField] private Slider slider;
 
     private void Awake()
     {
@@ -38,5 +40,13 @@ public class TimeManager : MonoBehaviour
         // invert the bool flag
         isSlowMo = !isSlowMo;
         DoSlowMotion();
+    }
+
+    // Used for adjusting amount of slowmo
+    public void ChangeSliderValue()
+    {
+
+        slowdownAmount = slider.value;
+
     }
 }
