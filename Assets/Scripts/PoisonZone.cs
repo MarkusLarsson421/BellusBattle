@@ -65,9 +65,20 @@ public class PoisonZone : MonoBehaviour
 
         foreach(GameObject player in playersInZone)
         {
+
             if (isInZoneDic[player] == false && poisonDic[player] <= 0f) continue;
             poisonDic[player] += isInZoneDic[player] == true ? Time.deltaTime : -Time.deltaTime;
-            player.GetComponent<PlayerHealth>().PlayPoisoned();
+
+            if(isInZoneDic[player] == false)
+            {
+                player.GetComponent<PlayerHealth>().StopPoisoned();
+            }
+            else
+            {
+                player.GetComponent<PlayerHealth>().PlayPoisoned();
+            }
+            
+
             Debug.Log(poisonDic[player]);
             if(poisonDic[player] >= timeToKill)
             {
