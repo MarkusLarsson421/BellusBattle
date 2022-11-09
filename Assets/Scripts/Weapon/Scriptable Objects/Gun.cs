@@ -38,6 +38,7 @@ public class Gun : MonoBehaviour
     [SerializeField] bool isPickedUp;
 
     [SerializeField] int gunsAmmo;
+    [SerializeField] GameObject swordMesh;
 
     [Header("Dropping")]
     bool isStartTimerForDrop;
@@ -79,7 +80,7 @@ public class Gun : MonoBehaviour
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
-        if (gunsAmmo == 0)
+        if (gunsAmmo == 0 && weaponData.name != "BasicSword")
         {
             // Placeholder för när vi fixat riktiga drop
             Drop();
@@ -162,6 +163,31 @@ public class Gun : MonoBehaviour
             //Debug.Log("Click clack");
         }
 
+        // Basic sword special case
+        if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f))
+        {
+            BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
+            bsb.isAttacking = true;
+
+            //Sound
+            if (weaponData.shootAttackSound != null)
+            {
+                weaponData.shootAttackSound.Play();
+            }
+
+            //VFX
+            if (weaponData.MuzzleFlashGameObject != null)
+            {
+                GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
+                MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
+                Destroy(MuzzleFlashIns, 4f);
+            }
+
+            // Animation
+            swordMesh.GetComponent<Animator>().SetBool("Attack", true);
+            Debug.Log("Swosh");
+        }
+        
         if (CanShoot())
         {
             gunsAmmo--;
@@ -174,8 +200,15 @@ public class Gun : MonoBehaviour
             }
 
             //VFX
+            //if (weaponData.MuzzleFlash != null) { weaponData.MuzzleFlash.Play(); }
+            if (weaponData.MuzzleFlashGameObject != null)
+            {
+                GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
+                MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
+                Destroy(MuzzleFlashIns, 4f);
+            }
 
-            //Animation
+
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
@@ -197,7 +230,11 @@ public class Gun : MonoBehaviour
     public void Drop()
     {
         isPickedUp = false;
-        weaponManager.UnEquipWeapon(gameObject);
+        if (weaponManager != null)
+        {
+            weaponManager.UnEquipWeapon(gameObject);
+        }
+        
         gameObject.transform.SetParent(null);
         // Otherwise it stays in DontDestroyOnLoad
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
