@@ -115,7 +115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeSpan: 5
   hitSounds: []
-  bulletDamage: 0
+  collideVFX: {fileID: 1625590031068301035, guid: 5fe16a0405b215545973c3fad735229c,
+    type: 3}
 --- !u!54 &362432233798713757
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -128,7 +128,7 @@ MonoBehaviour:
     x: -1761
     y: -488
     width: 2812
-    height: 2090
+    height: 2070
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,7 +220,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 0.3
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -853,7 +853,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614884}
   m_ExposedName: ShockwaveColor
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 0
   m_Category: 
   m_Min:
     m_Type:
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614890}
   m_ExposedName: ShockwaveTexture
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 1
   m_Category: 
   m_Min:
     m_Type:
@@ -1181,7 +1181,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614892}
   m_ExposedName: ShockwaveSize
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 2
   m_Category: 
   m_Min:
     m_Type:
@@ -1286,7 +1286,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614894}
   m_ExposedName: ShockwaveLifetime
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:
@@ -1315,6 +1315,13 @@ MonoBehaviour:
     position: {x: 389, y: 251}
     expandedSlots: []
     expanded: 0
+  - m_Id: 3
+    linkedSlots:
+    - outputSlot: {fileID: 8926484042661614894}
+      inputSlot: {fileID: 8926484042661615107}
+    position: {x: -762.84784, y: 277.5435}
+    expandedSlots: []
+    expanded: 0
 --- !u!114 &8926484042661614894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1340,7 +1347,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 0.3
     m_Space: 2147483647
   m_Property:
     name: o
@@ -1351,6 +1358,7 @@ MonoBehaviour:
   m_LinkedSlots:
   - {fileID: 8926484042661614840}
   - {fileID: 8926484042661615178}
+  - {fileID: 8926484042661615107}
 --- !u!114 &8926484042661614895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,7 +1382,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614896}
   m_ExposedName: ShockwaveRate
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:
@@ -2664,7 +2672,8 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614894}
 --- !u!114 &8926484042661615108
 MonoBehaviour:
   m_ObjectHideFlags: 0

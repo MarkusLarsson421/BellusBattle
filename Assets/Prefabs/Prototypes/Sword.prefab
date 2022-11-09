@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2277677801399805890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.162, y: 0.399, z: 0.03}
+  m_LocalPosition: {x: -0.01, y: 1.09, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5284953535141017485}
   - component: {fileID: 3690860643624474654}
   - component: {fileID: 3177862991636339348}
+  - component: {fileID: 2611156886385406731}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Sword
@@ -77,8 +78,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4866374, y: 1.9427133, z: 1.9239659}
-  m_Center: {x: 0.0053471327, y: 0.47135675, z: -0.06668666}
+  m_Size: {x: 0.4387665, y: 1.4960046, z: 0.5533056}
+  m_Center: {x: 0.1014251, y: 1.3755419, z: -0.033967853}
 --- !u!54 &3690860643624474654
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!114 &3177862991636339348
 MonoBehaviour:
@@ -119,6 +120,26 @@ MonoBehaviour:
   gunsAmmo: 0
   timeToWaitForPickup: 2
   timeToWaitForDeSpawn: 2
+--- !u!95 &2611156886385406731
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277677801528443001}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a824d542d7d3a27438e4f8102dddf9f1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2277677801750240970
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +151,6 @@ GameObject:
   - component: {fileID: 2277677801750240971}
   - component: {fileID: 2277677801750241014}
   - component: {fileID: 2277677801750240969}
-  - component: {fileID: 2277677801750241012}
   - component: {fileID: 6852624397805488069}
   - component: {fileID: 7493171810272807927}
   m_Layer: 0
@@ -148,7 +168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2277677801750240970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09296107, y: 0.9362025, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -207,26 +227,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &2277677801750241012
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277677801750240970}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a824d542d7d3a27438e4f8102dddf9f1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &6852624397805488069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2277677801750240970}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.37881386, y: 1.3072323, z: 3.3451967}
