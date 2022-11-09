@@ -41,7 +41,10 @@ public class Bullet : Projectile
 			pde.FireEvent();
 			*/
 			Die();
-		}
+		}else if (playerGo.CompareTag("AI"))
+        {
+			playerGo.GetComponent<AI>().KillAI();
+        }
 
 		if(other.gameObject.CompareTag("Target"))
         {

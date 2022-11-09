@@ -54,8 +54,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void PlayPoisoned()
     {
-        poisoned.Stop();
+        //poisoned.Stop();
         poisoned.Play();
+
+    }
+
+    public void StopPoisoned()
+    {
+        //poisoned.Stop();
+        poisoned.Stop();
 
     }
 
