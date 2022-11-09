@@ -677,7 +677,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614911}
   - {fileID: 8926484042661614912}
   m_OutputSlots: []
-  m_Disabled: 1
+  m_Disabled: 0
   repeat: 0
   spawnMode: 0
   delayMode: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661614914}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
 --- !u!114 &8926484042661614914
 MonoBehaviour:
   m_ObjectHideFlags: 0

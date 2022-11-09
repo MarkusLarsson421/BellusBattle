@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public static event OnGameOver onGameOver;
     [SerializeField] private AudioSource playerDeathSound;
     [SerializeField] private VisualEffect bloodSplatter;
+    [SerializeField] private VisualEffect poisoned;
 
     private float health = 1;
     private bool isInvinsable=false;
@@ -51,6 +52,19 @@ public class PlayerHealth : MonoBehaviour
         isInvinsable = value;
     }
 
+    public void PlayPoisoned()
+    {
+        //poisoned.Stop();
+        poisoned.Play();
+
+    }
+
+    public void StopPoisoned()
+    {
+        //poisoned.Stop();
+        poisoned.Stop();
+
+    }
 
     public void KillPlayer()
     {

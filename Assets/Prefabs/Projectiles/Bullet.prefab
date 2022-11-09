@@ -115,7 +115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeSpan: 5
   hitSounds: []
-  bulletDamage: 0
+  collideVFX: {fileID: 1625590031068301035, guid: 5fe16a0405b215545973c3fad735229c,
+    type: 3}
 --- !u!54 &362432233798713757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,9 +130,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!96 &8883272063211794269
 TrailRenderer:
   serializedVersion: 2

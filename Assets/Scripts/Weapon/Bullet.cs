@@ -9,6 +9,7 @@ public class Bullet : Projectile
 	CameraFocus cf;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
+	[SerializeField] private GameObject collideVFX;
 
 	//public float bulletDamage;
 
@@ -40,7 +41,10 @@ public class Bullet : Projectile
 			pde.FireEvent();
 			*/
 			Die();
-		}
+		}else if (playerGo.CompareTag("AI"))
+        {
+			playerGo.GetComponent<AI>().KillAI();
+        }
 
 		if(other.gameObject.CompareTag("Target"))
         {
@@ -51,6 +55,8 @@ public class Bullet : Projectile
 		if (other.gameObject.tag == "Obstacle")
 		{
 			Debug.Log("Obstacle");
+			GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
+			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
 			Destroy(gameObject);
 			return;
 		}

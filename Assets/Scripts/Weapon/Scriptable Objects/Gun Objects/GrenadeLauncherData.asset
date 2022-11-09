@@ -18,7 +18,7 @@ MonoBehaviour:
     type: 3}
   damage: 1
   maxDistance: 3
-  projectile: {fileID: 2217352063105504401, guid: ed45301ffa672bf43b5fdda7e7f92191,
+  projectile: {fileID: 2217352063105504401, guid: ee72c8e87a0494a4abbcdd15ad76bb81,
     type: 3}
   projectileForce: 1000
   currentAmmo: 3
