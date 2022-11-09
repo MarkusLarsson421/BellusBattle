@@ -94,4 +94,9 @@ public class PoisonZone : MonoBehaviour
         isInZoneDic.Clear();
         playersInZone.Clear();
     }
+
+    private void OnDestroy()
+    {
+        Clear();
+    }
 }

@@ -54,14 +54,14 @@ public class PlayerHealth : MonoBehaviour
 
     public void PlayPoisoned()
     {
-        //poisoned.Stop();
+        poisoned.gameObject.SetActive(true);
         poisoned.Play();
 
     }
 
     public void StopPoisoned()
     {
-        //poisoned.Stop();
+        poisoned.gameObject.SetActive(false);
         poisoned.Stop();
 
     }

@@ -5844,6 +5844,7 @@ MonoBehaviour:
   CF: {fileID: 0}
   playerDeathSound: {fileID: 5042949326614459676}
   bloodSplatter: {fileID: 3332971346311075587}
+  poisoned: {fileID: 26230028221232840}
   deathPosition: {fileID: 5916060800904582881}
   boxCollider: {fileID: 6431588530169345906}
   rightArm: {fileID: 2915926472710746649}
