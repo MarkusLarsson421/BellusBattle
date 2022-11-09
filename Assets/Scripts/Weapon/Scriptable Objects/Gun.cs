@@ -38,6 +38,7 @@ public class Gun : MonoBehaviour
     [SerializeField] bool isPickedUp;
 
     [SerializeField] int gunsAmmo;
+    [SerializeField] GameObject swordMesh;
 
     [Header("Dropping")]
     bool isStartTimerForDrop;
@@ -162,11 +163,31 @@ public class Gun : MonoBehaviour
             //Debug.Log("Click clack");
         }
 
-        if (weaponData.name == "BasicSword")
+        // Basic sword special case
+        if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f))
         {
-            GetComponent<Animator>().SetBool("Attack", true);
-        }
+            BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
+            bsb.isAttacking = true;
 
+            //Sound
+            if (weaponData.shootAttackSound != null)
+            {
+                weaponData.shootAttackSound.Play();
+            }
+
+            //VFX
+            if (weaponData.MuzzleFlashGameObject != null)
+            {
+                GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
+                MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
+                Destroy(MuzzleFlashIns, 4f);
+            }
+
+            // Animation
+            swordMesh.GetComponent<Animator>().SetBool("Attack", true);
+            Debug.Log("Swosh");
+        }
+        
         if (CanShoot())
         {
             gunsAmmo--;
@@ -184,9 +205,9 @@ public class Gun : MonoBehaviour
             {
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
+                Destroy(MuzzleFlashIns, 4f);
             }
 
-            //Animation
 
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);

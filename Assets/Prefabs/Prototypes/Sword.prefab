@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5284953535141017485}
   - component: {fileID: 3690860643624474654}
   - component: {fileID: 3177862991636339348}
+  - component: {fileID: 2611156886385406731}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Sword
@@ -119,6 +120,26 @@ MonoBehaviour:
   gunsAmmo: 0
   timeToWaitForPickup: 2
   timeToWaitForDeSpawn: 2
+--- !u!95 &2611156886385406731
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277677801528443001}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a824d542d7d3a27438e4f8102dddf9f1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2277677801750240970
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +151,6 @@ GameObject:
   - component: {fileID: 2277677801750240971}
   - component: {fileID: 2277677801750241014}
   - component: {fileID: 2277677801750240969}
-  - component: {fileID: 2277677801750241012}
   - component: {fileID: 6852624397805488069}
   - component: {fileID: 7493171810272807927}
   m_Layer: 0
@@ -207,26 +227,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &2277677801750241012
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277677801750240970}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a824d542d7d3a27438e4f8102dddf9f1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &6852624397805488069
 BoxCollider:
   m_ObjectHideFlags: 0

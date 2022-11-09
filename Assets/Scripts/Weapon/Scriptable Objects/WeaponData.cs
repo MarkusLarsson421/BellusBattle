@@ -41,7 +41,6 @@ public class WeaponData : ScriptableObject
 
     [Header("VFX")]
     [SerializeField] private GameObject muzzleFlashGameObject;
-    //
     //[SerializeField] private ParticleSystem muzzleFlashVFX;
 
     // Getters
@@ -53,6 +52,7 @@ public class WeaponData : ScriptableObject
     
     public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
 
+    /*
     // Metods
     public void SpawnPool()
     {
@@ -98,7 +98,7 @@ public class WeaponData : ScriptableObject
 
         return obj;
     }
-    
+    */
     
 
 
