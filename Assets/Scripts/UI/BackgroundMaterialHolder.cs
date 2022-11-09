@@ -43,17 +43,17 @@ public class BackgroundMaterialHolder : MonoBehaviour
         //    M32[i].material = darkenMaterial2[3];
         //}
 
-        for (int i = 0; i < M03.Count; i++)
-        {
-            M03[i].material = darkenMaterial3[0];
-        }
-        for (int i = 0; i < M13.Count; i++)
-        {
-            M13[i].material = darkenMaterial3[1];
-        }
-        for (int i = 0; i < M23.Count; i++)
-        {
-            M23[i].material = darkenMaterial3[2];
-        }
+        //for (int i = 0; i < M03.Count; i++)
+        //{
+        //    M03[i].material = darkenMaterial3[0];
+        //}
+        //for (int i = 0; i < M13.Count; i++)
+        //{
+        //    M13[i].material = darkenMaterial3[1];
+        //}
+        //for (int i = 0; i < M23.Count; i++)
+        //{
+        //    M23[i].material = darkenMaterial3[2];
+        //}
     }
 }
