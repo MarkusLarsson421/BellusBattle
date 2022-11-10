@@ -6,8 +6,7 @@ using UnityEngine.VFX;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private CameraFocus CF;
-    public delegate void OnGameOver();
+	public delegate void OnGameOver();
     public static event OnGameOver onGameOver;
     [SerializeField] private AudioSource playerDeathSound;
     [SerializeField] private VisualEffect bloodSplatter;
@@ -38,7 +37,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        CF = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
         poisoned.gameObject.SetActive(false);
         UnkillPlayer();
     }
@@ -110,5 +108,4 @@ public class PlayerHealth : MonoBehaviour
         //swordMesh.enabled = true;
         //ppV1.isHoldingWeapon = false;
     }
-    
 }
