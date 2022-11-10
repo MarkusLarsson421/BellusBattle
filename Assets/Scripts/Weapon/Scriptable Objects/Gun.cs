@@ -180,7 +180,6 @@ public class Gun : MonoBehaviour
             //VFX
             if (weaponData.MuzzleFlashGameObject != null)
             {
-                Debug.Log("kddfsordsoO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
@@ -254,9 +253,9 @@ public class Gun : MonoBehaviour
 
         gameObject.transform.position = new Vector2(999999, 999999);
 
-        //ExecuteAfterTime(2f);
-        gameObject.SetActive(false);
-        Debug.Log("fuck");
+        ExecuteAfterTime(2f);
+        //gameObject.SetActive(false);
+        //Debug.Log("fuck");
         //gameObject.GetComponent<BoxCollider>().enabled = false;
     }
     IEnumerator ExecuteAfterTime(float time)
