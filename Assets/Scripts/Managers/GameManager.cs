@@ -6,9 +6,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField, Tooltip("For how long the game shall wait until the round starts.")] 
-	private float roundStartingPause = 10.0f;
+	private float roundStartingPauseTime = 10.0f;
 	[SerializeField, Tooltip("For how long the game shall wait until giving the remaining players their score.")] 
-	private float roundEndingPause = 10.0f;
+	private float roundEndingPauseTime = 10.0f;
+	[SerializeField, Tooltip("Reference to the level manager for telling it when to swap level.")]
+	private GameObject levelManagerGo;
 
 	public static GameManager Instance;
 
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
 	private GameState _state;
 	private readonly Dictionary<GameObject, int> _players = new();
 	private int _scoreToWin;
+	private LevelManager levelManager;
 
 	private void Awake()
 	{
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
 
 	private void Start(){
 		PlayerSpawnEvent.RegisterListener(AddPlayer);
-
+		levelManager = levelManagerGo.GetComponent<LevelManager>();
 		UpdateGameState(GameState.Menu);
 	}
 
@@ -58,11 +61,14 @@ public class GameManager : MonoBehaviour
 			case GameState.GameEnding:
 				HandleGameEnding();
 				break;
+			case GameState.NewLevel:
+				HandleNewLevel();
+				break;
 			default:
 				throw new Exception("Unexpected GameState state.");
 		}
 	}
-	
+
 	private void AddPlayer(PlayerSpawnEvent pse)
 	{
 		if (_players.ContainsKey(pse.playerGo)){return;}
@@ -99,7 +105,7 @@ public class GameManager : MonoBehaviour
 	 */
 	private void HandleRoundStarting()
 	{
-		RoundStartingPause(roundStartingPause);
+		StartCoroutine(RoundStartingPause(roundStartingPauseTime));
 	}
 	
 	/*
@@ -111,17 +117,22 @@ public class GameManager : MonoBehaviour
 	}
 	
 	/*
-	 * 
+	 * The waiting period before swapping level.
 	 */
 	private void HandleRoundEnding(){
-		StartCoroutine(RoundEndingPause(roundEndingPause));
+		StartCoroutine(RoundEndingPause(roundEndingPauseTime));
 	}
 	
 	/*
-	 * 
+	 * Called once a victor as been declared.
 	 */
 	private void HandleGameEnding(){
 		//Load in the end level.
+	}
+	
+	private void HandleNewLevel()
+	{
+		levelManager.LoadNextScene();
 	}
 
 	private IEnumerator RoundStartingPause(float seconds){
@@ -183,4 +194,5 @@ public enum GameState
 	RoundOnGoing, //Round is on going.
 	RoundEnding, //Round has ended.
 	GameEnding, //Game has ended.
+	NewLevel, //Changes the level.
 }

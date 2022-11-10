@@ -8,9 +8,11 @@ public class LevelSlider : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textS;
     private Slider slider;
     private int nmrOfLevels;
-    // Start is called before the first frame update
+    private GameManager _gameManager;
+    
     void Start()
     {
+	    _gameManager = GameManager.Instance;
         nmrOfLevels = 1;
     }
 
@@ -18,7 +20,6 @@ public class LevelSlider : MonoBehaviour
     void FixedUpdate()
     {
         textS.text = nmrOfLevels.ToString();
-
     }
 
     public void Increase()
@@ -34,7 +35,6 @@ public class LevelSlider : MonoBehaviour
     }
     public void OnPlay()
     {
-        GameManager.Instance.SetScoreToWin(nmrOfLevels);
-        levelManager.LoadNextScene();
+        _gameManager.SetScoreToWin(nmrOfLevels);
     }
 }
