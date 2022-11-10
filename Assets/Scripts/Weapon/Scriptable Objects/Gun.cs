@@ -123,7 +123,7 @@ public class Gun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isPickedUp)
         {
             playerShoot = other.gameObject.GetComponent<PlayerShoot>();
 
@@ -164,9 +164,10 @@ public class Gun : MonoBehaviour
         }
 
         // Basic sword special case
-        if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f))
+        BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
+        if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && isPickedUp)
         {
-            BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
+            
             bsb.isAttacking = true;
 
             //Sound
@@ -186,6 +187,8 @@ public class Gun : MonoBehaviour
             // Animation
             swordMesh.GetComponent<Animator>().SetBool("Attack", true);
             Debug.Log("Swosh");
+
+
         }
         
         if (CanShoot())
