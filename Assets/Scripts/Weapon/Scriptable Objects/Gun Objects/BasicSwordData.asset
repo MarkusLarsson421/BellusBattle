@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: BasicSwordData
   m_EditorClassIdentifier: 
+  amountToSpawn: 0
   name: BasicSword
   weaponPrefab: {fileID: 2277677801528443001, guid: 59a8b008c1ec8f5449123dcd2a856ffe,
     type: 3}
@@ -24,4 +25,6 @@ MonoBehaviour:
   magSize: 0
   fireRate: 3
   pickupSound: {fileID: 0}
-  shootSound: {fileID: 0}
+  shootAttackSound: {fileID: 0}
+  muzzleFlashGameObject: {fileID: 1298385045497319875, guid: c4f13cda770c9714ba5f9ea0f462adbd,
+    type: 3}

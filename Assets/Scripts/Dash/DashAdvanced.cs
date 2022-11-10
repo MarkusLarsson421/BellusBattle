@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.Events;
-using UnityEditor.Rendering.LookDev;
-using UnityEditor.SceneManagement;
+//using UnityEditor.Rendering.LookDev;
+//using UnityEditor.SceneManagement;
 using UnityEngine.UIElements;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -44,7 +44,7 @@ public class DashAdvanced : MonoBehaviour
 
     private Vector3 direction;
     private Vector3 velocity;
-    private PlayerMovement movement;
+    [SerializeField] private PlayerMovement movement;
     private PlayerHealth health;
     private float currentDashingDistace;
     private float currentDashingDuration;
@@ -310,7 +310,7 @@ public class DashAdvanced : MonoBehaviour
             }
             else if(onControlOverride)
             {
-                currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) + Mathf.Abs(movement.Velocity.y);
+                currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
             }
             else
             {

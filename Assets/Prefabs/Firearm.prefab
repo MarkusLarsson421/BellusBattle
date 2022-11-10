@@ -5249,11 +5249,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 75c05ab19bacc544dbeeea3210805aa2, type: 2}
   playerShoot: {fileID: 0}
+  ownerID: 0
   weaponManager: {fileID: 0}
   muzzle: {fileID: 5716300864232877825}
+  emptyGunSound: {fileID: 0}
   player: {fileID: 0}
   aim: {fileID: 0}
   isPickedUp: 0
+  gunsAmmo: 0
+  timeToWaitForPickup: 2
+  timeToWaitForDeSpawn: 5
 --- !u!54 &1248005850
 Rigidbody:
   m_ObjectHideFlags: 0
