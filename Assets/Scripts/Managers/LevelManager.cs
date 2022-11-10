@@ -31,7 +31,6 @@ public class LevelManager : MonoBehaviour
         if (_singleTon == null){_singleTon = gameObject;}
         else{Die();}
         
-        DontDestroyOnLoad(gameObject);
         sceneCount = SceneManager.sceneCountInBuildSettings;
         scenesToRemove.Add("MainMenu");
         scenesToRemove.Add("The_End");

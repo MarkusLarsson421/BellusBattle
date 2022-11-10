@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviour
 	}
 
 	private void Start(){
-		DontDestroyOnLoad(gameObject);
-		
 		PlayerSpawnEvent.RegisterListener(AddPlayer);
 
 		UpdateGameState(GameState.Menu);

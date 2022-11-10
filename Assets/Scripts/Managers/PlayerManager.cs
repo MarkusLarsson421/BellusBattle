@@ -13,7 +13,6 @@ public class PlayerManager : MonoBehaviour{
 		if (_singleTon == null){_singleTon = gameObject;}
 		else{Die();}
 		
-		DontDestroyOnLoad(gameObject);
 		_gameManager = GameManager.Instance;
 		PlayerSpawnEvent.RegisterListener(OnPlayerSpawn);
 		PlayerDeathEvent.RegisterListener(OnPlayerDeath);
