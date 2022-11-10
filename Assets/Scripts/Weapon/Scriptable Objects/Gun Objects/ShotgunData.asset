@@ -20,11 +20,11 @@ MonoBehaviour:
   maxDistance: 5
   projectile: {fileID: 7929666838174018582, guid: 99b20f100c8787f4e96438a5ddee74fe,
     type: 3}
-  projectileForce: 50
-  currentAmmo: 3
-  initialAmmo: 3
-  magSize: 3
-  fireRate: 20
+  projectileForce: 60
+  currentAmmo: 4
+  initialAmmo: 4
+  magSize: 4
+  fireRate: 60
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
   muzzleFlashGameObject: {fileID: 4152921793190633321, guid: 48213759ef4e3da4bb200155920ca711,
