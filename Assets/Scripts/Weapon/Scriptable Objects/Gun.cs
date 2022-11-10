@@ -165,10 +165,10 @@ public class Gun : MonoBehaviour
         }
 
         // Basic sword special case
-        BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
+        
         if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && isPickedUp)
         {
-            
+            BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
             bsb.isAttacking = true;
 
             //Sound
@@ -180,6 +180,7 @@ public class Gun : MonoBehaviour
             //VFX
             if (weaponData.MuzzleFlashGameObject != null)
             {
+                Debug.Log("kddfsordsoO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
@@ -207,6 +208,7 @@ public class Gun : MonoBehaviour
             //if (weaponData.MuzzleFlash != null) { weaponData.MuzzleFlash.Play(); }
             if (weaponData.MuzzleFlashGameObject != null)
             {
+                Debug.Log("YOOOO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
@@ -244,8 +246,19 @@ public class Gun : MonoBehaviour
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
         isStartTimerForDrop = true;
         isStartTimerForDeSpawn = true;
+        //gameObject.GetComponent<Gun>().enabled = false;
 
+        gameObject.transform.position = new Vector2(999999, 999999);
+
+        //ExecuteAfterTime(2f);
         gameObject.SetActive(false);
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        Debug.Log("fuck");
+        //gameObject.GetComponent<BoxCollider>().enabled = false;
     }
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        gameObject.SetActive(false);
+    }
+
 }

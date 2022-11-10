@@ -19,24 +19,12 @@ public class Bullet : Projectile
 	}
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "Obstacle")
-		{
-			Debug.Log("Obstacle");
-			ContactPoint contact = other.contacts[0];
-			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-			Vector3 pos = contact.point;
-			GameObject MuzzleFlashIns = Instantiate(collideVFX, pos, rot);
-			Destroy(MuzzleFlashIns, 3f);
-
-			//GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
-			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
-			Destroy(gameObject);
-			return;
-		}
+		
 		GameObject playerGo = other.gameObject;
-		if (playerGo.CompareTag("Player") && Shooter != playerGo)
+		if (playerGo.CompareTag("Player")) // && Shooter != playerGo)
 		{
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
+			Debug.Log("Hit player");
 
 			if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
 			{
@@ -58,6 +46,21 @@ public class Bullet : Projectile
 		else if (playerGo.CompareTag("AI"))
 		{
 			playerGo.GetComponent<AI>().KillAI();
+		}
+
+		if (other.gameObject.tag == "Obstacle")
+		{
+			Debug.Log("Obstacle");
+			ContactPoint contact = other.contacts[0];
+			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+			Vector3 pos = contact.point;
+			GameObject MuzzleFlashIns = Instantiate(collideVFX, pos, rot);
+			Destroy(MuzzleFlashIns, 3f);
+
+			//GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
+			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
+			Destroy(gameObject);
+			return;
 		}
 
 		if (other.gameObject.CompareTag("Target"))

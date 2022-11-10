@@ -45,7 +45,7 @@ public class HazardMover : MonoBehaviour
     }
     private void MoveHazard()
     {
-        Debug.Log(moveVector);
+        //Debug.Log(moveVector);
         if(hasReachedHighestPoint == false)
         {
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);

@@ -79,7 +79,7 @@ public class PoisonZone : MonoBehaviour
             }
             
 
-            Debug.Log(poisonDic[player]);
+            //Debug.Log(poisonDic[player]);
             if(poisonDic[player] >= timeToKill)
             {
                 cameraFocus.RemoveTarget(player.transform); //shitfix
