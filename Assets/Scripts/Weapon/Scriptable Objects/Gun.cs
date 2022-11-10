@@ -253,7 +253,7 @@ public class Gun : MonoBehaviour
 
         gameObject.transform.position = new Vector2(999999, 999999);
 
-        //ExecuteAfterTime(2f);
+        //ExecuteAfterTime(1f);
         gameObject.SetActive(false);
         //Debug.Log("fuck");
         //gameObject.GetComponent<BoxCollider>().enabled = false;
