@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
     private int sceneCount;
     [SerializeField] private string[] scenes;
-    [SerializeField] private List<LevelDetails> levels = new List<LevelDetails>();
+    [SerializeField] private List<LevelDetails> levels = new();
     [SerializeField] private float timeTillRestartGame;
     [SerializeField] private GameObject content;
     [SerializeField] private GameObject levelXPrefab;
@@ -22,10 +22,7 @@ public class LevelManager : MonoBehaviour
     
     public List<string> scenesToChooseFrom = new();
     public List<string> scenesToRemove = new();
-    public List<string> GetScencesList()
-    {
-        return scenesToChooseFrom;
-    }
+
     private void Awake()
     {
         if (_singleTon == null){_singleTon = gameObject;}
@@ -68,7 +65,6 @@ public class LevelManager : MonoBehaviour
                 levels.Add(g.GetComponent<LevelDetails>());
                 levels.ElementAt(i - 1).SetName(tempStr);
             }
-
         }
     }
     private void CreateListOfScenesFromList()
