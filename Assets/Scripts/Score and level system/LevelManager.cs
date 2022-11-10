@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         sceneCount = SceneManager.sceneCountInBuildSettings;
-        scenesToRemove.Add("TestingGround");
+        scenesToRemove.Add("MainMenu");
         scenesToRemove.Add("The_End");
         LoadScenesList();
         if(SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
