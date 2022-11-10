@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject rightArm;
     [SerializeField] private SkinnedMeshRenderer skr;
 
+   
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         CF = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
+        poisoned.gameObject.SetActive(false);
     }
 
     public void TakeDamage(float damage)
