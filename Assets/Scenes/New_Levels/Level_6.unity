@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 176519936}
   m_Layer: 3
   m_Name: Platform(Clone) (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 192718060}
   m_Layer: 7
   m_Name: passable_platform(Clone) (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -922,7 +922,7 @@ GameObject:
   - component: {fileID: 245080079}
   m_Layer: 7
   m_Name: passable_platform(Clone) (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1020,7 +1020,7 @@ GameObject:
   - component: {fileID: 269129679}
   m_Layer: 7
   m_Name: passable_platform(Clone) (12)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1603,7 +1603,7 @@ GameObject:
   - component: {fileID: 635110288}
   m_Layer: 3
   m_Name: Platform(Clone) (7)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1700,7 +1700,7 @@ GameObject:
   - component: {fileID: 673781212}
   m_Layer: 3
   m_Name: Platform(Clone) (11)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1880,7 +1880,7 @@ GameObject:
   - component: {fileID: 723255781}
   m_Layer: 7
   m_Name: passable_platform(Clone) (13)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2144,7 +2144,7 @@ GameObject:
   - component: {fileID: 1008589617}
   m_Layer: 3
   m_Name: Platform(Clone) (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2241,7 +2241,7 @@ GameObject:
   - component: {fileID: 1038542799}
   m_Layer: 3
   m_Name: Platform(Clone)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2338,7 +2338,7 @@ GameObject:
   - component: {fileID: 1046569402}
   m_Layer: 3
   m_Name: Platform(Clone) (9)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2518,7 +2518,7 @@ GameObject:
   - component: {fileID: 1093103585}
   m_Layer: 3
   m_Name: Platform(Clone) (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2793,7 +2793,7 @@ GameObject:
   - component: {fileID: 1169969455}
   m_Layer: 3
   m_Name: Platform(Clone) (8)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2933,7 +2933,7 @@ GameObject:
   - component: {fileID: 1204082874}
   m_Layer: 3
   m_Name: Platform(Clone) (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3615,7 +3615,7 @@ GameObject:
   - component: {fileID: 1399634005}
   m_Layer: 3
   m_Name: Platform(Clone) (6)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4142,7 +4142,7 @@ GameObject:
   - component: {fileID: 1674204487}
   m_Layer: 3
   m_Name: Wall(Clone)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4367,7 +4367,7 @@ GameObject:
   - component: {fileID: 1714779946}
   m_Layer: 3
   m_Name: Platform(Clone) (5)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4537,7 +4537,7 @@ GameObject:
   - component: {fileID: 1800763926}
   m_Layer: 7
   m_Name: passable_platform(Clone) (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4764,7 +4764,7 @@ GameObject:
   - component: {fileID: 1918374617}
   m_Layer: 3
   m_Name: Wall(Clone) (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4944,7 +4944,7 @@ GameObject:
   - component: {fileID: 2058456607}
   m_Layer: 3
   m_Name: Platform(Clone) (10)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
