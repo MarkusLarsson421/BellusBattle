@@ -5475,6 +5475,7 @@ MonoBehaviour:
   airResistance: 72
   downwardForce: -22.5
   acceleration: 35245
+  jumpSetting: 2
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
   edgeControlAmount: 0.5
