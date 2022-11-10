@@ -20,8 +20,8 @@ public class LevelManager : MonoBehaviour
     
     private static GameObject _singleTon;
     
-    public List<string> scenesToChooseFrom = new List<string>();
-    public List<string> scenesToRemove = new List<string>();
+    public List<string> scenesToChooseFrom = new();
+    public List<string> scenesToRemove = new();
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;

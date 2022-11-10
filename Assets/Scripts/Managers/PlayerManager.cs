@@ -5,15 +5,16 @@ public class PlayerManager : MonoBehaviour{
 	[SerializeField] private Transform[] spawnLocations;
 	[SerializeField] private Material[] materials;
 	
-	private GameManager _gameManager = GameManager.Instance;
+	private GameManager _gameManager;
 
 	private static GameObject _singleTon;
 	
 	private void Start(){
 		if (_singleTon == null){_singleTon = gameObject;}
 		else{Die();}
-		
+
 		_gameManager = GameManager.Instance;
+		
 		PlayerSpawnEvent.RegisterListener(OnPlayerSpawn);
 		PlayerDeathEvent.RegisterListener(OnPlayerDeath);
 	}
@@ -22,7 +23,6 @@ public class PlayerManager : MonoBehaviour{
 	 * Called upon player joining. Might be displayed as never used.
 	 */
 	void OnPlayerJoined(PlayerInput playerInput){
-		Debug.Log("WACK");
 		if (_gameManager.GetGameState() != GameState.Menu){
 			Debug.Log("menu");
 			return;

@@ -33,12 +33,13 @@ public class WeaponSpawnerManager : MonoBehaviour{
 		if (spawners.Length == 0){return;}
         
 		int i = 0;
-		while(i < minimumWeapons - _weaponsAvailable){
-			if(spawners[i] != null){
-				WeaponSpawner spawner = spawners[Random.Range(0, spawners.Length)].GetComponent<WeaponSpawner>(); 
-				bool spawned = spawner.SpawnWeapon();
-				if (spawned){i++;}
+		while(i < minimumWeapons - _weaponsAvailable)
+		{
+			WeaponSpawner spawner = spawners[Random.Range(0, spawners.Length)].GetComponent<WeaponSpawner>();
+			if(spawner != null){
+				spawner.SpawnWeapon();
 			}
+			i++;
 		}
 	}
 

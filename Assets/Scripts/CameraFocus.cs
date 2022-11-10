@@ -16,15 +16,13 @@ public class CameraFocus : MonoBehaviour
 	[SerializeField] 
 	private float zoomLimiter = 50.0f;
 	
-	private List<Transform> _targets;
+	private List<Transform> _targets = new();
 	private Vector3 _velocity;
 	private Camera _cam;
 	private bool _isOrthographic;
 	private Vector3 _startPos;
 
 	private void Start(){
-		DontDestroyOnLoad(gameObject);
-		_targets = new();
 		_cam = GetComponent<Camera>();
 		
 		//Register to events.

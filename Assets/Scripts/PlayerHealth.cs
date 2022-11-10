@@ -62,7 +62,6 @@ public class PlayerHealth : MonoBehaviour
     {
         poisoned.gameObject.SetActive(false);
         poisoned.Stop();
-
     }
 
     public void KillPlayer()
