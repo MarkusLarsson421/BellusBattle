@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5238657, g: 0.5617042, b: 0.47704506, a: 1}
+  m_IndirectSpecularColor: {r: 0.52386564, g: 0.56170434, b: 0.47704506, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -906,6 +906,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2632716175614946670, guid: 765ddfd0471730a47ac8721c56db8da6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3441482137243776980, guid: 765ddfd0471730a47ac8721c56db8da6,
         type: 3}
       propertyPath: m_RootOrder
@@ -1173,7 +1178,7 @@ GameObject:
   - component: {fileID: 190086108}
   m_Layer: 3
   m_Name: Platforms
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3625,6 +3630,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8325934541239545983, guid: 29977db1201bd624eaedc8f798fb58b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8543606756984236157, guid: 29977db1201bd624eaedc8f798fb58b7,
         type: 3}
       propertyPath: m_Layer
@@ -3821,6 +3831,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300822877795947417, guid: 8c68cae569e2ddf4895e93bc9a7dec2c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 7300822877795947417, guid: 8c68cae569e2ddf4895e93bc9a7dec2c,
         type: 3}
@@ -4820,6 +4835,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7999234931669811249, guid: 38aa088c17a96014a8b873d55bd9b627,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38aa088c17a96014a8b873d55bd9b627, type: 3}
 --- !u!4 &1011174700 stripped
@@ -5330,6 +5350,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8325934541239545983, guid: 29977db1201bd624eaedc8f798fb58b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8543606756984236157, guid: 29977db1201bd624eaedc8f798fb58b7,
         type: 3}
       propertyPath: m_Layer
@@ -5715,6 +5740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817246022115281933, guid: 51f52a17f12482f45b3a2bf9f7c86ca5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f52a17f12482f45b3a2bf9f7c86ca5, type: 3}
@@ -6402,7 +6432,7 @@ GameObject:
   - component: {fileID: 1564792721}
   m_Layer: 3
   m_Name: NoPass
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7909,7 +7939,7 @@ GameObject:
   - component: {fileID: 2064345155}
   m_Layer: 3
   m_Name: CollidersNoPass
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10232,6 +10262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: castle_door (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2928155194814159921, guid: e775efe1667969545a5eb038a1e6c4cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e775efe1667969545a5eb038a1e6c4cc, type: 3}
 --- !u!4 &1643098730075006290 stripped
@@ -10870,6 +10905,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: top_platform
       objectReference: {fileID: 0}
+    - target: {fileID: 6451866433702966168, guid: fc626376258bec44bbdb929264cc06e1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 6670664583649258394, guid: fc626376258bec44bbdb929264cc06e1,
         type: 3}
       propertyPath: m_TagString
@@ -11062,6 +11102,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7999234931669811249, guid: 38aa088c17a96014a8b873d55bd9b627,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38aa088c17a96014a8b873d55bd9b627, type: 3}
 --- !u!1001 &6725071310287020270
@@ -11145,6 +11190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: castle_door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2928155194814159921, guid: e775efe1667969545a5eb038a1e6c4cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e775efe1667969545a5eb038a1e6c4cc, type: 3}
@@ -11236,6 +11286,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7817246022115281933, guid: 51f52a17f12482f45b3a2bf9f7c86ca5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f52a17f12482f45b3a2bf9f7c86ca5, type: 3}
 --- !u!1001 &8295351922497493932
@@ -11259,6 +11314,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300822877795947417, guid: 8c68cae569e2ddf4895e93bc9a7dec2c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 7933771432807549219, guid: 8c68cae569e2ddf4895e93bc9a7dec2c,
         type: 3}

@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc302e29ab8f2446886c2c1137e5363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAudioMixer: {fileID: 24100000, guid: 66b12940d28b0d94ea93cc1bea189c8b, type: 2}
+  _audioMixer: {fileID: 0}
   valumeValue: {fileID: 4351930}
 --- !u!1001 &8223647
 PrefabInstance:
@@ -6262,7 +6262,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1091961803}
   m_HandleRect: {fileID: 1091961802}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
