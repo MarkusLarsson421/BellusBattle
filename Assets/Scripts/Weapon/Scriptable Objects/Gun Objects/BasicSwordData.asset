@@ -23,8 +23,8 @@ MonoBehaviour:
   currentAmmo: 0
   initialAmmo: 0
   magSize: 0
-  fireRate: 3
+  fireRate: 9000
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
-  muzzleFlashGameObject: {fileID: 1298385045497319875, guid: c4f13cda770c9714ba5f9ea0f462adbd,
+  muzzleFlashGameObject: {fileID: 1625590031068301035, guid: 5fe16a0405b215545973c3fad735229c,
     type: 3}

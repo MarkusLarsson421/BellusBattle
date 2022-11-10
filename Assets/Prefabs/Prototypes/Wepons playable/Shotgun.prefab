@@ -5052,7 +5052,7 @@ GameObject:
   - component: {fileID: 370272509325264095}
   m_Layer: 0
   m_Name: Shotgun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5103,7 +5103,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9eb68274adabff64ebd2dc3e8a6bcc83, type: 2}
+  - {fileID: 2100000, guid: f22a3d7682209ba479d45f4a1dbcb12f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5142,7 +5142,7 @@ MonoBehaviour:
   ownerID: 0
   weaponManager: {fileID: 0}
   muzzle: {fileID: 5716300864232877825}
-  emptyGunSound: {fileID: 0}
+  shootSound: {fileID: 0}
   player: {fileID: 0}
   aim: {fileID: 0}
   isPickedUp: 0

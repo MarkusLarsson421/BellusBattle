@@ -5,18 +5,13 @@ using UnityEngine;
 public class PoisonZone : MonoBehaviour
 {
     [SerializeField] private float timeToKill;
+    [SerializeField] private string causeOfDeath = "Poison bullet";
+    
     private static Dictionary<GameObject, float> poisonDic = new Dictionary<GameObject, float>();
     private static Dictionary<GameObject, bool> isInZoneDic = new Dictionary<GameObject, bool>();
     private List<GameObject> playersInZone = new List<GameObject>();
     private List<Collider> objectsInZone = new List<Collider>();
-
-    private CameraFocus cameraFocus; //shitfix;
-    
-    void Start()
-    {
-        cameraFocus = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
-      
-    }
+    private GameObject shooter;
 
     void Update()
     {
@@ -49,7 +44,7 @@ public class PoisonZone : MonoBehaviour
     private void AddPLayerToDictionary(GameObject player)
     {
         isInZoneDic[player] = true;
-        if (poisonDic.ContainsKey(player) == true) return;
+        if (poisonDic.ContainsKey(player)) return;
         poisonDic[player] = 0;   
     }
 
@@ -79,11 +74,16 @@ public class PoisonZone : MonoBehaviour
             }
             
 
-            Debug.Log(poisonDic[player]);
+            //Debug.Log(poisonDic[player]);
             if(poisonDic[player] >= timeToKill)
             {
-                cameraFocus.RemoveTarget(player.transform); //shitfix
-                player.GetComponent<PlayerHealth>().KillPlayer();
+                PlayerDeathEvent pde = new PlayerDeathEvent
+                {
+                    kille = player,
+                    killer = shooter,
+                    killedWith = causeOfDeath,
+                };
+                pde.FireEvent();
             }
         }
     }
