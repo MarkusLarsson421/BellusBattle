@@ -193,7 +193,11 @@ public class Gun : MonoBehaviour
         {
             gunsAmmo--;
             //Debug.Log(gunsAmmo);
-            shootSound.Play();
+            if(shootSound != null)
+            {
+                shootSound.Play();
+            }
+            
             //Sound
             if (weaponData.shootAttackSound != null)
             {
