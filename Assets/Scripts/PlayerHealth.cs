@@ -12,12 +12,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private VisualEffect bloodSplatter;
     [SerializeField] private VisualEffect poisoned;
     private PlayerMovement pm;
-   
-
+    
     private float health = 1;
-    private bool isInvinsable=false;
-
-    [SerializeField] Transform deathPosition;
 
     public float Health { get => health; }
 
@@ -27,9 +23,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer skr;
     [SerializeField] private GameObject hips;
     [SerializeField] private Animator anime;
-
-
-
+    
     private void Start()
     {
         pm = GetComponent<PlayerMovement>();
@@ -43,18 +37,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        //if(isInvinsable) return;
         health -= damage;
         if (health <= 0)
         {
             KillPlayer();
             playerDeathSound.Play();
-            //onGameOver.Invoke();
         }
-    }
-    public void SetInvincible( bool value)
-    {
-        isInvinsable = value;
     }
 
     public void PlayPoisoned()
@@ -79,13 +67,6 @@ public class PlayerHealth : MonoBehaviour
         hips.SetActive(true);
         anime.enabled = false;
         pm.enabled = false;
-        /*
-        boxCollider.enabled = false;
-        rightArm.SetActive(false);
-        skr.enabled = false;
-        */
-        //gunMesh.enabled = false;
-        //grenadeMesh.enabled = false;
     }
 
     public void UnkillPlayer()
@@ -98,14 +79,5 @@ public class PlayerHealth : MonoBehaviour
         hips.transform.position = Vector3.zero;
         boxCollider.enabled = true;
         pm.enabled = true;
-        /*
-        boxCollider.enabled = true;
-        rightArm.SetActive(true);
-        skr.enabled = true;
-        */
-        //gunMesh.enabled = false;
-        //grenadeMesh.enabled = false;
-        //swordMesh.enabled = true;
-        //ppV1.isHoldingWeapon = false;
     }
 }
