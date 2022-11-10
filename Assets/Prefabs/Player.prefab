@@ -6032,6 +6032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 300225489857970639}
   equippedWeapon: {fileID: 0}
+  pickingUP: 0
 --- !u!82 &7204374830010860157
 AudioSource:
   m_ObjectHideFlags: 0
