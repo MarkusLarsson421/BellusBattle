@@ -68,7 +68,7 @@ public class Gun : MonoBehaviour
         deSpawnTimer = 0f;
         //Drop();
 
-        
+
     }
 
     private void Update()
@@ -156,16 +156,16 @@ public class Gun : MonoBehaviour
         if (gunsAmmo == 0 || weaponData.name != "BasicSword")
         {
             // Play click sound to indicate no ammo left
-           // if (emptyGunSound != null)
-         //   {
-          //      emptyGunSound.Play();
-                
-          //  }
+            // if (emptyGunSound != null)
+            //   {
+            //      emptyGunSound.Play();
+
+            //  }
             //Debug.Log("Click clack");
         }
 
         // Basic sword special case
-        
+
         if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && isPickedUp)
         {
             BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
@@ -191,16 +191,16 @@ public class Gun : MonoBehaviour
 
 
         }
-        
+
         if (CanShoot())
         {
             gunsAmmo--;
             //Debug.Log(gunsAmmo);
-            if(shootSound != null)
+            if (shootSound != null)
             {
                 shootSound.Play();
             }
-            
+
             //Sound
             if (weaponData.shootAttackSound != null)
             {
@@ -243,7 +243,7 @@ public class Gun : MonoBehaviour
         {
             weaponManager.UnEquipWeapon(gameObject);
         }
-        
+
         gameObject.transform.SetParent(null);
         // Otherwise it stays in DontDestroyOnLoad
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
@@ -253,8 +253,13 @@ public class Gun : MonoBehaviour
 
         gameObject.transform.position = new Vector2(999999, 999999);
 
-        //ExecuteAfterTime(1f);
+
+
+
         gameObject.SetActive(false);
+
+        //ExecuteAfterTime(1f);
+
         //Debug.Log("fuck");
         //gameObject.GetComponent<BoxCollider>().enabled = false;
     }
