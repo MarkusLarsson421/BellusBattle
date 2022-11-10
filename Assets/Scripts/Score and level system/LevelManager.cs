@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         sceneCount = SceneManager.sceneCountInBuildSettings;
-        scenesToRemove.Add("MainMenu");
+        scenesToRemove.Add("TestingGround");
         scenesToRemove.Add("The_End");
         LoadScenesList();
         if(SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
             string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             if (i != 0)
             {
+                Debug.Log("hahahah");
                 GameObject g = Instantiate(levelXPrefab);
                 g.transform.parent = content.transform;
                 levels.Add(g.GetComponent<LevelDetails>());

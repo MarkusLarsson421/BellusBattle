@@ -211,7 +211,7 @@ public class Gun : MonoBehaviour
 
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-
+            //emptyGunSound.Play();
             // mainly used for Lobby gun atm
             //firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 
