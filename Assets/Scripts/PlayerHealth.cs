@@ -95,9 +95,10 @@ public class PlayerHealth : MonoBehaviour
     {
         skr.enabled = true;
         anime.enabled = true;
-        hips.SetActive(true);
         hips.SetActive(false);
         hips.SetActive(true);
+        hips.SetActive(false);
+        hips.transform.position = Vector3.zero;
         boxCollider.enabled = true;
         pm.enabled = true;
         /*
