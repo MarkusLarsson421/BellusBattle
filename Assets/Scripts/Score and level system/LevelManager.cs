@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
             scenesToChooseFrom.Remove(scene);
         }
     }
+    // ahhaa
     private void CreateListOfScenesFromBuild()
     {
         for (int i = 0; i < sceneCount; i++)
@@ -61,6 +62,7 @@ public class LevelManager : MonoBehaviour
             string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             if (i != 0)
             {
+                Debug.Log("hahahah");
                 GameObject g = Instantiate(levelXPrefab);
                 g.transform.parent = content.transform;
                 levels.Add(g.GetComponent<LevelDetails>());
