@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45065767, g: 0.668982, b: 0.65595955, a: 1}
+  m_IndirectSpecularColor: {r: 0.45065767, g: 0.66898215, b: 0.65595955, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12881,28 +12881,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
-      propertyPath: maxZoom
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
-        type: 3}
-      propertyPath: minZoom
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
-        type: 3}
       propertyPath: offset.y
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2243822597589709032, guid: 7fd267a9208675545ada65258a64089a,
+    - target: {fileID: 2243822597589709030, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243822597589709032, guid: 7fd267a9208675545ada65258a64089a,
-        type: 3}
-      propertyPath: orthographic
-      value: 0
+      propertyPath: zoomLimiter
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2243822597589709033, guid: 7fd267a9208675545ada65258a64089a,
         type: 3}
