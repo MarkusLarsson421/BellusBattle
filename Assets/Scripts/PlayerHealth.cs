@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     private PlayerMovement pm;
     
     private float health = 1;
+    private bool isInvinsable=false;
 
     public float Health { get => health; }
 
@@ -43,6 +44,11 @@ public class PlayerHealth : MonoBehaviour
             KillPlayer();
             playerDeathSound.Play();
         }
+    }
+    
+    public void SetInvincible( bool value)
+    {
+	    isInvinsable = value;
     }
 
     public void PlayPoisoned()

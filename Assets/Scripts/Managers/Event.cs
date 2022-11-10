@@ -27,6 +27,12 @@ public abstract class Event<T> where T : Event<T>
 	}
 }
 
+public class PickUpEvent : Event<PickUpEvent>
+{
+	public GameObject item;
+	public GameObject player;
+}
+
 public class PlayerSpawnEvent : Event<PlayerSpawnEvent>{
 	public int playerIndex;
 	public GameObject playerGo;
