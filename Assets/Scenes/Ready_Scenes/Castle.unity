@@ -10232,6 +10232,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: castle_door (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2928155194814159921, guid: e775efe1667969545a5eb038a1e6c4cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e775efe1667969545a5eb038a1e6c4cc, type: 3}
 --- !u!4 &1643098730075006290 stripped
@@ -11145,6 +11150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: castle_door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2928155194814159921, guid: e775efe1667969545a5eb038a1e6c4cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e775efe1667969545a5eb038a1e6c4cc, type: 3}
