@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 35598166}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -323,6 +323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: JumpPad (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802274712763678151, guid: 310af703ad5567f429d3c528fe0a0f54,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 3802274712763678204, guid: 310af703ad5567f429d3c528fe0a0f54,
         type: 3}
@@ -1055,6 +1060,86 @@ Transform:
   m_Father: {fileID: 795713918}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1001 &248342773
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 332275915}
+    m_Modifications:
+    - target: {fileID: 8619433398501993539, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_Name
+      value: WeaponSpawner (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993542, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f73657c4c8861d4a88333ee8fd8dbf6, type: 3}
+--- !u!4 &248342774 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8619433398501993560, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 248342773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &261201870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,6 +1356,7 @@ Transform:
   - {fileID: 1999477891}
   - {fileID: 197686692}
   - {fileID: 437938469}
+  - {fileID: 248342774}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1540,7 +1626,7 @@ GameObject:
   - component: {fileID: 510792544}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1792,7 +1878,7 @@ GameObject:
   - component: {fileID: 623801485}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1868,6 +1954,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: JumpPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802274712763678151, guid: 310af703ad5567f429d3c528fe0a0f54,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 3802274712763678204, guid: 310af703ad5567f429d3c528fe0a0f54,
         type: 3}
@@ -1955,7 +2046,7 @@ GameObject:
   - component: {fileID: 725230780}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2038,7 +2129,7 @@ GameObject:
   - component: {fileID: 742854213}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2425,7 +2516,7 @@ GameObject:
   - component: {fileID: 818444003}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2789,7 +2880,7 @@ GameObject:
   - component: {fileID: 955987134}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2872,7 +2963,7 @@ GameObject:
   - component: {fileID: 974891111}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3280,6 +3371,91 @@ Transform:
   m_Father: {fileID: 1854759138}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1136341934
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2008052508}
+    m_Modifications:
+    - target: {fileID: 8985089656260249840, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_Name
+      value: PoisonZone (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15.234383
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 32.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.527872
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.6756053
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de754292e5db19642943107f28014dfc, type: 3}
+--- !u!4 &1136341935 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8985089656260249845, guid: de754292e5db19642943107f28014dfc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1136341934}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1146095608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,7 +3791,7 @@ GameObject:
   - component: {fileID: 1266205488}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3977,7 +4153,7 @@ GameObject:
   - component: {fileID: 1380863559}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4110,7 +4286,7 @@ GameObject:
   - component: {fileID: 1593970100}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4288,7 +4464,7 @@ GameObject:
   - component: {fileID: 1677500752}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4620,7 +4796,7 @@ GameObject:
   - component: {fileID: 1721033898}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4703,7 +4879,7 @@ GameObject:
   - component: {fileID: 1730826391}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4848,7 +5024,7 @@ GameObject:
   - component: {fileID: 1783009007}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4929,7 +5105,7 @@ GameObject:
   - component: {fileID: 1783835799}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5045,7 +5221,7 @@ GameObject:
   - component: {fileID: 1801754746}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5177,7 +5353,7 @@ GameObject:
   - component: {fileID: 1822625430}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5572,7 +5748,7 @@ GameObject:
   - component: {fileID: 1845369109}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5742,7 +5918,7 @@ GameObject:
   - component: {fileID: 1890657413}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5823,7 +5999,7 @@ GameObject:
   - component: {fileID: 1910215710}
   m_Layer: 0
   m_Name: passable_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6183,7 +6359,7 @@ GameObject:
   - component: {fileID: 1992050875}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6376,6 +6552,7 @@ Transform:
   - {fileID: 1684205723}
   - {fileID: 1280527401}
   - {fileID: 1294122469}
+  - {fileID: 1136341935}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6572,7 +6749,7 @@ GameObject:
   - component: {fileID: 2090065808}
   m_Layer: 0
   m_Name: textureEditorIsolateSelectSet_normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6717,7 +6894,7 @@ GameObject:
   - component: {fileID: 2119639338}
   m_Layer: 0
   m_Name: normal_size_platform
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
