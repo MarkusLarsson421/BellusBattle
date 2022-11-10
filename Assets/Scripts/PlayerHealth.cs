@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer skr;
     [SerializeField] private GameObject hips;
     [SerializeField] private Animator anime;
-
+    [SerializeField] private DashAdvanced dash;
 
 
     private void Start()
@@ -82,6 +82,8 @@ public class PlayerHealth : MonoBehaviour
         hips.SetActive(true);
         anime.enabled = false;
         pm.enabled = false;
+        dash.enabled = false;
+        gameObject.GetComponentInChildren<Gun>().Drop();
         /*
         boxCollider.enabled = false;
         rightArm.SetActive(false);
@@ -101,6 +103,7 @@ public class PlayerHealth : MonoBehaviour
         hips.transform.position = Vector3.zero;
         boxCollider.enabled = true;
         pm.enabled = true;
+        dash.enabled = true;
         /*
         boxCollider.enabled = true;
         rightArm.SetActive(true);

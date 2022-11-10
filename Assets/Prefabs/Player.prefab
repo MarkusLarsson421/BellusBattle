@@ -5851,6 +5851,7 @@ MonoBehaviour:
   skr: {fileID: 6010799286257098507}
   hips: {fileID: 2842460971312104397}
   anime: {fileID: 8727384561011662934}
+  dash: {fileID: 7604770547986073551}
 --- !u!114 &7604770547986073551
 MonoBehaviour:
   m_ObjectHideFlags: 0
