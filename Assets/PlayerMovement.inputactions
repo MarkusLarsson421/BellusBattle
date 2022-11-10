@@ -136,6 +136,17 @@
                 },
                 {
                     "name": "right",
+                    "id": "6bb0e866-8c5d-4988-bfd5-f9d36bbee8ce",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MKB",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
                     "id": "1ac9b1a0-b737-475e-93f9-05011dff2353",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -320,6 +331,17 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "MKB",
+            "bindingGroup": "MKB",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }

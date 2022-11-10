@@ -45,6 +45,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         Renderer renderer = playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         TextMeshPro indicatorText = playerInput.gameObject.GetComponentInChildren<TextMeshPro>();
+        print(indicatorText);
         //Activates Player characteraccessories and assigns material based on characterIndex
         playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer, indicatorText);
 

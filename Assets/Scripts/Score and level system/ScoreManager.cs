@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private bool hasOnePlayerLeft;
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
 
-    [SerializeField] private bool gameHasStarted; //fˆr att den inte ska bˆrja r‰kna po‰ng i lobbyn, ‰r t‰nkt att s‰ttas till true n‰r man gÂr igenom teleportern
+    [SerializeField] private bool gameHasStarted; //f√∂r att den inte ska b√∂rja r√§kna po√§ng i lobbyn, √§r t√§nkt att s√§ttas till true n√§r man g√•r igenom teleportern
     private int winner;
 
     public int Winner
@@ -87,7 +87,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void AddScore(GameObject winner) //TODO anv‰nd playerID ist‰llet fˆr hela spelarobjektet
+    private void AddScore(GameObject winner) //TODO anv√§nd playerID ist√§llet f√∂r hela spelarobjektet
     {
         if (!scoreDic.ContainsKey(winner))
         {
@@ -125,7 +125,7 @@ public class ScoreManager : MonoBehaviour
                 winner = cameraFocus._targets[0].transform.gameObject.GetComponent<PlayerDetails>().playerID;
                 ClearScore();
                 levelManager.Finish(gameObject);
-                //NÂn har vunnit!
+                //N√•n har vunnit!
                 return;
             }
         }

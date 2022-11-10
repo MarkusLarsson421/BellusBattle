@@ -13,7 +13,6 @@ public class CharacterCustimization : MonoBehaviour
         [SerializeField] private string characterName;
         public List<GameObject> accessoryItems;
         public Material characterMaterial;
-        public TextMeshPro indicatorText;
         public Material textMaterial;
         public int characterIndex;
         public bool isAvailable;
@@ -35,7 +34,7 @@ public class CharacterCustimization : MonoBehaviour
                 ToggleItemsInList(item.accessoryItems, true);
                 CharacterRenderer.material = item.characterMaterial;
                 indicatorText.text = "P" + (item.characterIndex+1).ToString() ;
-                indicatorText.material = item.textMaterial;
+                indicatorText.renderer.material = item.textMaterial;
 
             }
             else
