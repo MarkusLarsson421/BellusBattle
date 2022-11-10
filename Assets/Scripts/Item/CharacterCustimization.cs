@@ -25,7 +25,7 @@ public class CharacterCustimization : MonoBehaviour
     }
 
     //Loops through acceossories list and activates accessories based on the CharacterIndex
-    public void ActivateAccessories(int characterId, Renderer CharacterRenderer)
+    public void ActivateAccessories(int characterId, Renderer CharacterRenderer, TextMeshPro indicatorText)
     {
         foreach (CharacterItem item in characterItems)
         {
@@ -34,8 +34,8 @@ public class CharacterCustimization : MonoBehaviour
                 item.SetIsAvailable(false);
                 ToggleItemsInList(item.accessoryItems, true);
                 CharacterRenderer.material = item.characterMaterial;
-                item.indicatorText.text = "P" + (item.characterIndex+1).ToString() ;
-                item.indicatorText.material = item.textMaterial;
+                indicatorText.text = "P" + (item.characterIndex+1).ToString() ;
+                indicatorText.material = item.textMaterial;
 
             }
             else
