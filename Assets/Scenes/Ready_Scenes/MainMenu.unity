@@ -3874,7 +3874,7 @@ PrefabInstance:
     - target: {fileID: 3811216812318420032, guid: 2419d59ae6139464d82a73547f006732,
         type: 3}
       propertyPath: giveScoreTime
-      value: 999999
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6654202594948050944, guid: 2419d59ae6139464d82a73547f006732,
         type: 3}
