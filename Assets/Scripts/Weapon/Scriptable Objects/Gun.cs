@@ -124,7 +124,7 @@ public class Gun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isPickedUp)
         {
             playerShoot = other.gameObject.GetComponent<PlayerShoot>();
 
@@ -153,7 +153,7 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        if (gunsAmmo == 0)
+        if (gunsAmmo == 0 || weaponData.name != "BasicSword")
         {
             // Play click sound to indicate no ammo left
            // if (emptyGunSound != null)
@@ -165,7 +165,8 @@ public class Gun : MonoBehaviour
         }
 
         // Basic sword special case
-        if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f))
+        
+        if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && isPickedUp)
         {
             BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
             bsb.isAttacking = true;
@@ -179,6 +180,7 @@ public class Gun : MonoBehaviour
             //VFX
             if (weaponData.MuzzleFlashGameObject != null)
             {
+                Debug.Log("kddfsordsoO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
@@ -187,13 +189,19 @@ public class Gun : MonoBehaviour
             // Animation
             swordMesh.GetComponent<Animator>().SetBool("Attack", true);
             Debug.Log("Swosh");
+
+
         }
         
         if (CanShoot())
         {
             gunsAmmo--;
             //Debug.Log(gunsAmmo);
-            shootSound.Play();
+            if(shootSound != null)
+            {
+                shootSound.Play();
+            }
+            
             //Sound
             if (weaponData.shootAttackSound != null)
             {
@@ -204,6 +212,7 @@ public class Gun : MonoBehaviour
             //if (weaponData.MuzzleFlash != null) { weaponData.MuzzleFlash.Play(); }
             if (weaponData.MuzzleFlashGameObject != null)
             {
+                Debug.Log("YOOOO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
@@ -241,8 +250,19 @@ public class Gun : MonoBehaviour
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
         isStartTimerForDrop = true;
         isStartTimerForDeSpawn = true;
+        //gameObject.GetComponent<Gun>().enabled = false;
 
+        gameObject.transform.position = new Vector2(999999, 999999);
+
+        //ExecuteAfterTime(2f);
         gameObject.SetActive(false);
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        Debug.Log("fuck");
+        //gameObject.GetComponent<BoxCollider>().enabled = false;
     }
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        gameObject.SetActive(false);
+    }
+
 }

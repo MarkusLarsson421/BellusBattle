@@ -5602,14 +5602,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5880428358489751191}
-  m_LocalRotation: {x: 0.40448594, y: -0.5159052, z: -0.53054523, w: 0.537359}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.38719764, y: -0.6519288, z: -0.5571903, w: 0.33853492}
+  m_LocalPosition: {x: -0.024305146, y: 0.022728309, z: -0.10574378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8000850111832111331}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -6.472, y: -81.873, z: -83.654}
+  m_LocalEulerAnglesHint: {x: -27.667, y: -99.742, z: -84.867}
 --- !u!1 &5954001412046255214
 GameObject:
   m_ObjectHideFlags: 0
@@ -6056,6 +6056,7 @@ MonoBehaviour:
   skr: {fileID: 6010799286257098507}
   hips: {fileID: 2842460971312104397}
   anime: {fileID: 8727384561011662934}
+  dash: {fileID: 7604770547986073551}
 --- !u!114 &7604770547986073551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7990,12 +7991,7 @@ PrefabInstance:
     - target: {fileID: 827963824451789540, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:Head'\n\tTransform
-        'mixamorig:LeftArm'\n\tTransform 'mixamorig:RightHand'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
-        'mixamorig:RightForeArm'\n\tTransform 'mixamorig:Neck'\n\tTransform 'mixamorig:LeftHand'\n\tTransform
-        'mixamorig:RightArm'\n\tTransform 'mixamorig:Head'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 860533418602687005, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
