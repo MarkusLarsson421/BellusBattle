@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     private float playerHeight;
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
-    
+
     private bool toggleJump = false;
 
     private bool isMovingLeft, isMovingRight;
@@ -220,19 +220,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.started && jumpSetting==JumpSetting.Press)
+        if (ctx.started && jumpSetting == JumpSetting.Press)
         {
             Jump();
-        }
-
-        else if(ctx.started && jumpSetting == JumpSetting.Hold)
-        {
-            InvokeRepeating("JumpCoroutine", 0.1f, 1f);
         }
         else if (ctx.canceled && jumpSetting == JumpSetting.Hold)
         {
             CancelInvoke();
+            StopAllCoroutines();
         }
+        else if (ctx.started && jumpSetting == JumpSetting.Hold)
+        {
+            InvokeRepeating("JumpCoroutine", 0.1f, 1f);
+        }
+
 
         else if (ctx.started && jumpSetting == JumpSetting.Toggle && toggleJump)
         {

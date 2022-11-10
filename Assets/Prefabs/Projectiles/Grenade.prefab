@@ -140,6 +140,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7929666838174018589}
     m_Modifications:
+    - target: {fileID: -387110191634700887, guid: ed45301ffa672bf43b5fdda7e7f92191,
+        type: 3}
+      propertyPath: bombMesh
+      value: 
+      objectReference: {fileID: 2549813533853423884}
     - target: {fileID: 1298431034502118129, guid: ed45301ffa672bf43b5fdda7e7f92191,
         type: 3}
       propertyPath: boomTime
@@ -222,6 +227,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed45301ffa672bf43b5fdda7e7f92191, type: 3}
+--- !u!1 &2549813533853423884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2217352063105504401, guid: ed45301ffa672bf43b5fdda7e7f92191,
+    type: 3}
+  m_PrefabInstance: {fileID: 4442620791006367133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2893863248617096118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1553263964355448363, guid: ed45301ffa672bf43b5fdda7e7f92191,
