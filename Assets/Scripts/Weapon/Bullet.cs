@@ -66,16 +66,6 @@ public class Bullet : Projectile
 
 		}
 
-		if (other.gameObject.tag == "Obstacle")
-		{
-
-
-			//GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
-			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
-			//Destroy(gameObject);
-			//return;
-		}
-
 		if (other.gameObject.CompareTag("Breakable"))
 		{
 			Destroy(other.gameObject);
@@ -88,7 +78,7 @@ public class Bullet : Projectile
 		}
 
 	}
-	private void OnTriggerEnter(Collider other)
+	/*private void OnTriggerEnter(Collider other)
 	{
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player") && Shooter != playerGo)
@@ -101,7 +91,7 @@ public class Bullet : Projectile
 				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
 				cf.RemoveTarget(playerGo.transform);
 			}
-			/*
+			
 			PlayerDeathEvent pde = new PlayerDeathEvent{
 				PlayerGo = other.gameObject,
 				Kille = other.name,
@@ -109,8 +99,8 @@ public class Bullet : Projectile
 				KilledWith = "Bullets",
 			};
 			pde.FireEvent();
-			*/
-			Die();
+			
+	Die();
 		}else if (playerGo.CompareTag("AI"))
         {
 			playerGo.GetComponent<AI>().KillAI();
@@ -125,7 +115,7 @@ public class Bullet : Projectile
 		if (other.gameObject.tag == "Obstacle")
 		{
 			Debug.Log("Obstacle");
-			GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position), transform.rotation);
+			GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);
 			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
 			Destroy(gameObject);
 			return;
@@ -142,7 +132,7 @@ public class Bullet : Projectile
 			hitSounds[UnityEngine.Random.Range(0, hitSounds.Length)].Play();
 		}
 
-	}
+	}*/
 
 	/*
 	public void SetDamage(float setTo)

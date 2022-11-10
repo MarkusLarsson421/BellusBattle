@@ -21,9 +21,9 @@ MonoBehaviour:
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
   projectileForce: 100
-  currentAmmo: 6
-  initialAmmo: 6
-  magSize: 6
+  currentAmmo: 100
+  initialAmmo: 100
+  magSize: 100
   fireRate: 50
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
