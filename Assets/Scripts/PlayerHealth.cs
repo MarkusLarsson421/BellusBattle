@@ -81,9 +81,17 @@ public class PlayerHealth : MonoBehaviour
         bloodSplatter.Play();
         hips.SetActive(true);
         anime.enabled = false;
-        pm.enabled = false;
+        if (pm != null)
+        {
+            pm.enabled = false;
+        }
+        
         dash.enabled = false;
-        gameObject.GetComponentInChildren<Gun>().Drop();
+        if (gameObject.GetComponentInChildren<Gun>() != null)
+        {
+            gameObject.GetComponentInChildren<Gun>().Drop();
+        }
+        
         /*
         boxCollider.enabled = false;
         rightArm.SetActive(false);
@@ -102,7 +110,10 @@ public class PlayerHealth : MonoBehaviour
         hips.SetActive(false);
         hips.transform.position = Vector3.zero;
         boxCollider.enabled = true;
-        pm.enabled = true;
+        if (pm != null)
+        {
+            pm.enabled = true;
+        }
         dash.enabled = true;
         /*
         boxCollider.enabled = true;
