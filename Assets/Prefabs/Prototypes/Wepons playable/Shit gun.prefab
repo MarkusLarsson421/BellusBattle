@@ -5052,7 +5052,7 @@ GameObject:
   - component: {fileID: 370272509325264095}
   m_Layer: 0
   m_Name: Shit gun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5147,6 +5147,7 @@ MonoBehaviour:
   aim: {fileID: 0}
   isPickedUp: 0
   gunsAmmo: 0
+  swordMesh: {fileID: 0}
   timeToWaitForPickup: 2
   timeToWaitForDeSpawn: 2
 --- !u!65 &1102843745852693778
