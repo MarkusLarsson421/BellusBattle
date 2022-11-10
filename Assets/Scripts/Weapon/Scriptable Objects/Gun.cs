@@ -30,7 +30,8 @@ public class Gun : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField, Tooltip("Sound made when weapon out of ammo")]
-    public AudioSource emptyGunSound;
+    //public AudioSource emptyGunSound;
+    public AudioSource shootSound;
 
     [SerializeField] private PlayerMovement player;
     [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
@@ -155,11 +156,11 @@ public class Gun : MonoBehaviour
         if (gunsAmmo == 0)
         {
             // Play click sound to indicate no ammo left
-            if (emptyGunSound != null)
-            {
-                emptyGunSound.Play();
+           // if (emptyGunSound != null)
+         //   {
+          //      emptyGunSound.Play();
                 
-            }
+          //  }
             //Debug.Log("Click clack");
         }
 
@@ -192,7 +193,7 @@ public class Gun : MonoBehaviour
         {
             gunsAmmo--;
             //Debug.Log(gunsAmmo);
-
+            shootSound.Play();
             //Sound
             if (weaponData.shootAttackSound != null)
             {
@@ -211,7 +212,7 @@ public class Gun : MonoBehaviour
 
 
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-
+            //emptyGunSound.Play();
             // mainly used for Lobby gun atm
             //firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 

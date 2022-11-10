@@ -210,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 JumpSound.Play();
                 MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
+                Destroy(MuzzleFlashIns, 1.5f);
                 StartCoroutine(VFXRemover());
                 hasDoubleJump = false;
                 jumpDecreaser = doubleJumpDecreaser;
