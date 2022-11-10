@@ -5052,7 +5052,7 @@ GameObject:
   - component: {fileID: 370272509325264095}
   m_Layer: 0
   m_Name: Shit gun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5066,7 +5066,7 @@ Transform:
   m_GameObject: {fileID: 9109231185878699503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.566, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2839734295875269815}
@@ -5147,6 +5147,7 @@ MonoBehaviour:
   aim: {fileID: 0}
   isPickedUp: 0
   gunsAmmo: 0
+  swordMesh: {fileID: 0}
   timeToWaitForPickup: 2
   timeToWaitForDeSpawn: 2
 --- !u!65 &1102843745852693778

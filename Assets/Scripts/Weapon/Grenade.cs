@@ -32,6 +32,7 @@ public class Grenade : Projectile
 
 	private void Explode()
 	{
+		bombMesh.SetActive(false);
 		GameObject spawnVfx = Instantiate(objectToBoom, transform);
 
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
@@ -39,7 +40,7 @@ public class Grenade : Projectile
 			if (hits[i].CompareTag("Player"))
 			{
 				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
-				ph.TakeDamage(1);
+				ph.TakeDamage(damage);
 				cf.RemoveTarget(hits[i].transform); //shitfix
 				//pickUp_Proto.isHoldingWeapon = false;
 
@@ -63,7 +64,7 @@ public class Grenade : Projectile
 			}
 		}
 
-		bombMesh.SetActive(false);
+		
 		// Delay before destroy
 		Destroy(gameObject, 1f);
 		//Die();

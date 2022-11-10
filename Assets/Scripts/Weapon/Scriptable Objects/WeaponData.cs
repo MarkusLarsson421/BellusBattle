@@ -40,14 +40,19 @@ public class WeaponData : ScriptableObject
     public AudioSource shootAttackSound;
 
     [Header("VFX")]
-    private int placeholder;
+    [SerializeField] private GameObject muzzleFlashGameObject;
+    //[SerializeField] private ParticleSystem muzzleFlashVFX;
 
     // Getters
     public int Ammo { get => currentAmmo; }
 
+    //public ParticleSystem MuzzleFlash { get => muzzleFlashVFX; }
+    
+    public GameObject MuzzleFlashGameObject { get => muzzleFlashGameObject; }
     
     public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
 
+    /*
     // Metods
     public void SpawnPool()
     {
@@ -93,7 +98,7 @@ public class WeaponData : ScriptableObject
 
         return obj;
     }
-    
+    */
     
 
 
