@@ -49,7 +49,8 @@ public class WeaponData : ScriptableObject
     //public ParticleSystem MuzzleFlash { get => muzzleFlashVFX; }
     
     public GameObject MuzzleFlashGameObject { get => muzzleFlashGameObject; }
-    
+
+
     public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
 
     /*

@@ -115,7 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeSpan: 5
   hitSounds: []
-  collideVFX: {fileID: 1625590031068301035, guid: 5fe16a0405b215545973c3fad735229c,
+  colliderWallVFX: {fileID: 1625590031068301035, guid: 5fe16a0405b215545973c3fad735229c,
+    type: 3}
+  colliderPlayerVFX: {fileID: 8985986999755935481, guid: 69d427bf9b230bc4595515ba8dfb26f1,
     type: 3}
 --- !u!54 &362432233798713757
 Rigidbody:
@@ -197,7 +199,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
-      key1: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0, g: 0, b: 0, a: 0.27450982}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -213,8 +215,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 64764
+      atime1: 38357
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -222,7 +224,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 3
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
