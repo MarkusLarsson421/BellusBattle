@@ -380,10 +380,10 @@ MonoBehaviour:
     collapsed: 0
   uiBounds:
     serializedVersion: 2
-    x: -3799
-    y: -3306
-    width: 8631
-    height: 2676
+    x: -3800
+    y: -3307
+    width: 8632
+    height: 2657
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7238,7 +7238,7 @@ MonoBehaviour:
   m_OutputSlots:
   - {fileID: 8926484042661616373}
   m_Disabled: 0
-  mode: 0
+  mode: 1
   clampToOne: 1
 --- !u!114 &8926484042661616372
 MonoBehaviour:
