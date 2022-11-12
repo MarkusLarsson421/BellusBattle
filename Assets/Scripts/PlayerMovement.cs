@@ -126,12 +126,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (IsGrounded && velocity.y < 0)
         {
-            landSound.Play();
-            movementY = 0;
+            
+            //movementY = 0;
             coyoteTimer = 0;
             hasCoyoteTime = true;
             hasDoubleJump = true;
             hasJumpedOnGround = false;
+            landSound.Play();
+            
             
             if (hasJumpBuffer)
             {
@@ -363,13 +365,12 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
             {
-                if (velocity.y > 0)
-                {
-                    return;
-                }
-                else if(hit.collider.bounds.min.y < boxCollider.bounds.min.y)
+                if (velocity.y > 0) return;
+
+                if (hit.collider.bounds.max.y < boxCollider.bounds.min.y)
                 {
                     velocity.y = 0;
+                    movementY = 0;
                 }
             } 
         }
