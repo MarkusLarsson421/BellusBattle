@@ -97,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
     private bool runBufferTimer;
     private bool hasJumpBuffer;
     private bool hasBeenKnockedBack;
+    private bool isGrounded;
   
     void Start()
     {
@@ -112,22 +113,22 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(velocity.y);
+        isGrounded = IsGrounded;
         UpdateRayCastOrgins();
         UpdateMovementForce();
         UpdateCoyoteTime();
         RunKnockbackTimer();
         
-        if (IsGrounded == false)
+        if (isGrounded == false)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
             
         }
 
-        if (IsGrounded && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
         {
-            
-            //movementY = 0;
+
+            movementY = 0;
             coyoteTimer = 0;
             hasCoyoteTime = true;
             hasDoubleJump = true;
@@ -201,9 +202,9 @@ public class PlayerMovement : MonoBehaviour
             isStandingOnOneWayPlatform = false;
             return;
         }
-        else if (IsGrounded || hasCoyoteTime || hasDoubleJump)
+        else if (isGrounded || hasCoyoteTime || hasDoubleJump)
         {
-            if (IsGrounded)
+            if (isGrounded)
             {
                 hasJumpedOnGround = true;
                 JumpSound.Play();
@@ -329,7 +330,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void UpdateCoyoteTime()
     {
-        if (IsGrounded || !hasCoyoteTime) return;
+        if (isGrounded || !hasCoyoteTime) return;
  
         if (coyoteTimer > coyoteTime || hasJumpedOnGround)
         {
