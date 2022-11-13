@@ -543,6 +543,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4d85aa58-abf0-426a-9d8f-fb46ffbdcdf5",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "14cc5de4-fe94-4d1d-82b5-dfd6d2928dcc",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -598,6 +609,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d125f396-8add-4385-af1e-25c76bdd4cae",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7002279f-85a9-4a9b-9b36-7ffb22610860",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -622,6 +644,17 @@
                     "name": "",
                     "id": "82fb719b-e094-4ed9-8b19-25e3974ef4f8",
                     "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af3d83e2-669f-459b-96d9-78c421e6d078",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -675,6 +708,17 @@
                 },
                 {
                     "name": "",
+                    "id": "998e4f26-7e51-41cd-90fb-bcf032c1d83d",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot/Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "144e7a60-671a-47ea-b87b-90c3f1aeb51b",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -698,6 +742,17 @@
                 {
                     "name": "",
                     "id": "9e331a1a-2459-41c8-9332-f191ab6112bc",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimOverride",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7994e262-2be6-4f14-a4c6-0e881297b348",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
