@@ -227,7 +227,7 @@ public class GroundSlashGun : MonoBehaviour
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation) as GameObject;
             groundSlash = firedProjectile.GetComponent<GroundSlashBullet>();
             firedProjectile.GetComponent<Rigidbody>().velocity = transform.forward * forceForwrd;
-            firedProjectile.transform.Rotate(Vector3.down * 90);
+            firedProjectile.transform.Rotate(Vector3.right * 180);
 
             //emptyGunSound.Play();
             // mainly used for Lobby gun atm

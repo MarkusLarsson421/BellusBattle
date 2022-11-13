@@ -119,6 +119,8 @@ MonoBehaviour:
     type: 3}
   colliderPlayerVFX: {fileID: 8985986999755935481, guid: 69d427bf9b230bc4595515ba8dfb26f1,
     type: 3}
+  colliderPlayerBloodVFX: {fileID: 5481652109580546448, guid: d469dd9af11bd024f96b983700fedff2,
+    type: 3}
 --- !u!54 &362432233798713757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,7 +158,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  - {fileID: 2100000, guid: 39bc98eba73dbd948b7b6466aab47425, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,29 +187,47 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.013961792
-        value: 0.056602478
+        time: 0
+        value: 0.6280365
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.3054971
+        value: 0.6162478
+        inSlope: 0.018192345
+        outSlope: 0.018192345
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.12321726
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.009522647
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
-      key1: {r: 0, g: 0, b: 0, a: 0.27450982}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key1: {r: 0.009433985, g: 0.009211485, b: 0.009211485, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 7710
+      ctime1: 25058
       ctime2: 65535
       ctime3: 0
       ctime4: 0
@@ -229,7 +249,7 @@ TrailRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    shadowBias: 0.5
+    shadowBias: 1
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0

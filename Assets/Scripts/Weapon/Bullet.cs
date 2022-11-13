@@ -11,6 +11,7 @@ public class Bullet : Projectile
 	public AudioSource[] hitSounds;
 	[SerializeField] private GameObject colliderWallVFX;
 	[SerializeField] private GameObject colliderPlayerVFX;
+	[SerializeField] private GameObject colliderPlayerBloodVFX;
 
 	//public float bulletDamage;
 
@@ -30,6 +31,8 @@ public class Bullet : Projectile
 			Vector3 pos = contact.point;
 			GameObject MuzzleFlashIns = Instantiate(colliderPlayerVFX, pos, rot);
 			Destroy(MuzzleFlashIns, 3f);
+			GameObject Blood = Instantiate(colliderPlayerBloodVFX, pos, rot);
+			Destroy(Blood, 3f);
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 			Debug.Log("Hit player");
 
