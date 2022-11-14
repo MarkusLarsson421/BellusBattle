@@ -73,6 +73,8 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(isStartTimerForDeSpawn + " " + isStartTimerForDrop);
+
         // USED FOR FIRERATE
         timeSinceLastShot += Time.deltaTime;
         if (Time.deltaTime >= _nextTimeToFire)
@@ -81,45 +83,48 @@ public class Gun : MonoBehaviour
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
 
+        /*
         if (gunsAmmo == 0 && weaponData.name != "BasicSword")
         {
             // Placeholder för när vi fixat riktiga drop
             Drop();
         }
-
-        /*
-        // USED FOR DE-SPAWNING
-        if (!isStartTimerForDeSpawn)
-        {
-            return;
-        }
-        deSpawnTimer += Time.deltaTime;
-        //Debug.Log("Despawn: " + deSpawnTimer);
-        if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0) // No ammo && Time runs out
-        {
-            isStartTimerForDeSpawn = false;
-            deSpawnTimer = 0f;
-            // Delete this gun
-            Drop();
-            gameObject.SetActive(false);
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
-       */
-        /*
-        // USED FOR DROP
-        if (!isStartTimerForDrop)
-        {
-            return;
-        }
-        dropTimer += Time.deltaTime;
-        //Debug.Log("droppper: " + dropTimer +" poda " + timeToWaitForPickup);
-        if (dropTimer >= timeToWaitForPickup)
-        {
-            dropTimer = 0;
-            isStartTimerForDrop = false;
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-        }
         */
+
+
+        // USED FOR DROP
+        if (isStartTimerForDrop)
+        {
+            dropTimer += Time.deltaTime;
+            Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
+            if (dropTimer >= timeToWaitForPickup)
+            {
+                dropTimer = 0;
+                isStartTimerForDrop = false;
+                gameObject.GetComponent<BoxCollider>().enabled = true;
+            }
+        }
+        
+
+
+        // USED FOR DE-SPAWNING
+        if (isStartTimerForDeSpawn)
+        {
+            deSpawnTimer += Time.deltaTime;
+            Debug.Log("Despawn: " + deSpawnTimer);
+            // No ammo && Time runs out
+            if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0)
+            {
+                deSpawnTimer = 0f;
+                isStartTimerForDeSpawn = false;
+                // Delete this gun
+                Drop();
+                gameObject.SetActive(false);
+                gameObject.GetComponent<BoxCollider>().enabled = false;
+                gameObject.GetComponent<Gun>().enabled = false;
+            }
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -139,7 +144,12 @@ public class Gun : MonoBehaviour
                     playerShoot.shootInput += Shoot;
                     playerShoot.dropInput += Drop;
                     weaponManager.EquipWeapon(weaponData, gameObject);
+
+                    isStartTimerForDrop = false;
+                    isStartTimerForDeSpawn = false;
                     deSpawnTimer = 0f;
+                    dropTimer = 0f;
+
                     isPickedUp = true;
 
                     //gunsAmmo = weaponData.Ammo;
@@ -244,24 +254,30 @@ public class Gun : MonoBehaviour
             weaponManager.UnEquipWeapon(gameObject);
         }
 
+        isStartTimerForDrop = true;
+        if (gunsAmmo == 0)
+        {
+            isStartTimerForDeSpawn = true;
+        }
+        
         gameObject.transform.SetParent(null);
         // Otherwise it stays in DontDestroyOnLoad
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
-        isStartTimerForDrop = true;
-        isStartTimerForDeSpawn = true;
+        
+        
         //gameObject.GetComponent<Gun>().enabled = false;
 
-        gameObject.transform.position = new Vector2(999999, 999999);
+        //gameObject.transform.position = new Vector2(999999, 999999);
 
 
 
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
 
         //ExecuteAfterTime(1f);
 
         //Debug.Log("fuck");
-        //gameObject.GetComponent<BoxCollider>().enabled = false;
+        //gameObject.GetComponent<BoxCollider>().enabled = true;
     }
     IEnumerator ExecuteAfterTime(float time)
     {
