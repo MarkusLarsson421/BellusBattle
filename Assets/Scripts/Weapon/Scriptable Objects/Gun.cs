@@ -46,6 +46,7 @@ public class Gun : MonoBehaviour
     [Tooltip("time before the weapon can be picked up again")]
     [SerializeField] float timeToWaitForPickup = 2f;
     float dropTimer;
+    bool isDropped;
 
     [Header("DeSpawning")]
     bool isStartTimerForDeSpawn;
@@ -71,26 +72,24 @@ public class Gun : MonoBehaviour
 
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        if (isDropped)
+        {
+            Despawn();
+        }
+    }
+
     private void Update()
     {
-        Debug.Log(isStartTimerForDeSpawn + " " + isStartTimerForDrop);
-
         // USED FOR FIRERATE
         timeSinceLastShot += Time.deltaTime;
         if (Time.deltaTime >= _nextTimeToFire)
         {
             // Might need to change calculation
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
+            // = timeSinceLastShot + (1f / weaponData.fireRate);
         }
-
-        /*
-        if (gunsAmmo == 0 && weaponData.name != "BasicSword")
-        {
-            // Placeholder för när vi fixat riktiga drop
-            Drop();
-        }
-        */
-
 
         // USED FOR DROP
         if (isStartTimerForDrop)
@@ -118,13 +117,17 @@ public class Gun : MonoBehaviour
                 deSpawnTimer = 0f;
                 isStartTimerForDeSpawn = false;
                 // Delete this gun
-                Drop();
-                gameObject.SetActive(false);
-                gameObject.GetComponent<BoxCollider>().enabled = false;
-                gameObject.GetComponent<Gun>().enabled = false;
+                Despawn();
             }
         }
-        
+
+
+        // SPECIAL CASES
+        if (gunsAmmo == 0 && weaponData.name == "Grenade")
+        {
+            Despawn();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -159,20 +162,32 @@ public class Gun : MonoBehaviour
         }
     }
 
+    void Despawn()
+    {
+        //Drop();
+        gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.GetComponent<Gun>().enabled = false;
+    }
+
     private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
 
     private void Shoot()
     {
+        /*
         if (gunsAmmo == 0 || weaponData.name != "BasicSword")
         {
-            // Play click sound to indicate no ammo left
-            // if (emptyGunSound != null)
-            //   {
-            //      emptyGunSound.Play();
+             // Play click sound to indicate no ammo left
+             if (emptyGunSound != null)
+               {
+                  emptyGunSound.Play();
 
-            //  }
-            //Debug.Log("Click clack");
+              }
+            Debug.Log("Click clack");
         }
+        */
+
+        /*
 
         // Basic sword special case
 
@@ -201,6 +216,8 @@ public class Gun : MonoBehaviour
 
 
         }
+
+        */
 
         if (CanShoot())
         {
@@ -261,16 +278,14 @@ public class Gun : MonoBehaviour
         }
         
         gameObject.transform.SetParent(null);
+        isDropped = true;
         // Otherwise it stays in DontDestroyOnLoad
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
-        
-        
+
+
         //gameObject.GetComponent<Gun>().enabled = false;
 
         //gameObject.transform.position = new Vector2(999999, 999999);
-
-
-
 
         //gameObject.SetActive(false);
 
@@ -278,6 +293,12 @@ public class Gun : MonoBehaviour
 
         //Debug.Log("fuck");
         //gameObject.GetComponent<BoxCollider>().enabled = true;
+
+
+        
+        playerShoot = null;
+        ownerID = 5;
+        weaponManager = null;
     }
     IEnumerator ExecuteAfterTime(float time)
     {
