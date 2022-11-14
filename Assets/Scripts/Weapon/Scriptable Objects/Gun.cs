@@ -6,53 +6,56 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Put on every weapon
+/// </summary>
 public class Gun : MonoBehaviour
 {
-    /**
-     * Put on every weapon
-    **/
     [Header("References")]
     [SerializeField] private WeaponData weaponData; // The data of the weapon
     [SerializeField] private PlayerShoot playerShoot; // Actions
     [SerializeField] private int ownerID; // Player ID
     [SerializeField] private WeaponManager weaponManager;
-
-    public int OwnerID { get => ownerID; }
+    [SerializeField] private Transform muzzle;
 
     [Tooltip("What projectile is being fired.")]
     private GameObject projectile;
-
     private Projectile _projectile;
-    [SerializeField] private Transform muzzle;
     [Tooltip("Used for FireRate")]
     private float timeSinceLastShot;
     private float _nextTimeToFire;
 
     [Header("Sounds")]
     [SerializeField, Tooltip("Sound made when weapon out of ammo")]
-    //public AudioSource emptyGunSound;
+    public AudioSource emptyGunSound;
+    [SerializeField, Tooltip("Sound made when weapon shoots")]
     public AudioSource shootSound;
 
-    [SerializeField] private PlayerMovement player;
-    [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
-
+    [Header("Info")]
     [SerializeField] bool isPickedUp;
-
     [SerializeField] int gunsAmmo;
-    [SerializeField] GameObject swordMesh;
 
     [Header("Dropping")]
-    bool isStartTimerForDrop;
     [Tooltip("time before the weapon can be picked up again")]
     [SerializeField] float timeToWaitForPickup = 2f;
+    bool isStartTimerForDrop;
     float dropTimer;
     bool isDropped;
 
     [Header("DeSpawning")]
-    bool isStartTimerForDeSpawn;
     [Tooltip("time before the weapon can be picked up again")]
     [SerializeField] float timeToWaitForDeSpawn = 2f;
+    bool isStartTimerForDeSpawn;
     float deSpawnTimer;
+
+    [Header("Special cases")]
+    [SerializeField] GameObject swordMesh;
+
+    /// <summary>
+    /// Gets the ID of the one who is currently holding the weapon
+    /// </summary>
+    public int OwnerID { get => ownerID; }
+
 
     private void Start()
     {
@@ -65,11 +68,9 @@ public class Gun : MonoBehaviour
             _projectile = projectile.GetComponent<Projectile>();
         }
 
-        dropTimer = 0f;
-        deSpawnTimer = 0f;
+        //dropTimer = 0f;
+        //deSpawnTimer = 0f;
         //Drop();
-
-
     }
 
     private void OnLevelWasLoaded(int level)
@@ -95,7 +96,7 @@ public class Gun : MonoBehaviour
         if (isStartTimerForDrop)
         {
             dropTimer += Time.deltaTime;
-            Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
+            //Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
             if (dropTimer >= timeToWaitForPickup)
             {
                 dropTimer = 0;
@@ -110,13 +111,12 @@ public class Gun : MonoBehaviour
         if (isStartTimerForDeSpawn)
         {
             deSpawnTimer += Time.deltaTime;
-            Debug.Log("Despawn: " + deSpawnTimer);
+            //Debug.Log("Despawn: " + deSpawnTimer);
             // No ammo && Time runs out
             if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0)
             {
                 deSpawnTimer = 0f;
                 isStartTimerForDeSpawn = false;
-                // Delete this gun
                 Despawn();
             }
         }
@@ -146,6 +146,7 @@ public class Gun : MonoBehaviour
                 {
                     playerShoot.shootInput += Shoot;
                     playerShoot.dropInput += Drop;
+                    
                     weaponManager.EquipWeapon(weaponData, gameObject);
 
                     isStartTimerForDrop = false;
@@ -162,7 +163,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    void Despawn()
+    private void Despawn()
     {
         //Drop();
         gameObject.SetActive(false);
@@ -295,10 +296,9 @@ public class Gun : MonoBehaviour
         //gameObject.GetComponent<BoxCollider>().enabled = true;
 
 
-        
-        playerShoot = null;
-        ownerID = 5;
-        weaponManager = null;
+        // So that the previous owner can't shoot this gun
+        playerShoot.shootInput = null;
+        playerShoot.dropInput = null;
     }
     IEnumerator ExecuteAfterTime(float time)
     {
