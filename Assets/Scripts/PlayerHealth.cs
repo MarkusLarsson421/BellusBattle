@@ -103,12 +103,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
+        health = 1f;
         skr.enabled = true;
         anime.enabled = true;
         hips.SetActive(false);
         hips.SetActive(true);
-        hips.SetActive(false);
         hips.transform.position = Vector3.zero;
+        hips.SetActive(false);
         boxCollider.enabled = true;
         if (pm != null)
         {
