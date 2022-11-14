@@ -239,18 +239,13 @@ public class Gun : MonoBehaviour
             //if (weaponData.MuzzleFlash != null) { weaponData.MuzzleFlash.Play(); }
             if (weaponData.MuzzleFlashGameObject != null)
             {
-                Debug.Log("YOOOO");
+                //Debug.Log("YOOOO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
             }
 
-
-
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-            //emptyGunSound.Play();
-            // mainly used for Lobby gun atm
-            //firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;
@@ -282,16 +277,10 @@ public class Gun : MonoBehaviour
         isDropped = true;
         // Otherwise it stays in DontDestroyOnLoad
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
-
-
         //gameObject.GetComponent<Gun>().enabled = false;
-
         //gameObject.transform.position = new Vector2(999999, 999999);
-
         //gameObject.SetActive(false);
-
         //ExecuteAfterTime(1f);
-
         //Debug.Log("fuck");
         //gameObject.GetComponent<BoxCollider>().enabled = true;
 
@@ -300,10 +289,12 @@ public class Gun : MonoBehaviour
         playerShoot.shootInput = null;
         playerShoot.dropInput = null;
     }
+    /*
     IEnumerator ExecuteAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
         gameObject.SetActive(false);
     }
+    */
 
 }
