@@ -200,6 +200,8 @@ public class DashAdvanced : MonoBehaviour
     }
     private void StartDashProtocol()
     {
+        Time.timeScale = 0.1f;
+        currentDashingDuration *= 2;
         dashSound.Play();
         CheckForCollision();
         canDash = false;
@@ -217,6 +219,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void EndDashProtocol()
     {
+        Time.timeScale = 1f;
         tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
