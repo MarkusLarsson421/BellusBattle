@@ -63,7 +63,7 @@ public class GroundSlashBullet : Projectile
 			{
 				//playerGo.SetActive(false);
 				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
-				cf.RemoveTarget(playerGo.transform);
+				//cf.RemoveTarget(playerGo.transform);
 			}
 			/*
 			PlayerDeathEvent pde = new PlayerDeathEvent{
