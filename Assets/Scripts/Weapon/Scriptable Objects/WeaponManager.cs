@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class WeaponManager : MonoBehaviour
@@ -30,6 +31,15 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.transform.SetParent(null);
         }
         
+    }
+
+    public bool pickingUP;
+    public void OnPickup(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            pickingUP = true;
+        }
     }
 
     public void EquipWeapon(WeaponData weaponData, GameObject nowWeapon)

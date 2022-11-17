@@ -131,10 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bea2dc907e6f744ebdd02ad3211acd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 5, z: -50}
+  offset: {x: 0, y: 1, z: -50}
   smoothTime: 0.5
-  minZoom: 80
-  maxZoom: 20
+  minZoom: 40
+  maxZoom: 10
   zoomLimiter: 100
-  useStartZoom: 1
-  _targets: []
